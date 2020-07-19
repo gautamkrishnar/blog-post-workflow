@@ -1,2 +1,2 @@
 # blog-post-workflow
-Allows you to show your latest blog posts on your github/project readme
+Allows you to show your latest blog posts on your github profile or project readme.

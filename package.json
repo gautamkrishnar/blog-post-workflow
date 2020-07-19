@@ -1,0 +1,32 @@
+{
+  "name": "blog-post-workflow",
+  "version": "1.0.0",
+  "description": "Allows you to show your latest blog posts on your github profile or project readme",
+  "main": "index.js",
+  "scripts": {
+    "start": "node blog-post-workflow.js",
+    "local-run": "TEST=true node blog-post-workflow.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gautamkrishnar/blog-post-workflow.git"
+  },
+  "keywords": [
+    "github",
+    "workflow",
+    "blog",
+    "posts"
+  ],
+  "author": "Gautam krishna R <r.gautamkrishna@gmail.com> (http://www.github.com/gautamkrishnar)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gautamkrishnar/blog-post-workflow/issues"
+  },
+  "homepage": "https://github.com/gautamkrishnar/blog-post-workflow#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "lodash": "^4.17.19",
+    "process": "latest",
+    "rss-parser": "^3.8.0"
+  }
+}

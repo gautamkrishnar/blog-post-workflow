@@ -1,0 +1,32 @@
+name: 'Blog Post Workflow'
+author: 'Gautam Krishna R'
+description: 'Allows you to show your latest blog posts on your github profile or project readme'
+
+inputs:
+  gh_token:
+    description: 'GitHub access token with Repo scope'
+    required: true
+    default: ${{ github.token }}
+  USERNAME:
+    description: 'Your GitHub username'
+    default: ${{ github.repository_owner }}
+    required: false
+  README_PATH:
+    description: 'Path of the readme file you want to update'
+    default: './README.md'
+    required: false
+  MAX_POST_COUNT:
+    description: 'Maximum number of posts you want to show on your readme, all feeds combined'
+    default: '5'
+    required: false
+  FEED_OBJECT:
+    description: "Javascript array that contains feed metadata, eg: [{url: 'https://site1.com/feeds', dateObj: 'date', itemsObj: 'items'}, url: 'https://site2.com/feeds', dateObj: 'date', itemsObj: 'items'}]",
+    default: "[]"
+    required: true
+
+runs:
+  using: node12
+  main: blog-post-workflow.js
+branding:
+  icon: 'activity'
+  color: 'blue'
