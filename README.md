@@ -20,7 +20,6 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
   schedule:
     # Runs every hour
     - cron: '0 * * * *'
