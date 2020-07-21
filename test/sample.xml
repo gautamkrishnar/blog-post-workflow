@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Gautam krishna.R</title>
+        <author>Gautam krishna.R</author>
+        <description>Developer, open source lover and after all a wonderful human being... Software Engineer at Red Hat | DuckDuckGo Community Leader | Polygot</description>
+        <link>https://dev.to/gautamkrishnar</link>
+        <language>en</language>
+        <item>
+            <title>God Mode in browsers: document.designMode = "on"</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Thu, 16 Jul 2020 10:40:11 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</link>
+            <guid>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</guid>
+            <description>&lt;p&gt;Just type &lt;code&gt;document.designMode = "on"&lt;/code&gt; on you favourite browser devtools and see the magic. &lt;/p&gt;
+
+                &lt;p&gt;It will make any website editable:&lt;/p&gt;
+
+                &lt;p&gt;&lt;a href="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" alt="preview"&gt;&lt;/a&gt;&lt;/p&gt;
+
+            </description>
+            <category>chrome</category>
+            <category>firefox</category>
+            <category>devtools</category>
+            <category>webdev</category>
+        </item>
+        <item>
+            <title>Skipping the Chrome "Your connection is not private" warning</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Sun, 03 May 2020 15:14:39 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/quickbits-1-skipping-the-chrome-your-connection-is-not-private-warning-4kp1</link>
+            <guid>https://dev.to/gautamkrishnar/quickbits-1-skipping-the-chrome-your-connection-is-not-private-warning-4kp1</guid>
+            <description>&lt;p&gt;You guys might have encountered a warning saying that "Your connection is not private" while doing some web development. This tutorial is about how you can skip the same. (Feel free to skip the tutorial, if you are not using chrome or chromium-based browser)&lt;/p&gt;
+
+                &lt;p&gt;You will get this kind of error usually when you are not using localhost as the domain for development. This is implemented to make your browsing experience more secure. If you are visiting a website via HTTPS and the server doesn't support it, you are vulnerable to the normal attacks that can happen when accessing a website via HTTP. You are vulnerable to the MIM (Man in the middle) attacks, these attacks a quite serious since it can gather private information like usernames and passwords from the victim.&lt;/p&gt;
+
+                &lt;p&gt;But having this feature enabled while developing a web application is a headache. Organizations can set browser policies to prevent accessing such pages especially if you are using a machine provided by the company. The screen will look below:&lt;/p&gt;
+
+                &lt;p&gt;&lt;a href="https://res.cloudinary.com/practicaldev/image/fetch/s--rNO8MFUv--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/qkrva33lpcgbcfbu85gh.png" class="article-body-image-wrapper"&gt;&lt;img src="https://res.cloudinary.com/practicaldev/image/fetch/s--rNO8MFUv--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/qkrva33lpcgbcfbu85gh.png" alt="Certificate"&gt;&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;As you can see that there will be no skip button on this. The only way you can access the page is by setting up a correct certificate or launching the Chrome browser in insecure mode via flags.&lt;/p&gt;
+
+                &lt;p&gt;But there is a &lt;strong&gt;cheat code&lt;/strong&gt; you can use to skip this warning 😄 Just type &lt;strong&gt;"thisisunsafe"&lt;/strong&gt; in the chrome warning message page. (Not in the address bar, just type it in the page) Boom! 💣 You can see that the warning message disappeared.&lt;/p&gt;
+
+                &lt;p&gt;&lt;a href="https://i.giphy.com/media/YpZAFbpbswOIDNTuo4/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/YpZAFbpbswOIDNTuo4/giphy.gif" alt="magic"&gt;&lt;/a&gt;&lt;br&gt;
+                To test this yourself you can visit: &lt;a href="https://self-signed.badssl.com/"&gt;https://self-signed.badssl.com/&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;Congrats, You've just added a permanent exception for the corresponding domain for the SSL certificate check. 😄&lt;/p&gt;
+
+                &lt;p&gt;&lt;a href="https://i.giphy.com/media/5VKbvrjxpVJCM/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/5VKbvrjxpVJCM/giphy.gif" alt="wow"&gt;&lt;/a&gt;&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#technical-details" class="anchor"&gt;
+                &lt;/a&gt;
+                Technical details
+                &lt;/h4&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;Chromium source code: &lt;a href="https://chromium.googlesource.com/chromium/src/+/master/components/security_interstitials/core/browser/resources/interstitial_large.js"&gt;https://chromium.googlesource.com/chromium/src/+/master/components/security_interstitials/core/browser/resources/interstitial_large.js&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;Stackoverflow thread: &lt;a href="https://stackoverflow.com/questions/35274659/does-using-badidea-or-thisisunsafe-to-bypass-a-chrome-certificate-hsts-error"&gt;https://stackoverflow.com/questions/35274659/does-using-badidea-or-thisisunsafe-to-bypass-a-chrome-certificate-hsts-error&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p&gt;Stay safe, Happy coding.... 😷&lt;/p&gt;
+
+            </description>
+            <category>trick</category>
+            <category>chrome</category>
+            <category>privacy</category>
+            <category>https</category>
+        </item>
+        <item>
+            <title>Microsoft Student Partners – Geek is the new rockstar</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Sun, 25 Jun 2017 16:35:48 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/microsoft-student-partners--geek-is-the-new-rockstar</link>
+            <guid>https://dev.to/gautamkrishnar/microsoft-student-partners--geek-is-the-new-rockstar</guid>
+            <description>&lt;p&gt;&lt;a href="https://res.cloudinary.com/practicaldev/image/fetch/s--5JQq31ZB--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/q51ovqx8t3tz0lilnzqo.png" class="article-body-image-wrapper"&gt;&lt;img src="https://res.cloudinary.com/practicaldev/image/fetch/s--5JQq31ZB--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/q51ovqx8t3tz0lilnzqo.png" alt="MSP"&gt;&lt;/a&gt;&lt;br&gt;
+                The Microsoft Student Partner (MSPs) Recruitment for the year 2017 will be happening from 13th to 10th July. This is a shoutout to all the students out here… Don’t miss the chance for being a part of this amazing community… ðŸ™‚&lt;/p&gt;
+                &lt;h3&gt;
+                &lt;a href="#whos-a-microsoft-student-partner" class="anchor"&gt;
+                &lt;/a&gt;
+                Who’s a Microsoft Student Partner
+                &lt;/h3&gt;
+
+                &lt;p&gt;From &lt;a href="https://en.wikipedia.org/wiki/Microsoft_Student_Partners"&gt;wikipedia&lt;/a&gt;:&lt;br&gt;
+                &lt;em&gt;“The Microsoft Student Partners is a worldwide recognizable program to sponsor students majoring in disciplines related to technology. The MSP program enhances students’ employability by offering training in skills not usually taught in academia, including knowledge of Microsoft technologies.”&lt;/em&gt;&lt;/p&gt;
+
+                &lt;p&gt;Simply  the Microsoft Student Program is a great way for students to get involved in the world of technology. It’s a great program by Microsoft to empower students who are passionate about Microsoft technologies.&lt;/p&gt;
+
+                &lt;p&gt;Microsoft Student Partners do incredible things:&lt;/p&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;Run workshops and hackathons&lt;/li&gt;
+                &lt;li&gt;Host tech events and give demos on campus&lt;/li&gt;
+                &lt;li&gt;Work alongside Microsoft professionals, assisting them during hackathons and events&lt;/li&gt;
+                &lt;li&gt;Join exclusive Microsoft training events to learn the latest technologies&lt;/li&gt;
+                &lt;li&gt;Grow and nurture a community of students and faculty on-campus and online&lt;/li&gt;
+                &lt;li&gt;Enhance their skills and career opportunities&lt;/li&gt;
+                &lt;li&gt;Get amazing jobs
+                And much more…&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p&gt;&lt;iframe width="710" height="399" src="https://www.youtube.com/embed/fYhn7-vWbuI"&gt;
+                &lt;/iframe&gt;
+                &lt;/p&gt;
+
+                &lt;h3&gt;
+                &lt;a href="#perks-of-being-an-msp" class="anchor"&gt;
+                &lt;/a&gt;
+                Perks of being an MSP
+                &lt;/h3&gt;
+
+                &lt;p&gt;This is a question that is asked by most students about the program. Is it worth something being an MSP?. Why MSP?, Let’s find out….&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#exclusive-event-invitations" class="anchor"&gt;
+                &lt;/a&gt;
+                Exclusive event invitations
+                &lt;/h4&gt;
+
+                &lt;p&gt;Being an MSP will increase your chances for being selected in Microsoft invite only events, conferences and meetups. You can meet amazing people in these events.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#free-msdn-subscription" class="anchor"&gt;
+                &lt;/a&gt;
+                Free MSDN subscription
+                &lt;/h4&gt;
+
+                &lt;p&gt;This is one of my favorite perks being an MSP. Being an MSP, Microsoft will give you a free MSDN (Visual studio enterprise) subscription (Which costs around $5,999). It will give you access to all Microsoft products for free. You can easily download and use genuine Microsoft products from your MSDN subscription portal. You can get up to 5 genuine serial keys for most products completely for free. What I liked most about the MSDN subscription is that it gave me Visual studio Enterprise and Windows 10 Enterprise for free. It also includes free tons of Azure credits to run up to 3 high end VPS VMs simultaneously. It also offers one to one support on all Microsoft products.&lt;br&gt;
+                &lt;a href="https://res.cloudinary.com/practicaldev/image/fetch/s--o6jw2pFs--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/s4jb6ki9yk1oa647sw45.png" class="article-body-image-wrapper"&gt;&lt;img src="https://res.cloudinary.com/practicaldev/image/fetch/s--o6jw2pFs--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/s4jb6ki9yk1oa647sw45.png" alt="VS subscription"&gt;&lt;/a&gt;&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#learn-new-technologies-and-programming-languages" class="anchor"&gt;
+                &lt;/a&gt;
+                Learn new technologies and programming languages
+                &lt;/h4&gt;
+
+                &lt;p&gt;Being an MSP, you will receive exclusive access to Many online learning platforms like Microsoft E-Learning, Xamarin university etc. It will help you to add up to your skillset and sharpen your current skills.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#networking-opportunities" class="anchor"&gt;
+                &lt;/a&gt;
+                Networking opportunities
+                &lt;/h4&gt;
+
+                &lt;p&gt;Being an MSP you will be added to an exclusive closed group of MSPs and microsoft employees. You will recieve a @studentpartner.com email ID, it will give you access to the Yammer network and the office 365 portal. Using this email ID you will be eligible for 1TB of microsoft one drive cloud storage space. You will also get a free office 365 with all of its 3rd party extensions. Participating in MS events will allow you to grow your network with MVPs &amp;amp; Microsoft Employees. Whether you have any doubts related to anything under the globe, there will be at least a single person to help you out in our community.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#internship-amp-recruitments" class="anchor"&gt;
+                &lt;/a&gt;
+                Internship &amp;amp; Recruitments
+                &lt;/h4&gt;
+
+                &lt;p&gt;Microsoft may offer you internships if you perform well as an MSP.  You may also land into a job offer if you are the best.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#boost-your-resume" class="anchor"&gt;
+                &lt;/a&gt;
+                Boost your resume
+                &lt;/h4&gt;
+
+                &lt;p&gt;Experience being an MSP will be surely the best thing to put in your resume. It will make you stand out from the crowd. It will surely catch the eyes of the recruiters.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#beta-testing" class="anchor"&gt;
+                &lt;/a&gt;
+                Beta testing
+                &lt;/h4&gt;
+
+                &lt;p&gt;Microsoft announces internal beta test for most of its products. As a student partner. if you apply for any of the Microsoft’s beta test programs, you have a high chance of being selected. I used my student partner ID to apply for Microsoft’s Zo project and I was selected as a beta tester. Being an MSP will keep you updated about Microsoft’s new products and its releases.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#swags-swags-and-swags" class="anchor"&gt;
+                &lt;/a&gt;
+                Swags, swags and swags…
+                &lt;/h4&gt;
+
+                &lt;p&gt;Whether you are attending an MS event or hosting an event, Microsoft will shower you with lots and lots of goodies like tee shirts, headphones, or even a brand new windows phone… ðŸ˜€&lt;br&gt;
+                &lt;a href="https://res.cloudinary.com/practicaldev/image/fetch/s--XWGFjPms--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/9h6c7c489r6kootpb7h5.jpg" class="article-body-image-wrapper"&gt;&lt;img src="https://res.cloudinary.com/practicaldev/image/fetch/s--XWGFjPms--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/9h6c7c489r6kootpb7h5.jpg" alt="Carlos"&gt;&lt;/a&gt;&lt;/p&gt;
+
+                &lt;h3&gt;
+                &lt;a href="#eligibility-criteria-for-msp-2017" class="anchor"&gt;
+                &lt;/a&gt;
+                Eligibility criteria for MSP 2017
+                &lt;/h3&gt;
+
+                &lt;p&gt;All applying students must be enrolled full time in an accredited academic institution from July 1, 2017 through June 1, 2018 and all students must have valid identification.&lt;/p&gt;
+
+                &lt;p&gt;Anyone who satisfies the above requirements can apply to the program. The person need not have to be a computer science student to apply for MSP program. I know many MSPs who are B-School students, One of my friend MSP is even studying B.S in Botany.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#prerequisites" class="anchor"&gt;
+                &lt;/a&gt;
+                Prerequisites
+                &lt;/h4&gt;
+
+                &lt;p&gt;You must make sure that you have the following things in your hand (Taken from official page):&lt;/p&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;Student Verification: Scan and upload your college ID Card in an Online Drive. The Uploaded ID Card link should be directly viewable and the image should be properly visible.&lt;/li&gt;
+                &lt;li&gt;Video Challenge: Please create a 1-minute or less video explaining why you should be a Microsoft Student Partner on your campus. Elaborate on technical skills, events you’ve been involved with, and describe how you would motivate students on your campus to learn about technology. The video should be uploaded on Youtube and made publicity visible. Only applications with completed videos will be reviewed. You can take reference as to how to upload a video on Youtube from &lt;a href="https://support.google.com/youtube/answer/57407?co=GENIE.Platform%3DDesktop&amp;amp;hl=en"&gt;here&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p&gt;If you have any questions about the MSP program or the application process, please contact: &lt;a href="mailto:newmsp@microsoft.com"&gt;newmsp@microsoft.com&lt;/a&gt;&lt;/p&gt;
+
+                &lt;h5&gt;
+                &lt;a href="#so-what-are-you-waiting-for-apply-now-%C3%B0%C3%BF%CB%9C%E2%82%AC" class="anchor"&gt;
+                &lt;/a&gt;
+                So what are you waiting for? Apply now! ðŸ˜€
+                &lt;/h5&gt;
+
+                &lt;p&gt;Know more: &lt;a href="https://msdn.microsoft.com/en-in/microsoftstudentpartners.aspx"&gt;https://msdn.microsoft.com/en-in/microsoftstudentpartners.aspx&lt;/a&gt;&lt;br&gt;
+                Apply now: &lt;a href="https://aka.ms/JoinMSP2017"&gt;https://aka.ms/JoinMSP2017&lt;/a&gt;&lt;br&gt;
+                Apply now (India): &lt;a href="https://www.microsoft.com/en-in/campaign/msp2017/default.aspx"&gt;https://www.microsoft.com/en-in/campaign/msp2017/default.aspx&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;Originally published on &lt;a href="http://www.gautamkrishnar.com/microsoft-student-partners/"&gt;http://www.gautamkrishnar.com/microsoft-student-partners/&lt;/a&gt;&lt;/p&gt;
+
+            </description>
+            <category>microsoft</category>
+            <category>student</category>
+            <category>partner</category>
+            <category>msp</category>
+        </item>
+        <item>
+            <title>An Introduction to NumPy</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Wed, 19 Apr 2017 15:34:15 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/an-introduction-to-numpy</link>
+            <guid>https://dev.to/gautamkrishnar/an-introduction-to-numpy</guid>
+            <description>&lt;p&gt;&lt;a href="https://res.cloudinary.com/practicaldev/image/fetch/s--cjZ3iPpo--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/mKy85Kr.png" class="article-body-image-wrapper"&gt;&lt;img src="https://res.cloudinary.com/practicaldev/image/fetch/s--cjZ3iPpo--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/mKy85Kr.png" alt="Numpy"&gt;&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;Numerical python or simply NumPy is one of the best modules to perform scientific computing in python. It is extensively used for data science as well as image manipulation using python. I recently learned how to use this module effectively in my projects, when started learning Machine learning and Data Science using python. I was amazed with the features of NumPy and I found it quite interesting to work with NumPy. Within some hours of usage i fell in love with it.&lt;/p&gt;
+
+                &lt;h2&gt;
+                &lt;a href="#what-is-numpy" class="anchor"&gt;
+                &lt;/a&gt;
+                What is NumPy
+                &lt;/h2&gt;
+
+                &lt;p&gt;&lt;a href="https://github.com/numpy/numpy/blob/master/README.md"&gt;Numpy’s GitHub readme&lt;/a&gt; defines it as:&lt;br&gt;
+                NumPy is the fundamental package needed for scientific computing with Python. This package contains:&lt;/p&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;a powerful N-dimensional array object&lt;/li&gt;
+                &lt;li&gt;sophisticated (broadcasting) functions&lt;/li&gt;
+                &lt;li&gt;tools for integrating C/C++ and Fortran code&lt;/li&gt;
+                &lt;li&gt;useful linear algebra, Fourier transform, and random number capabilities.&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p&gt;It derives from the old Numeric code base and can be used as a replacement for Numeric. It also adds the features introduced by numarray and can be used to replace numarray.&lt;/p&gt;
+
+                &lt;p&gt;Simply NumPy is an open source python library that allows us to do scientific calculations in python. It has superpowers to magically support daunting vector and matrix computations. The core of the NumPy package, is the ndarray object. This encapsulates n-dimensional arrays of homogeneous data types, with many optimizations for performance. Narrays are created in contrast to Python’s built-in list data structure.&lt;/p&gt;
+                &lt;h2&gt;
+                &lt;a href="#why-numpy" class="anchor"&gt;
+                &lt;/a&gt;
+                Why NumPy
+                &lt;/h2&gt;
+
+                &lt;p&gt;As i said earlier, NumPy is created to overcome the limitations of python’s list data structure. We can use python lists instead of NumPy to perform various calculations like matrix multiplication, vector products etc. Using NumPy instead of lists will not only improve the performance of the code, but also will reduce the number of lines of the code. In this blog i will compare list datatype with numpy.&lt;/p&gt;
+                &lt;h4&gt;
+                &lt;a href="#install-numpy" class="anchor"&gt;
+                &lt;/a&gt;
+                Install NumPy
+                &lt;/h4&gt;
+
+                &lt;p&gt;You can use pip to install NumPy. If you don’t have python and pip installed, you can download it from here. After installation, use the command below to install NumPy:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;pip &lt;span class="nb"&gt;install &lt;/span&gt;numpy
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;Now the NumPy will be installed on your machine.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#numpy-vs-lists" class="anchor"&gt;
+                &lt;/a&gt;
+                Numpy v/s Lists
+                &lt;/h4&gt;
+
+                &lt;p&gt;Python has a powerful built in data type known as lists. It has everything in its superpower to make it useful for almost any advanced scientific applications, but it is still limited while comparing to NumPy’s array data type. Lets compare python lists with NumPy arrays. I will be using python shell in this examples. Just type the python command to launch the shell.&lt;/p&gt;
+
+                &lt;p&gt;You can create  a NumPy array using the code below:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="n"&gt;You&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="n"&gt;containing&lt;/span&gt; &lt;span class="n"&gt;same&lt;/span&gt; &lt;span class="n"&gt;elements&lt;/span&gt; &lt;span class="n"&gt;using&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="n"&gt;below&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+                &lt;span class="n"&gt;lets&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;both&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;them&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;# Numpy Array
+                &lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;element&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="mi"&gt;1&lt;/span&gt;
+                &lt;span class="mi"&gt;2&lt;/span&gt;
+                &lt;span class="mi"&gt;3&lt;/span&gt;
+                &lt;span class="mi"&gt;4&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;# Python List
+                &lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;element&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="mi"&gt;1&lt;/span&gt;
+                &lt;span class="mi"&gt;2&lt;/span&gt;
+                &lt;span class="mi"&gt;3&lt;/span&gt;
+                &lt;span class="mi"&gt;4&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;As you can see that NumPy array works exactly the same way as list. We can simply use a loop to print its elements. Even though both looks the same, there’s some difference with the python lists and NumPy arrays. We can simply use the code below to add a new element to the list:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;We can’t do the same in NumPy arrays, It will throw an error:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class="nb"&gt;AttributeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;'numpy.ndarray'&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="n"&gt;has&lt;/span&gt; &lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="n"&gt;attribute&lt;/span&gt; &lt;span class="s"&gt;'append'&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class="nb"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;operands&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;broadcast&lt;/span&gt; &lt;span class="n"&gt;together&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;shapes&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;As you can see that both doesn’t works in the case of NumPy array. Lists use plus operator for concatenation, but NumPy arrays use the plus operator differently. So lets check it out. Lets find the element wise sum of an array using NumPy and python lists:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="c1"&gt;# Temporary List
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="c1"&gt;# Using List
+                &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;     &lt;span class="n"&gt;b2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;b2&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c1"&gt;# Using NumPy array
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;Pretty easy right!😀&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#numpy-in-action" class="anchor"&gt;
+                &lt;/a&gt;
+                NumPy in action
+                &lt;/h4&gt;
+
+                &lt;p&gt;NumPy arrays treat plus operator(+) as the element wise addition operator. We can also use it to add two different arrays, or even we can use it to perform scalar addition to an array. NumPy array treats multiplication operator(*) as matrix multiplication operator. Most operators act element wise in NumPy arrays. Lets see the superpowers of NumPy arrays 😀:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c1"&gt;# NumPy Array
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;#New NumPy array
+                &lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="c1"&gt;# Matrix addition
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# Addition with a scalar
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="c1"&gt;# element wise multiplication
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;28&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# Multiplication with a scalar
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="c1"&gt;# Power operator
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;dtype&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;int32&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# Sum of elements in a
+                &lt;/span&gt;&lt;span class="mi"&gt;45&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;As you can see that the matrix arithmetic works like a breeze in NumPy arrays. We don’t need to use the annoying loops anymore to perform those 😉 . If you have an N dimensional matrix you can use NumPy to perform all these operations on it. NumPy has everything built in to perform these operations effectively by providing an abstract layer to you. For a 2D matrix lets check these operations:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# access each row
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# access element i=0 j=1
+                &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# access element i=0 j=1
+                &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="c1"&gt;# Scalar Multiplication
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="c1"&gt;# Addition
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;21&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;27&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="c1"&gt;# Multiplication
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;36&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mi"&gt;52&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;70&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;90&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;112&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;136&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;162&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="c1"&gt;# Subraction
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;inva&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;inv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# a inverse
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;inva&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.50359963e+15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mf"&gt;9.00719925e+15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.50359963e+15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;  &lt;span class="mf"&gt;9.00719925e+15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.80143985e+16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mf"&gt;9.00719925e+15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.50359963e+15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mf"&gt;9.00719925e+15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;4.50359963e+15&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;det&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Determinant of a
+                &lt;/span&gt;&lt;span class="mf"&gt;6.6613381477509402e-16&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;diag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Diagonals of a
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Sum of diagonals
+                &lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eig&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Eigen values and eigen vectors of a
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;  &lt;span class="mf"&gt;1.61168440e+01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.11684397e+00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.30367773e-15&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.23197069&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.78583024&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40824829&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.52532209&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.08675134&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.81649658&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8186735&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.61232756&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40824829&lt;/span&gt;&lt;span class="p"&gt;]]))&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# eigen value
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;  &lt;span class="mf"&gt;1.61168440e+01&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.11684397e+00&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.30367773e-15&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# eigen vectors
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.23197069&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.78583024&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40824829&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.52532209&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.08675134&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.81649658&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.8186735&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.61232756&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40824829&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="c1"&gt;# Power
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;36&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;49&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;81&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="c1"&gt;# Transpose of a2
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# mean
+                &lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# variance
+                &lt;/span&gt;&lt;span class="mf"&gt;6.666666666666667&lt;/span&gt;
+
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="c1"&gt;# NumPy Matrix type
+                &lt;/span&gt;&lt;span class="n"&gt;matrix&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;NumPy also have a matrix type in addition to NumPy arrays. The official documentation recommends using matrix type for matrix operations. NumPy performs well for multidimensional matrices as well. In addition with these standard operations NumPy has several other functions available to make your programs a lot more simpler. Lets see some of the examples:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sqrt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;        &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.41421356&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.73205081&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;0.84147098&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.90929743&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.14112001&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cos&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;0.54030231&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.41614684&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.9899925&lt;/span&gt; &lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;1.55740772&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.18503986&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.14254654&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;        &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.69314718&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.09861229&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;  &lt;span class="mf"&gt;2.71828183&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;   &lt;span class="mf"&gt;7.3890561&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;20.08553692&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;So simply NumPy treats an array like a vector or a mathematical object. To do operations on list, you need to use a for loop. Since for loops are slow it may take more time to perform various operations while compared to NumPy arrays. Lets do some operations on vector and matrices:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;17&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Dot product a.a2
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;90&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;96&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;201&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;216&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;231&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;318&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;342&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;366&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="c1"&gt;# Dot product a2.a
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt;&lt;span class="mi"&gt;138&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;171&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;204&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;174&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;216&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;258&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;210&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;261&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;312&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Dot product a.a2
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;90&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mi"&gt;96&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;201&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;216&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;231&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;318&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;342&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;366&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;maga&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# magnitude of a
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;maga2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linalg&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;@&lt;/span&gt; &lt;span class="n"&gt;magnitude&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;a2&lt;/span&gt;
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;angle&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arccos&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;maga&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;maga2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# angle between a and a2
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;angle&lt;/span&gt; &lt;span class="c1"&gt;# in radian
+                &lt;/span&gt;&lt;span class="mf"&gt;1.1352271440633694&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;To generate random matrices for testing just use:&lt;br&gt;
+                &lt;/p&gt;
+
+                &lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Generates zero array
+                &lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;z&lt;/span&gt;
+                &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zeros&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 5*5 Zero matrix
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ones&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 5*5 Unit matrix
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# random 5*5 array with elements &amp;lt; 0
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mf"&gt;0.95798455&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.24020745&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.62194033&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.93840616&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40785382&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.01294948&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.7228686&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.67448551&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.20403856&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.046528&lt;/span&gt;  &lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.63331545&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.89097084&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.01754348&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.17084474&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.32112247&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.97881143&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.83247286&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.65629919&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.21386575&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.72251318&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.20167738&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.24018638&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.85572554&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.7706282&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.80284553&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+
+                &lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;randn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Random 5*5 matrix
+                &lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([[&lt;/span&gt; &lt;span class="mf"&gt;0.16603893&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.14554164&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.40170708&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.52864275&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.50740231&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.13218522&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.20418907&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.09940842&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.25180194&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.6859655&lt;/span&gt; &lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.09053258&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;1.11002797&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.1455936&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.33915414&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.25604553&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt; &lt;span class="mf"&gt;0.96807902&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.03155716&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.79001785&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.4567955&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.93929055&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+                &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.38540075&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.82320053&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;  &lt;span class="mf"&gt;0.02358358&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.13975953&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.23515682&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+                &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+                &lt;p&gt;Summing up all these, even though the NumPy arrays contain several advanced functions when compared with lists datatype, it can’t be considered as a replacement for python lists. NumPy is really useful if you want do do some mathematical operations on an array, If we are using a list instead of NumPy arrays we need to traverse each and every elements using a loop, it will significantly reduce the overall performance of the program. Using NumPy will not only improves the performance of the program, but also adds advanced functionalities to the code.&lt;/p&gt;
+
+                &lt;p&gt;Visit the official docs to learn more: &lt;a href="https://docs.scipy.org/doc/numpy/"&gt;https://docs.scipy.org/doc/numpy/&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;Any suggestions to this article is always welcome. Please don’t forget to comment on this article if you found any mistakes 😀&lt;/p&gt;
+
+                &lt;p&gt;Originally published on: &lt;a href="http://www.gautamkrishnar.com/"&gt;gautamkrishnar.com&lt;/a&gt;&lt;/p&gt;
+
+            </description>
+            <category>numpy</category>
+            <category>python</category>
+            <category>introduction</category>
+        </item>
+        <item>
+            <title>Hi, I'm Gautam krishna.R</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Sun, 02 Apr 2017 19:04:43 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/hi-im-gautam-krishnar</link>
+            <guid>https://dev.to/gautamkrishnar/hi-im-gautam-krishnar</guid>
+            <description>&lt;p&gt;I have been coding for 9 years, I am a Microsoft student partner and DuckDuckGo community leader who's actively involved in several open source projects.&lt;/p&gt;
+
+                &lt;p&gt;You can find me on GitHub at &lt;a href="https://github.com/gautamkrishnar"&gt;@gautamkrishnar&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;You can also find me on Twitter as &lt;a href="https://twitter.com/gautamkrishnar"&gt;@gautamkrishnar&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;I live in Kollam.&lt;/p&gt;
+
+                &lt;p&gt;I mostly program in these languages: Phython, NodeJS, PHP, C, C#, Java.&lt;/p&gt;
+
+                &lt;p&gt;I am currently learning more about ML.&lt;/p&gt;
+
+                &lt;p&gt;Nice to meet you.&lt;/p&gt;
+
+            </description>
+            <category>introductions</category>
+        </item>
+        <item>
+            <title>DuckDuckGo – The search engine redefined</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Thu, 05 Nov 2015 19:49:25 +0000</pubDate>
+            <link>https://dev.to/gautamkrishnar/duckduckgo-the-search-engine-redefined-4c7d</link>
+            <guid>https://dev.to/gautamkrishnar/duckduckgo-the-search-engine-redefined-4c7d</guid>
+            <description>&lt;p&gt;&lt;a href="https://duckduckgo.com/"&gt;DuckDuckGo&lt;/a&gt; is a search engine just like Google and Bing but the only difference is that it is open source. It is powered by an awesome open source community. Also, it won’t track your searches to show you personalized ads as google does. I hope you have heard the recent news that &lt;a href="https://www.reuters.com/article/us-alphabet-google-privacy-lawsuit/google-faces-5-billion-lawsuit-in-u-s-for-tracking-private-internet-use-idUSKBN23933H"&gt;Google is tracking users even in incognito or private browsing mode&lt;/a&gt;. You can search and surf the web anonymously using DuckDuckGo. &lt;/p&gt;
+
+                &lt;p&gt;This blog will help you to understand more about DuckDuckGo and some of its amazing features:&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#social-media-bio" class="anchor"&gt;
+                &lt;/a&gt;
+                Social media bio
+                &lt;/h4&gt;
+
+                &lt;p&gt;DuckDuckGo lets you see the social media profiles of people without leaving the search engine. So, search for &lt;a href="https://duckduckgo.com/?q=%40gautamkrishnar&amp;amp;ia=twitter"&gt;@gautamkrishnar&lt;/a&gt; and you can see my twitter profile information on the same page. If you want to see a person’s Google+ profile you can simply search g+ followed by a person’s name. Another cool feature is that you can perform a search on other website’s search box using DuckDuckGo, we call it bangs. If you want to search someone in LinkedIn just type !linkedin followed by the person’s name. You can use !a to search for some products in amazon.com. At the time of writing this post, there are 13,505 bangs available. You can see more bangs &lt;a href="https://duckduckgo.com/bang..."&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#app-store-search" class="anchor"&gt;
+                &lt;/a&gt;
+                App store search
+                &lt;/h4&gt;
+
+                &lt;p&gt;Search for any popular apps in DuckDuckGo and it will show a carousel full of apps with similar names. Another useful feature shows alternatives to apps in a neat carousel. Tired of MS Office? Just search for “&lt;a href="https://duckduckgo.com/?q=alternative+to+microsoft+word"&gt;Alternative to Word&lt;/a&gt;” and see the results for yourself. It also works for Web services, so you can even search for “&lt;a href="https://duckduckgo.com/?q=alternative+to+duckduckgo"&gt;Alternative to DuckDuckGo&lt;/a&gt;“ if you like.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#stopwatch" class="anchor"&gt;
+                &lt;/a&gt;
+                Stopwatch
+                &lt;/h4&gt;
+
+                &lt;p&gt;DuckDuckGo has a stopwatch, simply search for the &lt;a href="https://duckduckgo.com/?q=stopwatch&amp;amp;ia=stopwatch"&gt;stopwatch.&lt;/a&gt;&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#shorten-and-expand-links" class="anchor"&gt;
+                &lt;/a&gt;
+                Shorten and expand links
+                &lt;/h4&gt;
+
+                &lt;p&gt;Want to find out which websites are at the end of shortened links such as &lt;a href="http://bit.ly/blahbla"&gt;http://bit.ly/blahbla&lt;/a&gt;? Open DuckDuckGo and search “expand &lt;a href="http://bit.ly/blahbla%E2%80%9D"&gt;http://bit.ly/blahbla”&lt;/a&gt;. Also, if you want to shorten long URLs, enter “&lt;a href="https://duckduckgo.com/?q=shorten+www.gkrish.xyz%2Fisabella&amp;amp;ia=shortenedlink"&gt;shorten www.gkrish.xyz/isabella&lt;/a&gt;” to get a URL shortened using &lt;a href="http://is.gd/"&gt;is.gd&lt;/a&gt;.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#generate-passwords" class="anchor"&gt;
+                &lt;/a&gt;
+                Generate passwords
+                &lt;/h4&gt;
+
+                &lt;p&gt;DuckDuckGo also helps you to generate strong passwords. Just head to DuckDuckGo and search for “Password 20”. You’ll see a strong 20-character password. You can replace the number to change the number of characters in the password. If you find those random passwords hard to remember, you can make DuckDuckGo generate &lt;a href="http://xkcd.com/936/"&gt;XKCD-style passwords&lt;/a&gt;. These passwords comprise four common words put together, which are easy to remember and hard to crack, and were first suggested in the popular Web comic XKCD. For these passwords, search “Random passphrase”.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#change-case-and-check-the-number-of-characters" class="anchor"&gt;
+                &lt;/a&gt;
+                Change case and check the number of characters
+                &lt;/h4&gt;
+
+                &lt;p&gt;Want to change a sentence to Title Case, lowercase or UPPERCASE? Just add one of those three terms before your sentence and key it in on DuckDuckGo.&lt;/p&gt;
+
+                &lt;p&gt;Another interesting feature is the number of characters. You can quickly check how many characters are in your search query by adding “chars” before or after the query. Try searching for “chars I really like this article” without the quotes and see the results.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#rhyme-with" class="anchor"&gt;
+                &lt;/a&gt;
+                rhyme with
+                &lt;/h4&gt;
+
+                &lt;p&gt;You read that right. DuckDuckGo also has an instant answer that finds rhyming words. Search “rhyme with heart” or any other word you can think of. You’ll see an instant answer with rhyming words, from RhymeBrain.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#calendar" class="anchor"&gt;
+                &lt;/a&gt;
+                Calendar
+                &lt;/h4&gt;
+
+                &lt;p&gt;Google and DuckDuckGo can show you the current date and time. But DuckDuckGo goes one step further by supporting the calendar as an instant answer. Search “calendar” to see one, with the current date highlighted. It can also show you the calendar for any month and year. Try searching for “&lt;a href="https://duckduckgo.com/?q=calendar+january+1899"&gt;calendar january 1899&lt;/a&gt;“.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#loan-calculator" class="anchor"&gt;
+                &lt;/a&gt;
+                Loan calculator
+                &lt;/h4&gt;
+
+                &lt;p&gt;Another useful DuckDuckGo instant answer is a loan calculator. It’s useful if you want to see how much your monthly installments will be and how much interest you’ll be paying in total. The search query for this is a little hard to remember, like the terms and conditions for most loan agreements. It is “loan AMOUNT at INTEREST with PERCENT down for DURATION”. All the uppercase words are what you need to key in – total amount, interest rate, down payment percentage and the duration of the loan. We tried “&lt;a href="https://duckduckgo.com/?q=loan+Rs+50%2C00%2C000+at+4.5%25+with+25%25+down+for+15+years"&gt;loan Rs 50,00,000 at 4.5% with 25% down for 15 years&lt;/a&gt;” to get the answer in the picture below.&lt;/p&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#cool-features-for-developers" class="anchor"&gt;
+                &lt;/a&gt;
+                Cool features for developers
+                &lt;/h4&gt;
+
+                &lt;p&gt;There are several instant answers that will be useful to software developers but might be less important for the general public. Here’s a quick list of what DuckDuckGo can do:&lt;/p&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=lorem+ipsum"&gt;Generate lorem ipsum text&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=url+encode+http%3A%2F%2Fgkrish.xyz"&gt;Encode URLs to machine-readable text&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=11001101010001010100101010101011+binary"&gt;Convert binary to decimal&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=html+chars"&gt;Show a list of special characters and their HTML values&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=html+for+spade"&gt;Show HTML value for any special character&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=%23ff0012"&gt;Show colors based on hexadecimal values&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;h4&gt;
+                &lt;a href="#miscellaneous-features" class="anchor"&gt;
+                &lt;/a&gt;
+                Miscellaneous features
+                &lt;/h4&gt;
+
+                &lt;ol&gt;
+                &lt;li&gt;Run a search for &lt;a href="https://duckduckgo.com/?q=xkcd"&gt;‘xkcd’&lt;/a&gt; and DuckDuckGo will automatically fetch a most recent comic right there on the search result page.&lt;/li&gt;
+                &lt;li&gt;You can get DuckDuckGo to explain you an emoticon straight away. Just type its code 😀&lt;/li&gt;
+                &lt;li&gt;DDG lets you use “” to go to directly to the first search result after inputting a query. We call this “i am feeling ducky” 😀&lt;/li&gt;
+                &lt;/ol&gt;
+
+                &lt;p&gt;There are several other instant answers on DuckDuckGo that are quite cool, but not very useful. Here’s a quick list of some of the best.&lt;/p&gt;
+
+                &lt;ul&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=people+in+space"&gt;How many people are in space&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=gautam"&gt;Generate ASCII art&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=1983+chinese+zodiac"&gt;Chinese Zodiac queries&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=anagram+scramble"&gt;Anagram solver&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://duckduckgo.com/?q=blood+donor+ab%2B"&gt;Blood type compatibility&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+
+                &lt;p&gt;As DuckDuckGo is an open-source search engine, its possibilities are limitless. There are several other things DuckDuckGo can do. Check out &lt;a href="https://duckduckgo.com/tour"&gt;this page.&lt;/a&gt;&lt;/p&gt;
+
+                &lt;p&gt;DuckDuckGo is powered by an open-source community, it has a team of dedicated open source developers who contribute part-time to it. We can even say that DuckDuckGo has more features than google because the developer community is adding more and more features day by day. I am really happy to say that I am also a part of that awesome community (DuckDuckGo Community Leader 😀). &lt;/p&gt;
+
+                &lt;p&gt;Update: At the time of writing this post, DDG had stopped accepting external contributions. Now they are working on developing Privacy focused browsers and extension: &lt;a href="https://github.com/duckduckgo"&gt;https://github.com/duckduckgo&lt;/a&gt;&lt;/p&gt;
+
+            </description>
+            <category>duckduckgo</category>
+            <category>searching</category>
+            <category>tips</category>
+            <category>privacy</category>
+        </item>
+    </channel>
+</rss>

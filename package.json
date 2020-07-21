@@ -2,10 +2,13 @@
   "name": "blog-post-workflow",
   "version": "1.0.0",
   "description": "Allows you to show your latest blog posts on your github profile or project readme",
-  "main": "index.js",
+  "main": "blog-post-workflow.js",
   "scripts": {
     "start": "node blog-post-workflow.js",
-    "local-run": "TEST=true node blog-post-workflow.js"
+    "local-run": "node test.js",
+    "test-run": "npm run local-run && diff test/Readme.md test/Readme.md.snap",
+    "start-server": "node test/test-server.js",
+    "test": "start-server-and-test start-server http://localhost:8080 test-run"
   },
   "repository": {
     "type": "git",
@@ -28,5 +31,8 @@
     "lodash": "^4.17.19",
     "process": "latest",
     "rss-parser": "^3.8.0"
+  },
+  "devDependencies": {
+    "start-server-and-test": "^1.11.2"
   }
 }

@@ -5,22 +5,18 @@ description: 'Allows you to show your latest blog posts on your github profile o
 inputs:
   gh_token:
     description: 'GitHub access token with Repo scope'
-    required: true
-    default: ${{ github.token }}
-  USERNAME:
-    description: 'Your GitHub username'
-    default: ${{ github.repository_owner }}
     required: false
-  README_PATH:
+    default: ${{ github.token }}
+  readme_path:
     description: 'Path of the readme file you want to update'
     default: './README.md'
     required: false
-  MAX_POST_COUNT:
+  max_post_count:
     description: 'Maximum number of posts you want to show on your readme, all feeds combined'
     default: '5'
     required: false
-  FEED_OBJECT:
-    description: "Javascript array that contains feed metadata, eg: [{url: 'https://site1.com/feeds', dateObj: 'date', itemsObj: 'items'}, url: 'https://site2.com/feeds', dateObj: 'date', itemsObj: 'items'}]",
+  feed_list:
+    description: "Javascript array that contains feed urls",
     default: "[]"
     required: true
 
