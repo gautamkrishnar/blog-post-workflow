@@ -67,6 +67,10 @@ const commitReadme = async () => {
         'user.email',
         'blog-post-bot@example.com',
     ]);
+    if (GITHUB_TOKEN) {
+        // git remote set-url origin
+        await exec('git', ['remote', 'set-url', 'origin', `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
+    }
     await exec('git', ['config', '--global', 'user.name', 'blog-post-bot']);
     await exec('git', ['add', README_FILE_PATH]);
     await exec('git', ['commit', '-m', 'Updated with latest blog posts']);
