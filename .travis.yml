@@ -1,0 +1,7 @@
+language: node_js
+os: linux
+dist: bionic
+node_js:
+  - 12
+cache:
+  npm: true
