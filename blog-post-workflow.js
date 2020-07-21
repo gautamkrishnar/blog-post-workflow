@@ -46,9 +46,6 @@ const buildReadme = (previousContent, newContent) => {
  * @return {Promise<void>}
  */
 const commitReadme = async () => {
-    /**
-     * Executes a command
-     */
     const exec = (cmd, args = []) => new Promise((resolve, reject) => {
         console.log(`Started: ${cmd} ${args.join(' ')}`);
         const app = spawn(cmd, args, {stdio: 'inherit'});
@@ -74,6 +71,9 @@ const commitReadme = async () => {
     await exec('git', ['add', README_FILE_PATH]);
     await exec('git', ['commit', '-m', 'Updated with latest blog posts']);
     await exec('git', ['push']);
+    core.info("Readme updated successfully in the upstream repository");
+    // Making job fail if one of the source fails
+    jobFailFlag ? process.exit(1) : process.exit(0);
 };
 
 
@@ -167,11 +167,7 @@ Promise.allSettled(promiseArray).then((results) => {
                 core.info('Writing to ' + README_FILE_PATH);
                 fs.writeFileSync(README_FILE_PATH, newReadme);
                 if (!process.env.TEST_MODE) {
-                    commitReadme.then(()=> {
-                       core.info("Readme updated successfully in the upstream repository");
-                        // Making job fail if one of the source fails
-                        jobFailFlag ? process.exit(1) : process.exit(0);
-                    });
+                    commitReadme();
                 }
             } else {
                 core.info('No change detected, skipping');
