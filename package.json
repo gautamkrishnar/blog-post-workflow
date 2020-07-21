@@ -9,7 +9,7 @@
     "test-run": "npm run local-run && diff test/Readme.md test/Readme.md.snap",
     "start-server": "node test/test-server.js",
     "test": "start-server-and-test start-server http://localhost:8080 test-run",
-    "build": "parcel build  --no-source-maps --target=node blog-post-workflow.js"
+    "build": "parcel build  --no-source-maps --target=node --bundle-node-modules blog-post-workflow.js"
   },
   "repository": {
     "type": "git",
