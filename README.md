@@ -17,15 +17,12 @@ List your latest blog posts from different sources on your Github profile/projec
 ```yaml
 name: Latest blog post workflow
 on:
-  push:
-    branches:
-      - master
   schedule:
     # Runs every hour
     - cron: '0 * * * *'
 
 jobs:
-  update-readme:
+  update-readme-with-blog:
     name: Update this repo's README with latest blog posts
     runs-on: ubuntu-latest
     steps:
