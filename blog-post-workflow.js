@@ -99,10 +99,11 @@ const feedObjString = core.getInput('feed_list').trim();
 let feedList = feedObjString.split(',');
 if (feedList.length === 0) {
     core.error("Please double check the value of feed_list");
-    process.exit(0);
+    process.exit(1);
 }
 
 feedList.forEach((siteUrl) => {
+    runnerNameArray.push(siteUrl);
     promiseArray.push(new Promise((resolve, reject) => {
         parser.parseURL(siteUrl).then((data) => {
             const responsePosts = _.get(data, 'items');
@@ -126,7 +127,6 @@ feedList.forEach((siteUrl) => {
                         date: new Date(item.pubDate)
                     };
                 });
-                runnerNameArray.push(siteUrl);
                 resolve(posts);
             }
         }).catch(reject);
