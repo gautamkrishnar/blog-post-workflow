@@ -16,7 +16,7 @@ inputs:
     default: '5'
     required: false
   feed_list:
-    description: "Comma separated list of RSS feed urls",
+    description: "Comma separated list of RSS feed urls"
     default: ""
     required: true
 
