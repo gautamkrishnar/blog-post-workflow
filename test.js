@@ -12,9 +12,8 @@ Test content
 `;
 fs.writeFileSync(path.join(__dirname, 'test', 'Readme.md'), template);
 
-const data = ['http://localhost:8080'];
 process.env.INPUT_MAX_POST_COUNT = "5";
-process.env.INPUT_FEED_LIST = JSON.stringify(data);
+process.env.INPUT_FEED_LIST = "http://localhost:8080";
 process.env.INPUT_README_PATH = "./test/README.md";
 process.env.TEST_MODE = "true";
 require('./blog-post-workflow');
