@@ -8,7 +8,8 @@
     "local-run": "node test.js",
     "test-run": "npm run local-run && diff test/Readme.md test/Readme.md.snap",
     "start-server": "node test/test-server.js",
-    "test": "start-server-and-test start-server http://localhost:8080 test-run"
+    "test": "start-server-and-test start-server http://localhost:8080 test-run",
+    "build": "parcel build  --no-source-maps --target=node blog-post-workflow.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "rss-parser": "^3.8.0"
   },
   "devDependencies": {
-    "start-server-and-test": "^1.11.2"
+    "start-server-and-test": "^1.11.2",
+    "parcel-bundler": "^1.12.4"
   }
 }
