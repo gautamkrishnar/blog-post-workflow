@@ -55,6 +55,9 @@ Following are the list of some popular blogging platforms and their RSS feed url
 | [Dev.to](https://dev.to/) | `https://dev.to/feed/username` | Replace username wih your own username | https://dev.to/feed/gautamkrishnar |
 | [Wordpress](https://wordpress.org/) | `https://www.gautamkrishnar.com/feed/` | Replace wih your own blog url | n/a |
 
+### Examples 
+* [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
+
 ### Bugs
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
