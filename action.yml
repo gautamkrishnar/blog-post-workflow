@@ -1,6 +1,6 @@
 name: 'Blog Post Workflow'
 author: 'Gautam Krishna R'
-description: 'Allows you to show your latest blog posts on your github profile or project readme'
+description: 'Allows you to show your latest blog posts on your github profile or project readme automaticially from rss feeds'
 
 inputs:
   gh_token:
