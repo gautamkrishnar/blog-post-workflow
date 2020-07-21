@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: gautamkrishnar/blog-post-workflow@master
         with:
-          feed_list: "['https://dev.to/feed/gautamkrishnar', 'https://www.gautamkrishnar.com/feed/']"
+          feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
 ```
 - Replace the above url list with your own rss feed urls. See [popular-sources](#popular-sources) for a list of common RSS feed urls.
 - Commit and wait for it to run
@@ -42,7 +42,7 @@ This workflow has additional options that you can use to customize it for your u
 
 | Option | Default Value | Description | Required |
 |--------|--------|--------|--------|
-| `feed_list` | `[]` | List of feed urls formatted as javascript array, eg: `['https://example1.com', 'https://example2.com'`]` | Yes |
+| `feed_list` | `""` | Comma separated list of RSS feed urls, eg: `https://example1.com,https://example2.com` | Yes |
 | `max_post_count` | `5` | Maximum number of posts you want to show on your readme, all feeds combined | No  |
 | `readme_path` | `./README.md` | Path of the readme file you want to update | No |
 | `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |  

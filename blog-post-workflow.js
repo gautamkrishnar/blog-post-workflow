@@ -93,19 +93,13 @@ let postsArray = []; // Array to store posts
 let jobFailFlag = false; // Job status flag
 
 const feedObjString = core.getInput('feed_list').trim();
-let feedList = [];
+
 
 // Reading feed list from the workflow input
-if (!feedObjString || feedObjString === '[]') {
-    core.setFailed('FEED_OBJECT key not set correctly');
-    process.exit(1);
-} else {
-    try {
-        feedList = JSON.parse(feedObjString);
-    } catch (e) {
-        core.setFailed('Unable to parse FEED_OBJECT key. Please double check its value. Value:' + feedObjString);
-        process.exit(1);
-    }
+let feedList = feedObjString.split(',');
+if (feedList.length === 0) {
+    core.error("Please double check the value of feed_list");
+    process.exit(0);
 }
 
 feedList.forEach((siteUrl) => {
