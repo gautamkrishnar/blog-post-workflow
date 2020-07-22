@@ -116,6 +116,9 @@ feedList.forEach((siteUrl) => {
                 reject("Cannot read response->item");
             } else {
                 const posts = responsePosts.map((item) => {
+                    // Ignore Medium's comments
+                    if (siteUrl.includes('medium.com/feed') && item['category'] === undefined) return
+                    
                     // Validating keys to avoid errors
                     if (item['pubDate'] === undefined) {
                         reject("Cannot read response->item->pubDate");
