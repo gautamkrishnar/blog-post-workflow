@@ -42,7 +42,43 @@ This workflow has additional options that you can use to customize it for your u
 | `feed_list` | `""` | Comma separated list of RSS feed urls, eg: `https://example1.com,https://example2.com` | Yes |
 | `max_post_count` | `5` | Maximum number of posts you want to show on your readme, all feeds combined | No  |
 | `readme_path` | `./README.md` | Path of the readme file you want to update | No |
-| `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |  
+| `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |
+| `comment_tag_name` | `BLOG-POST-LIST` |Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
+
+### Advanced usage examples
+#### StackOverflow example
+Following configuration allows you to show your latest StackOverflow activity along with your latest blog posts in the Github profile or project readme:
+- Follow the steps mentioned in [how to use](#how-to-use) section
+- Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->` in your readme. The workflow will replace this comment with the actual StackOverflow activity: 
+```markdown
+# StackOverflow Activity
+<!-- STACKOVERFLOW:START -->
+<!-- STACKOVERFLOW:END -->
+```
+- Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user id](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
+```yaml
+name: Latest stack oveflow activity
+on:
+  schedule:
+    # Runs every hour
+    - cron: '0 * * * *'
+
+jobs:
+  update-readme-with-blog:
+    name: Update this repo's README with latest activity from StackOverflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          comment_tag_name: "STACKOVERFLOW"
+          feed_list: "https://stackoverflow.com/feeds/user/4214976"
+```
+<details>
+  <summary>See the result!</summary>
+
+  ![advanced](https://user-images.githubusercontent.com/8397274/88197889-b727ff80-cc60-11ea-8e4a-b1fbd8dd9d06.png)
+</details>
 
 ### Popular Sources 
 Following are the list of some popular blogging platforms and their RSS feed urls:

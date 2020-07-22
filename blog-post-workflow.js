@@ -12,7 +12,8 @@ const { spawn } = require('child_process');
  * @return {string}: content after combining previousContent and newContent
  */
 const buildReadme = (previousContent, newContent) => {
-    const tagToLookFor = `<!-- BLOG-POST-LIST:`;
+    const tagNameInput = core.getInput('comment_tag_name');
+    const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : `<!-- BLOG-POST-LIST:`;
     const closingTag = '-->';
     const startOfOpeningTagIndex = previousContent.indexOf(
         `${tagToLookFor}START`,
