@@ -50,9 +50,11 @@ Following are the list of some popular blogging platforms and their RSS feed url
 | Name | Feed URL | Comments | Example |
 |--------|--------|--------|--------|
 | [Dev.to](https://dev.to/) | `https://dev.to/feed/username` | Replace username wih your own username | https://dev.to/feed/gautamkrishnar |
-| [Wordpress](https://wordpress.org/) | `https://www.gautamkrishnar.com/feed/` | Replace wih your own blog url | n/a |
-| [Medium](https://medium.com/) | `https://medium.com/feed/@username` | Replace wih your own blog url | https://medium.com/feed/@khaosdoctor |
-| [Stackoverflow](https://stackoverflow.com/) | `https://stackoverflow.com/feeds/user/userid` | Replace wih your own blog url | https://stackoverflow.com/feeds/user/5283532|
+| [Wordpress](https://wordpress.org/) | `https://www.example.com/feed/` | Replace wih your own blog url | https://www.gautamkrishnar.com/feed/ |
+| [Medium](https://medium.com/) | `https://medium.com/feed/@username` | Replace @username with your medium username | https://medium.com/feed/@khaosdoctor |
+| [Stackoverflow](https://stackoverflow.com/) | `https://stackoverflow.com/feeds/user/userid` | Replace wih your StackOverflow [UserId](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130) | https://stackoverflow.com/feeds/user/5283532 |
+| [Ghost](https://ghost.org/) | `https://www.example.com/rss/` | Replace wih your own blog url | https://blog.codinghorror.com/rss/ |
+| [Drupal](https://www.drupal.org/) | `https://www.example.com/rss.xml` | Replace wih your own blog url | https://www.arsenal.com/rss.xml |
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
