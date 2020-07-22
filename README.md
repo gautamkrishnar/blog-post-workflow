@@ -51,6 +51,7 @@ Following are the list of some popular blogging platforms and their RSS feed url
 |--------|--------|--------|--------|
 | [Dev.to](https://dev.to/) | `https://dev.to/feed/username` | Replace username wih your own username | https://dev.to/feed/gautamkrishnar |
 | [Wordpress](https://wordpress.org/) | `https://www.gautamkrishnar.com/feed/` | Replace wih your own blog url | n/a |
+| [Medium](https://medium.com/) | `https://medium.com/feed/@username` | Replace wih your own blog url | https://medium.com/feed/@khaosdoctor |
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
