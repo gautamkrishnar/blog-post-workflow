@@ -106,7 +106,7 @@ if (feedList.length === 0) {
     process.exit(1)
 }
 
-function ignoreMediumComments (item) { // filters out every medium comment
+function ignoreMediumComments (item) { // filters out every medium comment (PR #4)
     if (item['link'].includes('medium.com') && item['categories'] === undefined) return false
     return true
 }
