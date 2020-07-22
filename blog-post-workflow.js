@@ -106,10 +106,8 @@ if (feedList.length === 0) {
     process.exit(1)
 }
 
-function ignoreMediumComments (item) { // filters out every medium comment (PR #4)
-    if (item['link'].includes('medium.com') && item['categories'] === undefined) return false
-    return true
-}
+// filters out every medium comment (PR #4)
+const ignoreMediumComments = (item) => item['link'].includes('medium.com') && item['categories'] === undefined ? false : true
 
 feedList.forEach((siteUrl) => {
     runnerNameArray.push(siteUrl)
@@ -148,6 +146,7 @@ feedList.forEach((siteUrl) => {
 Promise.allSettled(promiseArray).then((results) => {
     results.forEach((result, index) => {
         if (result.status === "fulfilled") {
+            console.log(result)
             // Succeeded
             core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length)
             postsArray.push(...result.value)
