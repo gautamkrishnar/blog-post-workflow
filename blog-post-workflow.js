@@ -99,6 +99,8 @@ let jobFailFlag = false; // Job status flag
 
 const feedObjString = core.getInput('feed_list').trim();
 
+function ignoreMediumComments (post) {
+    
 
 // Reading feed list from the workflow input
 let feedList = feedObjString.split(',');
@@ -115,10 +117,12 @@ feedList.forEach((siteUrl) => {
             if (responsePosts === undefined) {
                 reject("Cannot read response->item");
             } else {
-                const posts = responsePosts.map((item) => {
-                    // Ignore Medium's comments
-                    if (siteUrl.includes('medium.com/feed') && item['category'] === undefined) return
-                    
+                const posts = responsePosts
+                .filter((item) => { // filters out every medium comment
+                    if (siteUrl.includes('medium.com/feed') && item['category'] === undefined) return false
+                    return true
+                })
+                .map((item) => {
                     // Validating keys to avoid errors
                     if (item['pubDate'] === undefined) {
                         reject("Cannot read response->item->pubDate");
