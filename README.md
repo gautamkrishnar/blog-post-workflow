@@ -57,14 +57,14 @@ Following configuration allows you to show your latest StackOverflow activity al
 ```
 - Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user id](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
 ```yaml
-name: Latest stack oveflow activity
+name: Latest stack overflow activity
 on:
   schedule:
-    # Runs every hour
-    - cron: '0 * * * *'
+    # Runs every 5 minutes
+    - cron: '*/5 * * * *'
 
 jobs:
-  update-readme-with-blog:
+  update-readme-with-stack-overflow:
     name: Update this repo's README with latest activity from StackOverflow
     runs-on: ubuntu-latest
     steps:
