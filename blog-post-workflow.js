@@ -143,7 +143,7 @@ Promise.allSettled(promiseArray).then((results) => {
         if (result.status === "fulfilled") {
             // Succeeded
             core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length);
-            postsArray = [...postsArray, ...result.value]
+            postsArray.push(...result.value);
         } else {
             jobFailFlag = true;
             // Rejected
