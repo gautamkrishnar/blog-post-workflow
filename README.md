@@ -62,7 +62,6 @@ Following are the list of some popular blogging platforms and their RSS feed url
 ### ToDo
 - [ ] Add more sources
 - [ ] Fix bugs
-- [ ] Add CI/CD using travis ci
 
 ### Bugs
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
