@@ -162,9 +162,11 @@ Promise.allSettled(promiseArray).then((results) => {
   });
 }).finally(() => {
   // Sorting posts based on date
-  postsArray.sort(function (a, b) {
-    return b.date - a.date;
-  });
+  if (core.getInput('disable_sort') === "false") {
+    postsArray.sort(function (a, b) {
+      return b.date - a.date;
+    });
+  }
   // Slicing with the max count
   postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
   if (postsArray.length > 0) {

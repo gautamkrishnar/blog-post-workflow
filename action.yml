@@ -19,6 +19,10 @@ inputs:
     description: "Comma separated list of RSS feed urls"
     default: ""
     required: true
+  disable_sort:
+    description: "Disables the sorting of list based on publish date"
+    default: "false"
+    required: false
   comment_tag_name:
     description: "Override the default comment tag name, if you want to show multiple instances of the action on the same repo"
     required: false

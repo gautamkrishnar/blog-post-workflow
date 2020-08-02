@@ -44,6 +44,7 @@ This workflow has additional options that you can use to customize it for your u
 | `readme_path` | `./README.md` | Path of the readme file you want to update | No |
 | `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |
 | `comment_tag_name` | `BLOG-POST-LIST` | Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
+| `disable_sort` | `false` | Disables the sorting of list based on publish date | No |
 | `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
