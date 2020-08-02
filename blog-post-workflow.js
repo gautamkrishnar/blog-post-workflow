@@ -60,22 +60,25 @@ const commitReadme = async () => {
     });
     app.on('error', reject);
   });
-
+  // Getting config
+  const committerUsername = core.getInput('committer_username');
+  const committerEmail = core.getInput('committer_email');
+  const commitMessage = core.getInput('commit_message');
   // Doing commit and push
   await exec('git', [
     'config',
     '--global',
     'user.email',
-    'blog-post-bot@example.com',
+    committerEmail,
   ]);
   if (GITHUB_TOKEN) {
     // git remote set-url origin
     await exec('git', ['remote', 'set-url', 'origin',
       `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
   }
-  await exec('git', ['config', '--global', 'user.name', 'blog-post-bot']);
+  await exec('git', ['config', '--global', 'user.name', committerUsername]);
   await exec('git', ['add', README_FILE_PATH]);
-  await exec('git', ['commit', '-m', 'Updated with latest blog posts']);
+  await exec('git', ['commit', '-m', commitMessage]);
   await exec('git', ['push']);
   core.info("Readme updated successfully in the upstream repository");
   // Making job fail if one of the source fails

@@ -43,7 +43,10 @@ This workflow has additional options that you can use to customize it for your u
 | `max_post_count` | `5` | Maximum number of posts you want to show on your readme, all feeds combined | No  |
 | `readme_path` | `./README.md` | Path of the readme file you want to update | No |
 | `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |
-| `comment_tag_name` | `BLOG-POST-LIST` |Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
+| `comment_tag_name` | `BLOG-POST-LIST` | Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
+| `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
+| `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
+| `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
 
 ### Advanced usage examples
 #### StackOverflow example
