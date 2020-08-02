@@ -75,6 +75,7 @@ jobs:
       - uses: gautamkrishnar/blog-post-workflow@master
         with:
           comment_tag_name: "STACKOVERFLOW"
+          commit_message: "Updated readme with the latest stackOverflow data"
           feed_list: "https://stackoverflow.com/feeds/user/4214976"
 ```
 <details>
