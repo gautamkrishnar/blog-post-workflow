@@ -1,7 +1,6 @@
 const process = require('process');
 let Parser = require('rss-parser');
 const core = require('@actions/core');
-const _ = require('lodash');
 const fs = require('fs');
 const {spawn} = require('child_process');
 
@@ -117,10 +116,10 @@ feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
     parser.parseURL(siteUrl).then((data) => {
-      const responsePosts = _.get(data, 'items');
-      if (!responsePosts) {
+      if (!data.items) {
         reject("Cannot read response->item");
       } else {
+        const responsePosts = data.items;
         const posts = responsePosts
           .filter(ignoreMediumComments)
           .map((item) => {

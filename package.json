@@ -30,7 +30,6 @@
   "homepage": "https://github.com/gautamkrishnar/blog-post-workflow#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "lodash": "^4.17.19",
     "process": "latest",
     "rss-parser": "^3.8.0"
   },
