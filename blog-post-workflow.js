@@ -103,7 +103,7 @@ let jobFailFlag = false; // Job status flag
 const feedObjString = core.getInput('feed_list').trim();
 
 // Reading feed list from the workflow input
-let feedList = feedObjString.split(',');
+let feedList = feedObjString.split(',').map(item=>item.trim());
 if (feedList.length === 0) {
   core.error("Please double check the value of feed_list");
   process.exit(1);
