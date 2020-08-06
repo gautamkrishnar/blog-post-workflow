@@ -30,7 +30,11 @@ const buildReadme = (previousContent, newContent) => {
     endOfOpeningTagIndex === -1 ||
     startOfClosingTagIndex === -1
   ) {
-    return previousContent;
+    // Exit with error if comment is not found on the readme
+    core.error(
+      `Cannot find the comment tag on the readme:\n<!-- ${tagToLookFor}:START -->\n<!-- ${tagToLookFor}:END -->`
+    );
+    process.exit(1);
   }
   return [
     previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
