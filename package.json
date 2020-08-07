@@ -1,6 +1,6 @@
 {
   "name": "blog-post-workflow",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Allows you to show your latest blog posts on your github profile or project readme",
   "main": "blog-post-workflow.js",
   "scripts": {
