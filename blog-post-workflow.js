@@ -38,9 +38,7 @@ const buildReadme = (previousContent, newContent) => {
   }
   return [
     previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-    '\n',
     newContent,
-    '\n',
     previousContent.slice(startOfClosingTagIndex),
   ].join('');
 };
@@ -175,9 +173,18 @@ Promise.allSettled(promiseArray).then((results) => {
   if (postsArray.length > 0) {
     try {
       const readmeData = fs.readFileSync(README_FILE_PATH, "utf8");
-
+      const template = core.getInput('template');
       const postListMarkdown = postsArray.reduce((acc, cur, index) => {
-        return acc + `- [${cur.title}](${cur.url})` + ((index === (postsArray.length - 1)) ? '' : '\n');
+        if (template === "default") {
+          // Default template: - [$title]($url)
+          return acc + `\n- [${cur.title}](${cur.url})` + (((index + 1) === postsArray.length) ? '\n' : '');
+        } else {
+          // Building with custom template
+          return acc + template
+            .replace(/\$title/g, cur.title)
+            .replace(/\$url/g, cur.url)
+            .replace(/\$newline/g, "\n");
+        }
       }, '');
       const newReadme = buildReadme(readmeData, postListMarkdown);
       // if there's change in readme file update it

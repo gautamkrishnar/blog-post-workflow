@@ -23,6 +23,10 @@ inputs:
     description: "Disables the sorting of list based on publish date"
     default: "false"
     required: false
+  template:
+    description: "Template to use while creating the list of posts. It can contain $title,$url and $newline as variables"
+    default: "default"
+    required: false
   comment_tag_name:
     description: "Override the default comment tag name, if you want to show multiple instances of the action on the same repo"
     required: false

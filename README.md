@@ -45,6 +45,7 @@ This workflow has additional options that you can use to customize it for your u
 | `gh_token` | your github token with repo scope | Use this to configure the token of the user that commits the workflow result to GitHub | No |
 | `comment_tag_name` | `BLOG-POST-LIST` | Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
 | `disable_sort` | `false` | Disables the sorting of list based on publish date | No |
+| `template` | `default` | Allows you to change the structure of the posts list by using the `$title`, `$url` and `$newline` variables. By default this workflow uses markdown list format to render the posts, you can override this behaviour using this option. Eg: `[$title]($url) ` will give you a space separated list of posts | No |
 | `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
@@ -98,7 +99,7 @@ Following are the list of some popular blogging platforms and their RSS feed url
 | [Drupal](https://www.drupal.org/) | `https://www.example.com/rss.xml` | Replace wih your own blog url | https://www.arsenal.com/rss.xml |
 | [Youtube Playlists](https://www.youtube.com) | `https://www.youtube.com/feeds/videos.xml?playlist_id=playlistId` | Replace `playlistId` with your own Youtube playlist id | https://www.youtube.com/feeds/videos.xml?playlist_id=PLJNqgDLpd5E69Kc664st4j7727sbzyx0X |
 | [Youtube Channel Video list](https://www.youtube.com) |  `https://www.youtube.com/feeds/videos.xml?channel_id=channelId` | Replace `channelId` with your own Youtube channel id | https://www.youtube.com/feeds/videos.xml?channel_id=UCDCHcqyeQgJ-jVSd6VJkbCw |
-|[Anchor.fm Podcasts](https://anchor.fm/) | `https://anchor.fm/s/podcastId/podcast/rss` | You can get the rss feed url of a podcast by following [these](https://help.anchor.fm/hc/en-us/articles/360027712351-Locating-your-Anchor-RSS-feed) instructions | https://anchor.fm/s/1e784a38/podcast/rss |
+| [Anchor.fm Podcasts](https://anchor.fm/) | `https://anchor.fm/s/podcastId/podcast/rss` | You can get the rss feed url of a podcast by following [these](https://help.anchor.fm/hc/en-us/articles/360027712351-Locating-your-Anchor-RSS-feed) instructions | https://anchor.fm/s/1e784a38/podcast/rss |
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
