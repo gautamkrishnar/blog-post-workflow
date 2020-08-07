@@ -5,8 +5,9 @@
   "main": "blog-post-workflow.js",
   "scripts": {
     "start": "node blog-post-workflow.js",
-    "local-run": "node test.js",
-    "test-run": "npm run local-run && diff test/Readme.md test/Readme.md.snap",
+    "start-test": "node test.js",
+    "local-run": "start-server-and-test start-server http://localhost:8080 start-test",
+    "test-run": "npm run start-test && diff test/Readme.md test/Readme.md.snap",
     "start-server": "node test/test-server.js",
     "test": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run",
     "lint": "jshint --exclude='node_modules/' *.js",
