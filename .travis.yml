@@ -7,6 +7,10 @@ cache:
   npm: true
 jobs:
   include:
-    - stage: Test generated dist
+    - stage: Generate, test and publish dist
       if: tag IS present
-      script: yarn run test-dist
+      script:
+        - git config --global user.email "gkr@tuta.io"
+        - git config --global user.name "gkr-bot"
+        - git remote set-url origin https://${GH_TOKEN}@github.com/gautamkrishnar/blog-post-workflow.git
+        - yarn build && yarn run test-dist && git add ./dist/blog-post-workflow.js && git commit -m "Published ${TRAVIS_TAG}" && git push --quiet
