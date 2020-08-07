@@ -8,11 +8,12 @@ cache:
 jobs:
   include:
     - stage: Generate dist and test
+      if: tag IS blank
       script: yarn build && yarn run test-dist
-    - stage: Pulish dist to GitHub
+    - stage: Generate dist, test pulish to GitHub
       if: tag IS present
       script:
         - git config --global user.email "gkr@tuta.io"
         - git config --global user.name "gkr-bot"
         - git remote set-url origin https://${GH_TOKEN}@github.com/gautamkrishnar/blog-post-workflow.git
-        - yarn build && git add ./dist/blog-post-workflow.js && git commit -m "Published ${TRAVIS_TAG}" && git push --quiet
+        - yarn build && yarn run test-dist && git add ./dist/blog-post-workflow.js && git commit -m "Published ${TRAVIS_TAG}" && git push --quiet
