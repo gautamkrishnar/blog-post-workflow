@@ -5,3 +5,8 @@ node_js:
   - 12
 cache:
   npm: true
+jobs:
+  include:
+    - stage: Test generated dist
+      if: tag IS present
+      script: yarn run test-dist

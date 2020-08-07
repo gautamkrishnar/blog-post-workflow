@@ -18,6 +18,8 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
     process.env.INPUT_DISABLE_SORT = "false";
     process.env.INPUT_TEMPLATE = "default";
     process.env.TEST_MODE = "true";
-    require('./blog-post-workflow');
+    const testFile = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
+    console.log('Testing: ', testFile);
+    require(testFile);
 });
 
