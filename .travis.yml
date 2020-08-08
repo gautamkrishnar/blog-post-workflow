@@ -15,4 +15,4 @@ jobs:
     - stage: Generate dist, test and publish to GitHub
       if: tag IS present
       script:
-        - yarn build && yarn run test-dist && git clone https://${GH_TOKEN}@github.com/gautamkrishnar/blog-post-workflow.git publish-repo  > /dev/null 2>&1 && cp -fv ./dist/blog-post-workflow.js ./publish-repo/dist/blog-post-workflow.js && cd publish-repo && git add ./dist/blog-post-workflow.js && git commit -m "Published ${TRAVIS_TAG}" && git push --quiet
+        - yarn build && yarn run test-dist && git clone https://${GH_TOKEN}@github.com/gautamkrishnar/blog-post-workflow.git publish-repo  > /dev/null 2>&1 && cp -fv ./dist/blog-post-workflow.js ./publish-repo/dist/blog-post-workflow.js && cd publish-repo && git config --global user.email "gkr@tuta.io" && git config --global user.name "gkr-bot" && git add ./dist/blog-post-workflow.js && git commit -m "Published ${TRAVIS_TAG}" && git push --quiet
