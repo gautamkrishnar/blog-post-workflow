@@ -2,7 +2,7 @@ const process = require('process');
 let Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('fs');
-const {spawn} = require('child_process');
+const exec = require('./exec');
 
 /**
  * Builds the new readme by replacing the readme's <!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END --> tags
@@ -48,19 +48,6 @@ const buildReadme = (previousContent, newContent) => {
  * @return {Promise<void>}
  */
 const commitReadme = async () => {
-  const exec = (cmd, args = []) => new Promise((resolve, reject) => {
-    console.log(`Started: ${cmd} ${args.join(' ')}`);
-    const app = spawn(cmd, args, {stdio: ['inherit', 'inherit', 'inherit']});
-    app.on('close', (code) => {
-      if (code !== 0) {
-        const err = new Error(`Invalid status code: ${code}`);
-        err.code = code;
-        return reject(err);
-      }
-      return resolve(code);
-    });
-    app.on('error', reject);
-  });
   // Getting config
   const committerUsername = core.getInput('committer_username');
   const committerEmail = core.getInput('committer_email');

@@ -1,5 +1,5 @@
 {
   "node": true,
-  "esversion": 8,
+  "esversion": 9,
   "globals": {}
 }

@@ -4,15 +4,15 @@
   "description": "Allows you to show your latest blog posts on your github profile or project readme",
   "main": "blog-post-workflow.js",
   "scripts": {
-    "start": "node blog-post-workflow.js",
-    "local-run": "start-server-and-test start-server http://localhost:8080 start-test",
-    "start-server": "node test/test-server.js",
-    "test-run": "node test.js && diff test/Readme.md test/Readme.md.snap",
-    "test": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run",
-    "test-run-dist": "DIST=true node test.js && diff test/Readme.md test/Readme.md.snap",
-    "test-dist": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run-dist",
+    "build": "parcel build  --no-source-maps --target=node --bundle-node-modules blog-post-workflow.js",
     "lint": "jshint --exclude='node_modules/' *.js",
-    "build": "parcel build  --no-source-maps --target=node --bundle-node-modules blog-post-workflow.js"
+    "start-server": "node test/test-server.js",
+    "local-run-script": "node local-run.js",
+    "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
+    "test-run": "mocha test.js",
+    "test": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run",
+    "test-run-dist": "DIST=true mocha test.js",
+    "test-dist": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "rss-parser": "^3.8.0"
   },
   "devDependencies": {
+    "mocha": "^8.1.1",
     "jshint": "^2.11.1",
     "parcel-bundler": "^1.12.4",
     "start-server-and-test": "^1.11.2"
