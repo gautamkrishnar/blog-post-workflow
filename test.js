@@ -30,7 +30,7 @@ describe('Blog post workflow tests', function () {
       INPUT_TEMPLATE: "default",
       TEST_MODE: "true"
     };
-    await exec('node', ['blog-post-workflow.js'],{env: envObj});
+    await exec('node', [TEST_FILE],{env: envObj});
     const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE  + '.snap'), "utf-8");
     const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), "utf-8");
     assert.equal(snapshot, newReadme);
@@ -48,7 +48,7 @@ describe('Blog post workflow tests', function () {
       INPUT_TEMPLATE: "default",
       TEST_MODE: "true"
     };
-    await exec('node', ['blog-post-workflow.js'],{env: envObj});
+    await exec('node', [TEST_FILE],{env: envObj});
     const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE  + '.snap'), "utf-8");
     const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), "utf-8");
     assert.equal(snapshot, newReadme);
@@ -66,7 +66,7 @@ describe('Blog post workflow tests', function () {
       INPUT_TEMPLATE: "$newline[$title]($url) $newline",
       TEST_MODE: "true",
     };
-    await exec('node', ['blog-post-workflow.js'],{env: envObj});
+    await exec('node', [TEST_FILE],{env: envObj});
     const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), "utf-8");
     const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), "utf-8");
     assert.equal(snapshot, newReadme);
