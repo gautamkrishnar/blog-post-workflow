@@ -13,7 +13,7 @@ Post list example:
 # Other contents
 Test content
 `;
-const TEST_FILE = process.env.DIST ? './blog-post-workflow' :'./blog-post-workflow';
+const TEST_FILE = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
 console.log('Testing: ', TEST_FILE);
 
 // Test block
