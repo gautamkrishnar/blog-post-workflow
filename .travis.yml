@@ -7,10 +7,12 @@ cache:
   npm: true
 jobs:
   include:
+    - stage: Test
+      script: yarn test
     - stage: Generate dist and test
       if: tag IS blank
       script: yarn build && yarn run test-dist
-    - stage: Generate dist, test pulish to GitHub
+    - stage: Generate dist, test and publish to GitHub
       if: tag IS present
       script:
         - git config --global user.email "gkr@tuta.io"
