@@ -23,6 +23,9 @@ inputs:
     description: "Disables the sorting of list based on publish date"
     default: "false"
     required: false
+  tag_post_pre_newline:
+    description: "Inserts newline before the opening tag and after the closing tag when using the template option, for formatting"
+    required: false
   template:
     description: "Template to use while creating the list of posts. It can contain $title,$url and $newline as variables"
     default: "default"

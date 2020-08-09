@@ -14,6 +14,7 @@ const buildReadme = (previousContent, newContent) => {
   const tagNameInput = core.getInput('comment_tag_name');
   const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : `<!-- BLOG-POST-LIST:`;
   const closingTag = '-->';
+  const tagNewlineFlag = core.getInput('tag_post_pre_newline');
   const startOfOpeningTagIndex = previousContent.indexOf(
     `${tagToLookFor}START`,
   );
@@ -38,7 +39,9 @@ const buildReadme = (previousContent, newContent) => {
   }
   return [
     previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
+    tagNewlineFlag ? '\n' : '',
     newContent,
+    tagNewlineFlag ? '\n' : '',
     previousContent.slice(startOfClosingTagIndex),
   ].join('');
 };

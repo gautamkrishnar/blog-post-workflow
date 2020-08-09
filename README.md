@@ -46,6 +46,7 @@ This workflow has additional options that you can use to customize it for your u
 | `comment_tag_name` | `BLOG-POST-LIST` | Allows you to override the default comment tag name (`<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->`), if you want to show multiple instances of the action on the same repo, see advanced usage for more info | No | 
 | `disable_sort` | `false` | Disables the sorting of list based on publish date | No |
 | `template` | `default` | Allows you to change the structure of the posts list by using the `$title`, `$url` and `$newline` variables. By default this workflow uses markdown list format to render the posts, you can override this behaviour using this option. Eg: `[$title]($url) ` will give you a space separated list of posts | No |
+| `tag_post_pre_newline` | `true` if you are not using **template** option | Allows you to insert a newline before the opening tag and after the closing tag when using the template option if needed, for better formatting | No |
 | `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
