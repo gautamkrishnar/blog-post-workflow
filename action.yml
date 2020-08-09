@@ -24,7 +24,7 @@ inputs:
     default: "false"
     required: false
   tag_post_pre_newline:
-    description: "Inserts newline before the opening tag and after the closing tag when using the template option, for formatting"
+    description: "Inserts newline before the closing tag and after the opening tag when using the template option, for formatting"
     required: false
   template:
     description: "Template to use while creating the list of posts. It can contain $title,$url and $newline as variables"
