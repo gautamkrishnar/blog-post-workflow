@@ -36,8 +36,8 @@
     "rss-parser": "^3.8.0"
   },
   "devDependencies": {
-    "mocha": "^8.1.1",
     "jshint": "^2.11.1",
+    "mocha": "^8.1.1",
     "parcel-bundler": "^1.12.4",
     "start-server-and-test": "^1.11.2"
   }
