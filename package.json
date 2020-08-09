@@ -1,6 +1,6 @@
 {
   "name": "blog-post-workflow",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Allows you to show your latest blog posts on your github profile or project readme",
   "main": "blog-post-workflow.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "local-run-script": "node local-run.js",
     "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
     "test-run": "mocha test.js",
-    "test": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run",
+    "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
     "test-run-dist": "DIST=true mocha test.js",
-    "test-dist": "npm run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
+    "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
   },
   "repository": {
     "type": "git",
