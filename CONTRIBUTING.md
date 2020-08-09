@@ -33,6 +33,6 @@ Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in
 1. Update the README.md with details of changes to the API if you made those changes. Add an example as well
 2. Add proper comments to the code you have added. You should use the `yarn lint` to check linting of the code, 
 make sure that you dont add/remove any linting rules. Discuss with the maintainer if you require any of such changes.
-3. Do not run `yarn build`, It will be done by the maintainer when he release a new version. Revert the changes if you had
+3. Do not run `yarn build`, It will be done by the maintainer's bot when he release a new version. Revert the changes if you had
 accidentally done it.
 4. Add descriptive title and description to the PRs
