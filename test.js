@@ -23,7 +23,7 @@ describe('Blog post workflow tests', function () {
     fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
-      INPUT_MAX_POST_COUNT: "5",
+      INPUT_MAX_POST_COUNT: "10",
       INPUT_FEED_LIST: "http://localhost:8080",
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "false",
@@ -42,7 +42,7 @@ describe('Blog post workflow tests', function () {
     fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
-      INPUT_MAX_POST_COUNT: "5",
+      INPUT_MAX_POST_COUNT: "10",
       INPUT_FEED_LIST: "http://localhost:8080",
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "true",
@@ -61,12 +61,29 @@ describe('Blog post workflow tests', function () {
     fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
-      INPUT_MAX_POST_COUNT: "5",
+      INPUT_MAX_POST_COUNT: "10",
       INPUT_FEED_LIST: "http://localhost:8080",
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "false",
       INPUT_TEMPLATE: "$newline[$title]($url) $newline",
       INPUT_FILTER_COMMENTS: "stackoverflow,medium",
+      TEST_MODE: "true",
+    };
+    await exec('node', [TEST_FILE],{env: envObj});
+    const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), "utf-8");
+    const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), "utf-8");
+    assert.equal(snapshot, newReadme);
+  });
+  it('Generated readme without filters should match the snapshot',async function () {
+    const README_FILE = 'Readme.comments.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      INPUT_MAX_POST_COUNT: "10",
+      INPUT_FEED_LIST: "http://localhost:8080",
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_DISABLE_SORT: "false",
+      INPUT_TEMPLATE: "$newline[$title]($url) $newline",
       TEST_MODE: "true",
     };
     await exec('node', [TEST_FILE],{env: envObj});
