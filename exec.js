@@ -1,11 +1,13 @@
 const {spawn} = require('child_process');
 
-const exec = (cmd, args = [], options = {}, stdio = ['inherit', 'inherit', 'inherit']) => new Promise((resolve, reject) => {
+const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => {
   console.log(`Started: ${cmd} ${args.join(' ')}`);
   const optionsToCLI = {
-    ...options,
-    stdio
+    ...options
   };
+  if (!optionsToCLI.stdio) {
+    Object.assign(optionsToCLI, {stdio: ['inherit', 'inherit', 'inherit']});
+  }
   const app = spawn(cmd, args, optionsToCLI);
   app.on('close', (code) => {
     if (code !== 0) {
