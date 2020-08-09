@@ -47,6 +47,7 @@ This workflow has additional options that you can use to customize it for your u
 | `disable_sort` | `false` | Disables the sorting of list based on publish date | No |
 | `template` | `default` | Allows you to change the structure of the posts list by using the `$title`, `$url` and `$newline` variables. By default this workflow uses markdown list format to render the posts, you can override this behaviour using this option. Eg: `[$title]($url) ` will give you a space separated list of posts | No |
 | `tag_post_pre_newline` | `true` if you are not using **template** option | Allows you to insert a newline before the closing tag and after the opening tag when using the template option if needed, for better formatting | No |
+| `filter_comments` | `stackoverflow,medium` | Comma separated list of platforms you want to enable the comment filter. Available filters: `medium` `stackoverflow` | No |
 | `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |

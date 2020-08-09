@@ -23,6 +23,10 @@ inputs:
     description: "Disables the sorting of list based on publish date"
     default: "false"
     required: false
+  filter_comments:
+    description: "Comma separated list of platforms you want to enable the comment filter"
+    default: "stackoverflow,medium"
+    required: false
   tag_post_pre_newline:
     description: "Inserts newline before the closing tag and after the opening tag when using the template option, for formatting"
     required: false

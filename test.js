@@ -28,6 +28,7 @@ describe('Blog post workflow tests', function () {
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "false",
       INPUT_TEMPLATE: "default",
+      INPUT_FILTER_COMMENTS: "stackoverflow,medium",
       TEST_MODE: "true"
     };
     await exec('node', [TEST_FILE],{env: envObj});
@@ -46,6 +47,7 @@ describe('Blog post workflow tests', function () {
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "true",
       INPUT_TEMPLATE: "default",
+      INPUT_FILTER_COMMENTS: "stackoverflow,medium",
       TEST_MODE: "true"
     };
     await exec('node', [TEST_FILE],{env: envObj});
@@ -64,6 +66,7 @@ describe('Blog post workflow tests', function () {
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "false",
       INPUT_TEMPLATE: "$newline[$title]($url) $newline",
+      INPUT_FILTER_COMMENTS: "stackoverflow,medium",
       TEST_MODE: "true",
     };
     await exec('node', [TEST_FILE],{env: envObj});

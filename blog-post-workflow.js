@@ -85,6 +85,11 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Readme path, default: ./README.md
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
+const COMMENT_FILTERS = core
+  .getInput('filter_comments')
+  .trim()
+  .split(',')
+  .map(item=>item.trim());
 core.setSecret(GITHUB_TOKEN);
 
 const promiseArray = []; // Runner
@@ -102,7 +107,10 @@ if (feedList.length === 0) {
 }
 
 // filters out every medium comment (PR #4)
-const ignoreMediumComments = (item) => !(item.link.includes('medium.com') && item.categories === undefined);
+const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 && item.link.includes('medium.com') && item.categories === undefined);
+
+// filters out stackOverflow comments (#16)
+const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 && item.link.includes('stackoverflow.com') && item.title.startsWith('Comment by ' + item.author));
 
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
@@ -114,6 +122,7 @@ feedList.forEach((siteUrl) => {
         const responsePosts = data.items;
         const posts = responsePosts
           .filter(ignoreMediumComments)
+          .filter(ignoreStackOverflowComments)
           .map((item) => {
             // Validating keys to avoid errors
             if (!item.pubDate) {
