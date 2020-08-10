@@ -66,7 +66,7 @@ describe('Blog post workflow tests', function () {
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DISABLE_SORT: "false",
       INPUT_TEMPLATE: "$newline[$title]($url) $newline",
-      INPUT_FILTER_COMMENTS: "stackoverflow,medium",
+      INPUT_FILTER_COMMENTS: "medium,stackoverflow/Comment by $author/",
       TEST_MODE: "true",
     };
     await exec('node', [TEST_FILE],{env: envObj});

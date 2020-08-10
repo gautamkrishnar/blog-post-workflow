@@ -85,12 +85,38 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Readme path, default: ./README.md
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
+const FILTER_PARAMS = {
+  stackoverflow: "Comment by $author"
+};
+
+/**
+ * Updates FILTER_PARAMS object with filter parameters
+ * @param sourceWithParam filter source with param eg: stackoverflow/Comment by $author/
+ * @return {string} actual source name eg: stackoverflow
+ */
+const updateAndParseParams = (sourceWithParam) => {
+  const param = sourceWithParam.split('/'); // Reading params
+  if (param.length === 3) {
+    Object.assign(FILTER_PARAMS, {[param[0]]: param[1]});
+    return param[0];// Returning source name
+  } else {
+    return sourceWithParam;
+  }
+};
+
+core.setSecret(GITHUB_TOKEN);
 const COMMENT_FILTERS = core
   .getInput('filter_comments')
   .trim()
   .split(',')
-  .map(item=>item.trim());
-core.setSecret(GITHUB_TOKEN);
+  .map((item)=>{
+    const str = item.trim();
+    if (str.startsWith('stackoverflow')) {
+      return updateAndParseParams(item);
+    } else {
+      return str;
+    }
+  });
 
 const promiseArray = []; // Runner
 const runnerNameArray = []; // To show the error/success message
@@ -107,10 +133,14 @@ if (feedList.length === 0) {
 }
 
 // filters out every medium comment (PR #4)
-const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 && item.link.includes('medium.com') && item.categories === undefined);
+const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 &&
+  item.link.includes('medium.com') &&
+  item.categories === undefined);
 
 // filters out stackOverflow comments (#16)
-const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 && item.link.includes('stackoverflow.com') && item.title.startsWith('Comment by ' + item.author));
+const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 &&
+  item.link.includes('stackoverflow.com') &&
+  item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
 
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
