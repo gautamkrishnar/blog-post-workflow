@@ -25,7 +25,7 @@ inputs:
     required: false
   filter_comments:
     description: "Comma separated list of platforms you want to enable the comment filter"
-    default: "stackoverflow,medium"
+    default: "medium,stackoverflow/Comment by $author/,stackexchange/Comment by $author/"
     required: false
   tag_post_pre_newline:
     description: "Inserts newline before the closing tag and after the opening tag when using the template option, for formatting"

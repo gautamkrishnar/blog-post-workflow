@@ -86,7 +86,8 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
 const FILTER_PARAMS = {
-  stackoverflow: "Comment by $author"
+  stackoverflow: "Comment by $author",
+  stackexchange: "Comment by $author",
 };
 
 /**
@@ -111,7 +112,7 @@ const COMMENT_FILTERS = core
   .split(',')
   .map((item)=>{
     const str = item.trim();
-    if (str.startsWith('stackoverflow')) {
+    if (str.startsWith('stackoverflow') || str.startsWith('stackexchange')) {
       return updateAndParseParams(item);
     } else {
       return str;
@@ -142,6 +143,11 @@ const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackov
   item.link.includes('stackoverflow.com') &&
   item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
 
+// filters out stackOverflow comments (#16)
+const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackexchange') !== -1 &&
+  item.link.includes('stackexchange.com') &&
+  item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
+
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
@@ -153,6 +159,7 @@ feedList.forEach((siteUrl) => {
         const posts = responsePosts
           .filter(ignoreMediumComments)
           .filter(ignoreStackOverflowComments)
+          .filter(ignoreStackExchangeComments)
           .map((item) => {
             // Validating keys to avoid errors
             if (!item.pubDate) {
