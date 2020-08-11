@@ -1,4 +1,4 @@
-# Blog post workflow  [![Build Status](https://travis-ci.com/gautamkrishnar/blog-post-workflow.svg?branch=master)](https://travis-ci.com/gautamkrishnar/blog-post-workflow)
+# Blog post workflow  ![Build and test](https://github.com/gautamkrishnar/blog-post-workflow/workflows/Build%20and%20test/badge.svg?branch=master)
 List your latest blog posts from different sources on your Github profile/project readme automatically using this github action:
 
 ![preview](https://user-images.githubusercontent.com/8397274/88047382-29b8b280-cb6f-11ea-9efb-2af2b10f3e0c.png)
