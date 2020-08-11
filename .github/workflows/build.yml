@@ -1,7 +1,5 @@
 name: Build and test
-
-on:
-  on: [push, pull_request]
+on: [push, pull_request]
 jobs:
   version-bump:
     name: Generate build and test
