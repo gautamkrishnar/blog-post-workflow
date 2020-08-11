@@ -1,7 +1,8 @@
 name: Build and test
 on: [push, pull_request]
 jobs:
-  version-bump:
+  test:
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     name: Generate build and test
     runs-on: ubuntu-latest
     steps:
