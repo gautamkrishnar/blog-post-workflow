@@ -2,7 +2,6 @@ name: Version bump
 
 on:
   workflow_dispatch:
-    NEW_TAG: "Tag name of the next release"
 jobs:
   version-bump:
     name: Generating build and version bumping
@@ -13,4 +12,4 @@ jobs:
         with:
           node-version: "12"
       - run: yarn install
-      - run: yarn build && yarn run test-dist && git clone https://${GH_TOKEN}@github.com/gautamkrishnar/blog-post-workflow.git publish-repo  > /dev/null 2>&1 && cd publish-repo && yarn version --new-version ${NEW_TAG} --no-git-tag-version && cp -fv ../dist/blog-post-workflow.js ./dist/blog-post-workflow.js && git config --global user.email "gkr@tuta.io" && git config --global user.name "gkr-bot" && git add ./dist/blog-post-workflow.js ./package.json && git commit -m "[skip ci] Published ${NEW_TAG}" && git push --quiet
+      - run: yarn build && yarn run test-dist && git clone https://${{secrets.GH_TOKEN}}@github.com/gautamkrishnar/blog-post-workflow.git publish-repo  > /dev/null 2>&1 && cd publish-repo && yarn version --new-version ${NEW_TAG} --no-git-tag-version && cp -fv ../dist/blog-post-workflow.js ./dist/blog-post-workflow.js && git config --global user.email "gkr@tuta.io" && git config --global user.name "gkr-bot" && git add ./dist/blog-post-workflow.js ./package.json && git commit -m "[skip ci] Updated dist" && git push --quiet
