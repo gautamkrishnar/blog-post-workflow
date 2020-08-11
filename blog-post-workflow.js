@@ -76,10 +76,10 @@ const commitReadme = async () => {
   process.exit(jobFailFlag ? 1 : 0);
 };
 
-
 // Blog workflow code
+const userAgent = core.getInput('user_agent');
+let parser = userAgent ? new Parser({headers: {'User-Agent': userAgent}}) : new Parser();
 
-let parser = new Parser();
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Readme path, default: ./README.md

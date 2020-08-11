@@ -37,6 +37,9 @@ inputs:
   comment_tag_name:
     description: "Override the default comment tag name, if you want to show multiple instances of the action on the same repo"
     required: false
+  user_agent:
+    description: "Allows you to customize the user agent used by the RSS feed crawler"
+    required: false
   commit_message:
     description: "Commit message used while committing to the repo"
     default: "Updated with the latest blog posts"
