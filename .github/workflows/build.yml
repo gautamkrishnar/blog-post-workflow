@@ -1,0 +1,16 @@
+name: Build and test
+
+on:
+  on: [push, pull_request]
+jobs:
+  version-bump:
+    name: Generate build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - run: yarn install
+      - run: yarn test
+      - run: yarn build && yarn run test-dist
