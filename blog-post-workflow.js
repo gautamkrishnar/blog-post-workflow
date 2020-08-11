@@ -78,7 +78,13 @@ const commitReadme = async () => {
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
-let parser = userAgent ? new Parser({headers: {'User-Agent': userAgent}}) : new Parser();
+const accept = core.getInput("accept");
+let parser = userAgent ? new Parser({
+  headers: {
+    'User-Agent': userAgent,
+    'Accept': accept
+  }
+}) : new Parser();
 
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
