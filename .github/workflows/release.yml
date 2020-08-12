@@ -13,15 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set env
-        run: echo ::set-env name=pkg_version::$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
+        run: echo ::set-output name=pkg_version::$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
+        id: env_out
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ pkg_version }}
-          release_name: ${{ pkg_version }}
+          tag_name: ${{ steps.env_out.outputs.pkg_version }}
+          release_name: ${{ steps.env_out.outputs.pkg_version }}
           body: |
             Changes in this Release
             - Change this
