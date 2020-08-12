@@ -18,8 +18,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json}}
-          release_name: ${{awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json}}
+          tag_name: ${{$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)}}
+          release_name: ${{$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)}}
           body: |
             Changes in this Release
             - Change this
