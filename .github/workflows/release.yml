@@ -20,8 +20,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ PKG_VERSION }}
-          release_name: ${{ PKG_VERSION }}
+          tag_name: ${{ $PKG_VERSION }}
+          release_name: ${{ $PKG_VERSION }}
           body: |
             Changes in this Release
             - Change this
