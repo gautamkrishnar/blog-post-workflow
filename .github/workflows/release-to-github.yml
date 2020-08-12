@@ -1,4 +1,4 @@
-name: Release to GitHub
+name: Publish release to GitHub
 on:
   workflow_dispatch:
   workflow_run:
