@@ -31,6 +31,7 @@ describe('Blog post workflow tests', function () {
       INPUT_FILTER_COMMENTS: "stackoverflow,medium",
       INPUT_USER_AGENT: "rss-parser",
       INPUT_ACCEPT_HEADER: "application/rss+xml",
+      INPUT_GH_TOKEN: "secret-test",
       TEST_MODE: "true"
     };
     await exec('node', [TEST_FILE],{env: envObj});
@@ -52,6 +53,7 @@ describe('Blog post workflow tests', function () {
       INPUT_FILTER_COMMENTS: "stackoverflow,medium",
       INPUT_USER_AGENT: "rss-parser",
       INPUT_ACCEPT_HEADER: "application/rss+xml",
+      INPUT_GH_TOKEN: "secret-test",
       TEST_MODE: "true"
     };
     await exec('node', [TEST_FILE],{env: envObj});
@@ -73,6 +75,7 @@ describe('Blog post workflow tests', function () {
       INPUT_USER_AGENT: "rss-parser",
       INPUT_ACCEPT_HEADER: "application/rss+xml",
       INPUT_FILTER_COMMENTS: "medium,stackoverflow/Comment by $author/",
+      INPUT_GH_TOKEN: "secret-test",
       TEST_MODE: "true",
     };
     await exec('node', [TEST_FILE],{env: envObj});
@@ -92,6 +95,7 @@ describe('Blog post workflow tests', function () {
       INPUT_TEMPLATE: "$newline[$title]($url) $newline",
       INPUT_USER_AGENT: "rss-parser",
       INPUT_ACCEPT_HEADER: "application/rss+xml",
+      INPUT_GH_TOKEN: "secret-test",
       TEST_MODE: "true",
     };
     await exec('node', [TEST_FILE],{env: envObj});
