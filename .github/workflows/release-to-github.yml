@@ -24,7 +24,6 @@ jobs:
           tag_name: ${{ steps.env_out.outputs.pkg_version }}
           release_name: ${{ steps.env_out.outputs.pkg_version }}
           body: |
-            Changes in this Release
-            - Change this
+            -
           draft: false
           prerelease: false
