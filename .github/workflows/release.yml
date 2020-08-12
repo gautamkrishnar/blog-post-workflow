@@ -1,0 +1,26 @@
+name: Release to GitHub
+on:
+  workflow_run:
+    workflows: ["Version bump"]
+    branches: [master]
+    types:
+      - completed
+jobs:
+  version-bump:
+    name: Release to github releases
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: $(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
+          release_name: $(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
+          body: |
+            Changes in this Release
+            - Change this
+          draft: false
+          prerelease: false
