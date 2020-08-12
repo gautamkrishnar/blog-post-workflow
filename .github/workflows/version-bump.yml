@@ -16,16 +16,3 @@ jobs:
           node-version: "12"
       - run: yarn install
       - run: yarn build && yarn run test-dist && git clone https://${{secrets.GH_TOKEN}}@github.com/gautamkrishnar/blog-post-workflow.git publish-repo  > /dev/null 2>&1 && cd publish-repo && yarn version --new-version ${{ github.event.inputs.tag_name }} --no-git-tag-version && cp -fv ../dist/blog-post-workflow.js ./dist/blog-post-workflow.js && git config --global user.email "gkr@tuta.io" && git config --global user.name "gkr-bot" && git add ./dist/blog-post-workflow.js ./package.json && git commit -m "[skip-ci] Published ${{ github.event.inputs.tag_name }}" && git push --quiet
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.tag_name }}
-          release_name: ${{ github.event.inputs.tag_name }}
-          body: |
-            Changes in this Release
-            - Change this
-          draft: false
-          prerelease: false
