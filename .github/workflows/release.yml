@@ -1,5 +1,6 @@
 name: Release to GitHub
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Version bump"]
     branches: [master]
@@ -18,7 +19,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json}}
-          release_name: ${{awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)}}
+          release_name: ${{awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json}}
           body: |
             Changes in this Release
             - Change this
