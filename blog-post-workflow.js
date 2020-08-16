@@ -174,9 +174,9 @@ feedList.forEach((siteUrl) => {
               reject("Cannot read response->item->link");
             }
             return {
-              title: item.title,
-              url: item.link,
-              date: new Date(item.pubDate)
+              title: item.title.trim(),
+              url: item.link.trim(),
+              date: new Date(item.pubDate.trim())
             };
           });
         resolve(posts);
