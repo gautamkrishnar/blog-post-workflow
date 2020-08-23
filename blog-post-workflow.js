@@ -2,6 +2,7 @@ const process = require('process');
 let Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('fs');
+const dateFormat = require('dateformat');
 const exec = require('./exec');
 
 /**
@@ -218,9 +219,11 @@ Promise.allSettled(promiseArray).then((results) => {
           return acc + `\n- [${cur.title}](${cur.url})` + (((index + 1) === postsArray.length) ? '\n' : '');
         } else {
           // Building with custom template
+          const date = dateFormat(cur.date, core.getInput('date_format')); // Formatting date
           return acc + template
             .replace(/\$title/g, cur.title)
             .replace(/\$url/g, cur.url)
+            .replace(/\$date/g, date)
             .replace(/\$newline/g, "\n");
         }
       }, '');

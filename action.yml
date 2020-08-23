@@ -31,8 +31,12 @@ inputs:
     description: "Inserts newline before the closing tag and after the opening tag when using the template option, for formatting"
     required: false
   template:
-    description: "Template to use while creating the list of posts. It can contain $title,$url and $newline as variables"
+    description: "Template to use while creating the list of posts. It can contain $title,$url, $newline and $date as variables"
     default: "default"
+    required: false
+  date_format:
+    description: "Allows you to change the format of the date or time displayed when using the $date in the template option"
+    default: "UTC:ddd mmm dd yyyy h:MM TT"
     required: false
   comment_tag_name:
     description: "Override the default comment tag name, if you want to show multiple instances of the action on the same repo"

@@ -13,6 +13,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_USER_AGENT: "rss-parser",
   INPUT_ACCEPT_HEADER: "application/rss+xml",
   INPUT_GH_TOKEN: "secret-test",
+  INPUT_DATE_FORMAT: "UTC:ddd mmm dd yyyy h:MM TT",
   TEST_MODE: "true"
 };
 
@@ -66,7 +67,7 @@ describe('Blog post workflow tests', function () {
       ...process.env,
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
-      INPUT_TEMPLATE: "$newline[$title]($url) $newline"
+      INPUT_TEMPLATE: "$newline[$title]($url): $date $newline"
     };
     await exec('node', [TEST_FILE],{env: envObj});
     const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), "utf-8");
