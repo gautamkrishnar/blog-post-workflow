@@ -72,7 +72,7 @@ const commitReadme = async () => {
   await exec('git', ['add', README_FILE_PATH]);
   await exec('git', ['commit', '-m', commitMessage]);
   await exec('git', ['push']);
-  core.info("Readme updated successfully in the upstream repository");
+  core.info('Readme updated successfully in the upstream repository');
   // Making job fail if one of the source fails
   process.exit(jobFailFlag ? 1 : 0);
 };
@@ -81,7 +81,7 @@ const commitReadme = async () => {
 const userAgent = core.getInput('user_agent');
 const acceptHeader = core.getInput('accept_header');
 
-let parser = new Parser({headers: {'User-Agent': userAgent, "Accept": acceptHeader}});
+let parser = new Parser({headers: {'User-Agent': userAgent, 'Accept': acceptHeader}});
 
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
@@ -89,8 +89,8 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
 const FILTER_PARAMS = {
-  stackoverflow: "Comment by $author",
-  stackexchange: "Comment by $author",
+  stackoverflow: 'Comment by $author',
+  stackexchange: 'Comment by $author',
 };
 
 /**
@@ -132,7 +132,7 @@ const feedObjString = core.getInput('feed_list').trim();
 // Reading feed list from the workflow input
 let feedList = feedObjString.split(',').map(item => item.trim());
 if (feedList.length === 0) {
-  core.error("Please double check the value of feed_list");
+  core.error('Please double check the value of feed_list');
   process.exit(1);
 }
 
@@ -156,7 +156,7 @@ feedList.forEach((siteUrl) => {
   promiseArray.push(new Promise((resolve, reject) => {
     parser.parseURL(siteUrl).then((data) => {
       if (!data.items) {
-        reject("Cannot read response->item");
+        reject('Cannot read response->item');
       } else {
         const responsePosts = data.items;
         const posts = responsePosts
@@ -166,13 +166,13 @@ feedList.forEach((siteUrl) => {
           .map((item) => {
             // Validating keys to avoid errors
             if (!item.pubDate) {
-              reject("Cannot read response->item->pubDate");
+              reject('Cannot read response->item->pubDate');
             }
             if (!item.title) {
-              reject("Cannot read response->item->title");
+              reject('Cannot read response->item->title');
             }
             if (!item.link) {
-              reject("Cannot read response->item->link");
+              reject('Cannot read response->item->link');
             }
             return {
               title: item.title.trim(),
@@ -189,7 +189,7 @@ feedList.forEach((siteUrl) => {
 // Processing the generated promises
 Promise.allSettled(promiseArray).then((results) => {
   results.forEach((result, index) => {
-    if (result.status === "fulfilled") {
+    if (result.status === 'fulfilled') {
       // Succeeded
       core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length);
       postsArray.push(...result.value);
@@ -202,7 +202,7 @@ Promise.allSettled(promiseArray).then((results) => {
   });
 }).finally(() => {
   // Sorting posts based on date
-  if (core.getInput('disable_sort') === "false") {
+  if (core.getInput('disable_sort') === 'false') {
     postsArray.sort(function (a, b) {
       return b.date - a.date;
     });
@@ -211,10 +211,10 @@ Promise.allSettled(promiseArray).then((results) => {
   postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
   if (postsArray.length > 0) {
     try {
-      const readmeData = fs.readFileSync(README_FILE_PATH, "utf8");
+      const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
       const postListMarkdown = postsArray.reduce((acc, cur, index) => {
-        if (template === "default") {
+        if (template === 'default') {
           // Default template: - [$title]($url)
           return acc + `\n- [${cur.title}](${cur.url})` + (((index + 1) === postsArray.length) ? '\n' : '');
         } else {
@@ -224,7 +224,7 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$title/g, cur.title)
             .replace(/\$url/g, cur.url)
             .replace(/\$date/g, date)
-            .replace(/\$newline/g, "\n");
+            .replace(/\$newline/g, '\n');
         }
       }, '');
       const newReadme = buildReadme(readmeData, postListMarkdown);
@@ -245,7 +245,7 @@ Promise.allSettled(promiseArray).then((results) => {
       process.exit(1);
     }
   } else {
-    core.info("0 blog posts fetched");
+    core.info('0 blog posts fetched');
     process.exit(jobFailFlag ? 1 : 0);
   }
 });
