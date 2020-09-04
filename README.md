@@ -30,7 +30,7 @@ jobs:
           feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
 ```
 - Replace the above url list with your own rss feed urls. See [popular-sources](#popular-sources) for a list of common RSS feed urls.
-- Commit and wait for it to run
+- Commit and wait for it to run automaticially or you can also trigger it manually to see the result instantly. To trigger the workflow manually please follow the steps in the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=272s).
 
 ### Options
 This workflow has additional options that you can use to customize it for your use case, following are the list of options available:
@@ -124,7 +124,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contr
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
 ### Thanks
-- Thanks to all the existing users of this workflow
+- Thanks to all the **1K+** users of this workflow
 - Thanks to all the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
 - Thanks to [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
 
