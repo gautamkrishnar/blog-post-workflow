@@ -23,5 +23,5 @@ jobs:
           release_name: ${{ env.pkg_version }}
           body: |
             -
-          draft: false
+          draft: true
           prerelease: false
