@@ -27,12 +27,15 @@
           &lt;p&gt;Nice to meet you.&lt;/p&gt;
 
         </description>
+          <testingTag>hello</testingTag>
+          <testingTag2>apple</testingTag2>
         <category>introductions</category>
       </item>
         <item>
             <title>God Mode in browsers: document.designMode = "on"</title>
             <author>Gautam krishna.R</author>
             <pubDate>Thu, 16 Jul 2020 10:40:11 +0000</pubDate>
+          <testingTag>world</testingTag>
             <link>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</link>
             <guid>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</guid>
             <description>&lt;p&gt;Just type &lt;code&gt;document.designMode = "on"&lt;/code&gt; on you favourite browser devtools and see the magic. &lt;/p&gt;

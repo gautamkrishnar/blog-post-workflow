@@ -81,27 +81,30 @@ const commitReadme = async () => {
 const userAgent = core.getInput('user_agent');
 const acceptHeader = core.getInput('accept_header');
 
-let parser = new Parser({headers: {'User-Agent': userAgent, 'Accept': acceptHeader}});
-
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Readme path, default: ./README.md
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
+
+// Filter parameters
 const FILTER_PARAMS = {
   stackoverflow: 'Comment by $author',
   stackexchange: 'Comment by $author',
 };
+// Custom tags
+const CUSTOM_TAGS = {};
 
 /**
- * Updates FILTER_PARAMS object with filter parameters
- * @param sourceWithParam filter source with param eg: stackoverflow/Comment by $author/
+ * Compound parameter parser, Updates obj with compound parameters and returns item name
+ * @param sourceWithParam filter source with compound param eg: stackoverflow/Comment by $author/
+ * @param obj object to update
  * @return {string} actual source name eg: stackoverflow
  */
-const updateAndParseParams = (sourceWithParam) => {
-  const param = sourceWithParam.split('/'); // Reading params
+const updateAndParseCompoundParams = (sourceWithParam, obj) => {
+  const param = sourceWithParam.split('/'); // Reading params ['stackoverflow','Comment by $author', '']
   if (param.length === 3) {
-    Object.assign(FILTER_PARAMS, {[param[0]]: param[1]});
+    Object.assign(obj, {[param[0]]: param[1]});
     return param[0];// Returning source name
   } else {
     return sourceWithParam;
@@ -114,12 +117,20 @@ const COMMENT_FILTERS = core
   .trim()
   .split(',')
   .map((item)=>{
-    const str = item.trim();
-    if (str.startsWith('stackoverflow') || str.startsWith('stackexchange')) {
-      return updateAndParseParams(item);
+    item = item.trim();
+    if (item.startsWith('stackoverflow') || item.startsWith('stackexchange')) {
+      return updateAndParseCompoundParams(item, FILTER_PARAMS);
     } else {
-      return str;
+      return item;
     }
+  });
+
+core.getInput('custom_tags')
+  .trim()
+  .split(',')
+  .forEach((item)=> {
+    item = item.trim();
+    updateAndParseCompoundParams(item, CUSTOM_TAGS); // Creates custom tag object
   });
 
 const promiseArray = []; // Runner
@@ -151,6 +162,19 @@ const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackex
   item.link.includes('stackexchange.com') &&
   item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
 
+const customTagArgs = Object.keys(CUSTOM_TAGS).map(
+  item => [CUSTOM_TAGS[item], item]);
+
+let parser = new Parser({
+  'headers': {
+    'User-Agent': userAgent,
+    'Accept': acceptHeader
+  },
+  customFields: {
+    item: [...customTagArgs]
+  }
+});
+
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
@@ -174,10 +198,18 @@ feedList.forEach((siteUrl) => {
             if (!item.link) {
               reject('Cannot read response->item->link');
             }
+            // Custom tags
+            let customTags = {};
+            Object.keys(CUSTOM_TAGS).forEach((tag)=> {
+              if (item[tag]) {
+                Object.assign(customTags, {[tag]: item[tag]});
+              }
+            });
             return {
               title: item.title.trim(),
               url: item.link.trim(),
-              date: new Date(item.pubDate.trim())
+              date: new Date(item.pubDate.trim()),
+              ...customTags
             };
           });
         resolve(posts);
@@ -220,11 +252,18 @@ Promise.allSettled(promiseArray).then((results) => {
         } else {
           // Building with custom template
           const date = dateFormat(cur.date, core.getInput('date_format')); // Formatting date
-          return acc + template
-            .replace(/\$title/g, cur.title)
-            .replace(/\$url/g, cur.url)
-            .replace(/\$date/g, date)
+          let content = template
+            .replace(/\$title\b/g, cur.title)
+            .replace(/\$url\b/g, cur.url)
+            .replace(/\$date\b/g, date)
             .replace(/\$newline/g, '\n');
+
+          // Setting Custom tags to the template
+          Object.keys(CUSTOM_TAGS).forEach((tag)=> {
+            const replaceValue = cur[tag] ? cur[tag] : '';
+            content = content.replace(new  RegExp('\\$' + tag + '\\b', 'g'), replaceValue);
+          });
+          return acc + content;
         }
       }, '');
       const newReadme = buildReadme(readmeData, postListMarkdown);

@@ -22,6 +22,7 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   process.env.INPUT_TEMPLATE = 'default';
   process.env.INPUT_DATE_FORMAT = 'UTC:ddd mmm dd yyyy h:MM TT';
   process.env.TEST_MODE = 'true';
+  process.env.INPUT_CUSTOM_TAGS = '';
   const testFile = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
   console.log('Testing: ', testFile);
   require(testFile);

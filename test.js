@@ -14,6 +14,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_ACCEPT_HEADER: 'application/rss+xml',
   INPUT_GH_TOKEN: 'secret-test',
   INPUT_DATE_FORMAT: 'UTC:ddd mmm dd yyyy h:MM TT',
+  INPUT_CUSTOM_TAGS: '',
   TEST_MODE: 'true'
 };
 
@@ -82,6 +83,21 @@ describe('Blog post workflow tests', function () {
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_FILTER_COMMENTS: ''
+    };
+    await exec('node', [TEST_FILE],{env: envObj});
+    const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), 'utf-8');
+    const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), 'utf-8');
+    assert.equal(snapshot, newReadme);
+  });
+  it('Generated readme without custom elements should match the snapshot',async function () {
+    const README_FILE = 'Readme.custom-tags.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_CUSTOM_TAGS: 'testingTag/testingTag/,testingTag2/testingTag2/',
+      INPUT_TEMPLATE: '$title $url $testingTag $testingTag2 $newline'
     };
     await exec('node', [TEST_FILE],{env: envObj});
     const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), 'utf-8');
