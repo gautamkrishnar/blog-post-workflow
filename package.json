@@ -34,7 +34,7 @@
     "@actions/core": "^1.2.5",
     "dateformat": "^3.0.3",
     "process": "latest",
-    "rss-parser": "^3.8.0"
+    "rss-parser": "^3.9.0"
   },
   "devDependencies": {
     "jshint": "^2.12.0",
