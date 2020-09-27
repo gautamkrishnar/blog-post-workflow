@@ -34,6 +34,7 @@
     "@actions/core": "^1.2.5",
     "dateformat": "^3.0.3",
     "process": "latest",
+    "random-seed": "^0.3.0",
     "rss-parser": "^3.9.0"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ const core = require('@actions/core');
 const fs = require('fs');
 const dateFormat = require('dateformat');
 const exec = require('./exec');
+const rand = require('random-seed');
 
 /**
  * Builds the new readme by replacing the readme's <!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END --> tags
@@ -108,6 +109,24 @@ const updateAndParseCompoundParams = (sourceWithParam, obj) => {
     return param[0];// Returning source name
   } else {
     return sourceWithParam;
+  }
+};
+
+/**
+ * Returns parsed parameterised templates as array or return null
+ * @param template
+ * @param keyName
+ * @return {null|string[]}
+ */
+const getParameterisedTemplate = (template, keyName) => {
+  if (template.indexOf('$' + keyName) > -1 && template.match(new  RegExp('\\$' + keyName + '\\((.)*\\)', 'g'))) {
+    return template.match(new  RegExp('\\$' + keyName + '\\((.)*\\)', 'g'))[0]
+      .replace('$'+ keyName +'(','')
+      .replace(')','')
+      .split(',')
+      .map(item=> item.trim());
+  } else {
+    return null;
   }
 };
 
@@ -245,6 +264,8 @@ Promise.allSettled(promiseArray).then((results) => {
     try {
       const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
+      const randEmojiArr = getParameterisedTemplate(template, 'randomEmoji');
+      const constEmojiArr = getParameterisedTemplate(template, 'emojiKey');
       const postListMarkdown = postsArray.reduce((acc, cur, index) => {
         if (template === 'default') {
           // Default template: - [$title]($url)
@@ -263,6 +284,21 @@ Promise.allSettled(promiseArray).then((results) => {
             const replaceValue = cur[tag] ? cur[tag] : '';
             content = content.replace(new  RegExp('\\$' + tag + '\\b', 'g'), replaceValue);
           });
+
+          // Emoji implementation: Random
+          if (randEmojiArr) {
+            // For making randomness unique for each repos
+            const seed = (process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY : 'example') + index;
+            const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
+            content = content.replace(/\$randomEmoji\((.)*\)/g, emoji);
+          }
+
+          // Emoji implementation: Static
+          if (constEmojiArr) {
+            // using modulus
+            content = content.replace(/\$emojiKey\((.)*\)/g, constEmojiArr[index % constEmojiArr.length]);
+          }
+
           return acc + content;
         }
       }, '');
