@@ -89,6 +89,9 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 const TITLE_MAX_LENGTH = core.getInput('title_max_length') ?
   Number.parseInt(core.getInput('title_max_length')) : null;
 
+// Advanced content modification parameter, default: ""
+const ITEM_EXEC = core.getInput('item_exec');
+
 // Readme path, default: ./README.md
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
@@ -234,12 +237,24 @@ feedList.forEach((siteUrl) => {
               item.title = item.title.trim().slice(0, TITLE_MAX_LENGTH) === item.title.trim() ?
                 item.title.trim() : item.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
             }
-            return {
+            const post = {
               title: item.title.trim(),
               url: item.link.trim(),
               date: new Date(item.pubDate.trim()),
               ...customTags
             };
+            // Advanced content manipulation using javascript code
+            if (ITEM_EXEC) {
+              try {
+                eval(ITEM_EXEC);
+              } catch (e) {
+                core.error('Failure in executing `item_exec` parameter');
+                core.error(e);
+                process.exit(1);
+              }
+            }
+
+            return post;
           });
         resolve(posts);
       }

@@ -16,6 +16,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_DATE_FORMAT: 'UTC:ddd mmm dd yyyy h:MM TT',
   INPUT_CUSTOM_TAGS: '',
   INPUT_TITLE_MAX_LENGTH: '',
+  INPUT_ITEM_EXEC: '',
   TEST_MODE: 'true'
 };
 
@@ -130,6 +131,18 @@ describe('Blog post workflow tests', function () {
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_TITLE_MAX_LENGTH: '10'
+    };
+    await runAndCompareSnap(README_FILE, envObj);
+  });
+
+  it('Generated readme with advanced manipulation via JS should match the snapshot',async function () {
+    const README_FILE = 'Readme.exec.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_ITEM_EXEC: 'post.title=post.title.replace("Gautam",""); post.title=post.title.replace("browser","");'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });

@@ -57,6 +57,10 @@ inputs:
     description: "Allows you to trim the title in the posts list"
     default: ""
     required: false
+  item_exec:
+    description: "Allows you to execute custom JavaScript code on each item to do advanced text manipulation"
+    default: ""
+    required: false
   commit_message:
     description: "Commit message used while committing to the repo"
     default: "Updated with the latest blog posts"

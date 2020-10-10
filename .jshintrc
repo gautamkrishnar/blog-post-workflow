@@ -4,6 +4,7 @@
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
+  "evil": true,
   "freeze": true,
   "indent": 2,
   "newcap": true,
