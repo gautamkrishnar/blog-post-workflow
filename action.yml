@@ -54,7 +54,7 @@ inputs:
     default: ""
     required: false
   title_max_length:
-    description: "Allows you to trim the tile in the posts list"
+    description: "Allows you to trim the title in the posts list"
     default: ""
     required: false
   commit_message:
