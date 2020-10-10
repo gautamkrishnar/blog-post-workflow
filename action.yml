@@ -53,6 +53,10 @@ inputs:
     description: "Allows you to use the custom tags from your feed items in your template"
     default: ""
     required: false
+  title_max_length:
+    description: "Allows you to trim the tile in the posts list"
+    default: ""
+    required: false
   commit_message:
     description: "Commit message used while committing to the repo"
     default: "Updated with the latest blog posts"

@@ -15,6 +15,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_GH_TOKEN: 'secret-test',
   INPUT_DATE_FORMAT: 'UTC:ddd mmm dd yyyy h:MM TT',
   INPUT_CUSTOM_TAGS: '',
+  INPUT_TITLE_MAX_LENGTH: '',
   TEST_MODE: 'true'
 };
 
@@ -117,6 +118,18 @@ describe('Blog post workflow tests', function () {
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_TEMPLATE: '- $randomEmoji(💯,🔥,💫,🚀,🌮)'
+    };
+    await runAndCompareSnap(README_FILE, envObj);
+  });
+
+  it('Generated readme with truncation should match the snapshot',async function () {
+    const README_FILE = 'Readme.truncate.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_TITLE_MAX_LENGTH: '10'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });

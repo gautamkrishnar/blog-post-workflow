@@ -84,6 +84,11 @@ const acceptHeader = core.getInput('accept_header');
 
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
+
+// Title trimming parameter, default: ""
+const TITLE_MAX_LENGTH = core.getInput('title_max_length') ?
+  Number.parseInt(core.getInput('title_max_length')) : null;
+
 // Readme path, default: ./README.md
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
@@ -224,6 +229,11 @@ feedList.forEach((siteUrl) => {
                 Object.assign(customTags, {[tag]: item[tag]});
               }
             });
+            if (TITLE_MAX_LENGTH) {
+              // Trimming the title
+              item.title = item.title.trim().slice(0, TITLE_MAX_LENGTH) === item.title.trim() ?
+                item.title.trim() : item.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
+            }
             return {
               title: item.title.trim(),
               url: item.link.trim(),
