@@ -316,13 +316,13 @@ Promise.allSettled(promiseArray).then((results) => {
             const seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ?
               process.env.GITHUB_REPOSITORY : 'example') + index;
             const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
-            content = content.replace(/\$randomEmoji\((.)*\)/g, emoji);
+            content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
           }
 
           // Emoji implementation: Static
           if (constEmojiArr) {
             // using modulus
-            content = content.replace(/\$emojiKey\((.)*\)/g, constEmojiArr[index % constEmojiArr.length]);
+            content = content.replace(/\$emojiKey\((\S)*\)/g, constEmojiArr[index % constEmojiArr.length]);
           }
 
           return acc + content;
