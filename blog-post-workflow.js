@@ -277,6 +277,9 @@ Promise.allSettled(promiseArray).then((results) => {
     }
   });
 }).finally(() => {
+  // Ignore null items, allows you to ignore items by setting null in post via `item_exec`
+  postsArray = postsArray.filter(item => item !== null);
+
   // Sorting posts based on date
   if (core.getInput('disable_sort') === 'false') {
     postsArray.sort(function (a, b) {
