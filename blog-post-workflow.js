@@ -232,12 +232,7 @@ feedList.forEach((siteUrl) => {
                 Object.assign(customTags, {[tag]: item[tag]});
               }
             });
-            if (TITLE_MAX_LENGTH) {
-              // Trimming the title
-              item.title = item.title.trim().slice(0, TITLE_MAX_LENGTH) === item.title.trim() ?
-                item.title.trim() : item.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
-            }
-            const post = {
+            let post = {
               title: item.title.trim(),
               url: item.link.trim(),
               date: new Date(item.pubDate.trim()),
@@ -252,6 +247,12 @@ feedList.forEach((siteUrl) => {
                 core.error(e);
                 process.exit(1);
               }
+            }
+
+            if (TITLE_MAX_LENGTH) {
+              // Trimming the title
+              post.title = post.title.trim().slice(0, TITLE_MAX_LENGTH) === post.title.trim() ?
+                post.title.trim() : post.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
             }
 
             return post;
