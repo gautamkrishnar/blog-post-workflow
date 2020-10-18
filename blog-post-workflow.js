@@ -291,6 +291,10 @@ Promise.allSettled(promiseArray).then((results) => {
   postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
   if (postsArray.length > 0) {
     try {
+      if (!process.env.TEST_MODE) {
+        exec('git', ['config','pull.rebase', ' true']);
+        exec('git',['pull']); // Pulling the latest changes from upstream
+      }
       const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
       const randEmojiArr = getParameterisedTemplate(template, 'randomEmoji');
