@@ -176,17 +176,17 @@ if (feedList.length === 0) {
 
 // filters out every medium comment (PR #4)
 const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 &&
-  item.link.includes('medium.com') &&
+  item.link && item.link.includes('medium.com') &&
   item.categories === undefined);
 
 // filters out stackOverflow comments (#16)
 const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 &&
-  item.link.includes('stackoverflow.com') &&
+  item.link && item.link.includes('stackoverflow.com') &&
   item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
 
 // filters out stackOverflow comments (#16)
 const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackexchange') !== -1 &&
-  item.link.includes('stackexchange.com') &&
+  item.link && item.link.includes('stackexchange.com') &&
   item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
 
 const customTagArgs = Object.keys(CUSTOM_TAGS).map(
