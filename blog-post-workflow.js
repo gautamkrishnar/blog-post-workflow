@@ -277,7 +277,7 @@ Promise.allSettled(promiseArray).then((results) => {
       core.error(result.reason);
     }
   });
-}).finally(() => {
+}).finally(async () => {
   // Ignore null items, allows you to ignore items by setting null in post via `item_exec`
   postsArray = postsArray.filter(item => item !== null);
 
@@ -292,8 +292,8 @@ Promise.allSettled(promiseArray).then((results) => {
   if (postsArray.length > 0) {
     try {
       if (!process.env.TEST_MODE) {
-        exec('git', ['config','pull.rebase', 'true']);
-        exec('git',['pull']); // Pulling the latest changes from upstream
+        await exec('git', ['config','pull.rebase', 'true']);
+        await exec('git',['pull']); // Pulling the latest changes from upstream
       }
       const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
@@ -342,8 +342,7 @@ Promise.allSettled(promiseArray).then((results) => {
         core.info('Writing to ' + README_FILE_PATH);
         fs.writeFileSync(README_FILE_PATH, newReadme);
         if (!process.env.TEST_MODE) {
-          // noinspection JSIgnoredPromiseFromCall
-          commitReadme();
+          await commitReadme();
         }
       } else {
         core.info('No change detected, skipping');
