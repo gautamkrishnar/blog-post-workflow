@@ -1,17 +1,697 @@
 # Readme test
 Post list example:
 <!-- BLOG-POST-LIST:START -->
-[God Mode in browsers: document.designMode = "on"](https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo): Thu Jul 16 2020 10:40 AM 
+[God Mode in browsers: document.designMode = "on"](https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo): Thu Jul 16 2020 10:40 AM <p>Just type <code>document.designMode = "on"</code> on you favourite browser devtools and see the magic. </p>
 
-[Skipping the Chrome "Your connection is not private" warning](https://dev.to/gautamkrishnar/quickbits-1-skipping-the-chrome-your-connection-is-not-private-warning-4kp1): Sun May 03 2020 3:14 PM 
+                <p>It will make any website editable:</p>
 
-[Microsoft Student Partners – Geek is the new rockstar](https://dev.to/gautamkrishnar/microsoft-student-partners--geek-is-the-new-rockstar): Sun Jun 25 2017 4:35 PM 
+                <p><a href="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" class="article-body-image-wrapper"><img src="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" alt="preview"></a></p>
 
-[An Introduction to NumPy](https://dev.to/gautamkrishnar/an-introduction-to-numpy): Wed Apr 19 2017 3:34 PM 
+             
 
-[Hi, I'm Gautam krishna.R](https://dev.to/gautamkrishnar/hi-im-gautam-krishnar): Sun Apr 02 2017 7:04 PM 
+[Skipping the Chrome "Your connection is not private" warning](https://dev.to/gautamkrishnar/quickbits-1-skipping-the-chrome-your-connection-is-not-private-warning-4kp1): Sun May 03 2020 3:14 PM <p>You guys might have encountered a warning saying that "Your connection is not private" while doing some web development. This tutorial is about how you can skip the same. (Feel free to skip the tutorial, if you are not using chrome or chromium-based browser)</p>
 
-[DuckDuckGo – The search engine redefined](https://dev.to/gautamkrishnar/duckduckgo-the-search-engine-redefined-4c7d): Thu Nov 05 2015 7:49 PM 
+            <p>You will get this kind of error usually when you are not using localhost as the domain for development. This is implemented to make your browsing experience more secure. If you are visiting a website via HTTPS and the server doesn't support it, you are vulnerable to the normal attacks that can happen when accessing a website via HTTP. You are vulnerable to the MIM (Man in the middle) attacks, these attacks a quite serious since it can gather private information like usernames and passwords from the victim.</p>
+
+            <p>But having this feature enabled while developing a web application is a headache. Organizations can set browser policies to prevent accessing such pages especially if you are using a machine provided by the company. The screen will look below:</p>
+
+            <p><a href="https://res.cloudinary.com/practicaldev/image/fetch/s--rNO8MFUv--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/qkrva33lpcgbcfbu85gh.png" class="article-body-image-wrapper"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--rNO8MFUv--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/qkrva33lpcgbcfbu85gh.png" alt="Certificate"></a></p>
+
+            <p>As you can see that there will be no skip button on this. The only way you can access the page is by setting up a correct certificate or launching the Chrome browser in insecure mode via flags.</p>
+
+            <p>But there is a <strong>cheat code</strong> you can use to skip this warning 😄 Just type <strong>"thisisunsafe"</strong> in the chrome warning message page. (Not in the address bar, just type it in the page) Boom! 💣 You can see that the warning message disappeared.</p>
+
+            <p><a href="https://i.giphy.com/media/YpZAFbpbswOIDNTuo4/giphy.gif" class="article-body-image-wrapper"><img src="https://i.giphy.com/media/YpZAFbpbswOIDNTuo4/giphy.gif" alt="magic"></a><br>
+            To test this yourself you can visit: <a href="https://self-signed.badssl.com/">https://self-signed.badssl.com/</a></p>
+
+            <p>Congrats, You've just added a permanent exception for the corresponding domain for the SSL certificate check. 😄</p>
+
+            <p><a href="https://i.giphy.com/media/5VKbvrjxpVJCM/giphy.gif" class="article-body-image-wrapper"><img src="https://i.giphy.com/media/5VKbvrjxpVJCM/giphy.gif" alt="wow"></a></p>
+
+            <h4>
+            <a href="#technical-details" class="anchor">
+            </a>
+            Technical details
+            </h4>
+
+            <ul>
+            <li>Chromium source code: <a href="https://chromium.googlesource.com/chromium/src/+/master/components/security_interstitials/core/browser/resources/interstitial_large.js">https://chromium.googlesource.com/chromium/src/+/master/components/security_interstitials/core/browser/resources/interstitial_large.js</a>
+            </li>
+            <li>Stackoverflow thread: <a href="https://stackoverflow.com/questions/35274659/does-using-badidea-or-thisisunsafe-to-bypass-a-chrome-certificate-hsts-error">https://stackoverflow.com/questions/35274659/does-using-badidea-or-thisisunsafe-to-bypass-a-chrome-certificate-hsts-error</a>
+            </li>
+            </ul>
+
+            <p>Stay safe, Happy coding.... 😷</p>
+
+           
+
+[Microsoft Student Partners – Geek is the new rockstar](https://dev.to/gautamkrishnar/microsoft-student-partners--geek-is-the-new-rockstar): Sun Jun 25 2017 4:35 PM <p><a href="https://res.cloudinary.com/practicaldev/image/fetch/s--5JQq31ZB--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/q51ovqx8t3tz0lilnzqo.png" class="article-body-image-wrapper"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--5JQq31ZB--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/q51ovqx8t3tz0lilnzqo.png" alt="MSP"></a><br>
+                The Microsoft Student Partner (MSPs) Recruitment for the year 2017 will be happening from 13th to 10th July. This is a shoutout to all the students out here… Don’t miss the chance for being a part of this amazing community… ðŸ™‚</p>
+                <h3>
+                <a href="#whos-a-microsoft-student-partner" class="anchor">
+                </a>
+                Who’s a Microsoft Student Partner
+                </h3>
+
+                <p>From <a href="https://en.wikipedia.org/wiki/Microsoft_Student_Partners">wikipedia</a>:<br>
+                <em>“The Microsoft Student Partners is a worldwide recognizable program to sponsor students majoring in disciplines related to technology. The MSP program enhances students’ employability by offering training in skills not usually taught in academia, including knowledge of Microsoft technologies.”</em></p>
+
+                <p>Simply  the Microsoft Student Program is a great way for students to get involved in the world of technology. It’s a great program by Microsoft to empower students who are passionate about Microsoft technologies.</p>
+
+                <p>Microsoft Student Partners do incredible things:</p>
+
+                <ul>
+                <li>Run workshops and hackathons</li>
+                <li>Host tech events and give demos on campus</li>
+                <li>Work alongside Microsoft professionals, assisting them during hackathons and events</li>
+                <li>Join exclusive Microsoft training events to learn the latest technologies</li>
+                <li>Grow and nurture a community of students and faculty on-campus and online</li>
+                <li>Enhance their skills and career opportunities</li>
+                <li>Get amazing jobs
+                And much more…</li>
+                </ul>
+
+                <p><iframe width="710" height="399" src="https://www.youtube.com/embed/fYhn7-vWbuI">
+                </iframe>
+                </p>
+
+                <h3>
+                <a href="#perks-of-being-an-msp" class="anchor">
+                </a>
+                Perks of being an MSP
+                </h3>
+
+                <p>This is a question that is asked by most students about the program. Is it worth something being an MSP?. Why MSP?, Let’s find out….</p>
+
+                <h4>
+                <a href="#exclusive-event-invitations" class="anchor">
+                </a>
+                Exclusive event invitations
+                </h4>
+
+                <p>Being an MSP will increase your chances for being selected in Microsoft invite only events, conferences and meetups. You can meet amazing people in these events.</p>
+
+                <h4>
+                <a href="#free-msdn-subscription" class="anchor">
+                </a>
+                Free MSDN subscription
+                </h4>
+
+                <p>This is one of my favorite perks being an MSP. Being an MSP, Microsoft will give you a free MSDN (Visual studio enterprise) subscription (Which costs around $5,999). It will give you access to all Microsoft products for free. You can easily download and use genuine Microsoft products from your MSDN subscription portal. You can get up to 5 genuine serial keys for most products completely for free. What I liked most about the MSDN subscription is that it gave me Visual studio Enterprise and Windows 10 Enterprise for free. It also includes free tons of Azure credits to run up to 3 high end VPS VMs simultaneously. It also offers one to one support on all Microsoft products.<br>
+                <a href="https://res.cloudinary.com/practicaldev/image/fetch/s--o6jw2pFs--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/s4jb6ki9yk1oa647sw45.png" class="article-body-image-wrapper"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--o6jw2pFs--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/s4jb6ki9yk1oa647sw45.png" alt="VS subscription"></a></p>
+
+                <h4>
+                <a href="#learn-new-technologies-and-programming-languages" class="anchor">
+                </a>
+                Learn new technologies and programming languages
+                </h4>
+
+                <p>Being an MSP, you will receive exclusive access to Many online learning platforms like Microsoft E-Learning, Xamarin university etc. It will help you to add up to your skillset and sharpen your current skills.</p>
+
+                <h4>
+                <a href="#networking-opportunities" class="anchor">
+                </a>
+                Networking opportunities
+                </h4>
+
+                <p>Being an MSP you will be added to an exclusive closed group of MSPs and microsoft employees. You will recieve a @studentpartner.com email ID, it will give you access to the Yammer network and the office 365 portal. Using this email ID you will be eligible for 1TB of microsoft one drive cloud storage space. You will also get a free office 365 with all of its 3rd party extensions. Participating in MS events will allow you to grow your network with MVPs &amp; Microsoft Employees. Whether you have any doubts related to anything under the globe, there will be at least a single person to help you out in our community.</p>
+
+                <h4>
+                <a href="#internship-amp-recruitments" class="anchor">
+                </a>
+                Internship &amp; Recruitments
+                </h4>
+
+                <p>Microsoft may offer you internships if you perform well as an MSP.  You may also land into a job offer if you are the best.</p>
+
+                <h4>
+                <a href="#boost-your-resume" class="anchor">
+                </a>
+                Boost your resume
+                </h4>
+
+                <p>Experience being an MSP will be surely the best thing to put in your resume. It will make you stand out from the crowd. It will surely catch the eyes of the recruiters.</p>
+
+                <h4>
+                <a href="#beta-testing" class="anchor">
+                </a>
+                Beta testing
+                </h4>
+
+                <p>Microsoft announces internal beta test for most of its products. As a student partner. if you apply for any of the Microsoft’s beta test programs, you have a high chance of being selected. I used my student partner ID to apply for Microsoft’s Zo project and I was selected as a beta tester. Being an MSP will keep you updated about Microsoft’s new products and its releases.</p>
+
+                <h4>
+                <a href="#swags-swags-and-swags" class="anchor">
+                </a>
+                Swags, swags and swags…
+                </h4>
+
+                <p>Whether you are attending an MS event or hosting an event, Microsoft will shower you with lots and lots of goodies like tee shirts, headphones, or even a brand new windows phone… ðŸ˜€<br>
+                <a href="https://res.cloudinary.com/practicaldev/image/fetch/s--XWGFjPms--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/9h6c7c489r6kootpb7h5.jpg" class="article-body-image-wrapper"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--XWGFjPms--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/9h6c7c489r6kootpb7h5.jpg" alt="Carlos"></a></p>
+
+                <h3>
+                <a href="#eligibility-criteria-for-msp-2017" class="anchor">
+                </a>
+                Eligibility criteria for MSP 2017
+                </h3>
+
+                <p>All applying students must be enrolled full time in an accredited academic institution from July 1, 2017 through June 1, 2018 and all students must have valid identification.</p>
+
+                <p>Anyone who satisfies the above requirements can apply to the program. The person need not have to be a computer science student to apply for MSP program. I know many MSPs who are B-School students, One of my friend MSP is even studying B.S in Botany.</p>
+
+                <h4>
+                <a href="#prerequisites" class="anchor">
+                </a>
+                Prerequisites
+                </h4>
+
+                <p>You must make sure that you have the following things in your hand (Taken from official page):</p>
+
+                <ul>
+                <li>Student Verification: Scan and upload your college ID Card in an Online Drive. The Uploaded ID Card link should be directly viewable and the image should be properly visible.</li>
+                <li>Video Challenge: Please create a 1-minute or less video explaining why you should be a Microsoft Student Partner on your campus. Elaborate on technical skills, events you’ve been involved with, and describe how you would motivate students on your campus to learn about technology. The video should be uploaded on Youtube and made publicity visible. Only applications with completed videos will be reviewed. You can take reference as to how to upload a video on Youtube from <a href="https://support.google.com/youtube/answer/57407?co=GENIE.Platform%3DDesktop&amp;hl=en">here</a>
+                </li>
+                </ul>
+
+                <p>If you have any questions about the MSP program or the application process, please contact: <a href="mailto:newmsp@microsoft.com">newmsp@microsoft.com</a></p>
+
+                <h5>
+                <a href="#so-what-are-you-waiting-for-apply-now-%C3%B0%C3%BF%CB%9C%E2%82%AC" class="anchor">
+                </a>
+                So what are you waiting for? Apply now! ðŸ˜€
+                </h5>
+
+                <p>Know more: <a href="https://msdn.microsoft.com/en-in/microsoftstudentpartners.aspx">https://msdn.microsoft.com/en-in/microsoftstudentpartners.aspx</a><br>
+                Apply now: <a href="https://aka.ms/JoinMSP2017">https://aka.ms/JoinMSP2017</a><br>
+                Apply now (India): <a href="https://www.microsoft.com/en-in/campaign/msp2017/default.aspx">https://www.microsoft.com/en-in/campaign/msp2017/default.aspx</a></p>
+
+                <p>Originally published on <a href="http://www.gautamkrishnar.com/microsoft-student-partners/">http://www.gautamkrishnar.com/microsoft-student-partners/</a></p>
+
+             
+
+[An Introduction to NumPy](https://dev.to/gautamkrishnar/an-introduction-to-numpy): Wed Apr 19 2017 3:34 PM <p><a href="https://res.cloudinary.com/practicaldev/image/fetch/s--cjZ3iPpo--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/mKy85Kr.png" class="article-body-image-wrapper"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--cjZ3iPpo--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://i.imgur.com/mKy85Kr.png" alt="Numpy"></a></p>
+
+            <p>Numerical python or simply NumPy is one of the best modules to perform scientific computing in python. It is extensively used for data science as well as image manipulation using python. I recently learned how to use this module effectively in my projects, when started learning Machine learning and Data Science using python. I was amazed with the features of NumPy and I found it quite interesting to work with NumPy. Within some hours of usage i fell in love with it.</p>
+
+            <h2>
+            <a href="#what-is-numpy" class="anchor">
+            </a>
+            What is NumPy
+            </h2>
+
+            <p><a href="https://github.com/numpy/numpy/blob/master/README.md">Numpy’s GitHub readme</a> defines it as:<br>
+            NumPy is the fundamental package needed for scientific computing with Python. This package contains:</p>
+
+            <ul>
+            <li>a powerful N-dimensional array object</li>
+            <li>sophisticated (broadcasting) functions</li>
+            <li>tools for integrating C/C++ and Fortran code</li>
+            <li>useful linear algebra, Fourier transform, and random number capabilities.</li>
+            </ul>
+
+            <p>It derives from the old Numeric code base and can be used as a replacement for Numeric. It also adds the features introduced by numarray and can be used to replace numarray.</p>
+
+            <p>Simply NumPy is an open source python library that allows us to do scientific calculations in python. It has superpowers to magically support daunting vector and matrix computations. The core of the NumPy package, is the ndarray object. This encapsulates n-dimensional arrays of homogeneous data types, with many optimizations for performance. Narrays are created in contrast to Python’s built-in list data structure.</p>
+            <h2>
+            <a href="#why-numpy" class="anchor">
+            </a>
+            Why NumPy
+            </h2>
+
+            <p>As i said earlier, NumPy is created to overcome the limitations of python’s list data structure. We can use python lists instead of NumPy to perform various calculations like matrix multiplication, vector products etc. Using NumPy instead of lists will not only improve the performance of the code, but also will reduce the number of lines of the code. In this blog i will compare list datatype with numpy.</p>
+            <h4>
+            <a href="#install-numpy" class="anchor">
+            </a>
+            Install NumPy
+            </h4>
+
+            <p>You can use pip to install NumPy. If you don’t have python and pip installed, you can download it from here. After installation, use the command below to install NumPy:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight shell"><code>pip <span class="nb">install </span>numpy
+            </code></pre></div>
+
+
+
+            <p>Now the NumPy will be installed on your machine.</p>
+
+            <h4>
+            <a href="#numpy-vs-lists" class="anchor">
+            </a>
+            Numpy v/s Lists
+            </h4>
+
+            <p>Python has a powerful built in data type known as lists. It has everything in its superpower to make it useful for almost any advanced scientific applications, but it is still limited while comparing to NumPy’s array data type. Lets compare python lists with NumPy arrays. I will be using python shell in this examples. Just type the python command to launch the shell.</p>
+
+            <p>You can create  a NumPy array using the code below:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+            <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+            <span class="n">You</span> <span class="n">can</span> <span class="n">create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">python</span> <span class="nb">list</span> <span class="n">containing</span> <span class="n">same</span> <span class="n">elements</span> <span class="n">using</span> <span class="n">the</span> <span class="n">code</span> <span class="n">below</span><span class="p">:</span>
+
+            <span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+            <span class="n">lets</span> <span class="k">print</span> <span class="n">both</span> <span class="n">of</span> <span class="n">them</span> <span class="n">to</span> <span class="n">the</span> <span class="n">console</span><span class="p">:</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">a</span><span class="p">:</span> <span class="c1"># Numpy Array
+            </span> <span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="mi">1</span>
+            <span class="mi">2</span>
+            <span class="mi">3</span>
+            <span class="mi">4</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span> <span class="c1"># Python List
+            </span> <span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+            <span class="mi">1</span>
+            <span class="mi">2</span>
+            <span class="mi">3</span>
+            <span class="mi">4</span>
+            </code></pre></div>
+
+
+
+            <p>As you can see that NumPy array works exactly the same way as list. We can simply use a loop to print its elements. Even though both looks the same, there’s some difference with the python lists and NumPy arrays. We can simply use the code below to add a new element to the list:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">]</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+            </code></pre></div>
+
+
+
+            <p>We can’t do the same in NumPy arrays, It will throw an error:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+            <span class="n">File</span> <span class="s">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+            <span class="nb">AttributeError</span><span class="p">:</span> <span class="s">'numpy.ndarray'</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s">'append'</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+            <span class="n">File</span> <span class="s">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+            <span class="nb">ValueError</span><span class="p">:</span> <span class="n">operands</span> <span class="n">could</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">broadcast</span> <span class="n">together</span> <span class="k">with</span> <span class="n">shapes</span> <span class="p">(</span><span class="mi">4</span><span class="p">,)</span> <span class="p">(</span><span class="mi">2</span><span class="p">,)</span> <span class="p">(</span><span class="mi">4</span><span class="p">,)</span>
+            </code></pre></div>
+
+
+
+            <p>As you can see that both doesn’t works in the case of NumPy array. Lists use plus operator for concatenation, but NumPy arrays use the plus operator differently. So lets check it out. Lets find the element wise sum of an array using NumPy and python lists:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">b2</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># Temporary List
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">b</span><span class="p">:</span> <span class="c1"># Using List
+            </span><span class="p">...</span>     <span class="n">b2</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span> <span class="o">+</span> <span class="n">element</span><span class="p">)</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">b2</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+
+
+            <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">a</span> <span class="c1"># Using NumPy array
+            </span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+            </code></pre></div>
+
+
+
+            <p>Pretty easy right!😀</p>
+
+            <h4>
+            <a href="#numpy-in-action" class="anchor">
+            </a>
+            NumPy in action
+            </h4>
+
+            <p>NumPy arrays treat plus operator(+) as the element wise addition operator. We can also use it to add two different arrays, or even we can use it to perform scalar addition to an array. NumPy array treats multiplication operator(*) as matrix multiplication operator. Most operators act element wise in NumPy arrays. Lets see the superpowers of NumPy arrays 😀:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="c1"># NumPy Array
+            </span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span> <span class="c1">#New NumPy array
+            </span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">a2</span> <span class="c1"># Matrix addition
+            </span><span class="n">array</span><span class="p">([</span> <span class="mi">5</span><span class="p">,</span>  <span class="mi">7</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">3</span> <span class="c1"># Addition with a scalar
+            </span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a2</span> <span class="c1"># element wise multiplication
+            </span><span class="n">array</span><span class="p">([</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">3</span> <span class="c1"># Multiplication with a scalar
+            </span><span class="n">array</span><span class="p">([</span> <span class="mi">3</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">3</span> <span class="c1"># Power operator
+            </span><span class="n">array</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">.</span><span class="nb">sum</span><span class="p">()</span> <span class="c1"># Sum of elements in a
+            </span><span class="mi">45</span>
+            </code></pre></div>
+
+
+
+            <p>As you can see that the matrix arithmetic works like a breeze in NumPy arrays. We don’t need to use the annoying loops anymore to perform those 😉 . If you have an N dimensional matrix you can use NumPy to perform all these operations on it. NumPy has everything built in to perform these operations effectively by providing an abstract layer to you. For a 2D matrix lets check these operations:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+            <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">],[</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">],[</span><span class="mi">16</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">18</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span>
+            <span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># access each row
+            </span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># access element i=0 j=1
+            </span><span class="mi">2</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># access element i=0 j=1
+            </span><span class="mi">2</span>
+
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span> <span class="c1"># Scalar Multiplication
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mi">2</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">6</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">18</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">a2</span> <span class="c1"># Addition
+            </span><span class="n">array</span><span class="p">([[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">23</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a2</span> <span class="c1"># Multiplication
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mi">10</span><span class="p">,</span>  <span class="mi">22</span><span class="p">,</span>  <span class="mi">36</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mi">52</span><span class="p">,</span>  <span class="mi">70</span><span class="p">,</span>  <span class="mi">90</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">112</span><span class="p">,</span> <span class="mi">136</span><span class="p">,</span> <span class="mi">162</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">-</span> <span class="n">a2</span> <span class="c1"># Subraction
+            </span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">inva</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># a inverse
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="n">inva</span>
+            <span class="n">array</span><span class="p">([[</span> <span class="o">-</span><span class="mf">4.50359963e+15</span><span class="p">,</span>   <span class="mf">9.00719925e+15</span><span class="p">,</span>  <span class="o">-</span><span class="mf">4.50359963e+15</span><span class="p">],</span>
+            <span class="p">[</span>  <span class="mf">9.00719925e+15</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.80143985e+16</span><span class="p">,</span>   <span class="mf">9.00719925e+15</span><span class="p">],</span>
+            <span class="p">[</span> <span class="o">-</span><span class="mf">4.50359963e+15</span><span class="p">,</span>   <span class="mf">9.00719925e+15</span><span class="p">,</span>  <span class="o">-</span><span class="mf">4.50359963e+15</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Determinant of a
+            </span><span class="mf">6.6613381477509402e-16</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">diag</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Diagonals of a
+            </span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Sum of diagonals
+            </span><span class="mi">15</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">eig</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Eigen values and eigen vectors of a
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+            <span class="p">(</span><span class="n">array</span><span class="p">([</span>  <span class="mf">1.61168440e+01</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.11684397e+00</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.30367773e-15</span><span class="p">]),</span> <span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.23197069</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.78583024</span><span class="p">,</span>  <span class="mf">0.40824829</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">0.52532209</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08675134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.81649658</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">0.8186735</span> <span class="p">,</span>  <span class="mf">0.61232756</span><span class="p">,</span>  <span class="mf">0.40824829</span><span class="p">]]))</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># eigen value
+            </span><span class="n">array</span><span class="p">([</span>  <span class="mf">1.61168440e+01</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.11684397e+00</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.30367773e-15</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># eigen vectors
+            </span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">0.23197069</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.78583024</span><span class="p">,</span>  <span class="mf">0.40824829</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">0.52532209</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08675134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.81649658</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">0.8186735</span> <span class="p">,</span>  <span class="mf">0.61232756</span><span class="p">,</span>  <span class="mf">0.40824829</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">**</span> <span class="mi">2</span> <span class="c1"># Power
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>  <span class="mi">4</span><span class="p">,</span>  <span class="mi">9</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">36</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">49</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">81</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span><span class="p">.</span><span class="n">T</span> <span class="c1"># Transpose of a2
+            </span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">18</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># mean
+            </span><span class="mf">5.0</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">var</span><span class="p">()</span> <span class="c1"># variance
+            </span><span class="mf">6.666666666666667</span>
+
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="c1"># NumPy Matrix type
+            </span><span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+            </code></pre></div>
+
+
+
+            <p>NumPy also have a matrix type in addition to NumPy arrays. The official documentation recommends using matrix type for matrix operations. NumPy performs well for multidimensional matrices as well. In addition with these standard operations NumPy has several other functions available to make your programs a lot more simpler. Lets see some of the examples:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+            <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">1.</span>        <span class="p">,</span>  <span class="mf">1.41421356</span><span class="p">,</span>  <span class="mf">1.73205081</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">0.84147098</span><span class="p">,</span>  <span class="mf">0.90929743</span><span class="p">,</span>  <span class="mf">0.14112001</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">0.54030231</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.41614684</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.9899925</span> <span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">tan</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">1.55740772</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.18503986</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.14254654</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">0.69314718</span><span class="p">,</span>  <span class="mf">1.09861229</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">array</span><span class="p">([</span>  <span class="mf">2.71828183</span><span class="p">,</span>   <span class="mf">7.3890561</span> <span class="p">,</span>  <span class="mf">20.08553692</span><span class="p">])</span>
+            </code></pre></div>
+
+
+
+            <p>So simply NumPy treats an array like a vector or a mathematical object. To do operations on list, you need to use a for loop. Since for loops are slow it may take more time to perform various operations while compared to NumPy arrays. Lets do some operations on vector and matrices:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+            <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span>
+            <span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="c1"># Dot product a.a2
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mi">84</span><span class="p">,</span>  <span class="mi">90</span><span class="p">,</span>  <span class="mi">96</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">201</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">231</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">318</span><span class="p">,</span> <span class="mi">342</span><span class="p">,</span> <span class="mi">366</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="c1"># Dot product a2.a
+            </span><span class="n">array</span><span class="p">([[</span><span class="mi">138</span><span class="p">,</span> <span class="mi">171</span><span class="p">,</span> <span class="mi">204</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">174</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">258</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">210</span><span class="p">,</span> <span class="mi">261</span><span class="p">,</span> <span class="mi">312</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">a2</span><span class="p">)</span> <span class="c1"># Dot product a.a2
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mi">84</span><span class="p">,</span>  <span class="mi">90</span><span class="p">,</span>  <span class="mi">96</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">201</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">231</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">318</span><span class="p">,</span> <span class="mi">342</span><span class="p">,</span> <span class="mi">366</span><span class="p">]])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">maga</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># magnitude of a
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="n">maga2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">norm</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="o">@</span> <span class="n">magnitude</span> <span class="n">of</span> <span class="n">a2</span>
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">maga</span> <span class="o">*</span> <span class="n">maga2</span><span class="p">))</span> <span class="c1"># angle between a and a2
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="n">angle</span> <span class="c1"># in radian
+            </span><span class="mf">1.1352271440633694</span>
+            </code></pre></div>
+
+
+
+            <p>To generate random matrices for testing just use:<br>
+            </p>
+
+            <div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Generates zero array
+            </span><span class="o">&gt;&gt;&gt;</span> <span class="n">z</span>
+            <span class="n">array</span><span class="p">([</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># 5*5 Zero matrix
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">,</span>  <span class="mf">0.</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># 5*5 Unit matrix
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">,</span>  <span class="mf">1.</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">random</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># random 5*5 array with elements &lt; 0
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.95798455</span><span class="p">,</span>  <span class="mf">0.24020745</span><span class="p">,</span>  <span class="mf">0.62194033</span><span class="p">,</span>  <span class="mf">0.93840616</span><span class="p">,</span>  <span class="mf">0.40785382</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.01294948</span><span class="p">,</span>  <span class="mf">0.7228686</span> <span class="p">,</span>  <span class="mf">0.67448551</span><span class="p">,</span>  <span class="mf">0.20403856</span><span class="p">,</span>  <span class="mf">0.046528</span>  <span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.63331545</span><span class="p">,</span>  <span class="mf">0.89097084</span><span class="p">,</span>  <span class="mf">0.01754348</span><span class="p">,</span>  <span class="mf">0.17084474</span><span class="p">,</span>  <span class="mf">0.32112247</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.97881143</span><span class="p">,</span>  <span class="mf">0.83247286</span><span class="p">,</span>  <span class="mf">0.65629919</span><span class="p">,</span>  <span class="mf">0.21386575</span><span class="p">,</span>  <span class="mf">0.72251318</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.20167738</span><span class="p">,</span>  <span class="mf">0.24018638</span><span class="p">,</span>  <span class="mf">0.85572554</span><span class="p">,</span>  <span class="mf">0.7706282</span> <span class="p">,</span>  <span class="mf">0.80284553</span><span class="p">]])</span>
+
+            <span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Random 5*5 matrix
+            </span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.16603893</span><span class="p">,</span>  <span class="mf">1.14554164</span><span class="p">,</span>  <span class="mf">0.40170708</span><span class="p">,</span>  <span class="mf">0.52864275</span><span class="p">,</span>  <span class="mf">1.50740231</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.13218522</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20418907</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.09940842</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.25180194</span><span class="p">,</span>  <span class="mf">0.6859655</span> <span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.09053258</span><span class="p">,</span>  <span class="mf">1.11002797</span><span class="p">,</span>  <span class="mf">0.1455936</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.33915414</span><span class="p">,</span>  <span class="mf">0.25604553</span><span class="p">],</span>
+            <span class="p">[</span> <span class="mf">0.96807902</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.03155716</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.79001785</span><span class="p">,</span>  <span class="mf">0.4567955</span> <span class="p">,</span> <span class="o">-</span><span class="mf">1.93929055</span><span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mf">1.38540075</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.82320053</span><span class="p">,</span>  <span class="mf">0.02358358</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.13975953</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.23515682</span><span class="p">]])</span>
+            </code></pre></div>
+
+
+
+            <p>Summing up all these, even though the NumPy arrays contain several advanced functions when compared with lists datatype, it can’t be considered as a replacement for python lists. NumPy is really useful if you want do do some mathematical operations on an array, If we are using a list instead of NumPy arrays we need to traverse each and every elements using a loop, it will significantly reduce the overall performance of the program. Using NumPy will not only improves the performance of the program, but also adds advanced functionalities to the code.</p>
+
+            <p>Visit the official docs to learn more: <a href="https://docs.scipy.org/doc/numpy/">https://docs.scipy.org/doc/numpy/</a></p>
+
+            <p>Any suggestions to this article is always welcome. Please don’t forget to comment on this article if you found any mistakes 😀</p>
+
+            <p>Originally published on: <a href="http://www.gautamkrishnar.com/">gautamkrishnar.com</a></p>
+
+           
+
+[Hi, I'm Gautam krishna.R](https://dev.to/gautamkrishnar/hi-im-gautam-krishnar): Sun Apr 02 2017 7:04 PM <p>I have been coding for 9 years, I am a Microsoft student partner and DuckDuckGo community leader who's actively involved in several open source projects.</p>
+
+          <p>You can find me on GitHub at <a href="https://github.com/gautamkrishnar">@gautamkrishnar</a></p>
+
+          <p>You can also find me on Twitter as <a href="https://twitter.com/gautamkrishnar">@gautamkrishnar</a></p>
+
+          <p>I live in Kollam.</p>
+
+          <p>I mostly program in these languages: Phython, NodeJS, PHP, C, C#, Java.</p>
+
+          <p>I am currently learning more about ML.</p>
+
+          <p>Nice to meet you.</p>
+
+         
+
+[DuckDuckGo – The search engine redefined](https://dev.to/gautamkrishnar/duckduckgo-the-search-engine-redefined-4c7d): Thu Nov 05 2015 7:49 PM <p><a href="https://duckduckgo.com/">DuckDuckGo</a> is a search engine just like Google and Bing but the only difference is that it is open source. It is powered by an awesome open source community. Also, it won’t track your searches to show you personalized ads as google does. I hope you have heard the recent news that <a href="https://www.reuters.com/article/us-alphabet-google-privacy-lawsuit/google-faces-5-billion-lawsuit-in-u-s-for-tracking-private-internet-use-idUSKBN23933H">Google is tracking users even in incognito or private browsing mode</a>. You can search and surf the web anonymously using DuckDuckGo. </p>
+
+                <p>This blog will help you to understand more about DuckDuckGo and some of its amazing features:</p>
+
+                <h4>
+                <a href="#social-media-bio" class="anchor">
+                </a>
+                Social media bio
+                </h4>
+
+                <p>DuckDuckGo lets you see the social media profiles of people without leaving the search engine. So, search for <a href="https://duckduckgo.com/?q=%40gautamkrishnar&amp;ia=twitter">@gautamkrishnar</a> and you can see my twitter profile information on the same page. If you want to see a person’s Google+ profile you can simply search g+ followed by a person’s name. Another cool feature is that you can perform a search on other website’s search box using DuckDuckGo, we call it bangs. If you want to search someone in LinkedIn just type !linkedin followed by the person’s name. You can use !a to search for some products in amazon.com. At the time of writing this post, there are 13,505 bangs available. You can see more bangs <a href="https://duckduckgo.com/bang...">here</a>.</p>
+
+                <h4>
+                <a href="#app-store-search" class="anchor">
+                </a>
+                App store search
+                </h4>
+
+                <p>Search for any popular apps in DuckDuckGo and it will show a carousel full of apps with similar names. Another useful feature shows alternatives to apps in a neat carousel. Tired of MS Office? Just search for “<a href="https://duckduckgo.com/?q=alternative+to+microsoft+word">Alternative to Word</a>” and see the results for yourself. It also works for Web services, so you can even search for “<a href="https://duckduckgo.com/?q=alternative+to+duckduckgo">Alternative to DuckDuckGo</a>“ if you like.</p>
+
+                <h4>
+                <a href="#stopwatch" class="anchor">
+                </a>
+                Stopwatch
+                </h4>
+
+                <p>DuckDuckGo has a stopwatch, simply search for the <a href="https://duckduckgo.com/?q=stopwatch&amp;ia=stopwatch">stopwatch.</a></p>
+
+                <h4>
+                <a href="#shorten-and-expand-links" class="anchor">
+                </a>
+                Shorten and expand links
+                </h4>
+
+                <p>Want to find out which websites are at the end of shortened links such as <a href="http://bit.ly/blahbla">http://bit.ly/blahbla</a>? Open DuckDuckGo and search “expand <a href="http://bit.ly/blahbla%E2%80%9D">http://bit.ly/blahbla”</a>. Also, if you want to shorten long URLs, enter “<a href="https://duckduckgo.com/?q=shorten+www.gkrish.xyz%2Fisabella&amp;ia=shortenedlink">shorten www.gkrish.xyz/isabella</a>” to get a URL shortened using <a href="http://is.gd/">is.gd</a>.</p>
+
+                <h4>
+                <a href="#generate-passwords" class="anchor">
+                </a>
+                Generate passwords
+                </h4>
+
+                <p>DuckDuckGo also helps you to generate strong passwords. Just head to DuckDuckGo and search for “Password 20”. You’ll see a strong 20-character password. You can replace the number to change the number of characters in the password. If you find those random passwords hard to remember, you can make DuckDuckGo generate <a href="http://xkcd.com/936/">XKCD-style passwords</a>. These passwords comprise four common words put together, which are easy to remember and hard to crack, and were first suggested in the popular Web comic XKCD. For these passwords, search “Random passphrase”.</p>
+
+                <h4>
+                <a href="#change-case-and-check-the-number-of-characters" class="anchor">
+                </a>
+                Change case and check the number of characters
+                </h4>
+
+                <p>Want to change a sentence to Title Case, lowercase or UPPERCASE? Just add one of those three terms before your sentence and key it in on DuckDuckGo.</p>
+
+                <p>Another interesting feature is the number of characters. You can quickly check how many characters are in your search query by adding “chars” before or after the query. Try searching for “chars I really like this article” without the quotes and see the results.</p>
+
+                <h4>
+                <a href="#rhyme-with" class="anchor">
+                </a>
+                rhyme with
+                </h4>
+
+                <p>You read that right. DuckDuckGo also has an instant answer that finds rhyming words. Search “rhyme with heart” or any other word you can think of. You’ll see an instant answer with rhyming words, from RhymeBrain.</p>
+
+                <h4>
+                <a href="#calendar" class="anchor">
+                </a>
+                Calendar
+                </h4>
+
+                <p>Google and DuckDuckGo can show you the current date and time. But DuckDuckGo goes one step further by supporting the calendar as an instant answer. Search “calendar” to see one, with the current date highlighted. It can also show you the calendar for any month and year. Try searching for “<a href="https://duckduckgo.com/?q=calendar+january+1899">calendar january 1899</a>“.</p>
+
+                <h4>
+                <a href="#loan-calculator" class="anchor">
+                </a>
+                Loan calculator
+                </h4>
+
+                <p>Another useful DuckDuckGo instant answer is a loan calculator. It’s useful if you want to see how much your monthly installments will be and how much interest you’ll be paying in total. The search query for this is a little hard to remember, like the terms and conditions for most loan agreements. It is “loan AMOUNT at INTEREST with PERCENT down for DURATION”. All the uppercase words are what you need to key in – total amount, interest rate, down payment percentage and the duration of the loan. We tried “<a href="https://duckduckgo.com/?q=loan+Rs+50%2C00%2C000+at+4.5%25+with+25%25+down+for+15+years">loan Rs 50,00,000 at 4.5% with 25% down for 15 years</a>” to get the answer in the picture below.</p>
+
+                <h4>
+                <a href="#cool-features-for-developers" class="anchor">
+                </a>
+                Cool features for developers
+                </h4>
+
+                <p>There are several instant answers that will be useful to software developers but might be less important for the general public. Here’s a quick list of what DuckDuckGo can do:</p>
+
+                <ul>
+                <li><a href="https://duckduckgo.com/?q=lorem+ipsum">Generate lorem ipsum text</a></li>
+                <li><a href="https://duckduckgo.com/?q=url+encode+http%3A%2F%2Fgkrish.xyz">Encode URLs to machine-readable text</a></li>
+                <li><a href="https://duckduckgo.com/?q=11001101010001010100101010101011+binary">Convert binary to decimal</a></li>
+                <li><a href="https://duckduckgo.com/?q=html+chars">Show a list of special characters and their HTML values</a></li>
+                <li><a href="https://duckduckgo.com/?q=html+for+spade">Show HTML value for any special character</a></li>
+                <li><a href="https://duckduckgo.com/?q=%23ff0012">Show colors based on hexadecimal values</a></li>
+                </ul>
+
+                <h4>
+                <a href="#miscellaneous-features" class="anchor">
+                </a>
+                Miscellaneous features
+                </h4>
+
+                <ol>
+                <li>Run a search for <a href="https://duckduckgo.com/?q=xkcd">‘xkcd’</a> and DuckDuckGo will automatically fetch a most recent comic right there on the search result page.</li>
+                <li>You can get DuckDuckGo to explain you an emoticon straight away. Just type its code 😀</li>
+                <li>DDG lets you use “” to go to directly to the first search result after inputting a query. We call this “i am feeling ducky” 😀</li>
+                </ol>
+
+                <p>There are several other instant answers on DuckDuckGo that are quite cool, but not very useful. Here’s a quick list of some of the best.</p>
+
+                <ul>
+                <li><a href="https://duckduckgo.com/?q=people+in+space">How many people are in space</a></li>
+                <li><a href="https://duckduckgo.com/?q=gautam">Generate ASCII art</a></li>
+                <li><a href="https://duckduckgo.com/?q=1983+chinese+zodiac">Chinese Zodiac queries</a></li>
+                <li><a href="https://duckduckgo.com/?q=anagram+scramble">Anagram solver</a></li>
+                <li><a href="https://duckduckgo.com/?q=blood+donor+ab%2B">Blood type compatibility</a></li>
+                </ul>
+
+                <p>As DuckDuckGo is an open-source search engine, its possibilities are limitless. There are several other things DuckDuckGo can do. Check out <a href="https://duckduckgo.com/tour">this page.</a></p>
+
+                <p>DuckDuckGo is powered by an open-source community, it has a team of dedicated open source developers who contribute part-time to it. We can even say that DuckDuckGo has more features than google because the developer community is adding more and more features day by day. I am really happy to say that I am also a part of that awesome community (DuckDuckGo Community Leader 😀). </p>
+
+                <p>Update: At the time of writing this post, DDG had stopped accepting external contributions. Now they are working on developing Privacy focused browsers and extension: <a href="https://github.com/duckduckgo">https://github.com/duckduckgo</a></p>
+
+             
 <!-- BLOG-POST-LIST:END -->
 
 # Other contents

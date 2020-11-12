@@ -16,6 +16,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_DATE_FORMAT: 'UTC:ddd mmm dd yyyy h:MM TT',
   INPUT_CUSTOM_TAGS: '',
   INPUT_TITLE_MAX_LENGTH: '',
+  INPUT_DESCRIPTION_MAX_LENGTH: '',
   INPUT_ITEM_EXEC: '',
   TEST_MODE: 'true'
 };
@@ -71,7 +72,7 @@ describe('Blog post workflow tests', function () {
       ...process.env,
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
-      INPUT_TEMPLATE: '$newline[$title]($url): $date $newline'
+      INPUT_TEMPLATE: '$newline[$title]($url): $date $description $newline'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });
@@ -123,14 +124,27 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap(README_FILE, envObj);
   });
 
-  it('Generated readme with truncation should match the snapshot',async function () {
-    const README_FILE = 'Readme.truncate.md';
+  it('Generated readme with truncated title should match the snapshot',async function () {
+    const README_FILE = 'Readme.truncate.title.md';
     fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_TITLE_MAX_LENGTH: '10'
+    };
+    await runAndCompareSnap(README_FILE, envObj);
+  });
+
+  it('Generated readme with truncated description should match the snapshot',async function () {
+    const README_FILE = 'Readme.truncate.description.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_DESCRIPTION_MAX_LENGTH: '10',
+      INPUT_TEMPLATE: '$description'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });

@@ -89,6 +89,10 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 const TITLE_MAX_LENGTH = core.getInput('title_max_length') ?
   Number.parseInt(core.getInput('title_max_length')) : null;
 
+// Description trimming parameter, default: ""
+const DESCRIPTION_MAX_LENGTH = core.getInput('description_max_length') ?
+  Number.parseInt(core.getInput('description_max_length')) : null;
+
 // Advanced content modification parameter, default: ""
 const ITEM_EXEC = core.getInput('item_exec');
 
@@ -235,6 +239,7 @@ feedList.forEach((siteUrl) => {
             let post = {
               title: item.title.trim(),
               url: item.link.trim(),
+              description: item.content ? item.content : '',
               date: new Date(item.pubDate.trim()),
               ...customTags
             };
@@ -253,6 +258,12 @@ feedList.forEach((siteUrl) => {
               // Trimming the title
               post.title = post.title.trim().slice(0, TITLE_MAX_LENGTH) === post.title.trim() ?
                 post.title.trim() : post.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
+            }
+
+            if (DESCRIPTION_MAX_LENGTH && post && post.description) {
+              // Trimming the description
+              post.description = post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH) === post.description.trim() ?
+                post.description.trim() : post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH) + '...';
             }
 
             return post;
@@ -309,6 +320,7 @@ Promise.allSettled(promiseArray).then((results) => {
           let content = template
             .replace(/\$title\b/g, cur.title)
             .replace(/\$url\b/g, cur.url)
+            .replace(/\$description\b/g, cur.description)
             .replace(/\$date\b/g, date)
             .replace(/\$newline/g, '\n');
 
