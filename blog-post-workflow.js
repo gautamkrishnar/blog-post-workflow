@@ -257,13 +257,13 @@ feedList.forEach((siteUrl) => {
             if (TITLE_MAX_LENGTH && post && post.title) {
               // Trimming the title
               post.title = post.title.trim().slice(0, TITLE_MAX_LENGTH) === post.title.trim() ?
-                post.title.trim() : post.title.trim().slice(0, TITLE_MAX_LENGTH) + '...';
+                post.title.trim() : post.title.trim().slice(0, TITLE_MAX_LENGTH).trim() + '...';
             }
 
             if (DESCRIPTION_MAX_LENGTH && post && post.description) {
               // Trimming the description
               post.description = post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH) === post.description.trim() ?
-                post.description.trim() : post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH) + '...';
+                post.description.trim() : post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH).trim() + '...';
             }
 
             return post;
