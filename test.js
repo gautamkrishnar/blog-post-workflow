@@ -144,7 +144,7 @@ describe('Blog post workflow tests', function () {
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_DESCRIPTION_MAX_LENGTH: '10',
-      INPUT_TEMPLATE: '$description'
+      INPUT_TEMPLATE: '$description $newline'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });
