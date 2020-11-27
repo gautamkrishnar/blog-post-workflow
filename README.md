@@ -132,7 +132,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contr
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
 ### Thanks
-- Thanks to all the **1.5K+** users of this workflow
+- Thanks to all the **2K+✨** users of this workflow
 - Thanks to all the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
 - Thanks to [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
 
