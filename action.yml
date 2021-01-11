@@ -77,6 +77,13 @@ inputs:
     description: "Email id used while committing to the repo"
     default: "blog-post-bot@example.com"
     required: false
+  output_only:
+    description: "Prevent updating the readme, instead sets the output to the output variable named `results`"
+    default: "false"
+    required: false
+outputs:
+  results:
+    description: "JSON stringified array of posts"
 
 runs:
   using: node12

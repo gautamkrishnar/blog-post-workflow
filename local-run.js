@@ -26,6 +26,7 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   process.env.INPUT_TITLE_MAX_LENGTH = '';
   process.env.INPUT_DESCRIPTION_MAX_LENGTH = '';
   process.env.INPUT_ITEM_EXEC = '';
+  process.env.INPUT_OUTPUT_ONLY = 'false';
   const testFile = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
   console.log('Testing: ', testFile);
   require(testFile);
