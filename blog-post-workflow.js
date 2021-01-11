@@ -348,12 +348,13 @@ Promise.allSettled(promiseArray).then((results) => {
           return acc + content;
         }
       }, '');
-      const newReadme = buildReadme(readmeData, postListMarkdown);
+
+      const outputOnly = core.getInput('output_only') !== 'false';
+      const newReadme = !outputOnly ? buildReadme(readmeData, postListMarkdown) : null;
       // if there's change in readme file update it
       if (newReadme !== readmeData) {
         core.info('Writing to ' + README_FILE_PATH);
         fs.writeFileSync(README_FILE_PATH, newReadme);
-        const outputOnly = core.getInput('output_only') !== 'false';
 
         if (!process.env.TEST_MODE) {
           if (!outputOnly) {
