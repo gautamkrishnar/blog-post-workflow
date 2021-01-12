@@ -56,7 +56,7 @@ This workflow has additional options that you can use to customize it for your u
 | `commit_message` | `Updated with the latest blog posts` | Allows you to customize the commit message | No |
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
-| `output_only` | `false` | Sets the generated array as `results` [output variable](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idoutputs) so that it can be consumed in other actions and parsed via utilities like jq. This will also prevent committing to readme. | No |
+| `output_only` | `false` | Sets the generated array as `results` [output variable](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idoutputs) so that it can be consumed in other actions and parsed via utilities like [jq](https://stedolan.github.io/jq/). This will also prevent committing to readme. See [#51](https://github.com/gautamkrishnar/blog-post-workflow/issues/51#issuecomment-758570235) for more details about the output format and how to use it. | No |
 
 ### Advanced usage examples
 #### StackOverflow example
