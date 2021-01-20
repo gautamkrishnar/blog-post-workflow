@@ -73,7 +73,7 @@ const commitReadme = async (emptyCommit = false) => {
   await exec('git', ['config', '--global', 'user.name', committerUsername]);
   if (emptyCommit) {
     await exec('git',['commit', '--allow-empty', '-m', '"dummy commit to keep the repository ' +
-    'active, see blog-post-workflow/issues/53"']);
+    'active, see https://git.io/Jtm4V"']);
   } else {
     await exec('git', ['add', README_FILE_PATH]);
     await exec('git', ['commit', '-m', commitMessage]);
@@ -380,8 +380,6 @@ Promise.allSettled(promiseArray).then((results) => {
 
         const commitDate = new Date(parseInt(outputData, 10) * 1000);
         const diffInDays = Math.round((new Date() - commitDate)/(1000*60*60*24));
-
-        console.log(diffInDays);
 
         if (diffInDays > 50 && !process.env.TEST_MODE) {
           // Do dummy commit if elapsed time is greater than 50 days
