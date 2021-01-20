@@ -309,8 +309,9 @@ Promise.allSettled(promiseArray).then((results) => {
   if (postsArray.length > 0) {
     try {
       if (!process.env.TEST_MODE) {
-        await exec('git', ['config','pull.rebase', 'true']);
-        await exec('git',['pull']); // Pulling the latest changes from upstream
+        await exec('git', ['config','pull.rebase', 'true'], {stdio: ['pipe', 'pipe', 'pipe']});
+        // Pulling the latest changes from upstream
+        await exec('git',['pull'], {stdio: ['pipe', 'pipe', 'pipe']});
       }
       const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
