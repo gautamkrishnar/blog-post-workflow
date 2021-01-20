@@ -3,8 +3,8 @@ on: [push, pull_request]
 jobs:
   test:
     if: |
-      "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')" &&
-      "! startsWith(github.ref, 'refs/tags')
+      !contains(toJSON(github.event.commits.*.message), '[skip-ci]') &&
+      !startsWith(github.ref, 'refs/tags')
     name: Generate build and test
     runs-on: ubuntu-latest
     steps:
