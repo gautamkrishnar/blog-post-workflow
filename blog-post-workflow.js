@@ -369,7 +369,7 @@ Promise.allSettled(promiseArray).then((results) => {
             await commitReadme();
           } else {
             // Sets output as output as `results` variable in github action
-            core.info('outputOnly mode: set `results` variable. Readme not updated.');
+            core.info('outputOnly mode: set `results` variable. Readme not committed.');
             core.setOutput('results', postsArray);
           }
         }
