@@ -1,6 +1,7 @@
 const {spawn} = require('child_process');
 
 const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => {
+  let outputData = '';
   const optionsToCLI = {
     ...options
   };
@@ -8,16 +9,20 @@ const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => 
     Object.assign(optionsToCLI, {stdio: ['inherit', 'inherit', 'inherit']});
   }
   const app = spawn(cmd, args, optionsToCLI);
+  if (app.stdout) {
+    // Only needed for pipes
+    app.stdout.on('data', function(data) {
+      outputData+=data.toString();
+    });
+  }
+
   app.on('close', (code) => {
     if (code !== 0) {
-      console.log(`Error on: ${cmd} ${args.join(' ')}`);
-      const err = new Error(`Invalid status code: ${code}`);
-      err.code = code;
-      return reject(err);
+      return reject({code, outputData});
     }
-    return resolve(code);
+    return resolve({code, outputData});
   });
-  app.on('error', reject);
+  app.on('error', () => reject({code: 1, outputData}));
 });
 
 module.exports = exec;

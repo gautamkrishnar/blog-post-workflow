@@ -50,9 +50,10 @@ const buildReadme = (previousContent, newContent) => {
 
 /**
  * Code to do git commit
+ * @param emptyCommit: sets whether to do an empty commit or not
  * @return {Promise<void>}
  */
-const commitReadme = async () => {
+const commitReadme = async (emptyCommit = false) => {
   // Getting config
   const committerUsername = core.getInput('committer_username');
   const committerEmail = core.getInput('committer_email');
@@ -70,8 +71,13 @@ const commitReadme = async () => {
       `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
   }
   await exec('git', ['config', '--global', 'user.name', committerUsername]);
-  await exec('git', ['add', README_FILE_PATH]);
-  await exec('git', ['commit', '-m', commitMessage]);
+  if (emptyCommit) {
+    await exec('git',['commit', '--allow-empty', '-m', '"dummy commit to keep the repository ' +
+    'active, see blog-post-workflow/issues/53"']);
+  } else {
+    await exec('git', ['add', README_FILE_PATH]);
+    await exec('git', ['commit', '-m', commitMessage]);
+  }
   await exec('git', ['push']);
   core.info('Readme updated successfully in the upstream repository');
   // Making job fail if one of the source fails
@@ -367,8 +373,24 @@ Promise.allSettled(promiseArray).then((results) => {
           }
         }
       } else {
-        core.info('No change detected, skipping');
-        process.exit(0);
+        // Calculating last commit date, please see https://git.io/Jtm4V
+        const {outputData} = await exec('git',['--no-pager', 'log', '-1', '--format=%ct'],
+          { encoding : 'utf8', stdio: ['pipe', 'pipe', 'pipe']});
+
+        const commitDate = new Date(parseInt(outputData, 10) * 1000);
+        const diffInDays = Math.round((new Date() - commitDate)/(1000*60*60*24));
+
+        console.log(diffInDays);
+
+        if (diffInDays > 50 && !process.env.TEST_MODE) {
+          // Do dummy commit if elapsed time is greater than 50 days
+          core.info('Doing dummy commit to keep workflow active, see: https://git.io/Jtm4V');
+          await commitReadme(true);
+          process.exit(0);
+        } else {
+          core.info('No change detected, skipping');
+          process.exit(0);
+        }
       }
     } catch (e) {
       core.error(e);
