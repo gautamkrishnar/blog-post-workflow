@@ -114,6 +114,9 @@ const FILTER_PARAMS = {
 // Custom tags
 const CUSTOM_TAGS = {};
 
+// Keepalive flag
+const ENABLE_KEEPALIVE = core.getInput('enable_keepalive') === 'true';
+
 /**
  * Compound parameter parser, Updates obj with compound parameters and returns item name
  * @param sourceWithParam filter source with compound param eg: stackoverflow/Comment by $author/
@@ -381,7 +384,7 @@ Promise.allSettled(promiseArray).then((results) => {
         const commitDate = new Date(parseInt(outputData, 10) * 1000);
         const diffInDays = Math.round((new Date() - commitDate)/(1000*60*60*24));
 
-        if (diffInDays > 50 && !process.env.TEST_MODE) {
+        if (diffInDays > 50 && !process.env.TEST_MODE && ENABLE_KEEPALIVE) {
           // Do dummy commit if elapsed time is greater than 50 days
           core.info('Doing dummy commit to keep workflow active, see: https://git.io/Jtm4V');
           await commitReadme(true);

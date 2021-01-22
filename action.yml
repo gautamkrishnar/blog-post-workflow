@@ -81,6 +81,10 @@ inputs:
     description: "Prevent updating the readme, instead sets the output to the output variable named `results`"
     default: "false"
     required: false
+  enable_keepalive:
+    description: "Enables the feature that keeps the repo active by automatically committing to it even though there is no change"
+    default: "true"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

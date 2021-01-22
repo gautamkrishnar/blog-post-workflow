@@ -57,6 +57,7 @@ This workflow has additional options that you can use to customize it for your u
 | `committer_username` | `blog-post-bot` | Allows you to customize the committer username | No |
 | `committer_email` | `blog-post-bot@example.com` | Allows you to customize the committer email | No |
 | `output_only` | `false` | Sets the generated array as `results` [output variable](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idoutputs) so that it can be consumed in other actions and parsed via utilities like [jq](https://stedolan.github.io/jq/). This will also prevent committing to readme. See [#51](https://github.com/gautamkrishnar/blog-post-workflow/issues/51#issuecomment-758570235) for more details about the output format and how to use it. | No |
+| `enable_keepalive` | `true` | Workflow will automatically do a dummy commit to keep the repository active if there is no commit activity for the last 50 days. GitHub will stop running all cron based triggers if the repository is not active for more than 60 days. This flag allows you to disable this feature. See [#53](https://git.io/Jtm4V) for more details.  | No |
 
 ### Advanced usage examples
 #### StackOverflow example
