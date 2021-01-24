@@ -133,10 +133,12 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contr
 ### Bugs
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
-### Thanks
-- Thanks to all the **2K+✨** users of this workflow
-- Thanks to all the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
-- Thanks to [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
+### Thanks to
+- All the **2K+✨** users of this workflow
+- All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
+- [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
+- [CodeCov](https://about.codecov.io/) for this blog: [Discovering the Most Popular and Most Used Github Actions](https://about.codecov.io/blog/discovering-the-most-popular-and-most-used-github-actions/)
+- [the byte podcast](https://podcast.thebyte.io/episodes/learn-how-to-pimp-out-your-github-profile)
 
 ### Liked it?
 Hope you liked this project, don't forget to give it a star ⭐
