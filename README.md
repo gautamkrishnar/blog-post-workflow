@@ -143,4 +143,4 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 ### Liked it?
 Hope you liked this project, don't forget to give it a star ⭐
 
-<a href="https://starchart.cc/gautamkrishnar/nothing-private"><img src="https://starchart.cc/gautamkrishnar/nothing-private.svg" width="600px"></a>
+<a href="https://starchart.cc/gautamkrishnar/blog-post-workflow"><img src="https://starchart.cc/gautamkrishnar/blog-post-workflow.svg" width="600px"></a>
