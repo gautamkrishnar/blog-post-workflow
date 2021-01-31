@@ -35,7 +35,7 @@ const buildReadme = (previousContent, newContent) => {
   ) {
     // Exit with error if comment is not found on the readme
     core.error(
-      `Cannot find the comment tag on the readme:\n${tagToLookFor}:START -->\n${tagToLookFor}:END -->`
+      `Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`
     );
     process.exit(1);
   }
