@@ -115,6 +115,7 @@ Following are the list of some popular blogging platforms and their RSS feed url
 | [Reddit](https://www.reddit.com/) | `http://www.reddit.com/r/topic/.rss` | You can create an RSS feed by adding '.rss' to the end of an existing Reddit URL. Replace `topic` with SubReddit topic that interest you or localized to you.| http://www.reddit.com/r/news/.rss |
 | [Analytics India Magazine](https://analyticsindiamag.com/) | `https://analyticsindiamag.com/author/author_name/feed/` | Replace `author_name` with your name | https://analyticsindiamag.com/author/kaustubhgupta1828gmail-com/feed/ |
 | [Feedburner](https://feedburner.com/) | `https://feeds.feedburner.com/feed_address` | Replace `feed_address` with your Feedburner feed address | https://feeds.feedburner.com/darkwood-fr/blog |
+| [Tumblr](https://www.tumblr.com)|`https://blog_name.tumblr.com/rss` or `https://example.com/rss`|You can create an RSS feed by adding '/rss' to your main blog page or to your own domain if it is configured. Replace `blog_name` with your blog name | https://goggledoddle.tumblr.com/rss|
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
