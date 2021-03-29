@@ -140,12 +140,14 @@ const updateAndParseCompoundParams = (sourceWithParam, obj) => {
  * @return {null|string[]}
  */
 const getParameterisedTemplate = (template, keyName) => {
-  if (template.indexOf('$' + keyName) > -1 && template.match(new  RegExp('\\$' + keyName + '\\((.)*\\)', 'g'))) {
-    return template.match(new  RegExp('\\$' + keyName + '\\((.)*\\)', 'g'))[0]
-      .replace('$'+ keyName +'(','')
-      .replace(')','')
-      .split(',')
-      .map(item=> item.trim());
+  const key = '$' + keyName + '(';
+  if (template.indexOf(key) > -1) {
+    const startIndex = template.indexOf(key) + key.length;
+    const endIndex = template.indexOf(')', startIndex);
+    if (endIndex === -1) {
+      return null;
+    }
+    return template.slice(startIndex, endIndex).split(',').map(item=>item.trim());
   } else {
     return null;
   }
