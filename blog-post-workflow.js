@@ -254,9 +254,13 @@ feedList.forEach((siteUrl) => {
               title: item.title.trim(),
               url: item.link.trim(),
               description: item.content ? item.content : '',
-              date: new Date(item.pubDate.trim()),
               ...customTags
             };
+
+            if (ENABLE_SORT) {
+              post.date = new Date(item.pubDate.trim());
+            }
+
             // Advanced content manipulation using javascript code
             if (ITEM_EXEC) {
               try {
