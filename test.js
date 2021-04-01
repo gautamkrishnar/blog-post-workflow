@@ -20,6 +20,7 @@ const DEFAULT_TEST_ENV = {
   INPUT_ITEM_EXEC: '',
   INPUT_OUTPUT_ONLY: 'false',
   INPUT_ENABLE_KEEPALIVE: 'true',
+  INPUT_TAG_POST_PRE_NEWLINE:'false',
   TEST_MODE: 'true'
 };
 
