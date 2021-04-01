@@ -156,6 +156,19 @@ const getParameterisedTemplate = (template, keyName) => {
   }
 };
 
+/**
+ * Unicode aware javascript truncate
+ * @param str string to truncated
+ * @param length length to truncate
+ * @return {string} truncated value
+ */
+const truncateString = (str, length) => {
+  const trimmedString = str.trim();
+  const truncatedString = [...trimmedString].slice(0, length).join('');
+  return  truncatedString === trimmedString ?
+    trimmedString : truncatedString.trim() + '...';
+};
+
 core.setSecret(GITHUB_TOKEN);
 const COMMENT_FILTERS = core
   .getInput('filter_comments')
@@ -274,14 +287,13 @@ feedList.forEach((siteUrl) => {
 
             if (TITLE_MAX_LENGTH && post && post.title) {
               // Trimming the title
-              post.title = post.title.trim().slice(0, TITLE_MAX_LENGTH) === post.title.trim() ?
-                post.title.trim() : post.title.trim().slice(0, TITLE_MAX_LENGTH).trim() + '...';
+              post.title = truncateString(post.title, TITLE_MAX_LENGTH);
             }
 
             if (DESCRIPTION_MAX_LENGTH && post && post.description) {
+              const trimmedDescription = post.description.trim();
               // Trimming the description
-              post.description = post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH) === post.description.trim() ?
-                post.description.trim() : post.description.trim().slice(0, DESCRIPTION_MAX_LENGTH).trim() + '...';
+              post.description = truncateString(post.description, DESCRIPTION_MAX_LENGTH);
             }
 
             return post;
