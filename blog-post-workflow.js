@@ -91,6 +91,9 @@ const acceptHeader = core.getInput('accept_header');
 // Total no of posts to display on readme, all sources combined, default: 5
 const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 
+// Disables sort
+const ENABLE_SORT = core.getInput('disable_sort') === 'false';
+
 // Title trimming parameter, default: ""
 const TITLE_MAX_LENGTH = core.getInput('title_max_length') ?
   Number.parseInt(core.getInput('title_max_length')) : null;
@@ -231,7 +234,7 @@ feedList.forEach((siteUrl) => {
           .filter(ignoreStackExchangeComments)
           .map((item) => {
             // Validating keys to avoid errors
-            if (!item.pubDate) {
+            if (ENABLE_SORT && !item.pubDate) {
               reject('Cannot read response->item->pubDate');
             }
             if (!item.title) {
@@ -304,7 +307,7 @@ Promise.allSettled(promiseArray).then((results) => {
   postsArray = postsArray.filter(item => item !== null);
 
   // Sorting posts based on date
-  if (core.getInput('disable_sort') === 'false') {
+  if (ENABLE_SORT) {
     postsArray.sort(function (a, b) {
       return b.date - a.date;
     });
