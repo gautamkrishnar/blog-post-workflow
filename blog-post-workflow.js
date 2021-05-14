@@ -9,7 +9,8 @@ const {
   commitReadme,
   truncateString,
   buildReadme,
-  exec
+  exec,
+  getParameterisedTemplate
 } = require('./utils');
 const {
   ignoreStackExchangeComments,
@@ -47,26 +48,6 @@ const CUSTOM_TAGS = {};
 
 // Keepalive flag
 const ENABLE_KEEPALIVE = core.getInput('enable_keepalive') === 'true';
-
-/**
- * Returns parsed parameterised templates as array or return null
- * @param template
- * @param keyName
- * @return {null|string[]}
- */
-const getParameterisedTemplate = (template, keyName) => {
-  const key = '$' + keyName + '(';
-  if (template.indexOf(key) > -1) {
-    const startIndex = template.indexOf(key) + key.length;
-    const endIndex = template.indexOf(')', startIndex);
-    if (endIndex === -1) {
-      return null;
-    }
-    return template.slice(startIndex, endIndex).split(',').map(item => item.trim());
-  } else {
-    return null;
-  }
-};
 
 core.setSecret(GITHUB_TOKEN);
 
