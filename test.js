@@ -2,7 +2,7 @@ const assert = require('assert');
 const process = require('process');
 const path = require('path');
 const fs = require('fs');
-const exec = require('./exec');
+const {exec} = require('./utils');
 
 const DEFAULT_TEST_ENV = {
   INPUT_MAX_POST_COUNT: '10',

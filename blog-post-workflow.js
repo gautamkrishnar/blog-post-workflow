@@ -3,86 +3,19 @@ let Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('fs');
 const dateFormat = require('dateformat');
-const exec = require('./exec');
 const rand = require('random-seed');
-
-/**
- * Builds the new readme by replacing the readme's <!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END --> tags
- * @param previousContent {string}: actual readme content
- * @param newContent {string}: content to add
- * @return {string}: content after combining previousContent and newContent
- */
-const buildReadme = (previousContent, newContent) => {
-  const tagNameInput = core.getInput('comment_tag_name');
-  const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : `<!-- BLOG-POST-LIST:`;
-  const closingTag = '-->';
-  const tagNewlineFlag = core.getInput('tag_post_pre_newline') === 'true';
-  const startOfOpeningTagIndex = previousContent.indexOf(
-    `${tagToLookFor}START`,
-  );
-  const endOfOpeningTagIndex = previousContent.indexOf(
-    closingTag,
-    startOfOpeningTagIndex,
-  );
-  const startOfClosingTagIndex = previousContent.indexOf(
-    `${tagToLookFor}END`,
-    endOfOpeningTagIndex,
-  );
-  if (
-    startOfOpeningTagIndex === -1 ||
-    endOfOpeningTagIndex === -1 ||
-    startOfClosingTagIndex === -1
-  ) {
-    // Exit with error if comment is not found on the readme
-    core.error(
-      `Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`
-    );
-    process.exit(1);
-  }
-  return [
-    previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-    tagNewlineFlag ? '\n' : '',
-    newContent,
-    tagNewlineFlag ? '\n' : '',
-    previousContent.slice(startOfClosingTagIndex),
-  ].join('');
-};
-
-/**
- * Code to do git commit
- * @param emptyCommit: sets whether to do an empty commit or not
- * @return {Promise<void>}
- */
-const commitReadme = async (emptyCommit = false) => {
-  // Getting config
-  const committerUsername = core.getInput('committer_username');
-  const committerEmail = core.getInput('committer_email');
-  const commitMessage = core.getInput('commit_message');
-  // Doing commit and push
-  await exec('git', [
-    'config',
-    '--global',
-    'user.email',
-    committerEmail,
-  ]);
-  if (GITHUB_TOKEN) {
-    // git remote set-url origin
-    await exec('git', ['remote', 'set-url', 'origin',
-      `https://${GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
-  }
-  await exec('git', ['config', '--global', 'user.name', committerUsername]);
-  if (emptyCommit) {
-    await exec('git',['commit', '--allow-empty', '-m', '"dummy commit to keep the repository ' +
-    'active, see https://git.io/Jtm4V"']);
-  } else {
-    await exec('git', ['add', README_FILE_PATH]);
-    await exec('git', ['commit', '-m', commitMessage]);
-  }
-  await exec('git', ['push']);
-  core.info('Readme updated successfully in the upstream repository');
-  // Making job fail if one of the source fails
-  process.exit(jobFailFlag ? 1 : 0);
-};
+const {
+  updateAndParseCompoundParams,
+  commitReadme,
+  truncateString,
+  buildReadme,
+  exec
+} = require('./utils');
+const {
+  ignoreStackExchangeComments,
+  ignoreMediumComments,
+  ignoreStackOverflowComments
+} = require('./filters');
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
@@ -109,32 +42,11 @@ const ITEM_EXEC = core.getInput('item_exec');
 const README_FILE_PATH = core.getInput('readme_path');
 const GITHUB_TOKEN = core.getInput('gh_token');
 
-// Filter parameters
-const FILTER_PARAMS = {
-  stackoverflow: 'Comment by $author',
-  stackexchange: 'Comment by $author',
-};
 // Custom tags
 const CUSTOM_TAGS = {};
 
 // Keepalive flag
 const ENABLE_KEEPALIVE = core.getInput('enable_keepalive') === 'true';
-
-/**
- * Compound parameter parser, Updates obj with compound parameters and returns item name
- * @param sourceWithParam filter source with compound param eg: stackoverflow/Comment by $author/
- * @param obj object to update
- * @return {string} actual source name eg: stackoverflow
- */
-const updateAndParseCompoundParams = (sourceWithParam, obj) => {
-  const param = sourceWithParam.split('/'); // Reading params ['stackoverflow','Comment by $author', '']
-  if (param.length === 3) {
-    Object.assign(obj, {[param[0]]: param[1]});
-    return param[0];// Returning source name
-  } else {
-    return sourceWithParam;
-  }
-};
 
 /**
  * Returns parsed parameterised templates as array or return null
@@ -150,43 +62,18 @@ const getParameterisedTemplate = (template, keyName) => {
     if (endIndex === -1) {
       return null;
     }
-    return template.slice(startIndex, endIndex).split(',').map(item=>item.trim());
+    return template.slice(startIndex, endIndex).split(',').map(item => item.trim());
   } else {
     return null;
   }
 };
 
-/**
- * Unicode aware javascript truncate
- * @param str string to truncated
- * @param length length to truncate
- * @return {string} truncated value
- */
-const truncateString = (str, length) => {
-  const trimmedString = str.trim();
-  const truncatedString = [...trimmedString].slice(0, length).join('');
-  return  truncatedString === trimmedString ?
-    trimmedString : truncatedString.trim() + '...';
-};
-
 core.setSecret(GITHUB_TOKEN);
-const COMMENT_FILTERS = core
-  .getInput('filter_comments')
-  .trim()
-  .split(',')
-  .map((item)=>{
-    item = item.trim();
-    if (item.startsWith('stackoverflow') || item.startsWith('stackexchange')) {
-      return updateAndParseCompoundParams(item, FILTER_PARAMS);
-    } else {
-      return item;
-    }
-  });
 
 core.getInput('custom_tags')
   .trim()
   .split(',')
-  .forEach((item)=> {
+  .forEach((item) => {
     item = item.trim();
     updateAndParseCompoundParams(item, CUSTOM_TAGS); // Creates custom tag object
   });
@@ -205,21 +92,6 @@ if (feedList.length === 0) {
   process.exit(1);
 }
 
-// filters out every medium comment (PR #4)
-const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 &&
-  item.link && item.link.includes('medium.com') &&
-  item.categories === undefined);
-
-// filters out stackOverflow comments (#16)
-const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 &&
-  item.link && item.link.includes('stackoverflow.com') &&
-  item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
-
-// filters out stackOverflow comments (#16)
-const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackexchange') !== -1 &&
-  item.link && item.link.includes('stackexchange.com') &&
-  item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
-
 const customTagArgs = Object.keys(CUSTOM_TAGS).map(
   item => [CUSTOM_TAGS[item], item]);
 
@@ -233,6 +105,7 @@ let parser = new Parser({
   }
 });
 
+// Generating promise array
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
@@ -258,7 +131,7 @@ feedList.forEach((siteUrl) => {
             }
             // Custom tags
             let customTags = {};
-            Object.keys(CUSTOM_TAGS).forEach((tag)=> {
+            Object.keys(CUSTOM_TAGS).forEach((tag) => {
               if (item[tag]) {
                 Object.assign(customTags, {[tag]: item[tag]});
               }
@@ -293,7 +166,7 @@ feedList.forEach((siteUrl) => {
             if (DESCRIPTION_MAX_LENGTH && post && post.description) {
               const trimmedDescription = post.description.trim();
               // Trimming the description
-              post.description = truncateString(post.description, DESCRIPTION_MAX_LENGTH);
+              post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
             }
 
             return post;
@@ -333,9 +206,9 @@ Promise.allSettled(promiseArray).then((results) => {
   if (postsArray.length > 0) {
     try {
       if (!process.env.TEST_MODE) {
-        await exec('git', ['config','pull.rebase', 'true'], {stdio: ['pipe', 'pipe', 'pipe']});
+        await exec('git', ['config', 'pull.rebase', 'true'], {stdio: ['pipe', 'pipe', 'pipe']});
         // Pulling the latest changes from upstream
-        await exec('git',['pull'], {stdio: ['pipe', 'pipe', 'pipe']});
+        await exec('git', ['pull'], {stdio: ['pipe', 'pipe', 'pipe']});
       }
       const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
@@ -356,9 +229,9 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$newline/g, '\n');
 
           // Setting Custom tags to the template
-          Object.keys(CUSTOM_TAGS).forEach((tag)=> {
+          Object.keys(CUSTOM_TAGS).forEach((tag) => {
             const replaceValue = cur[tag] ? cur[tag] : '';
-            content = content.replace(new  RegExp('\\$' + tag + '\\b', 'g'), replaceValue);
+            content = content.replace(new RegExp('\\$' + tag + '\\b', 'g'), replaceValue);
           });
 
           // Emoji implementation: Random
@@ -390,7 +263,10 @@ Promise.allSettled(promiseArray).then((results) => {
         if (!process.env.TEST_MODE) {
           if (!outputOnly) {
             // Commit to readme
-            await commitReadme();
+            await commitReadme(GITHUB_TOKEN, README_FILE_PATH).then(() => {
+              // Making job fail if one of the source fails
+              process.exit(jobFailFlag ? 1 : 0);
+            });
           } else {
             // Sets output as output as `results` variable in github action
             core.info('outputOnly mode: set `results` variable. Readme not committed.');
@@ -399,20 +275,23 @@ Promise.allSettled(promiseArray).then((results) => {
         }
       } else {
         // Calculating last commit date, please see https://git.io/Jtm4V
-        const {outputData} = await exec('git',['--no-pager', 'log', '-1', '--format=%ct'],
-          { encoding : 'utf8', stdio: ['pipe', 'pipe', 'pipe']});
+        const {outputData} = await exec('git', ['--no-pager', 'log', '-1', '--format=%ct'],
+          {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']});
 
         const commitDate = new Date(parseInt(outputData, 10) * 1000);
-        const diffInDays = Math.round((new Date() - commitDate)/(1000*60*60*24));
+        const diffInDays = Math.round((new Date() - commitDate) / (1000 * 60 * 60 * 24));
 
         if (diffInDays > 50 && !process.env.TEST_MODE && ENABLE_KEEPALIVE) {
           // Do dummy commit if elapsed time is greater than 50 days
           core.info('Doing dummy commit to keep workflow active, see: https://git.io/Jtm4V');
-          await commitReadme(true);
+          await commitReadme(GITHUB_TOKEN, README_FILE_PATH, true).then(() => {
+            // Making job fail if one of the source fails
+            process.exit(jobFailFlag ? 1 : 0);
+          });
           process.exit(0);
         } else {
           core.info('No change detected, skipping');
-          process.exit(0);
+          process.exit(jobFailFlag ? 1 : 0);
         }
       }
     } catch (e) {
