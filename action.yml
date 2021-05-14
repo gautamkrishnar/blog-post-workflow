@@ -85,6 +85,14 @@ inputs:
     description: "Enables the feature that keeps the repo active by automatically committing to it even though there is no change"
     default: "true"
     required: false
+  retry_count:
+    description: "Maximum number of times to retry the fetch operation if it fails"
+    default: "0"
+    required: false
+  retry_wait_time:
+    description: "Time to wait before each retry operation in seconds"
+    default: "1"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

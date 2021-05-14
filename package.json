@@ -34,6 +34,7 @@
     "@actions/core": "^1.2.6",
     "dateformat": "^3.0.3",
     "process": "latest",
+    "promise-retry": "^2.0.1",
     "random-seed": "^0.3.0",
     "rss-parser": "^3.9.0"
   },

@@ -4,6 +4,7 @@ const core = require('@actions/core');
 const fs = require('fs');
 const dateFormat = require('dateformat');
 const rand = require('random-seed');
+const promiseRetry = require('promise-retry');
 const {
   updateAndParseCompoundParams,
   commitReadme,
@@ -49,6 +50,13 @@ const CUSTOM_TAGS = {};
 // Keepalive flag
 const ENABLE_KEEPALIVE = core.getInput('enable_keepalive') === 'true';
 
+// Retry configuration
+const retryConfig = {
+  retries: Number.parseInt(core.getInput('retry_count')),
+  factor: 1,
+  minTimeout: Number.parseInt(core.getInput('retry_wait_time')) * 1000
+};
+
 core.setSecret(GITHUB_TOKEN);
 
 core.getInput('custom_tags')
@@ -90,71 +98,80 @@ let parser = new Parser({
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
-    parser.parseURL(siteUrl).then((data) => {
-      if (!data.items) {
-        reject('Cannot read response->item');
-      } else {
-        const responsePosts = data.items;
-        const posts = responsePosts
-          .filter(ignoreMediumComments)
-          .filter(ignoreStackOverflowComments)
-          .filter(ignoreStackExchangeComments)
-          .map((item) => {
-            // Validating keys to avoid errors
-            if (ENABLE_SORT && !item.pubDate) {
-              reject('Cannot read response->item->pubDate');
-            }
-            if (!item.title) {
-              reject('Cannot read response->item->title');
-            }
-            if (!item.link) {
-              reject('Cannot read response->item->link');
-            }
-            // Custom tags
-            let customTags = {};
-            Object.keys(CUSTOM_TAGS).forEach((tag) => {
-              if (item[tag]) {
-                Object.assign(customTags, {[tag]: item[tag]});
-              }
-            });
-            let post = {
-              title: item.title.trim(),
-              url: item.link.trim(),
-              description: item.content ? item.content : '',
-              ...customTags
-            };
-
-            if (ENABLE_SORT) {
-              post.date = new Date(item.pubDate.trim());
-            }
-
-            // Advanced content manipulation using javascript code
-            if (ITEM_EXEC) {
-              try {
-                eval(ITEM_EXEC);
-              } catch (e) {
-                core.error('Failure in executing `item_exec` parameter');
-                core.error(e);
-                process.exit(1);
-              }
-            }
-
-            if (TITLE_MAX_LENGTH && post && post.title) {
-              // Trimming the title
-              post.title = truncateString(post.title, TITLE_MAX_LENGTH);
-            }
-
-            if (DESCRIPTION_MAX_LENGTH && post && post.description) {
-              const trimmedDescription = post.description.trim();
-              // Trimming the description
-              post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
-            }
-
-            return post;
-          });
-        resolve(posts);
+    promiseRetry((retry, tryNumber) => {
+      // Retry block
+      if (tryNumber > 1) {
+        core.info(`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`);
       }
-    }).catch(reject);
+      return parser.parseURL(siteUrl)
+        .catch(retry);
+    }, retryConfig)
+      .then((data) => {
+        if (!data.items) {
+          reject('Cannot read response->item');
+        } else {
+          const responsePosts = data.items;
+          const posts = responsePosts
+            .filter(ignoreMediumComments)
+            .filter(ignoreStackOverflowComments)
+            .filter(ignoreStackExchangeComments)
+            .map((item) => {
+              // Validating keys to avoid errors
+              if (ENABLE_SORT && !item.pubDate) {
+                reject('Cannot read response->item->pubDate');
+              }
+              if (!item.title) {
+                reject('Cannot read response->item->title');
+              }
+              if (!item.link) {
+                reject('Cannot read response->item->link');
+              }
+              // Custom tags
+              let customTags = {};
+              Object.keys(CUSTOM_TAGS).forEach((tag) => {
+                if (item[tag]) {
+                  Object.assign(customTags, {[tag]: item[tag]});
+                }
+              });
+              let post = {
+                title: item.title.trim(),
+                url: item.link.trim(),
+                description: item.content ? item.content : '',
+                ...customTags
+              };
+
+              if (ENABLE_SORT) {
+                post.date = new Date(item.pubDate.trim());
+              }
+
+              // Advanced content manipulation using javascript code
+              if (ITEM_EXEC) {
+                try {
+                  eval(ITEM_EXEC);
+                } catch (e) {
+                  core.error('Failure in executing `item_exec` parameter');
+                  core.error(e);
+                  process.exit(1);
+                }
+              }
+
+              if (TITLE_MAX_LENGTH && post && post.title) {
+                // Trimming the title
+                post.title = truncateString(post.title, TITLE_MAX_LENGTH);
+              }
+
+              if (DESCRIPTION_MAX_LENGTH && post && post.description) {
+                const trimmedDescription = post.description.trim();
+                // Trimming the description
+                post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
+              }
+              return post;
+            });
+          resolve(posts);
+        }
+      }, (err) => {
+        reject(err);
+      });
   }));
 });
 
@@ -254,6 +271,7 @@ Promise.allSettled(promiseArray).then((results) => {
             core.setOutput('results', postsArray);
           }
         }
+        process.exit(jobFailFlag ? 1 : 0);
       } else {
         // Calculating last commit date, please see https://git.io/Jtm4V
         const {outputData} = await exec('git', ['--no-pager', 'log', '-1', '--format=%ct'],
