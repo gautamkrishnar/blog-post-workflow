@@ -40,6 +40,7 @@ console.log('Testing: ', TEST_FILE);
 
 const runAndCompareSnap = async (README_FILE, envObj) => {
   await exec('node', [TEST_FILE],{env: envObj});
+
   const snapshot = fs.readFileSync(path.join(__dirname, 'test' , README_FILE + '.snap'), 'utf-8');
   const newReadme = fs.readFileSync(path.join(__dirname, 'test' , README_FILE), 'utf-8');
   assert.equal(snapshot, newReadme);
@@ -162,6 +163,20 @@ describe('Blog post workflow tests', function () {
       ...DEFAULT_TEST_ENV,
       INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
       INPUT_ITEM_EXEC: 'post.title=post.title.replace("Gautam",""); post.title=post.title.replace("browser","");'
+    };
+    await runAndCompareSnap(README_FILE, envObj);
+  });
+
+  it('Readme generated after retry should match the snapshot',async function () {
+    this.timeout(0);
+    const README_FILE = 'Readme.retry.md';
+    fs.writeFileSync(path.join(__dirname, 'test', README_FILE), TEMPLATE);
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: path.join(__dirname, 'test', README_FILE),
+      INPUT_FEED_LIST: 'http://localhost:8080/failtest',
+      INPUT_RETRY_COUNT: '5'
     };
     await runAndCompareSnap(README_FILE, envObj);
   });
