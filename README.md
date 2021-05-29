@@ -139,7 +139,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contr
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
 ### Thanks to
-- All the **2.5K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
+- All the **2.66K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
 - [CodeCov](https://about.codecov.io/) for this blog: [Discovering the Most Popular and Most Used Github Actions](https://about.codecov.io/blog/discovering-the-most-popular-and-most-used-github-actions/)
