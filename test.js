@@ -42,8 +42,12 @@ const TEST_FILE = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-w
 console.log('Testing: ', TEST_FILE);
 
 const runAndCompareSnap = async (README_FILE, envObj) => {
+  envObj = {
+    ...envObj,
+    INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE)
+  };
+  fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
   await exec('node', [TEST_FILE],{env: envObj});
-
   const snapshot = fs.readFileSync(path.join(TEST_SNAP_DIR , README_FILE + '.snap'), 'utf-8');
   const newReadme = fs.readFileSync(path.join(TEST_SNAP_DIR , README_FILE), 'utf-8');
   assert.strictEqual(snapshot, newReadme);
@@ -52,134 +56,101 @@ const runAndCompareSnap = async (README_FILE, envObj) => {
 // Test block
 describe('Blog post workflow tests', function () {
   it('Default template readme generated should match the snapshot',async function () {
-    const README_FILE = 'Readme.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
-      ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE)
+      ...DEFAULT_TEST_ENV
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.md', envObj);
   });
 
   it('Sorting disabled readme should be equal to the saved snapshot',async function () {
-    const README_FILE = 'Readme.sort.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_DISABLE_SORT: 'true'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.sort.md', envObj);
   });
 
   it('Custom template readme generated should match the snapshot',async function () {
-    const README_FILE = 'Readme.custom.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_TEMPLATE: '$newline[$title]($url): $date $description $newline'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.custom.md', envObj);
   });
   it('Generated readme without filters should match the snapshot',async function () {
-    const README_FILE = 'Readme.comments.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_FILTER_COMMENTS: ''
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.comments.md', envObj);
   });
   it('Generated readme without custom elements should match the snapshot',async function () {
-    const README_FILE = 'Readme.custom-tags.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_CUSTOM_TAGS: 'testingTag/testingTag/,testingTag2/testingTag2/',
       INPUT_TEMPLATE: '$title $url $testingTag $testingTag2 $newline'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.custom-tags.md', envObj);
   });
 
   it('Generated readme with $emojiKey template should match the snapshot',async function () {
-    const README_FILE = 'Readme.emojiKey.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_TEMPLATE: '- $emojiKey(💯,🔥)'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.emojiKey.md', envObj);
   });
 
   it('Generated readme with $randomEmoji template should match the snapshot',async function () {
-    const README_FILE = 'Readme.randomEmoji.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_TEMPLATE: '- $randomEmoji(💯,🔥,💫,🚀,🌮)'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.randomEmoji.md', envObj);
   });
 
   it('Generated readme with truncated title should match the snapshot',async function () {
-    const README_FILE = 'Readme.truncate.title.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_TITLE_MAX_LENGTH: '10'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap( 'Readme.truncate.title.md', envObj);
   });
 
   it('Generated readme with truncated description should match the snapshot',async function () {
-    const README_FILE = 'Readme.truncate.description.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_DESCRIPTION_MAX_LENGTH: '10',
       INPUT_TEMPLATE: '$description $newline'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.truncate.description.md', envObj);
   });
 
   it('Generated readme with advanced manipulation via JS should match the snapshot',async function () {
-    const README_FILE = 'Readme.exec.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_ITEM_EXEC: 'post.title=post.title.replace("Gautam",""); post.title=post.title.replace("browser","");'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.exec.md', envObj);
   });
 
   it('Readme generated after retry should match the snapshot',async function () {
-    const README_FILE = 'Readme.retry.md';
-    fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE),
       INPUT_FEED_LIST: 'http://localhost:8080/failtest',
       INPUT_RETRY_COUNT: '5'
     };
-    await runAndCompareSnap(README_FILE, envObj);
+    await runAndCompareSnap('Readme.retry.md', envObj);
   }).timeout(20*1000);
 });
