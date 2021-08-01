@@ -1,5 +1,11 @@
 name: Build and test
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - '**.js'
+  pull_request:
+    paths:
+      - '**.js'
 jobs:
   test:
     if: |
