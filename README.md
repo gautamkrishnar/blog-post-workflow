@@ -125,6 +125,7 @@ Following are the list of some popular blogging platforms and their RSS feed url
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
 * [Lucas Santos' GitHub profile readme](https://github.com/khaosdoctor) - [YML File](https://github.com/khaosdoctor/khaosdoctor/blob/main/.github/workflows/update-blog-posts.yml)
 * [Blog post table](https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar) - [YML File](https://github.com/gkr-bot/gkr-bot/blob/master/.github/workflows/stack-oveflow-workflow.yml)
+* [Youtube Videos table](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/README.md#-latest-youtube-videos) - [YML File](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml)
 
 ### Demo video
 Please see the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI) by [@codeSTACKr](https://github.com/codeSTACKr).
