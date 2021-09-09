@@ -80,7 +80,7 @@ The following configuration allows you to show your latest StackOverflow activit
     <!-- STACKOVERFLOW:START -->
     <!-- STACKOVERFLOW:END -->
     ```
-1. Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user id](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
+1. Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user ID](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
     ```yaml
     name: Latest stack overflow activity
     on:
