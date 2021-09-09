@@ -3,37 +3,42 @@
 ![preview](https://user-images.githubusercontent.com/8397274/88047382-29b8b280-cb6f-11ea-9efb-2af2b10f3e0c.png)
 
 
-### How to use
-- Star this repo 😉 
-- Go to your repository
-- Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->` in your readme. The workflow will replace this comment with the actual blog post list: 
-```markdown
-# Blog posts
-<!-- BLOG-POST-LIST:START -->
-<!-- BLOG-POST-LIST:END -->
-```
-- Create a folder named `.github` and create a `workflows` folder inside it if it doesn't exist.
-- Create a new file named `blog-post-workflow.yml` with the following contents inside the workflows folder:
-```yaml
-name: Latest blog post workflow
-on:
-  schedule: # Run workflow automatically
-    - cron: '0 * * * *' # Runs every hour, on the hour
-  workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the Github Actions Workflow page directly
-jobs:
-  update-readme-with-blog:
-    name: Update this repo's README with latest blog posts
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: gautamkrishnar/blog-post-workflow@master
-        with:
-          feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
-```
-- Replace the above url list with your own rss feed urls. See [popular-sources](#popular-sources) for a list of common RSS feed urls.
-- Commit and wait for it to run automatically or you can also trigger it manually to see the result instantly. To trigger the workflow manually, please follow the steps in the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=272s).
+## How to use
 
-### Options
+1. Star this repo 😉 
+1. Go to your repository
+1. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->` in your readme. The workflow will replace this comment with the actual blog post list: 
+    ```markdown
+    # Blog posts
+    <!-- BLOG-POST-LIST:START -->
+    <!-- BLOG-POST-LIST:END -->
+    ```
+1. Create a folder named `.github` and create a `workflows` folder inside it, if it doesn't exist.
+1. Create a new file named `blog-post-workflow.yml` with the following contents inside the workflows folder:
+    ```yaml
+    name: Latest blog post workflow
+    on:
+      schedule: # Run workflow automatically
+        - cron: '0 * * * *' # Runs every hour, on the hour
+      workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the Github Actions Workflow page directly
+    
+    jobs:
+      update-readme-with-blog:
+        name: Update this repo's README with latest blog posts
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Pull in dev.to posts
+            uses: gautamkrishnar/blog-post-workflow@master
+            with:
+              feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
+    ```
+1. Replace the above URL list with your own RSS feed URLs. See [popular-sources](#popular-sources) for a list of common RSS feed urls.
+1. Commit and wait for it to run automatically or you can also trigger it manually to see the result instantly. To trigger the workflow manually, please follow the steps in the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=272s).
+
+## Options
+
 This workflow has additional options that you can use to customize it for your use case. The following are the list of options available:
 
 | Option | Default Value | Description | Required |
@@ -62,44 +67,50 @@ This workflow has additional options that you can use to customize it for your u
 | `retry_count` | `0` | Maximum number of times to retry the fetch operation if it fails, See [#66](https://github.com/gautamkrishnar/blog-post-workflow/issues/66) for more details. | No |
 | `retry_wait_time` | `1` | Time to wait before each retry operation in seconds.  | No |
 
-### Advanced usage examples
-#### StackOverflow example
+## Advanced usage examples
+
+### StackOverflow example
+
 The following configuration allows you to show your latest StackOverflow activity along with your latest blog posts in the Github profile or project readme:
-- Follow the steps mentioned in the [how to use](#how-to-use) section
-- Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->` in your readme. The workflow will replace this comment with the actual StackOverflow activity: 
-```markdown
-# StackOverflow Activity
-<!-- STACKOVERFLOW:START -->
-<!-- STACKOVERFLOW:END -->
-```
-- Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user id](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
-```yaml
-name: Latest stack overflow activity
-on:
-  schedule:
-    # Runs every 5 minutes
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
-jobs:
-  update-readme-with-stack-overflow:
-    name: Update this repo's README with latest activity from StackOverflow
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: gautamkrishnar/blog-post-workflow@master
-        with:
-          comment_tag_name: "STACKOVERFLOW"
-          commit_message: "Updated readme with the latest stackOverflow data"
-          feed_list: "https://stackoverflow.com/feeds/user/4214976"
-```
+
+1. Follow the steps mentioned in the [how to use](#how-to-use) section.
+1. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->` in your readme. The workflow will replace this comment with the actual StackOverflow activity: 
+    ```markdown
+    # StackOverflow Activity
+    <!-- STACKOVERFLOW:START -->
+    <!-- STACKOVERFLOW:END -->
+    ```
+1. Create `stack-overflow-workflow.yml` in your `workflows` folder with the following contents, replace **4214976** with your StackOverflow [user ID](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130):
+    ```yaml
+    name: Latest stack overflow activity
+    on:
+      schedule:
+        # Runs every 5 minutes
+        - cron: '*/5 * * * *'
+      workflow_dispatch:
+      
+    jobs:
+      update-readme-with-stack-overflow:
+        name: Update this repo's README with latest activity from StackOverflow
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - uses: gautamkrishnar/blog-post-workflow@master
+            with:
+              comment_tag_name: "STACKOVERFLOW"
+              commit_message: "Updated readme with the latest stackOverflow data"
+              feed_list: "https://stackoverflow.com/feeds/user/4214976"
+    ```
+
 <details>
   <summary>See the result!</summary>
 
   ![advanced](https://user-images.githubusercontent.com/8397274/88197889-b727ff80-cc60-11ea-8e4a-b1fbd8dd9d06.png)
 </details>
 
-### Popular Sources 
-Following are the list of some popular blogging platforms and their RSS feed urls:
+## Popular Sources 
+
+Some popular blogging platforms and their RSS feed URLs:
 
 | Name | Feed URL | Comments | Example |
 |--------|--------|--------|--------|
@@ -127,20 +138,29 @@ Following are the list of some popular blogging platforms and their RSS feed url
 * [Blog post table](https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar) - [YML File](https://github.com/gkr-bot/gkr-bot/blob/master/.github/workflows/stack-oveflow-workflow.yml)
 * [Youtube Videos table](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/README.md#-latest-youtube-videos) - [YML File](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml)
 
-### Demo video
+## Demo video
+
 Please see the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI) by [@codeSTACKr](https://github.com/codeSTACKr).
 
-### Contributing
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for getting started with the contribution. Make sure that you follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) while contributing and engaging in the discussions. **When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
+## Contributing
 
-#### ToDo
+Please see [CONTRIBUTING.md](/CONTRIBUTING.md) for getting started with the contribution. 
+
+Make sure that you follow [CODE_OF_CONDUCT.md](/CODE_OF_CONDUCT.md) while contributing and engaging in the discussions. 
+
+**When contributing, please first discuss the change you wish to make via an issue on this repository before making the actual change**.
+
+### ToDo
+
 - [ ] Add more sources
 - [ ] Fix bugs if any
 
-### Bugs
+## Bugs
+
 If you are experiencing any bugs, don’t forget to open a [new issue](https://github.com/gautamkrishnar/blog-post-workflow/issues/new).
 
-### Thanks to
+## Thanks to
+
 - All the **3K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
 - All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
@@ -148,7 +168,10 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 - [CodeCov](https://about.codecov.io/) for this blog: [Discovering the Most Popular and Most Used Github Actions](https://about.codecov.io/blog/discovering-the-most-popular-and-most-used-github-actions/)
 - [the byte podcast](https://podcast.thebyte.io/episodes/learn-how-to-pimp-out-your-github-profile)
 
-### Liked it?
-Hope you liked this project, don't forget to give it a star ⭐
+## Liked it?
 
-<a href="https://starchart.cc/gautamkrishnar/blog-post-workflow"><img src="https://starchart.cc/gautamkrishnar/blog-post-workflow.svg" width="600px"></a>
+Hope you liked this project, don't forget to give it a star ⭐.
+
+<a href="https://starchart.cc/gautamkrishnar/blog-post-workflow">
+    <img src="https://starchart.cc/gautamkrishnar/blog-post-workflow.svg" width="600px">
+</a>
