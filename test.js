@@ -116,6 +116,15 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.randomEmoji.md', envObj);
   });
 
+  it('Generated readme with $counter template should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_TEMPLATE: '- $counter $title'
+    };
+    await runAndCompareSnap('Readme.counter.md', envObj);
+  });
+
   it('Generated readme with truncated title should match the snapshot',async function () {
     const envObj = {
       ...process.env,

@@ -224,6 +224,7 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$url\b/g, cur.url)
             .replace(/\$description\b/g, cur.description)
             .replace(/\$date\b/g, date)
+            .replace(/\$counter\b/g, (index + 1).toString())
             .replace(/\$newline/g, '\n');
 
           // Setting Custom tags to the template
