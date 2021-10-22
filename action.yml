@@ -93,6 +93,10 @@ inputs:
     description: "Time to wait before each retry operation in seconds"
     default: "1"
     required: false
+  feed_names:
+    description: "Comma separated name of the feeds to show on template"
+    default: ""
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

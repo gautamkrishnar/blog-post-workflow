@@ -1,0 +1,24 @@
+# Readme test
+Post list example:
+<!-- BLOG-POST-LIST:START -->
+ - hello -> God Mode in browsers: document.designMode = "on"
+ -  -> God Mode in browsers: document.designMode = "on"
+ - world -> God Mode in browsers: document.designMode = "on"
+ - hello -> Skipping the Chrome "Your connection is not private" warning
+ -  -> Skipping the Chrome "Your connection is not private" warning
+ - world -> Skipping the Chrome "Your connection is not private" warning
+ - hello -> Microsoft Student Partners – Geek is the new rockstar
+ -  -> Microsoft Student Partners – Geek is the new rockstar
+ - world -> Microsoft Student Partners – Geek is the new rockstar
+ - hello -> An Introduction to NumPy
+ -  -> An Introduction to NumPy
+ - world -> An Introduction to NumPy
+ - hello -> Hi, I'm Gautam krishna.R
+ -  -> Hi, I'm Gautam krishna.R
+ - world -> Hi, I'm Gautam krishna.R
+ - hello -> DuckDuckGo – The search engine redefined
+ -  -> DuckDuckGo – The search engine redefined
+ - world -> DuckDuckGo – The search engine redefined<!-- BLOG-POST-LIST:END -->
+
+# Other contents
+Test content

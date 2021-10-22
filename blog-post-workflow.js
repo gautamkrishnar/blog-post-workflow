@@ -81,6 +81,10 @@ if (feedList.length === 0) {
   process.exit(1);
 }
 
+// Grabbing feed names and converting it into array
+const feedNames = core.getInput('feed_names').trim();
+const feedNamesList = feedNames.split(',').map(item => item.trim());
+
 const customTagArgs = Object.keys(CUSTOM_TAGS).map(
   item => [CUSTOM_TAGS[item], item]);
 
@@ -181,6 +185,13 @@ Promise.allSettled(promiseArray).then((results) => {
     if (result.status === 'fulfilled') {
       // Succeeded
       core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length);
+      // Adds feed name to the items
+      if (typeof feedNamesList[index] !== undefined && feedNamesList[index]) {
+        result.value = result.value.map((item) => {
+          item.feedName = feedNamesList[index];
+          return item;
+        });
+      }
       postsArray.push(...result.value);
     } else {
       jobFailFlag = true;
@@ -225,6 +236,7 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$description\b/g, cur.description)
             .replace(/\$date\b/g, date)
             .replace(/\$counter\b/g, (index + 1).toString())
+            .replace(/\$feedName\b/g, cur.feedName ? cur.feedName : '')
             .replace(/\$newline/g, '\n');
 
           // Setting Custom tags to the template
