@@ -5,6 +5,7 @@ const fs = require('fs');
 const dateFormat = require('dateformat');
 const rand = require('random-seed');
 const promiseRetry = require('promise-retry');
+const keepaliveWorkflow = require('keepalive-workflow');
 const {
   updateAndParseCompoundParams,
   commitReadme,
@@ -297,24 +298,17 @@ Promise.allSettled(promiseArray).then((results) => {
         }
       } else {
         // Calculating last commit date, please see https://git.io/Jtm4V
-        const {outputData} = await exec('git', ['--no-pager', 'log', '-1', '--format=%ct'],
-          {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']});
-
-        const commitDate = new Date(parseInt(outputData, 10) * 1000);
-        const diffInDays = Math.round((new Date() - commitDate) / (1000 * 60 * 60 * 24));
-
-        if (diffInDays > 50 && !process.env.TEST_MODE && ENABLE_KEEPALIVE) {
+        if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
           // Do dummy commit if elapsed time is greater than 50 days
-          core.info('Doing dummy commit to keep workflow active, see: https://git.io/Jtm4V');
-          await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST, true).then(() => {
-            // Making job fail if one of the source fails
-            process.exit(jobFailFlag ? 1 : 0);
-          });
-          process.exit(0);
+          const committerUsername = core.getInput('committer_username');
+          const committerEmail = core.getInput('committer_email');
+          const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
+            'dummy commit to keep the repository active, see https://git.io/Jtm4V', 50);
+          core.info(message);
         } else {
           core.info('No change detected, skipping');
-          process.exit(jobFailFlag ? 1 : 0);
         }
+        process.exit(jobFailFlag ? 1 : 0);
       }
     } catch (e) {
       core.error(e);
