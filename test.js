@@ -63,6 +63,25 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.md', envObj);
   });
 
+  it('Multiple readme generated via readme_path should match the snapshots',async function () {
+    const readme1 = path.join(TEST_SNAP_DIR, 'Readme.multi.1.md');
+    const readme2 = path.join(TEST_SNAP_DIR, 'Readme.multi.2.md');
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_README_PATH: readme1 + ',' + readme2
+    };
+    fs.writeFileSync(readme1, TEMPLATE);
+    fs.writeFileSync(readme2, TEMPLATE);
+    await exec('node', [TEST_FILE],{env: envObj});
+    const snapshot1 = fs.readFileSync(readme1 + '.snap', 'utf-8');
+    const snapshot2 = fs.readFileSync(readme2 + '.snap', 'utf-8');
+    const newReadme1 = fs.readFileSync(readme1, 'utf-8');
+    const newReadme2 = fs.readFileSync(readme2, 'utf-8');
+    assert.strictEqual(snapshot1, newReadme1);
+    assert.strictEqual(snapshot2, newReadme2);
+  });
+
   it('Sorting disabled readme should be equal to the saved snapshot',async function () {
     const envObj = {
       ...process.env,

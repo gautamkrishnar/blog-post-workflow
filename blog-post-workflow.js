@@ -41,7 +41,9 @@ const DESCRIPTION_MAX_LENGTH = core.getInput('description_max_length') ?
 const ITEM_EXEC = core.getInput('item_exec');
 
 // Readme path, default: ./README.md
-const README_FILE_PATH = core.getInput('readme_path');
+const README_FILE_PATH_LIST = core.getInput('readme_path')
+  .split(',')
+  .map(item => item.trim());
 const GITHUB_TOKEN = core.getInput('gh_token');
 
 // Custom tags
@@ -219,7 +221,6 @@ Promise.allSettled(promiseArray).then((results) => {
         // Pulling the latest changes from upstream
         await exec('git', ['pull'], {stdio: ['pipe', 'pipe', 'pipe']});
       }
-      const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
       const template = core.getInput('template');
       const randEmojiArr = getParameterisedTemplate(template, 'randomEmoji');
       const constEmojiArr = getParameterisedTemplate(template, 'emojiKey');
@@ -264,27 +265,36 @@ Promise.allSettled(promiseArray).then((results) => {
         }
       }, '');
 
+      // Output only mode
       const outputOnly = core.getInput('output_only') !== 'false';
-      const newReadme = !outputOnly ? buildReadme(readmeData, postListMarkdown) : null;
-      // if there's change in readme file update it
-      if (newReadme !== readmeData) {
-        core.info('Writing to ' + README_FILE_PATH);
-        fs.writeFileSync(README_FILE_PATH, newReadme);
-
-        if (!process.env.TEST_MODE) {
-          if (!outputOnly) {
-            // Commit to readme
-            await commitReadme(GITHUB_TOKEN, README_FILE_PATH).then(() => {
-              // Making job fail if one of the source fails
-              process.exit(jobFailFlag ? 1 : 0);
-            });
-          } else {
-            // Sets output as output as `results` variable in github action
-            core.info('outputOnly mode: set `results` variable. Readme not committed.');
-            core.setOutput('results', postsArray);
-          }
-        }
+      if (outputOnly) {
+        // Sets output as output as `results` variable in github action
+        core.info('outputOnly mode: set `results` variable. Readme not committed.');
+        core.setOutput('results', postsArray);
         process.exit(jobFailFlag ? 1 : 0);
+      }
+
+      // Writing to each readme file
+      let changedReadmeCount = 0;
+      README_FILE_PATH_LIST.forEach((README_FILE_PATH) => {
+        const readmeData = fs.readFileSync(README_FILE_PATH, 'utf8');
+        const newReadme = buildReadme(readmeData, postListMarkdown);
+        // if there's change in readme file update it
+        if (newReadme !== readmeData) {
+          core.info('Writing to ' + README_FILE_PATH);
+          fs.writeFileSync(README_FILE_PATH, newReadme);
+          changedReadmeCount = changedReadmeCount + 1;
+        }
+      });
+
+      if (changedReadmeCount > 0) {
+        if (!process.env.TEST_MODE) {
+          // Commit to readme
+          await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
+            // Making job fail if one of the source fails
+            process.exit(jobFailFlag ? 1 : 0);
+          });
+        }
       } else {
         // Calculating last commit date, please see https://git.io/Jtm4V
         const {outputData} = await exec('git', ['--no-pager', 'log', '-1', '--format=%ct'],
@@ -296,7 +306,7 @@ Promise.allSettled(promiseArray).then((results) => {
         if (diffInDays > 50 && !process.env.TEST_MODE && ENABLE_KEEPALIVE) {
           // Do dummy commit if elapsed time is greater than 50 days
           core.info('Doing dummy commit to keep workflow active, see: https://git.io/Jtm4V');
-          await commitReadme(GITHUB_TOKEN, README_FILE_PATH, true).then(() => {
+          await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST, true).then(() => {
             // Making job fail if one of the source fails
             process.exit(jobFailFlag ? 1 : 0);
           });

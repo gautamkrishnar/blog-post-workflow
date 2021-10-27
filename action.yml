@@ -8,7 +8,7 @@ inputs:
     required: false
     default: ${{ github.token }}
   readme_path:
-    description: 'Path of the readme file you want to update'
+    description: 'Comma separated paths of the readme files you want to update'
     default: './README.md'
     required: false
   max_post_count:
