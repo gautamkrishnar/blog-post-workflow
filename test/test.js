@@ -2,7 +2,7 @@ const assert = require('assert');
 const process = require('process');
 const path = require('path');
 const fs = require('fs');
-const {exec} = require('./utils');
+const {exec} = require('../utils');
 
 const DEFAULT_TEST_ENV = {
   INPUT_MAX_POST_COUNT: '10',
@@ -27,7 +27,7 @@ const DEFAULT_TEST_ENV = {
 };
 
 // Folder with readme snapshots
-const TEST_SNAP_DIR = path.join(__dirname, 'test');
+const TEST_SNAP_DIR = path.join(__dirname);
 
 // language=markdown
 const TEMPLATE = `# Readme test
@@ -38,7 +38,7 @@ Post list example:
 # Other contents
 Test content
 `;
-const TEST_FILE = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
+const TEST_FILE = process.env.DIST ? path.join(__dirname, '../dist/blog-post-workflow') : path.join(__dirname, '../blog-post-workflow');
 console.log('Testing: ', TEST_FILE);
 
 const runAndCompareSnap = async (README_FILE, envObj) => {

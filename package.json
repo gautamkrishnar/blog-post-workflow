@@ -9,9 +9,9 @@
     "start-server": "node test/test-server.js",
     "local-run-script": "node local-run.js",
     "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
-    "test-run": "mocha test.js",
+    "test-run": "mocha test/test.js",
     "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
-    "test-run-dist": "DIST=true mocha test.js",
+    "test-run-dist": "DIST=true mocha test/test.js",
     "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
   },
   "repository": {
