@@ -3540,6 +3540,13 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keepalive-workflow@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/keepalive-workflow/-/keepalive-workflow-1.0.4.tgz#49d6522eddfe46e09269984541d7fb91d294e9c8"
+  integrity sha512-zsa1jRM05Ne9kxd+u3M+8W+jLXcP9tF+2V7EC8jCADJrC/hn52ldOFdEEfkGO2mFrOkHy7eaICBDJJQ/GdAeyA==
+  dependencies:
+    process latest
+
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"

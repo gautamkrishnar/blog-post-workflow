@@ -92,10 +92,9 @@ const truncateString = (str, length) => {
  * Code to do git commit
  * @param githubToken {string} github token
  * @param readmeFilePaths {string[]} path to the readme file
- * @param emptyCommit {boolean} sets whether to do an empty commit or not
  * @return {Promise<void>}
  */
-const commitReadme = async (githubToken, readmeFilePaths, emptyCommit = false) => {
+const commitReadme = async (githubToken, readmeFilePaths) => {
   // Getting config
   const committerUsername = core.getInput('committer_username');
   const committerEmail = core.getInput('committer_email');
@@ -113,13 +112,8 @@ const commitReadme = async (githubToken, readmeFilePaths, emptyCommit = false) =
       `https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
   }
   await exec('git', ['config', '--global', 'user.name', committerUsername]);
-  if (emptyCommit) {
-    await exec('git', ['commit', '--allow-empty', '-m', '"dummy commit to keep the repository ' +
-    'active, see https://git.io/Jtm4V"']);
-  } else {
-    await exec('git', ['add', ...readmeFilePaths]);
-    await exec('git', ['commit', '-m', commitMessage]);
-  }
+  await exec('git', ['add', ...readmeFilePaths]);
+  await exec('git', ['commit', '-m', commitMessage]);
   await exec('git', ['push']);
   core.info('Readme updated successfully in the upstream repository');
 };
