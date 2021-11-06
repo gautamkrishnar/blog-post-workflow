@@ -193,4 +193,14 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.feedNames.md', envObj);
   });
+
+  it('Generated readme with categories names should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FEED_LIST: 'http://localhost:8080',
+      INPUT_TEMPLATE: '$categories',
+    };
+    await runAndCompareSnap('Readme.categories.md', envObj);
+  });
 });

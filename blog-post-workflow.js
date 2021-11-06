@@ -140,11 +140,13 @@ feedList.forEach((siteUrl) => {
                   Object.assign(customTags, {[tag]: item[tag]});
                 }
               });
+              const categories = item.categories ?  item.categories : [];
               let post = {
                 title: item.title.trim(),
                 url: item.link.trim(),
                 description: item.content ? item.content : '',
-                ...customTags
+                ...customTags,
+                categories
               };
 
               if (ENABLE_SORT) {
@@ -239,6 +241,7 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$date\b/g, date)
             .replace(/\$counter\b/g, (index + 1).toString())
             .replace(/\$feedName\b/g, cur.feedName ? cur.feedName : '')
+            .replace(/\$categories\b/g, cur.categories ? cur.categories.join(', ') : '')
             .replace(/\$newline/g, '\n');
 
           // Setting Custom tags to the template
