@@ -98,7 +98,7 @@ inputs:
     default: ""
     required: false
   disable_html_encoding:
-    description: "Disables the html encoding of feed contents"
+    description: "Disables html encoding of the feed contents"
     default: "false"
     required: false
 outputs:
