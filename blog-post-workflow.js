@@ -153,17 +153,6 @@ feedList.forEach((siteUrl) => {
                 post.date = new Date(item.pubDate.trim());
               }
 
-              // Advanced content manipulation using javascript code
-              if (ITEM_EXEC) {
-                try {
-                  eval(ITEM_EXEC);
-                } catch (e) {
-                  core.error('Failure in executing `item_exec` parameter');
-                  core.error(e);
-                  process.exit(1);
-                }
-              }
-
               if (TITLE_MAX_LENGTH && post && post.title) {
                 // Trimming the title
                 post.title = truncateString(post.title, TITLE_MAX_LENGTH);
@@ -173,6 +162,17 @@ feedList.forEach((siteUrl) => {
                 const trimmedDescription = post.description.trim();
                 // Trimming the description
                 post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
+              }
+              
+              // Advanced content manipulation using javascript code
+              if (ITEM_EXEC) {
+                try {
+                  eval(ITEM_EXEC);
+                } catch (e) {
+                  core.error('Failure in executing `item_exec` parameter');
+                  core.error(e);
+                  process.exit(1);
+                }
               }
               return post;
             });
