@@ -154,11 +154,28 @@ const getParameterisedTemplate = (template, keyName) => {
   }
 };
 
+/***
+ * Returns html encoded version of some of the conflicting markdown special characters
+ * @param str {string} string to escape
+ * @return string
+ */
+const escapeHTML = str => str.replace(/[&<>')("]/g,
+  (tag) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '\'': '&#39;',
+    '"': '&quot;',
+    ')': '&rpar;',
+    '(': '&lpar;'
+  }[tag]));
+
 module.exports = {
   updateAndParseCompoundParams,
   commitReadme,
   truncateString,
   buildReadme,
   exec,
-  getParameterisedTemplate
+  getParameterisedTemplate,
+  escapeHTML
 };

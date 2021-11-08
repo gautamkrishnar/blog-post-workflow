@@ -12,7 +12,8 @@ const {
   truncateString,
   buildReadme,
   exec,
-  getParameterisedTemplate
+  getParameterisedTemplate,
+  escapeHTML
 } = require('./utils');
 const {
   ignoreStackExchangeComments,
@@ -163,7 +164,16 @@ feedList.forEach((siteUrl) => {
                 // Trimming the description
                 post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
               }
-              
+
+              const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
+              if (!disableHtmlEncoding) {
+                Object.keys(post).forEach((key)=> {
+                  if (typeof post[key] === 'string') {
+                    post[key] = escapeHTML(post[key]);
+                  }
+                });
+              }
+
               // Advanced content manipulation using javascript code
               if (ITEM_EXEC) {
                 try {

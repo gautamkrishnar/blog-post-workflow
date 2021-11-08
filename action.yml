@@ -97,6 +97,10 @@ inputs:
     description: "Comma separated name of the feeds to show on template"
     default: ""
     required: false
+  disable_html_encoding:
+    description: "Disables the html encoding of feed contents"
+    default: "false"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

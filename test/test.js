@@ -2,7 +2,7 @@ const assert = require('assert');
 const process = require('process');
 const path = require('path');
 const fs = require('fs');
-const {exec} = require('../utils');
+const {exec, escapeHTML} = require('../utils');
 
 const DEFAULT_TEST_ENV = {
   INPUT_MAX_POST_COUNT: '10',
@@ -23,6 +23,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_TAG_POST_PRE_NEWLINE:'false',
   INPUT_RETRY_COUNT:'0',
   INPUT_RETRY_WAIT_TIME: '1',
+  INPUT_FEED_NAMES: '',
+  INPUT_DISABLE_HTML_ENCODING: 'false',
   TEST_MODE: 'true'
 };
 
@@ -202,5 +204,9 @@ describe('Blog post workflow tests', function () {
       INPUT_TEMPLATE: '$categories',
     };
     await runAndCompareSnap('Readme.categories.md', envObj);
+  });
+
+  it('escapeHTML should work as expected', function () {
+    assert.strictEqual(escapeHTML('<hello>()\'"'), '&lt;hello&gt;&lpar;&rpar;&#39;&quot;');
   });
 });
