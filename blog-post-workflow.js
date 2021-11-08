@@ -168,7 +168,7 @@ feedList.forEach((siteUrl) => {
               const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
               if (!disableHtmlEncoding) {
                 Object.keys(post).forEach((key)=> {
-                  if (typeof post[key] === 'string') {
+                  if (typeof post[key] === 'string' && key !== 'url') {
                     post[key] = escapeHTML(post[key]);
                   }
                 });
