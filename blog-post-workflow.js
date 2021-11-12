@@ -242,6 +242,11 @@ Promise.allSettled(promiseArray).then((results) => {
           // Default template: - [$title]($url)
           return acc + `\n- [${cur.title}](${cur.url})` + (((index + 1) === postsArray.length) ? '\n' : '');
         } else {
+          // Building categories listing
+          const categoryTemplate = core.getInput('categories_template');
+          const categoryList = categoryTemplate === 'default' ?
+            cur.categories.join(', ') : cur.categories.reduce((prev, current) =>
+              prev + categoryTemplate.replace(/\$category\b/g, current.toString()), '');
           // Building with custom template
           const date = dateFormat(cur.date, core.getInput('date_format')); // Formatting date
           let content = template
@@ -251,7 +256,7 @@ Promise.allSettled(promiseArray).then((results) => {
             .replace(/\$date\b/g, date)
             .replace(/\$counter\b/g, (index + 1).toString())
             .replace(/\$feedName\b/g, cur.feedName ? cur.feedName : '')
-            .replace(/\$categories\b/g, cur.categories ? cur.categories.join(', ') : '')
+            .replace(/\$categories\b/g, categoryList.toString())
             .replace(/\$newline/g, '\n');
 
           // Setting Custom tags to the template

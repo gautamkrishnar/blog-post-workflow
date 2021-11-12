@@ -101,6 +101,10 @@ inputs:
     description: "Disables html encoding of the feed contents"
     default: "false"
     required: false
+  categories_template:
+    description: "Allows you to specify a template for the individual items in the category list"
+    default: "default"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

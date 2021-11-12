@@ -25,7 +25,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_RETRY_WAIT_TIME: '1',
   INPUT_FEED_NAMES: '',
   INPUT_DISABLE_HTML_ENCODING: 'false',
-  TEST_MODE: 'true'
+  TEST_MODE: 'true',
+  INPUT_CATEGORIES_TEMPLATE: 'default'
 };
 
 // Folder with readme snapshots
@@ -208,5 +209,15 @@ describe('Blog post workflow tests', function () {
 
   it('escapeHTML should work as expected', function () {
     assert.strictEqual(escapeHTML('<hello>()\'"'), '&lt;hello&gt;&lpar;&rpar;&#39;&quot;');
+  });
+  it('Generated readme with categories template should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FEED_LIST: 'http://localhost:8080',
+      INPUT_TEMPLATE: '$categories',
+      INPUT_CATEGORIES_TEMPLATE: '$category<br/>'
+    };
+    await runAndCompareSnap('Readme.categories.template.md', envObj);
   });
 });
