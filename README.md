@@ -135,6 +135,7 @@ Some popular blogging platforms and their RSS feed URLs:
 | [Feedburner](https://feedburner.com/) | `https://feeds.feedburner.com/feed_address` | Replace `feed_address` with your Feedburner feed address | https://feeds.feedburner.com/darkwood-fr/blog |
 | [Tumblr](https://www.tumblr.com)|`https://blog_name.tumblr.com/rss` or `https://example.com/rss`|You can create an RSS feed by adding '/rss' to your main blog page or to your own domain if it is configured. Replace `blog_name` with your blog name | https://goggledoddle.tumblr.com/rss|
 | [Blogger](https://www.blogger.com/)|`https://blog_name.blogspot.com/feeds/posts/default` | Replace `blog_name` with your blog subdomain | https://singlebucks.blogspot.com/feeds/posts/default |
+| [Velog](https://velog.io/) |`https://v2.velog.io/rss/userid` | Replace `userid` with your  user id (without the @ symbol) | https://v2.velog.io/rss/minnczi |
 
 
 ### Examples 
