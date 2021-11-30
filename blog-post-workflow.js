@@ -20,6 +20,7 @@ const {
   ignoreMediumComments,
   ignoreStackOverflowComments
 } = require('./filters');
+const path = require("path");
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
@@ -290,6 +291,11 @@ Promise.allSettled(promiseArray).then((results) => {
         // Sets output as output as `results` variable in github action
         core.info('outputOnly mode: set `results` variable. Readme not committed.');
         core.setOutput('results', postsArray);
+        const outputFilePath = path.join('/','tmp', 'blog_post_workflow_output.json');
+        if(fs.existsSync(outputFilePath)) {
+          fs.rmSync(outputFilePath);
+        }
+        fs.writeFileSync(outputFilePath, postsArray, { encoding: 'utf-8'});
         process.exit(jobFailFlag ? 1 : 0);
       }
 
