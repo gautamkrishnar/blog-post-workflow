@@ -20,7 +20,7 @@ const {
   ignoreMediumComments,
   ignoreStackOverflowComments
 } = require('./filters');
-const path = require("path");
+const path = require('path');
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
