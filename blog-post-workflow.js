@@ -295,7 +295,7 @@ Promise.allSettled(promiseArray).then((results) => {
         if(fs.existsSync(outputFilePath)) {
           fs.rmSync(outputFilePath);
         }
-        fs.writeFileSync(outputFilePath, postsArray, { encoding: 'utf-8'});
+        fs.writeFileSync(outputFilePath, JSON.stringify(postsArray), { encoding: 'utf-8'});
         process.exit(jobFailFlag ? 1 : 0);
       }
 
