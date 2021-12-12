@@ -110,7 +110,7 @@ outputs:
     description: "JSON stringified array of posts"
 
 runs:
-  using: node12
+  using: node16
   main: dist/blog-post-workflow.js
 branding:
   icon: 'activity'
