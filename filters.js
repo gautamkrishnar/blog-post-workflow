@@ -28,7 +28,7 @@ const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackov
   item.link && item.link.includes('stackoverflow.com') &&
   item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
 
-// filters out stackOverflow comments (#16)
+// filters out stackExchange comments (#16)
 const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackexchange') !== -1 &&
   item.link && item.link.includes('stackexchange.com') &&
   item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
