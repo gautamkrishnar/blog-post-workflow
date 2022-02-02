@@ -166,15 +166,6 @@ feedList.forEach((siteUrl) => {
                 post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
               }
 
-              const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
-              if (!disableHtmlEncoding) {
-                Object.keys(post).forEach((key)=> {
-                  if (typeof post[key] === 'string' && key !== 'url') {
-                    post[key] = escapeHTML(post[key]);
-                  }
-                });
-              }
-
               // Advanced content manipulation using javascript code
               if (ITEM_EXEC) {
                 try {
@@ -184,6 +175,16 @@ feedList.forEach((siteUrl) => {
                   core.error(e);
                   process.exit(1);
                 }
+              }
+
+              // Doing HTML encoding at last ref: #117
+              const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
+              if (!disableHtmlEncoding) {
+                Object.keys(post).forEach((key)=> {
+                  if (typeof post[key] === 'string' && key !== 'url') {
+                    post[key] = escapeHTML(post[key]);
+                  }
+                });
               }
               return post;
             });
