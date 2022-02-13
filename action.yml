@@ -105,6 +105,10 @@ inputs:
     description: "Allows you to specify a template for the individual items in the category list"
     default: "default"
     required: false
+  disable_item_validation:
+    description: "Disables the validation checks for Title, publish date and URL"
+    default: "false"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

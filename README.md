@@ -69,6 +69,7 @@ This workflow has additional options that you can use to customize it for your u
 | `retry_count` | `0` | Maximum number of times to retry the fetch operation if it fails, See [#66](https://github.com/gautamkrishnar/blog-post-workflow/issues/66) for more details. | No |
 | `retry_wait_time` | `1` | Time to wait before each retry operation in seconds.  | No |
 | `disable_html_encoding` | `false` | Disables html encoding of the feed contents. | No |
+| `disable_item_validation` | `false` | Disables the validation checks for Title, publish date and URL. | No |
 
 ## Advanced usage examples
 

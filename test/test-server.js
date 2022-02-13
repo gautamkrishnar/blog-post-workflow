@@ -17,7 +17,33 @@ http.createServer(function (req, res) {
     const showError = failCounter !== MAX_FAIL_COUNT;
     sendResponse(res, showError ? 500 : 200, showError ? 'error!' : xmlData);
     failCounter = failCounter + 1;
-  } else {
+  } else if (req.url === '/empty-tags') {
+    const emptyTagResponse = `
+    <?xml version="1.0" encoding="UTF-8"?>
+      <rss version="2.0">
+      <channel>
+          <title>Gautam krishna.R</title>
+          <author>Gautam krishna.R</author>
+          <description>test</description>
+          <link></link>
+          <language></language>
+          <item>
+          <title></title>
+          <author></author>
+          <pubDate></pubDate>
+          <link></link>
+          <guid>https://dev.to/gautamkrishnar/hi-im-gautam-krishnar</guid>
+          <description></description>
+            <testingTag>hello</testingTag>
+            <testingTag2>apple</testingTag2>
+          <category>introductions</category>
+        </item>
+      </channel>
+    </rss>
+    `;
+    sendResponse(res, 200, emptyTagResponse);
+  }
+  else {
     sendResponse(res, 200, xmlData);
   }
 }).listen(8080);

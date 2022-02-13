@@ -32,6 +32,9 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Disables sort
 const ENABLE_SORT = core.getInput('disable_sort') === 'false';
 
+// Disables validation checks
+const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
+
 // Title trimming parameter, default: ""
 const TITLE_MAX_LENGTH = core.getInput('title_max_length') ?
   Number.parseInt(core.getInput('title_max_length')) : null;
@@ -126,13 +129,13 @@ feedList.forEach((siteUrl) => {
             .filter(ignoreStackExchangeComments)
             .map((item) => {
               // Validating keys to avoid errors
-              if (ENABLE_SORT && !item.pubDate) {
+              if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
                 reject('Cannot read response->item->pubDate');
               }
-              if (!item.title) {
+              if (ENABLE_VALIDATION && !item.title) {
                 reject('Cannot read response->item->title');
               }
-              if (!item.link) {
+              if (ENABLE_VALIDATION && !item.link) {
                 reject('Cannot read response->item->link');
               }
               // Custom tags

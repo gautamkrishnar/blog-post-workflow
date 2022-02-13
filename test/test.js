@@ -26,7 +26,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_FEED_NAMES: '',
   INPUT_DISABLE_HTML_ENCODING: 'false',
   TEST_MODE: 'true',
-  INPUT_CATEGORIES_TEMPLATE: 'default'
+  INPUT_CATEGORIES_TEMPLATE: 'default',
+  INPUT_DISABLE_ITEM_VALIDATION: 'false'
 };
 
 // Folder with readme snapshots
@@ -219,5 +220,14 @@ describe('Blog post workflow tests', function () {
       INPUT_CATEGORIES_TEMPLATE: '$category<br/>'
     };
     await runAndCompareSnap('Readme.categories.template.md', envObj);
+  });
+  it('Generated readme with no validation flag should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FEED_LIST: 'http://localhost:8080/empty-tags',
+      INPUT_DISABLE_ITEM_VALIDATION: 'true'
+    };
+    await runAndCompareSnap('Readme.emptyTags.md', envObj);
   });
 });
