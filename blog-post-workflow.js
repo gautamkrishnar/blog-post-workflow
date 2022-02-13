@@ -182,7 +182,7 @@ feedList.forEach((siteUrl) => {
 
               // Doing HTML encoding at last ref: #117
               const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
-              if (!disableHtmlEncoding) {
+              if (!disableHtmlEncoding && post) {
                 Object.keys(post).forEach((key)=> {
                   if (typeof post[key] === 'string' && key !== 'url') {
                     post[key] = escapeHTML(post[key]);
