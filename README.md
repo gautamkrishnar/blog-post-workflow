@@ -168,7 +168,7 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 
 ## Thanks to
 
-- All the **4.6K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
+- All the **4.3K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
 - All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
