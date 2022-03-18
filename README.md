@@ -120,7 +120,7 @@ Some popular blogging platforms and their RSS feed URLs:
 |--------|--------|--------|--------|
 | [Dev.to](https://dev.to/) | `https://dev.to/feed/username` | Replace username with your own username | https://dev.to/feed/gautamkrishnar |
 | [Wordpress](https://wordpress.org/) | `https://www.example.com/feed/` | Replace with your own blog url | https://www.gautamkrishnar.com/feed/ |
-| [Medium](https://medium.com/) | `https://medium.com/feed/@username` | Replace @username with your Medium username | https://medium.com/feed/@khaosdoctor |
+| [Medium](https://medium.com/) | `https://medium.com/feed/@username` | Replace username with your Medium username | https://medium.com/feed/@khaosdoctor |
 | [Medium (Sub Domain)](https://medium.com/) | `https://username.medium.com/feed` | Replace username with your Medium username | https://timsneath.medium.com/feed |
 | [Stackoverflow](https://stackoverflow.com/) | `https://stackoverflow.com/feeds/user/userid` | Replace with your StackOverflow [UserId](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130) | https://stackoverflow.com/feeds/user/5283532 |
 | [StackExchange](https://stackexchange.com/) | `https://subdomain.stackexchange.com/feeds/user/userid` | Replace with your StackExchange [UserId](https://meta.stackexchange.com/questions/98771/what-is-my-user-id/111130#111130) and sub-domain | https://devops.stackexchange.com/feeds/user/15 |
