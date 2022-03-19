@@ -109,6 +109,10 @@ inputs:
     description: "Disables the validation checks for Title, publish date and URL"
     default: "false"
     required: false
+  filter_dates:
+    description: "Enables date filters"
+    default: ""
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

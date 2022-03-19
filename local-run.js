@@ -32,6 +32,7 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   process.env.INPUT_RETRY_COUNT = '0';
   process.env.INPUT_RETRY_WAIT_TIME = '1';
   process.env.INPUT_DISABLE_ITEM_VALIDATION  = 'false';
+  process.env.INPUT_FILTER_DATES = '';
   const testFile = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
   console.log('Testing: ', testFile);
   require(testFile);

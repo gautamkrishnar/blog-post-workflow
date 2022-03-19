@@ -27,7 +27,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_DISABLE_HTML_ENCODING: 'false',
   TEST_MODE: 'true',
   INPUT_CATEGORIES_TEMPLATE: 'default',
-  INPUT_DISABLE_ITEM_VALIDATION: 'false'
+  INPUT_DISABLE_ITEM_VALIDATION: 'false',
+  INPUT_FILTER_DATES:''
 };
 
 // Folder with readme snapshots
@@ -229,5 +230,29 @@ describe('Blog post workflow tests', function () {
       INPUT_DISABLE_ITEM_VALIDATION: 'true'
     };
     await runAndCompareSnap('Readme.emptyTags.md', envObj);
+  });
+  it('Generated readme with filter_dates daysAgo should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FILTER_DATES: 'daysAgo/10/'
+    };
+    await runAndCompareSnap('Readme.filter_dates.daysAgo.md', envObj);
+  });
+  it('Generated readme with filter_dates currentMonth should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FILTER_DATES: 'currentMonth'
+    };
+    await runAndCompareSnap('Readme.filter_dates.currentMonth.md', envObj);
+  });
+  it('Generated readme with filter_dates currentYear should match the snapshot',async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FILTER_DATES: 'currentYear'
+    };
+    await runAndCompareSnap('Readme.filter_dates.currentYear.md', envObj);
   });
 });

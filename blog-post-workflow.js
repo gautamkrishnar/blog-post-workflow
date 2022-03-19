@@ -18,7 +18,8 @@ const {
 const {
   ignoreStackExchangeComments,
   ignoreMediumComments,
-  ignoreStackOverflowComments
+  ignoreStackOverflowComments,
+  dateFilter
 } = require('./filters');
 const path = require('path');
 
@@ -127,6 +128,7 @@ feedList.forEach((siteUrl) => {
             .filter(ignoreMediumComments)
             .filter(ignoreStackOverflowComments)
             .filter(ignoreStackExchangeComments)
+            .filter(dateFilter)
             .map((item) => {
               // Validating keys to avoid errors
               if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {

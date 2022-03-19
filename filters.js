@@ -33,8 +33,37 @@ const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackex
   item.link && item.link.includes('stackexchange.com') &&
   item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
 
+const dateFilter = (item) => {
+  if (!item.pubDate) { return  true; }
+  const today = new Date();
+  const itemDate = new Date(item.pubDate.trim());
+  const dateFilter = core
+    .getInput('filter_dates')
+    .trim();
+
+  if (dateFilter.indexOf('daysAgo') !== -1) {
+    // Filters out posts that are older than n days
+    const filterParam = {
+      daysAgo: ''
+    };
+    updateAndParseCompoundParams(dateFilter, filterParam);
+    const dayInMilliSeconds = 24 * 60 * 60 * 1000;
+    const daysAgo = Number(filterParam.daysAgo);
+    const dateObj = new Date(Date.now() - (dayInMilliSeconds * daysAgo));
+    return itemDate >= dateObj;
+  } else if  (dateFilter.indexOf('currentMonth') !== -1) {
+    // Filters out current month's posts
+    return (itemDate.getMonth() === today.getMonth()) && (itemDate.getFullYear() === today.getFullYear());
+  } else if  (dateFilter.indexOf('currentYear') !== -1) {
+    // Filters out current year's posts
+    return itemDate.getFullYear() === today.getFullYear();
+  } else {
+    return true;
+  }
+};
 module.exports = {
   ignoreMediumComments,
   ignoreStackOverflowComments,
-  ignoreStackExchangeComments
+  ignoreStackExchangeComments,
+  dateFilter
 };
