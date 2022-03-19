@@ -70,7 +70,7 @@ This workflow has additional options that you can use to customize it for your u
 | `retry_wait_time` | `1` | Time to wait before each retry operation in seconds.  | No |
 | `disable_html_encoding` | `false` | Disables html encoding of the feed contents. | No |
 | `disable_item_validation` | `false` | Disables the validation checks for Title, publish date and URL. | No |
-| `filter_dates` | `""` | Allows you to filter post items based on date or time range. <br/><br/>**Supported Values** <ul><li>`daysAgo/N/`: Use this value to display only the posts from the last N days. eg: `daysAgo/10/` will show only posts from last 10 days.</li><li>`currentMonth`: Use this value to display the post that are published on current month.</li><li>`currentYear`: Use this value to display the post that are published on current year.</li></ul> Make sure that you set the `max_post_count` to a higher value to get rid of max post count filtering, before using the above options. | No |
+| `filter_dates` | `""` | Allows you to filter post items based on date range. <br/><br/>**Supported Values** <ul><li>`daysAgo/N/`: Use this value to display only the posts from the last N days. eg: `daysAgo/10/` will show only posts from last 10 days.</li><li>`currentMonth`: Use this value to display the post that are published on current month.</li><li>`currentYear`: Use this value to display the post that are published on current year.</li></ul> Make sure that you set the `max_post_count` to a higher value to get rid of max post count filtering, before using the above options. | No |
 
 ## Advanced usage examples
 
@@ -169,7 +169,7 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 
 ## Thanks to
 
-- All the **4.3K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
+- All the **4.5K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
 - All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
