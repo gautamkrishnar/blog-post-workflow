@@ -23,7 +23,7 @@ yarn local-run
 yarn test
 ```
 
-Please run `export TEST_MODE=true` before running the [blog-post-workflow.js](blog-post-workflow.js) directly, to prevent accidental 
+Please run `export TEST_MODE=true` before running the [blog-post-workflow.js](src/blog-post-workflow.js) directly, to prevent accidental 
 automated committing and pushing to your fork.
 
 Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
