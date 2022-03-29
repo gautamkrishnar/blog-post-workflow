@@ -4,7 +4,7 @@
   "description": "Allows you to show your latest blog posts on your github profile or project readme",
   "main": "blog-post-workflow.js",
   "scripts": {
-    "build": "parcel build  --no-source-maps --target=node --bundle-node-modules blog-post-workflow.js",
+    "build": "parcel build  --no-source-maps --target=node --bundle-node-modules ./src/blog-post-workflow.js",
     "lint": "jshint --exclude='node_modules/' *.js",
     "start-server": "node test/test-server.js",
     "local-run-script": "node local-run.js",
