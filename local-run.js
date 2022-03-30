@@ -18,7 +18,7 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   process.env.INPUT_README_PATH = path.join(__dirname, 'test', 'Readme.md');
   process.env.INPUT_DISABLE_SORT = 'false';
   process.env.INPUT_USER_AGENT = 'rss-parser';
-  process.env.INPUT_ACCEPT_HEADER= 'application/rss+xml';
+  process.env.INPUT_ACCEPT_HEADER = 'application/rss+xml';
   process.env.INPUT_TEMPLATE = 'default';
   process.env.INPUT_DATE_FORMAT = 'UTC:ddd mmm dd yyyy h:MM TT';
   process.env.TEST_MODE = 'true';
@@ -31,9 +31,9 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   process.env.INPUT_TAG_POST_PRE_NEWLINE = 'false';
   process.env.INPUT_RETRY_COUNT = '0';
   process.env.INPUT_RETRY_WAIT_TIME = '1';
-  process.env.INPUT_DISABLE_ITEM_VALIDATION  = 'false';
+  process.env.INPUT_DISABLE_ITEM_VALIDATION = 'false';
   process.env.INPUT_FILTER_DATES = '';
-  const testFile = process.env.DIST ? './dist/blog-post-workflow' :'./blog-post-workflow';
+  const testFile = process.env.DIST ? './dist/blog-post-workflow' : './src/blog-post-workflow';
   console.log('Testing: ', testFile);
   require(testFile);
 });

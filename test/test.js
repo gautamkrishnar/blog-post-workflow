@@ -2,7 +2,7 @@ const assert = require('assert');
 const process = require('process');
 const path = require('path');
 const fs = require('fs');
-const {exec, escapeHTML} = require('../utils');
+const { exec, escapeHTML } = require('../src/utils');
 
 const DEFAULT_TEST_ENV = {
   INPUT_MAX_POST_COUNT: '10',
@@ -20,15 +20,15 @@ const DEFAULT_TEST_ENV = {
   INPUT_ITEM_EXEC: '',
   INPUT_OUTPUT_ONLY: 'false',
   INPUT_ENABLE_KEEPALIVE: 'true',
-  INPUT_TAG_POST_PRE_NEWLINE:'false',
-  INPUT_RETRY_COUNT:'0',
+  INPUT_TAG_POST_PRE_NEWLINE: 'false',
+  INPUT_RETRY_COUNT: '0',
   INPUT_RETRY_WAIT_TIME: '1',
   INPUT_FEED_NAMES: '',
   INPUT_DISABLE_HTML_ENCODING: 'false',
   TEST_MODE: 'true',
   INPUT_CATEGORIES_TEMPLATE: 'default',
   INPUT_DISABLE_ITEM_VALIDATION: 'false',
-  INPUT_FILTER_DATES:''
+  INPUT_FILTER_DATES: ''
 };
 
 // Folder with readme snapshots
@@ -43,7 +43,7 @@ Post list example:
 # Other contents
 Test content
 `;
-const TEST_FILE = process.env.DIST ? path.join(__dirname, '../dist/blog-post-workflow') : path.join(__dirname, '../blog-post-workflow');
+const TEST_FILE = process.env.DIST ? path.join(__dirname, '../dist/blog-post-workflow') : path.join(__dirname, '../src/blog-post-workflow');
 console.log('Testing: ', TEST_FILE);
 
 const runAndCompareSnap = async (README_FILE, envObj) => {
@@ -52,15 +52,15 @@ const runAndCompareSnap = async (README_FILE, envObj) => {
     INPUT_README_PATH: path.join(TEST_SNAP_DIR, README_FILE)
   };
   fs.writeFileSync(path.join(TEST_SNAP_DIR, README_FILE), TEMPLATE);
-  await exec('node', [TEST_FILE],{env: envObj});
-  const snapshot = fs.readFileSync(path.join(TEST_SNAP_DIR , README_FILE + '.snap'), 'utf-8');
-  const newReadme = fs.readFileSync(path.join(TEST_SNAP_DIR , README_FILE), 'utf-8');
+  await exec('node', [TEST_FILE], { env: envObj });
+  const snapshot = fs.readFileSync(path.join(TEST_SNAP_DIR, README_FILE + '.snap'), 'utf-8');
+  const newReadme = fs.readFileSync(path.join(TEST_SNAP_DIR, README_FILE), 'utf-8');
   assert.strictEqual(snapshot, newReadme);
 };
 
 // Test block
 describe('Blog post workflow tests', function () {
-  it('Default template readme generated should match the snapshot',async function () {
+  it('Default template readme generated should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV
@@ -68,7 +68,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.md', envObj);
   });
 
-  it('Multiple readme generated via readme_path should match the snapshots',async function () {
+  it('Multiple readme generated via readme_path should match the snapshots', async function () {
     const readme1 = path.join(TEST_SNAP_DIR, 'Readme.multi.1.md');
     const readme2 = path.join(TEST_SNAP_DIR, 'Readme.multi.2.md');
     const envObj = {
@@ -78,7 +78,7 @@ describe('Blog post workflow tests', function () {
     };
     fs.writeFileSync(readme1, TEMPLATE);
     fs.writeFileSync(readme2, TEMPLATE);
-    await exec('node', [TEST_FILE],{env: envObj});
+    await exec('node', [TEST_FILE], { env: envObj });
     const snapshot1 = fs.readFileSync(readme1 + '.snap', 'utf-8');
     const snapshot2 = fs.readFileSync(readme2 + '.snap', 'utf-8');
     const newReadme1 = fs.readFileSync(readme1, 'utf-8');
@@ -87,7 +87,7 @@ describe('Blog post workflow tests', function () {
     assert.strictEqual(snapshot2, newReadme2);
   });
 
-  it('Sorting disabled readme should be equal to the saved snapshot',async function () {
+  it('Sorting disabled readme should be equal to the saved snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -96,7 +96,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.sort.md', envObj);
   });
 
-  it('Custom template readme generated should match the snapshot',async function () {
+  it('Custom template readme generated should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -104,7 +104,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.custom.md', envObj);
   });
-  it('Generated readme without filters should match the snapshot',async function () {
+  it('Generated readme without filters should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -112,7 +112,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.comments.md', envObj);
   });
-  it('Generated readme without custom elements should match the snapshot',async function () {
+  it('Generated readme without custom elements should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -122,7 +122,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.custom-tags.md', envObj);
   });
 
-  it('Generated readme with $emojiKey template should match the snapshot',async function () {
+  it('Generated readme with $emojiKey template should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -131,7 +131,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.emojiKey.md', envObj);
   });
 
-  it('Generated readme with $randomEmoji template should match the snapshot',async function () {
+  it('Generated readme with $randomEmoji template should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -140,7 +140,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.randomEmoji.md', envObj);
   });
 
-  it('Generated readme with $counter template should match the snapshot',async function () {
+  it('Generated readme with $counter template should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -149,16 +149,16 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.counter.md', envObj);
   });
 
-  it('Generated readme with truncated title should match the snapshot',async function () {
+  it('Generated readme with truncated title should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
       INPUT_TITLE_MAX_LENGTH: '10'
     };
-    await runAndCompareSnap( 'Readme.truncate.title.md', envObj);
+    await runAndCompareSnap('Readme.truncate.title.md', envObj);
   });
 
-  it('Generated readme with truncated description should match the snapshot',async function () {
+  it('Generated readme with truncated description should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -168,7 +168,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.truncate.description.md', envObj);
   });
 
-  it('Generated readme with advanced manipulation via JS should match the snapshot',async function () {
+  it('Generated readme with advanced manipulation via JS should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -177,7 +177,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.exec.md', envObj);
   });
 
-  it('Readme generated after retry should match the snapshot',async function () {
+  it('Readme generated after retry should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -185,9 +185,9 @@ describe('Blog post workflow tests', function () {
       INPUT_RETRY_COUNT: '5'
     };
     await runAndCompareSnap('Readme.retry.md', envObj);
-  }).timeout(20*1000);
+  }).timeout(20 * 1000);
 
-  it('Generated readme with feed names should match the snapshot',async function () {
+  it('Generated readme with feed names should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -199,7 +199,7 @@ describe('Blog post workflow tests', function () {
     await runAndCompareSnap('Readme.feedNames.md', envObj);
   });
 
-  it('Generated readme with categories names should match the snapshot',async function () {
+  it('Generated readme with categories names should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -212,7 +212,7 @@ describe('Blog post workflow tests', function () {
   it('escapeHTML should work as expected', function () {
     assert.strictEqual(escapeHTML('<hello>()\'"'), '&lt;hello&gt;&lpar;&rpar;&#39;&quot;');
   });
-  it('Generated readme with categories template should match the snapshot',async function () {
+  it('Generated readme with categories template should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -222,7 +222,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.categories.template.md', envObj);
   });
-  it('Generated readme with no validation flag should match the snapshot',async function () {
+  it('Generated readme with no validation flag should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -231,7 +231,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.emptyTags.md', envObj);
   });
-  it('Generated readme with filter_dates daysAgo should match the snapshot',async function () {
+  it('Generated readme with filter_dates daysAgo should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -239,7 +239,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.filter_dates.daysAgo.md', envObj);
   });
-  it('Generated readme with filter_dates currentMonth should match the snapshot',async function () {
+  it('Generated readme with filter_dates currentMonth should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
@@ -247,7 +247,7 @@ describe('Blog post workflow tests', function () {
     };
     await runAndCompareSnap('Readme.filter_dates.currentMonth.md', envObj);
   });
-  it('Generated readme with filter_dates currentYear should match the snapshot',async function () {
+  it('Generated readme with filter_dates currentYear should match the snapshot', async function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
