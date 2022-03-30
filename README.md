@@ -171,10 +171,15 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 
 - All the **4.5K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
-- All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors)
+- All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors) 
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
 - [CodeCov](https://about.codecov.io/) for this blog: [Discovering the Most Popular and Most Used Github Actions](https://about.codecov.io/blog/discovering-the-most-popular-and-most-used-github-actions/)
 - [the byte podcast](https://podcast.thebyte.io/episodes/learn-how-to-pimp-out-your-github-profile)
+- **JetBrains** for sponsoring the Open Source License to my favourite IDE WebStorm:
+ 
+ <a href="https://www.jetbrains.com/?from=SOCLI" target="_blank">
+ <img src="https://user-images.githubusercontent.com/8397274/72133518-a6d8c300-33a7-11ea-8979-659b248ca1a2.png" width="100">
+ </a>
 
 ## Liked it?
 
