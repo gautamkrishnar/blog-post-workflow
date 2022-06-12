@@ -144,7 +144,7 @@ Some popular blogging platforms and their RSS feed URLs:
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
 * [Lucas Santos' GitHub profile readme](https://github.com/khaosdoctor) - [YML File](https://github.com/khaosdoctor/khaosdoctor/blob/main/.github/workflows/update-blog-posts.yml)
 * [Blog post table](https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar) - [YML File](https://github.com/gkr-bot/gkr-bot/blob/master/.github/workflows/stack-oveflow-workflow.yml)
-* [Youtube Videos table](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/README.md#-latest-youtube-videos) - [YML File](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml)
+* [Youtube Videos table](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/README.md#-latest-youtube-videos) - [YML File]([https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml))
 
 ## Demo video
 
@@ -169,7 +169,7 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 
 ## Thanks to
 
-- All the **5.1K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
+- All the **5.2K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
 - All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors) 
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
