@@ -26,3 +26,9 @@ jobs:
             -
           draft: true
           prerelease: false
+      - name: Update v1 release with the latest code
+        run: |
+          git config user.name gkr-bot
+          git config user.email gkr@tuta.io
+          git tag -fa v1 -m "Updated v1 tag with the latest code"
+          git push origin v1 --force

@@ -30,7 +30,7 @@
           - name: Checkout
             uses: actions/checkout@v2
           - name: Pull in dev.to posts
-            uses: gautamkrishnar/blog-post-workflow@master
+            uses: gautamkrishnar/blog-post-workflow@v1
             with:
               feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
     ```
@@ -100,7 +100,7 @@ The following configuration allows you to show your latest StackOverflow activit
         runs-on: ubuntu-latest
         steps:
           - uses: actions/checkout@v2
-          - uses: gautamkrishnar/blog-post-workflow@master
+          - uses: gautamkrishnar/blog-post-workflow@v1
             with:
               comment_tag_name: "STACKOVERFLOW"
               commit_message: "Updated readme with the latest stackOverflow data"
