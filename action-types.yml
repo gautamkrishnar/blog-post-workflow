@@ -1,0 +1,78 @@
+# See https://github.com/krzema12/github-actions-typing
+typingSpec: krzema12/github-actions-typing@v0.3
+inputs:
+  gh_token:
+    type: string
+  readme_path:
+    type: list
+    separator: ','
+    listItem:
+      type: string
+  max_post_count:
+    type: integer
+  feed_list:
+    type: list
+    separator: ','
+    listItem:
+      type: string
+  disable_sort:
+    type: boolean
+  filter_comments:
+    type: list
+    separator: ','
+    listItem:
+      type: string
+  tag_post_pre_newline:
+    type: boolean
+  template:
+    type: string
+  date_format:
+    type: string
+  comment_tag_name:
+    type: string
+  user_agent:
+    type: string
+  accept_header:
+    type: string
+  custom_tags:
+    type: list
+    separator: ','
+    listItem:
+      type: string
+  title_max_length:
+    type: integer
+  description_max_length:
+    type: integer
+  item_exec:
+    type: string
+  commit_message:
+    type: string
+  committer_username:
+    type: string
+  committer_email:
+    type: string
+  output_only:
+    type: boolean
+  enable_keepalive:
+    type: boolean
+  retry_count:
+    type: integer
+  retry_wait_time:
+    type: integer
+  feed_names:
+    type: list
+    separator: ','
+    listItem:
+      type: string
+  disable_html_encoding:
+    type: boolean
+  categories_template:
+    type: string
+  disable_item_validation:
+    type: boolean
+  filter_dates:
+    type: string
+outputs:
+  results:
+    type: string
+
