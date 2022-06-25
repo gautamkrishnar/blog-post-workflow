@@ -180,6 +180,8 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
  <a href="https://www.jetbrains.com/?from=SOCLI" target="_blank">
  <img src="https://user-images.githubusercontent.com/8397274/72133518-a6d8c300-33a7-11ea-8979-659b248ca1a2.png" width="100">
  </a>
+ 
+ - Thanks @github for [GitHub India Open Source Grants](https://github.blog/2021-09-12-recipients-open-source-grants-github-sponsors-india/) and for sponsoring me
 
 ## Liked it?
 
