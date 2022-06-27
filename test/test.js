@@ -28,7 +28,8 @@ const DEFAULT_TEST_ENV = {
   TEST_MODE: 'true',
   INPUT_CATEGORIES_TEMPLATE: 'default',
   INPUT_DISABLE_ITEM_VALIDATION: 'false',
-  INPUT_FILTER_DATES: ''
+  INPUT_FILTER_DATES: '',
+  INPUT_RAND_SEED: ''
 };
 
 // Folder with readme snapshots

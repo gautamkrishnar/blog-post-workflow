@@ -113,6 +113,10 @@ inputs:
     description: "Enables date filters"
     default: ""
     required: false
+  rand_seed:
+    description: "Provide your own seeding string for the randomness"
+    default: ""
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

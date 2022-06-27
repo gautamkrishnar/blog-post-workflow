@@ -275,8 +275,12 @@ Promise.allSettled(promiseArray).then((results) => {
           // Emoji implementation: Random
           if (randEmojiArr) {
             // For making randomness unique for each repos
-            const seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ?
+            let seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ?
               process.env.GITHUB_REPOSITORY : 'example') + index;
+            if (core.getInput('rand_seed')) {
+              // If manual seed is provided, use it
+              seed = core.getInput('rand_seed') + index;
+            }
             const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
             content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
           }
