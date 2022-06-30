@@ -337,7 +337,7 @@ Promise.allSettled(promiseArray).then((results) => {
           const committerUsername = core.getInput('committer_username');
           const committerEmail = core.getInput('committer_email');
           const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
-            'dummy commit to keep the repository active, see https://git.io/Jtm4V', 50);
+            'dummy commit to keep the repository active, see https://git.io/Jtm4V', 50, true);
           core.info(message);
         } else {
           core.info('No change detected, skipping');
