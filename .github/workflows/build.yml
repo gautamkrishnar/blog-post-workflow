@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.js'
+      - 'package.json'
   pull_request:
     paths:
       - '**.js'
