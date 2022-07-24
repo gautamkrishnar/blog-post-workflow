@@ -77,12 +77,17 @@ This workflow has additional options that you can use to customize it for your u
 
 ## Advanced usage examples
 
-### StackOverflow example
+Click to expand:
+
+<details>
+<summary>
+<b>StackOverflow example </b>
+</summary>
 
 The following configuration allows you to show your latest StackOverflow activity along with your latest blog posts in the GitHub profile or project readme:
 
 1. Follow the steps mentioned in the [how to use](#how-to-use) section.
-1. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->` in your readme. The workflow will replace this comment with the actual StackOverflow activity: 
+1. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->` in your readme. The workflow will replace this comment with the actual StackOverflow activity:
     ```markdown
     # StackOverflow Activity
     <!-- STACKOVERFLOW:START -->
@@ -110,15 +115,13 @@ The following configuration allows you to show your latest StackOverflow activit
               feed_list: "https://stackoverflow.com/feeds/user/4214976"
     ```
 
-<details>
-  <summary>See the result!</summary>
-
-  ![advanced](https://user-images.githubusercontent.com/8397274/88197889-b727ff80-cc60-11ea-8e4a-b1fbd8dd9d06.png)
+##### See the result!
+![advanced](https://user-images.githubusercontent.com/8397274/88197889-b727ff80-cc60-11ea-8e4a-b1fbd8dd9d06.png)
 </details>
 
 ## Popular Sources 
-
-Some popular blogging platforms and their RSS feed URLs:
+<details>
+  <summary>Some popular blogging platforms and their RSS feed URLs (Click to expand)</summary>
 
 | Name                                                       | Feed URL                                                          | Comments                                                                                                                                                         | Example                                                                                                                           |
 |------------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
@@ -144,6 +147,7 @@ Some popular blogging platforms and their RSS feed URLs:
 | [Velog](https://velog.io/)                                 | `https://v2.velog.io/rss/userid`                                  | Replace `userid` with your  user id (without the @ symbol)                                                                                                       | https://v2.velog.io/rss/minnczi                                                                                                   |
 | [Shouts.dev](https://shouts.dev/)                          | `https://shouts.dev/feed/username`                                | Replace `username` with your own username                                                                                                                        | https://shouts.dev/feed/obydul                                                                                                    |
 
+</details>
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
