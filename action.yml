@@ -117,6 +117,10 @@ inputs:
     description: "Provide your own seeding string for the randomness"
     default: ""
     required: false
+  remove_duplicates:
+    description: "Allows you to remove duplicate blog posts from multiple sources"
+    default: ""
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

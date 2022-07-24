@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Gautam krishna.R</title>
+        <author>Gautam krishna.R</author>
+        <description>Developer, open source lover and after all a wonderful human being... Software Engineer at Red Hat | DuckDuckGo Community Leader | Polygot</description>
+        <link>https://dev.to/gautamkrishnar</link>
+        <language>en</language>
+        <item>
+        <title>Hi, I'm Gautam krishna.R</title>
+        <author>Gautam krishna.R</author>
+        <pubDate>Sun, 02 Apr 2017 19:04:43 +0000</pubDate>
+        <link>https://dev.to/gautamkrishnar/hi-im-gautam-krishnar</link>
+        <guid>https://dev.to/gautamkrishnar/hi-im-gautam-krishnar</guid>
+        <description>&lt;p&gt;I have been coding for 9 years, I am a Microsoft student partner and DuckDuckGo community leader who's actively involved in several open source projects.&lt;/p&gt;
+
+          &lt;p&gt;You can find me on GitHub at &lt;a href="https://github.com/gautamkrishnar"&gt;@gautamkrishnar&lt;/a&gt;&lt;/p&gt;
+
+          &lt;p&gt;You can also find me on Twitter as &lt;a href="https://twitter.com/gautamkrishnar"&gt;@gautamkrishnar&lt;/a&gt;&lt;/p&gt;
+
+          &lt;p&gt;I live in Kollam.&lt;/p&gt;
+
+          &lt;p&gt;I mostly program in these languages: Phython, NodeJS, PHP, C, C#, Java.&lt;/p&gt;
+
+          &lt;p&gt;I am currently learning more about ML.&lt;/p&gt;
+
+          &lt;p&gt;Nice to meet you.&lt;/p&gt;
+
+        </description>
+          <testingTag>hello</testingTag>
+          <testingTag2>apple</testingTag2>
+        <category>introductions</category>
+      </item>
+      <item>
+        <title>God Mode in browsers: document.designMode = "on"</title>
+        <author>Gautam krishna.R</author>
+        <pubDate>Thu, 16 Jul 2020 10:40:11 +0000</pubDate>
+        <testingTag>world</testingTag>
+        <link>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</link>
+        <guid>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</guid>
+        <description>&lt;p&gt;Just type &lt;code&gt;document.designMode = "on"&lt;/code&gt; on you favourite browser devtools and see the magic. &lt;/p&gt;
+
+          &lt;p&gt;It will make any website editable:&lt;/p&gt;
+
+          &lt;p&gt;&lt;a href="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" alt="preview"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        </description>
+        <category>chrome</category>
+        <category>firefox</category>
+        <category>devtools</category>
+        <category>webdev</category>
+      </item>
+        <item>
+            <title>God Mode in browsers: document.designMode = "on"</title>
+            <author>Gautam krishna.R</author>
+            <pubDate>Thu, 16 Jul 2020 10:40:11 +0000</pubDate>
+          <testingTag>world</testingTag>
+            <link>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</link>
+            <guid>https://dev.to/gautamkrishnar/god-mode-in-browsers-document-designmode-on-2pmo</guid>
+            <description>&lt;p&gt;Just type &lt;code&gt;document.designMode = "on"&lt;/code&gt; on you favourite browser devtools and see the magic. &lt;/p&gt;
+
+                &lt;p&gt;It will make any website editable:&lt;/p&gt;
+
+                &lt;p&gt;&lt;a href="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" alt="preview"&gt;&lt;/a&gt;&lt;/p&gt;
+
+            </description>
+            <category>chrome</category>
+            <category>firefox</category>
+            <category>devtools</category>
+            <category>webdev</category>
+        </item>
+      <item>
+        <title>Comment by Gautam Krishna R on test</title>
+        <author>Gautam Krishna R</author>
+        <pubDate>Wed, 19 Apr 2017 12:24:15 +0000</pubDate>
+        <link>https://stackoverflow.com/questions/49310909/omniauth-facebook-login-does-not-work/49311637?cid=85720166#49311637</link>
+        <guid>https://stackoverflow.com/questions/49310909/omniauth-facebook-login-does-not-work/49311637?cid=85720166#49311637</guid>
+        <description>desc</description>
+      </item>
+        <item>
+          <title>Comment by Gautam Krishna R on test</title>
+          <author>Gautam Krishna R</author>
+          <pubDate>Wed, 19 Apr 2017 12:24:15 +0000</pubDate>
+          <link>https://stackoverflow.com/questions/49310909/omniauth-facebook-login-does-not-work/49311637?cid=85720166#49311637</link>
+          <guid>https://stackoverflow.com/questions/49310909/omniauth-facebook-login-does-not-work/49311637?cid=85720166#49311637</guid>
+          <description>desc</description>
+        </item>
+
+    </channel>
+</rss>

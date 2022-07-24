@@ -124,6 +124,9 @@ feedList.forEach((siteUrl) => {
           reject('Cannot read response->item');
         } else {
           const responsePosts = data.items;
+          // To handle duplicate filter
+          const appendedPostTitles = [];
+          const appendedPostDesc = [];
           const posts = responsePosts
             .filter(ignoreMediumComments)
             .filter(ignoreStackOverflowComments)
@@ -179,6 +182,17 @@ feedList.forEach((siteUrl) => {
                   core.error('Failure in executing `item_exec` parameter');
                   core.error(e);
                   process.exit(1);
+                }
+              }
+              if (post && core.getInput('remove_duplicates') === 'true') {
+                if (
+                  appendedPostTitles.indexOf(post.title) !== -1 ||
+                  appendedPostDesc.indexOf(post.description) !== -1
+                ) {
+                  post = null;
+                } else {
+                  post.title && appendedPostTitles.push(post.title)
+                  post.description && appendedPostDesc.push(post.description);
                 }
               }
 

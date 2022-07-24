@@ -29,7 +29,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_CATEGORIES_TEMPLATE: 'default',
   INPUT_DISABLE_ITEM_VALIDATION: 'false',
   INPUT_FILTER_DATES: '',
-  INPUT_RAND_SEED: ''
+  INPUT_RAND_SEED: '',
+  INPUT_REMOVE_DUPLICATES: 'false'
 };
 
 // Folder with readme snapshots
@@ -255,5 +256,14 @@ describe('Blog post workflow tests', function () {
       INPUT_FILTER_DATES: 'currentYear'
     };
     await runAndCompareSnap('Readme.filter_dates.currentYear.md', envObj);
+  });
+  it('Generated readme with remove duplicates flag should match the snapshot', async function () {
+    const envObj = {
+      ...process.env,
+      ...DEFAULT_TEST_ENV,
+      INPUT_FEED_LIST: 'http://localhost:8080/duplicates',
+      INPUT_REMOVE_DUPLICATES: 'true'
+    };
+    await runAndCompareSnap('Readme.removeDuplicates.md', envObj);
   });
 });
