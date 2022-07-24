@@ -81,7 +81,7 @@ Click to expand:
 
 <details>
 <summary>
-<b>StackOverflow example </b>
+<b>StackOverflow example</b>
 </summary>
 
 The following configuration allows you to show your latest StackOverflow activity along with your latest blog posts in the GitHub profile or project readme:
@@ -119,6 +119,75 @@ The following configuration allows you to show your latest StackOverflow activit
 ![advanced](https://user-images.githubusercontent.com/8397274/88197889-b727ff80-cc60-11ea-8e4a-b1fbd8dd9d06.png)
 </details>
 
+<details>
+<summary><b>Blog post table</b></summary>
+
+##### workflow.yml
+```yaml
+name: Latest stack oveflow activity
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 * * * *'
+jobs:
+  update-readme-with-blog:
+    name: Update this repo's README with latest activity from StackOverflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gautamkrishnar/blog-post-workflow@v1
+        with:
+          comment_tag_name: "STACKOVERFLOW"
+          feed_list: "https://stackoverflow.com/feeds/user/4214976"
+          template: "<tr><td>$title</td><td>$url</td></tr>"
+```
+
+##### Readme.md
+```md
+### Latest StackOveflow activity of [@gautamkrishnar](https://github.com/gautamkrishnar)
+<table>
+  <tr><th>Title</th><th>Link</th></tr>
+  <!-- STACKOVERFLOW:START --><!-- STACKOVERFLOW:END -->
+</table>
+```
+Preview: [https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar](https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar)
+
+##### Results
+![image](https://user-images.githubusercontent.com/8397274/180653346-6dbbbe11-2d51-4f00-804d-d1a691dbb490.png)
+</details>
+
+<details>
+<summary><b>Youtube videos table</b></summary>
+
+##### workflow.yml
+```yaml
+name: Latest YouTube Videos
+on:
+  schedule:
+    # Runs every hour, on the hour
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update-readme-with-youtube:
+    name: Update this repo's README with latest videos from YouTube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=UCtvnB6R__6vdyjUEbDgAWHw"
+          custom_tags: "channelId/yt:channelId/,videoId/yt:videoId/"
+          date_format: "mmm d, yyyy"
+          template: '<table><tr><td><a href="$url"><img width="140px" src="https://i.ytimg.com/vi/$videoId/mqdefault.jpg"></a></td>$newline<td><a href="$url">$title</a><br/>$date</td></tr></table>$newline'
+          committer_email: "alwinjohn231@gmail.com"
+```
+Preview: [https://github.com/Dexters-Hub/Dexters-Hub](https://github.com/Dexters-Hub/Dexters-Hub)
+
+##### Results
+![image](https://user-images.githubusercontent.com/8397274/180653916-a4121091-d903-4b6e-b258-a2dfc46ffd02.png)
+</details>
+
 ## Popular Sources 
 <details>
   <summary>Some popular blogging platforms and their RSS feed URLs (Click to expand)</summary>
@@ -151,10 +220,6 @@ The following configuration allows you to show your latest StackOverflow activit
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
-* [Lucas Santos' GitHub profile readme](https://github.com/khaosdoctor) - [YML File](https://github.com/khaosdoctor/khaosdoctor/blob/main/.github/workflows/update-blog-posts.yml)
-* [Blog post table](https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gautamkrishnar) - [YML File](https://github.com/gkr-bot/gkr-bot/blob/master/.github/workflows/stack-oveflow-workflow.yml)
-* [Youtube Videos table](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/README.md#-latest-youtube-videos) - [YML File]([https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml](https://github.com/Dexters-Hub/Dexters-Hub/blob/master/.github/workflows/youtube-workflow.yml))
-
 ## Demo video
 
 Please see the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI) by [@codeSTACKr](https://github.com/codeSTACKr).
