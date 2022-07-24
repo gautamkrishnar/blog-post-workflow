@@ -8000,6 +8000,56 @@ var require_summary = __commonJS({
   }
 });
 
+// node_modules/@actions/core/lib/path-utils.js
+var require_path_utils = __commonJS({
+  "node_modules/@actions/core/lib/path-utils.js"(exports2) {
+    "use strict";
+    var __createBinding = exports2 && exports2.__createBinding || (Object.create ? function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      Object.defineProperty(o, k2, { enumerable: true, get: function() {
+        return m[k];
+      } });
+    } : function(o, m, k, k2) {
+      if (k2 === void 0)
+        k2 = k;
+      o[k2] = m[k];
+    });
+    var __setModuleDefault = exports2 && exports2.__setModuleDefault || (Object.create ? function(o, v) {
+      Object.defineProperty(o, "default", { enumerable: true, value: v });
+    } : function(o, v) {
+      o["default"] = v;
+    });
+    var __importStar = exports2 && exports2.__importStar || function(mod) {
+      if (mod && mod.__esModule)
+        return mod;
+      var result = {};
+      if (mod != null) {
+        for (var k in mod)
+          if (k !== "default" && Object.hasOwnProperty.call(mod, k))
+            __createBinding(result, mod, k);
+      }
+      __setModuleDefault(result, mod);
+      return result;
+    };
+    Object.defineProperty(exports2, "__esModule", { value: true });
+    exports2.toPlatformPath = exports2.toWin32Path = exports2.toPosixPath = void 0;
+    var path2 = __importStar(require("path"));
+    function toPosixPath(pth) {
+      return pth.replace(/[\\]/g, "/");
+    }
+    exports2.toPosixPath = toPosixPath;
+    function toWin32Path(pth) {
+      return pth.replace(/[/]/g, "\\");
+    }
+    exports2.toWin32Path = toWin32Path;
+    function toPlatformPath(pth) {
+      return pth.replace(/[/\\]/g, path2.sep);
+    }
+    exports2.toPlatformPath = toPlatformPath;
+  }
+});
+
 // node_modules/@actions/core/lib/core.js
 var require_core = __commonJS({
   "node_modules/@actions/core/lib/core.js"(exports2) {
@@ -8207,6 +8257,16 @@ Support boolean input list: \`true | True | TRUE | false | False | FALSE\``);
     var summary_2 = require_summary();
     Object.defineProperty(exports2, "markdownSummary", { enumerable: true, get: function() {
       return summary_2.markdownSummary;
+    } });
+    var path_utils_1 = require_path_utils();
+    Object.defineProperty(exports2, "toPosixPath", { enumerable: true, get: function() {
+      return path_utils_1.toPosixPath;
+    } });
+    Object.defineProperty(exports2, "toWin32Path", { enumerable: true, get: function() {
+      return path_utils_1.toWin32Path;
+    } });
+    Object.defineProperty(exports2, "toPlatformPath", { enumerable: true, get: function() {
+      return path_utils_1.toPlatformPath;
     } });
   }
 });
@@ -9248,6 +9308,8 @@ feedList.forEach((siteUrl) => {
         reject("Cannot read response->item");
       } else {
         const responsePosts = data.items;
+        const appendedPostTitles = [];
+        const appendedPostDesc = [];
         const posts = responsePosts.filter(ignoreMediumComments).filter(ignoreStackOverflowComments).filter(ignoreStackExchangeComments).filter(dateFilter).map((item) => {
           if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
             reject("Cannot read response->item->pubDate");
@@ -9289,6 +9351,14 @@ feedList.forEach((siteUrl) => {
               core.error("Failure in executing `item_exec` parameter");
               core.error(e);
               process.exit(1);
+            }
+          }
+          if (post && core.getInput("remove_duplicates") === "true") {
+            if (appendedPostTitles.indexOf(post.title) !== -1 || appendedPostDesc.indexOf(post.description) !== -1) {
+              post = null;
+            } else {
+              post.title && appendedPostTitles.push(post.title);
+              post.description && appendedPostDesc.push(post.description);
             }
           }
           const disableHtmlEncoding = core.getInput("disable_html_encoding") !== "false";
