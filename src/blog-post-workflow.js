@@ -186,13 +186,13 @@ feedList.forEach((siteUrl) => {
               }
               if (post && core.getInput('remove_duplicates') === 'true') {
                 if (
-                  appendedPostTitles.indexOf(post.title) !== -1 ||
-                  appendedPostDesc.indexOf(post.description) !== -1
+                  appendedPostTitles.indexOf(post.title.trim()) !== -1 ||
+                  appendedPostDesc.indexOf(post.description.trim()) !== -1
                 ) {
                   post = null;
                 } else {
-                  post.title && appendedPostTitles.push(post.title)
-                  post.description && appendedPostDesc.push(post.description);
+                  post.title && appendedPostTitles.push(post.title.trim());
+                  post.description && appendedPostDesc.push(post.description.trim());
                 }
               }
 
