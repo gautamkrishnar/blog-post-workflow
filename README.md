@@ -23,7 +23,7 @@
       workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
     
     jobs:
-      update-readme-with-blog:
+      build:
         name: Update this repo's README with latest blog posts
         runs-on: ubuntu-latest
         steps:
