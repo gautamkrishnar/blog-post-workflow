@@ -220,6 +220,10 @@ Preview: [https://github.com/Dexters-Hub/Dexters-Hub](https://github.com/Dexters
 
 ### Examples 
 * [My own GitHub profile readme](https://github.com/gautamkrishnar) - [YML File](https://github.com/gautamkrishnar/gautamkrishnar/blob/master/.github/workflows/blog-post-workflow.yml)
+
+### FAQs and Common issues
+- [Error Code 128](https://github.com/gautamkrishnar/blog-post-workflow/issues/67#issuecomment-1214339386)
+
 ## Demo video
 
 Please see the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI) by [@codeSTACKr](https://github.com/codeSTACKr).
