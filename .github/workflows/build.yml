@@ -21,6 +21,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "16"
+          cache: "yarn"
       - run: yarn install
       - run: yarn test
       - run: yarn build && yarn run test-dist
