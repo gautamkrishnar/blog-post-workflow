@@ -233,7 +233,17 @@ Promise.allSettled(promiseArray).then((results) => {
       jobFailFlag = true;
       // Rejected
       core.error(runnerNameArray[index] + ' runner failed, please verify the configuration. Error:');
-      core.error(result.reason);
+      if (result.reason.message.startsWith('Status code')) {
+        const code = result.reason.message.replace('Status code ', '');
+        core.error(`Looks like your website returned ${code}, There is nothing blog post workflow` +
+          ` can do to fix it. Please check your website's RSS feed generation source code. Also double check the URL.`);
+        if (code === `503`) {
+          core.error(`If you are using Cloudflare or Akamai,  make sure that you have the user agent ` +
+            ` ${userAgent} or GitHub actions IP ranges whitelisted in your firewall.`);
+        }
+      } else {
+        core.error(result.reason.message);
+      }
     }
   });
 }).finally(async () => {
