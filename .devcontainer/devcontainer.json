@@ -1,0 +1,16 @@
+{
+   "image":"mcr.microsoft.com/devcontainers/universal:2",
+   "features":{
+      "ghcr.io/devcontainers/features/node:1":{
+         "version":"16"
+      }
+   },
+   "customizations":{
+      "codespaces":{
+         "openFiles":[
+            "README.md",
+            "CONTRIBUTING.md"
+         ]
+      }
+   }
+}
