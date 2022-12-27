@@ -900,10 +900,10 @@ json-stringify-safe@^5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
-keepalive-workflow@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/keepalive-workflow/-/keepalive-workflow-1.0.8.tgz#24f56a58d7d89e5d943a37a910da857df637a3f2"
-  integrity sha512-4o9aJ0156zlciOHXXpp5+EBhmBMj/HtEm1zSaqZKiUn8pX+wrjczhvmTyFeRzkj8ZRs384V9rm8WeKD6h4Z7iQ==
+keepalive-workflow@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/keepalive-workflow/-/keepalive-workflow-1.1.0.tgz#c8db03ebbf61dee53c74c61b4514e3ebf4d861af"
+  integrity sha512-agALOkw3wdy7hkKTbOnKp0chTHBpPYa7ZtQqf+hZAeuqxkT69T4oOvshwzkyA+zU4d+sAFpHtEFM4ZeFiwpb1w==
   dependencies:
     process latest
 
