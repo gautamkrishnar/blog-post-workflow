@@ -233,7 +233,7 @@ Promise.allSettled(promiseArray).then((results) => {
       jobFailFlag = true;
       // Rejected
       core.error(runnerNameArray[index] + ' runner failed, please verify the configuration. Error:');
-      if (result.reason.message.startsWith('Status code')) {
+      if (result.reason && result.reason.message && result.reason.message.startsWith('Status code')) {
         const code = result.reason.message.replace('Status code ', '');
         core.error(`Looks like your website returned ${code}, There is nothing blog post workflow` +
           ` can do to fix it. Please check your website's RSS feed generation source code. Also double check the URL.`);
@@ -242,7 +242,7 @@ Promise.allSettled(promiseArray).then((results) => {
             ` ${userAgent} or GitHub actions IP ranges whitelisted in your firewall.`);
         }
       } else {
-        core.error(result.reason.message);
+        core.error(result.reason || result.reason.message);
       }
     }
   });
