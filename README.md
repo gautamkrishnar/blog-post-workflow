@@ -21,6 +21,8 @@
       schedule: # Run workflow automatically
         - cron: '0 * * * *' # Runs every hour, on the hour
       workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
+    permissions:
+      contents: write # To write the generated contents to the readme
     
     jobs:
       update-readme-with-blog:
@@ -101,6 +103,8 @@ The following configuration allows you to show your latest StackOverflow activit
         # Runs every 5 minutes
         - cron: '*/5 * * * *'
       workflow_dispatch:
+    permissions:
+      contents: write
       
     jobs:
       update-readme-with-stack-overflow:
@@ -129,6 +133,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron:  '0 * * * *'
+permissions:
+      contents: write
 jobs:
   update-readme-with-blog:
     name: Update this repo's README with latest activity from StackOverflow
@@ -167,6 +173,8 @@ on:
     # Runs every hour, on the hour
     - cron: "0 * * * *"
   workflow_dispatch:
+permissions:
+      contents: write
 
 jobs:
   update-readme-with-youtube:
