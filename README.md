@@ -30,7 +30,7 @@
         runs-on: ubuntu-latest
         steps:
           - name: Checkout
-            uses: actions/checkout@v2
+            uses: actions/checkout@v3
           - name: Pull in dev.to posts
             uses: gautamkrishnar/blog-post-workflow@v1
             with:
@@ -111,7 +111,7 @@ The following configuration allows you to show your latest StackOverflow activit
         name: Update this repo's README with latest activity from StackOverflow
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@v2
+          - uses: actions/checkout@v3
           - uses: gautamkrishnar/blog-post-workflow@v1
             with:
               comment_tag_name: "STACKOVERFLOW"
@@ -140,7 +140,7 @@ jobs:
     name: Update this repo's README with latest activity from StackOverflow
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: gautamkrishnar/blog-post-workflow@v1
         with:
           comment_tag_name: "STACKOVERFLOW"
@@ -181,7 +181,7 @@ jobs:
     name: Update this repo's README with latest videos from YouTube
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: gautamkrishnar/blog-post-workflow@master
         with:
           feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=UCtvnB6R__6vdyjUEbDgAWHw"
