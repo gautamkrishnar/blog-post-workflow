@@ -23,6 +23,10 @@ var __copyProps = (to, from, except, desc) => {
   return to;
 };
 var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
@@ -4291,41 +4295,77 @@ var require_sax = __commonJS({
       var S = 0;
       sax.STATE = {
         BEGIN: S++,
+        // leading byte order mark or whitespace
         BEGIN_WHITESPACE: S++,
+        // leading whitespace
         TEXT: S++,
+        // general stuff
         TEXT_ENTITY: S++,
+        // &amp and such.
         OPEN_WAKA: S++,
+        // <
         SGML_DECL: S++,
+        // <!BLARG
         SGML_DECL_QUOTED: S++,
+        // <!BLARG foo "bar
         DOCTYPE: S++,
+        // <!DOCTYPE
         DOCTYPE_QUOTED: S++,
+        // <!DOCTYPE "//blah
         DOCTYPE_DTD: S++,
+        // <!DOCTYPE "//blah" [ ...
         DOCTYPE_DTD_QUOTED: S++,
+        // <!DOCTYPE "//blah" [ "foo
         COMMENT_STARTING: S++,
+        // <!-
         COMMENT: S++,
+        // <!--
         COMMENT_ENDING: S++,
+        // <!-- blah -
         COMMENT_ENDED: S++,
+        // <!-- blah --
         CDATA: S++,
+        // <![CDATA[ something
         CDATA_ENDING: S++,
+        // ]
         CDATA_ENDING_2: S++,
+        // ]]
         PROC_INST: S++,
+        // <?hi
         PROC_INST_BODY: S++,
+        // <?hi there
         PROC_INST_ENDING: S++,
+        // <?hi "there" ?
         OPEN_TAG: S++,
+        // <strong
         OPEN_TAG_SLASH: S++,
+        // <strong /
         ATTRIB: S++,
+        // <a
         ATTRIB_NAME: S++,
+        // <a foo
         ATTRIB_NAME_SAW_WHITE: S++,
+        // <a foo _
         ATTRIB_VALUE: S++,
+        // <a foo=
         ATTRIB_VALUE_QUOTED: S++,
+        // <a foo="bar
         ATTRIB_VALUE_CLOSED: S++,
+        // <a foo="bar"
         ATTRIB_VALUE_UNQUOTED: S++,
+        // <a foo=bar
         ATTRIB_VALUE_ENTITY_Q: S++,
+        // <foo bar="&quot;"
         ATTRIB_VALUE_ENTITY_U: S++,
+        // <foo bar=&quot
         CLOSE_TAG: S++,
+        // </a
         CLOSE_TAG_SAW_WHITE: S++,
+        // </a   >
         SCRIPT: S++,
+        // <script> ...
         SCRIPT_ENDING: S++
+        // <script> ... <
       };
       sax.XML_ENTITIES = {
         "amp": "&",
@@ -5399,7 +5439,10 @@ var require_sax = __commonJS({
             var result = "";
             while (++index < length) {
               var codePoint = Number(arguments[index]);
-              if (!isFinite(codePoint) || codePoint < 0 || codePoint > 1114111 || floor(codePoint) !== codePoint) {
+              if (!isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
+              codePoint < 0 || // not a valid Unicode code point
+              codePoint > 1114111 || // not a valid Unicode code point
+              floor(codePoint) !== codePoint) {
                 throw RangeError("Invalid code point: " + codePoint);
               }
               if (codePoint <= 65535) {
@@ -6577,6 +6620,13 @@ var require_parser2 = __commonJS({
         this.setISODate(item2);
         return item2;
       }
+      /**
+       * Add iTunes specific fields from XML to extracted JSON
+       *
+       * @access public
+       * @param {object} feed extracted
+       * @param {object} channel parsed XML
+       */
       decorateItunes(feed, channel) {
         let items = channel.item || [];
         let categories2 = [];
@@ -6646,6 +6696,14 @@ var require_parser2 = __commonJS({
           }
         }
       }
+      /**
+       * Generates a pagination object where the rel attribute is the key and href attribute is the value
+       *  { self: 'self-url', first: 'first-url', ...  }
+       *
+       * @access private
+       * @param {Object} channel parsed XML
+       * @returns {Object}
+       */
       generatePaginationLinks(channel) {
         if (!channel["atom:link"]) {
           return {};
@@ -7718,6 +7776,10 @@ var require_lib3 = __commonJS({
           return this.request(verb, requestUrl, stream, additionalHeaders);
         });
       }
+      /**
+       * Gets a typed object from an endpoint
+       * Be aware that not found returns a null.  Other errors (4xx, 5xx) reject the promise
+       */
       getJson(requestUrl, additionalHeaders = {}) {
         return __awaiter(this, void 0, void 0, function* () {
           additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
@@ -7752,6 +7814,11 @@ var require_lib3 = __commonJS({
           return this._processResponse(res, this.requestOptions);
         });
       }
+      /**
+       * Makes a raw http request.
+       * All other methods such as get, post, patch, and request ultimately call this.
+       * Prefer get, del, post and patch
+       */
       request(verb, requestUrl, data2, headers) {
         return __awaiter(this, void 0, void 0, function* () {
           if (this._disposed) {
@@ -7812,12 +7879,20 @@ var require_lib3 = __commonJS({
           return response;
         });
       }
+      /**
+       * Needs to be called if keepAlive is set to true in request options.
+       */
       dispose() {
         if (this._agent) {
           this._agent.destroy();
         }
         this._disposed = true;
       }
+      /**
+       * Raw request.
+       * @param info
+       * @param data
+       */
       requestRaw(info, data2) {
         return __awaiter(this, void 0, void 0, function* () {
           return new Promise((resolve2, reject2) => {
@@ -7834,6 +7909,12 @@ var require_lib3 = __commonJS({
           });
         });
       }
+      /**
+       * Raw request with callback.
+       * @param info
+       * @param data
+       * @param onResult
+       */
       requestRawWithCallback(info, data2, onResult) {
         if (typeof data2 === "string") {
           if (!info.options.headers) {
@@ -7877,6 +7958,11 @@ var require_lib3 = __commonJS({
           req.end();
         }
       }
+      /**
+       * Gets an http agent. This function is useful when you need an http agent that handles
+       * routing through a proxy server - depending upon the url and proxy environment variables.
+       * @param serverUrl  The server URL where the request will be sent. For example, https://api.github.com
+       */
       getAgent(serverUrl) {
         const parsedUrl = new URL(serverUrl);
         return this._getAgent(parsedUrl);
@@ -8079,6 +8165,7 @@ var require_auth = __commonJS({
         }
         options.headers["Authorization"] = `Basic ${Buffer.from(`${this.username}:${this.password}`).toString("base64")}`;
       }
+      // This handler cannot handle 401
       canHandleAuthentication() {
         return false;
       }
@@ -8093,12 +8180,15 @@ var require_auth = __commonJS({
       constructor(token) {
         this.token = token;
       }
+      // currently implements pre-authorization
+      // TODO: support preAuth = false where it hooks on 401
       prepareRequest(options) {
         if (!options.headers) {
           throw Error("The request has no headers");
         }
         options.headers["Authorization"] = `Bearer ${this.token}`;
       }
+      // This handler cannot handle 401
       canHandleAuthentication() {
         return false;
       }
@@ -8113,12 +8203,15 @@ var require_auth = __commonJS({
       constructor(token) {
         this.token = token;
       }
+      // currently implements pre-authorization
+      // TODO: support preAuth = false where it hooks on 401
       prepareRequest(options) {
         if (!options.headers) {
           throw Error("The request has no headers");
         }
         options.headers["Authorization"] = `Basic ${Buffer.from(`PAT:${this.token}`).toString("base64")}`;
       }
+      // This handler cannot handle 401
       canHandleAuthentication() {
         return false;
       }
@@ -8272,6 +8365,12 @@ var require_summary = __commonJS({
       constructor() {
         this._buffer = "";
       }
+      /**
+       * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+       * Also checks r/w permissions.
+       *
+       * @returns step summary file path
+       */
       filePath() {
         return __awaiter(this, void 0, void 0, function* () {
           if (this._filePath) {
@@ -8290,6 +8389,15 @@ var require_summary = __commonJS({
           return this._filePath;
         });
       }
+      /**
+       * Wraps content in an HTML tag, adding any HTML attributes
+       *
+       * @param {string} tag HTML tag to wrap
+       * @param {string | null} content content within the tag
+       * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+       *
+       * @returns {string} content wrapped in HTML element
+       */
       wrap(tag, content, attrs = {}) {
         const htmlAttrs = Object.entries(attrs).map(([key, value]) => ` ${key}="${value}"`).join("");
         if (!content) {
@@ -8297,6 +8405,13 @@ var require_summary = __commonJS({
         }
         return `<${tag}${htmlAttrs}>${content}</${tag}>`;
       }
+      /**
+       * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+       *
+       * @param {SummaryWriteOptions} [options] (optional) options for write operation
+       *
+       * @returns {Promise<Summary>} summary instance
+       */
       write(options) {
         return __awaiter(this, void 0, void 0, function* () {
           const overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
@@ -8306,39 +8421,95 @@ var require_summary = __commonJS({
           return this.emptyBuffer();
         });
       }
+      /**
+       * Clears the summary buffer and wipes the summary file
+       *
+       * @returns {Summary} summary instance
+       */
       clear() {
         return __awaiter(this, void 0, void 0, function* () {
           return this.emptyBuffer().write({ overwrite: true });
         });
       }
+      /**
+       * Returns the current summary buffer as a string
+       *
+       * @returns {string} string of summary buffer
+       */
       stringify() {
         return this._buffer;
       }
+      /**
+       * If the summary buffer is empty
+       *
+       * @returns {boolen} true if the buffer is empty
+       */
       isEmptyBuffer() {
         return this._buffer.length === 0;
       }
+      /**
+       * Resets the summary buffer without writing to summary file
+       *
+       * @returns {Summary} summary instance
+       */
       emptyBuffer() {
         this._buffer = "";
         return this;
       }
+      /**
+       * Adds raw text to the summary buffer
+       *
+       * @param {string} text content to add
+       * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+       *
+       * @returns {Summary} summary instance
+       */
       addRaw(text, addEOL = false) {
         this._buffer += text;
         return addEOL ? this.addEOL() : this;
       }
+      /**
+       * Adds the operating system-specific end-of-line marker to the buffer
+       *
+       * @returns {Summary} summary instance
+       */
       addEOL() {
         return this.addRaw(os_1.EOL);
       }
+      /**
+       * Adds an HTML codeblock to the summary buffer
+       *
+       * @param {string} code content to render within fenced code block
+       * @param {string} lang (optional) language to syntax highlight code
+       *
+       * @returns {Summary} summary instance
+       */
       addCodeBlock(code, lang) {
         const attrs = Object.assign({}, lang && { lang });
         const element = this.wrap("pre", this.wrap("code", code), attrs);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML list to the summary buffer
+       *
+       * @param {string[]} items list of items to render
+       * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+       *
+       * @returns {Summary} summary instance
+       */
       addList(items, ordered = false) {
         const tag = ordered ? "ol" : "ul";
         const listItems = items.map((item2) => this.wrap("li", item2)).join("");
         const element = this.wrap(tag, listItems);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML table to the summary buffer
+       *
+       * @param {SummaryTableCell[]} rows table rows
+       *
+       * @returns {Summary} summary instance
+       */
       addTable(rows) {
         const tableBody = rows.map((row) => {
           const cells = row.map((cell) => {
@@ -8355,35 +8526,86 @@ var require_summary = __commonJS({
         const element = this.wrap("table", tableBody);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds a collapsable HTML details element to the summary buffer
+       *
+       * @param {string} label text for the closed state
+       * @param {string} content collapsable content
+       *
+       * @returns {Summary} summary instance
+       */
       addDetails(label, content) {
         const element = this.wrap("details", this.wrap("summary", label) + content);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML image tag to the summary buffer
+       *
+       * @param {string} src path to the image you to embed
+       * @param {string} alt text description of the image
+       * @param {SummaryImageOptions} options (optional) addition image attributes
+       *
+       * @returns {Summary} summary instance
+       */
       addImage(src, alt, options) {
         const { width, height } = options || {};
         const attrs = Object.assign(Object.assign({}, width && { width }), height && { height });
         const element = this.wrap("img", null, Object.assign({ src, alt }, attrs));
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML section heading element
+       *
+       * @param {string} text heading text
+       * @param {number | string} [level=1] (optional) the heading level, default: 1
+       *
+       * @returns {Summary} summary instance
+       */
       addHeading(text, level) {
         const tag = `h${level}`;
         const allowedTag = ["h1", "h2", "h3", "h4", "h5", "h6"].includes(tag) ? tag : "h1";
         const element = this.wrap(allowedTag, text);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML thematic break (<hr>) to the summary buffer
+       *
+       * @returns {Summary} summary instance
+       */
       addSeparator() {
         const element = this.wrap("hr", null);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML line break (<br>) to the summary buffer
+       *
+       * @returns {Summary} summary instance
+       */
       addBreak() {
         const element = this.wrap("br", null);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML blockquote to the summary buffer
+       *
+       * @param {string} text quote text
+       * @param {string} cite (optional) citation url
+       *
+       * @returns {Summary} summary instance
+       */
       addQuote(text, cite) {
         const attrs = Object.assign({}, cite && { cite });
         const element = this.wrap("blockquote", text, attrs);
         return this.addRaw(element).addEOL();
       }
+      /**
+       * Adds an HTML anchor tag to the summary buffer
+       *
+       * @param {string} text link text/content
+       * @param {string} href hyperlink
+       *
+       * @returns {Summary} summary instance
+       */
       addLink(text, href) {
         const element = this.wrap("a", text, { href });
         return this.addRaw(element).addEOL();
@@ -8688,7 +8910,7 @@ var require_dateformat = __commonJS({
             mask = date;
             date = void 0;
           }
-          date = date || new Date();
+          date = date || /* @__PURE__ */ new Date();
           if (!(date instanceof Date)) {
             date = new Date(date);
           }
@@ -9017,7 +9239,7 @@ var require_random_seed = __commonJS({
           for (i = 0; i < arguments.length; i++) {
             args.push(arguments[i]);
           }
-          hash(k++ + new Date().getTime() + args.join("") + Math.random());
+          hash(k++ + (/* @__PURE__ */ new Date()).getTime() + args.join("") + Math.random());
         };
         random.initState = function() {
           mash();
@@ -9139,7 +9361,7 @@ var require_retry_operation = __commonJS({
       if (!err) {
         return false;
       }
-      var currentTime = new Date().getTime();
+      var currentTime = (/* @__PURE__ */ new Date()).getTime();
       if (err && currentTime - this._operationStart >= this._maxRetryTime) {
         this._errors.unshift(new Error("RetryOperation timeout occurred"));
         return false;
@@ -9189,7 +9411,7 @@ var require_retry_operation = __commonJS({
           self._operationTimeoutCb();
         }, self._operationTimeout);
       }
-      this._operationStart = new Date().getTime();
+      this._operationStart = (/* @__PURE__ */ new Date()).getTime();
       this._fn(this._attempts);
     };
     RetryOperation.prototype.try = function(fn) {
@@ -9417,7 +9639,7 @@ var require_library = __commonJS({
             { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }
           );
           const commitDate = new Date(parseInt(outputData, 10) * 1e3);
-          const diffInDays = Math.round((new Date() - commitDate) / (1e3 * 60 * 60 * 24));
+          const diffInDays = Math.round((/* @__PURE__ */ new Date() - commitDate) / (1e3 * 60 * 60 * 24));
           if (diffInDays >= timeElapsed) {
             await execute("git", [
               "config",
@@ -9623,7 +9845,7 @@ var require_filters = __commonJS({
       if (!item2.pubDate) {
         return true;
       }
-      const today = new Date();
+      const today = /* @__PURE__ */ new Date();
       const itemDate = new Date(item2.pubDate.trim());
       const dateFilter3 = core2.getInput("filter_dates").trim();
       if (dateFilter3.indexOf("daysAgo") !== -1) {
@@ -9689,6 +9911,7 @@ var README_FILE_PATH_LIST = core.getInput("readme_path").split(",").map((item2) 
 var GITHUB_TOKEN = core.getInput("gh_token");
 var CUSTOM_TAGS = {};
 var ENABLE_KEEPALIVE = core.getInput("enable_keepalive") === "true";
+var SKIP_COMMITS = core.getInput("skip_commit") === "true";
 var retryConfig = {
   retries: Number.parseInt(core.getInput("retry_count")),
   factor: 1,
@@ -9896,7 +10119,7 @@ Promise.allSettled(promiseArray).then((results) => {
           changedReadmeCount = changedReadmeCount + 1;
         }
       });
-      if (changedReadmeCount > 0) {
+      if (changedReadmeCount > 0 && !SKIP_COMMITS) {
         if (!process.env.TEST_MODE) {
           await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
             process.exit(jobFailFlag ? 1 : 0);
