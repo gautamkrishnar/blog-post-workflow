@@ -33,7 +33,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "dateformat": "^3.0.3",
-    "esbuild": "^0.17.0",
+    "esbuild": "^0.17.6",
     "keepalive-workflow": "^1.1.0",
     "process": "latest",
     "promise-retry": "^2.0.1",
