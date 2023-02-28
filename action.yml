@@ -121,6 +121,10 @@ inputs:
     description: "Allows you to remove duplicate blog posts from multiple sources"
     default: ""
     required: false
+  skip_commit:
+    description: "Skips committing the changes to repo"
+    default: "false"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

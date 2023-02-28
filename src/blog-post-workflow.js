@@ -59,6 +59,9 @@ const CUSTOM_TAGS = {};
 // Keepalive flag
 const ENABLE_KEEPALIVE = core.getInput('enable_keepalive') === 'true';
 
+// Skip commit flag
+const SKIP_COMMITS = core.getInput('skip_commit') === 'true';
+
 // Retry configuration
 const retryConfig = {
   retries: Number.parseInt(core.getInput('retry_count')),
@@ -346,7 +349,7 @@ Promise.allSettled(promiseArray).then((results) => {
         }
       });
 
-      if (changedReadmeCount > 0) {
+      if (changedReadmeCount > 0 && !SKIP_COMMITS) {
         if (!process.env.TEST_MODE) {
           // Commit to readme
           await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
