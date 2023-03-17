@@ -196,6 +196,47 @@ Preview: [https://github.com/Dexters-Hub/Dexters-Hub](https://github.com/Dexters
 ![image](https://user-images.githubusercontent.com/8397274/180653916-a4121091-d903-4b6e-b258-a2dfc46ffd02.png)
 </details>
 
+<details>
+<summary><b>Latest Podcast Episode from Anchor</b></summary>
+
+##### workflow.yml
+```yaml
+name: Latest RadioGeek (Anchor)
+on:
+  schedule:
+    # Runs “At 00:00 on Friday.”
+    - cron: '0 0 * * FRI'
+  workflow_dispatch:
+
+jobs:
+  update-readme-with-anchor:
+    name: Update this repo's README with latest RadioGeek podcast feed from Anchor
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gautamkrishnar/blog-post-workflow@master
+        with:
+          comment_tag_name: "RadioGeek-Anchor-feed"
+          feed_list: "https://anchor.fm/s/6048890/podcast/rss"
+          max_post_count: 1000
+          commit_message: "🔥Update with lastest RadioGeek feed"
+          committer_username: "🤖RadioGeek-Bot"
+          committer_email: "<>"
+          date_format: 'UTC: yyyy-mm-dd'
+          template: "$newline #### - [$title]($url) $newline <details><summary>توضیحات</summary> $description </details> $newline <hr /> $newline"
+          # Regex for remove HTML TAG:    /(<([^>]+)>)/ig
+          item_exec: "post.description = post.description.replace('','')"
+          disable_html_encoding: true
+```
+by : [Mahdi Qiamast](https://github.com/Qiamast)
+
+##### Results
+![01](https://user-images.githubusercontent.com/78082316/215697112-3769ad7b-bfd8-4fba-909e-a906a4c696f2.png)
+![02](https://user-images.githubusercontent.com/78082316/215697145-29d29594-6974-4f8e-b017-8a0eddcf67d8.png)
+
+</details>
+
+
 ## Popular Sources 
 <details>
   <summary>Some popular blogging platforms and their RSS feed URLs (Click to expand)</summary>
