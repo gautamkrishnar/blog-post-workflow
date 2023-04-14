@@ -5670,7 +5670,7 @@ var require_parser = __commonJS({
           this.saxParser.onopentag = function(_this) {
             return function(node) {
               var key, newValue, obj, processedKey, ref;
-              obj = {};
+              obj = /* @__PURE__ */ Object.create(null);
               obj[charkey] = "";
               if (!_this.options.ignoreAttrs) {
                 ref = node.attributes;
@@ -5678,7 +5678,7 @@ var require_parser = __commonJS({
                   if (!hasProp.call(ref, key))
                     continue;
                   if (!(attrkey in obj) && !_this.options.mergeAttrs) {
-                    obj[attrkey] = {};
+                    obj[attrkey] = /* @__PURE__ */ Object.create(null);
                   }
                   newValue = _this.options.attrValueProcessors ? processItem(_this.options.attrValueProcessors, node.attributes[key], key) : node.attributes[key];
                   processedKey = _this.options.attrNameProcessors ? processItem(_this.options.attrNameProcessors, key) : key;
@@ -5728,7 +5728,11 @@ var require_parser = __commonJS({
                 }
               }
               if (isEmpty(obj)) {
-                obj = _this.options.emptyTag !== "" ? _this.options.emptyTag : emptyStr;
+                if (typeof _this.options.emptyTag === "function") {
+                  obj = _this.options.emptyTag();
+                } else {
+                  obj = _this.options.emptyTag !== "" ? _this.options.emptyTag : emptyStr;
+                }
               }
               if (_this.options.validator != null) {
                 xpath = "/" + function() {
@@ -5752,7 +5756,7 @@ var require_parser = __commonJS({
               }
               if (_this.options.explicitChildren && !_this.options.mergeAttrs && typeof obj === "object") {
                 if (!_this.options.preserveChildrenOrder) {
-                  node = {};
+                  node = /* @__PURE__ */ Object.create(null);
                   if (_this.options.attrkey in obj) {
                     node[_this.options.attrkey] = obj[_this.options.attrkey];
                     delete obj[_this.options.attrkey];
@@ -5767,7 +5771,7 @@ var require_parser = __commonJS({
                   obj = node;
                 } else if (s) {
                   s[_this.options.childkey] = s[_this.options.childkey] || [];
-                  objClone = {};
+                  objClone = /* @__PURE__ */ Object.create(null);
                   for (key in obj) {
                     if (!hasProp.call(obj, key))
                       continue;
@@ -5785,7 +5789,7 @@ var require_parser = __commonJS({
               } else {
                 if (_this.options.explicitRoot) {
                   old = obj;
-                  obj = {};
+                  obj = /* @__PURE__ */ Object.create(null);
                   obj[nodeName] = old;
                 }
                 _this.resultObject = obj;
@@ -6012,7 +6016,8 @@ var require_fields = __commonJS({
       "episode",
       "image",
       "season",
-      "keywords"
+      "keywords",
+      "episodeType"
     ].map(mapItunesField);
   }
 });
@@ -6615,6 +6620,9 @@ var require_parser2 = __commonJS({
           if (item2.guid._)
             item2.guid = item2.guid._;
         }
+        if (xmlItem.$ && xmlItem.$["rdf:about"]) {
+          item2["rdf:about"] = xmlItem.$["rdf:about"];
+        }
         if (xmlItem.category)
           item2.categories = xmlItem.category;
         this.setISODate(item2);
@@ -6652,8 +6660,10 @@ var require_parser2 = __commonJS({
         if (channel["itunes:category"]) {
           const categoriesWithSubs = channel["itunes:category"].map((category) => {
             return {
-              name: category.$.text,
-              subs: category["itunes:category"] ? category["itunes:category"].map((subcategory) => ({ name: subcategory.$.text })) : null
+              name: category && category.$ && category.$.text,
+              subs: category["itunes:category"] ? category["itunes:category"].map((subcategory) => ({
+                name: subcategory && subcategory.$ && subcategory.$.text
+              })) : null
             };
           });
           feed.itunes.categories = categoriesWithSubs.map((category) => category.name);
@@ -6662,7 +6672,7 @@ var require_parser2 = __commonJS({
         if (channel["itunes:keywords"]) {
           if (channel["itunes:keywords"].length > 1) {
             feed.itunes.keywords = channel["itunes:keywords"].map(
-              (keyword) => keyword.$.text
+              (keyword) => keyword && keyword.$ && keyword.$.text
             );
           } else {
             let keywords = channel["itunes:keywords"][0];
