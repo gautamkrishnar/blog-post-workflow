@@ -29,7 +29,7 @@
         </description>
           <testingTag>hello</testingTag>
           <testingTag2>apple</testingTag2>
-        <category>introductions</category>
+        <category >introductions</category>
       </item>
         <item>
             <title>God Mode in browsers: document.designMode = "on"</title>
@@ -45,7 +45,7 @@
                 &lt;p&gt;&lt;a href="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" class="article-body-image-wrapper"&gt;&lt;img src="https://i.giphy.com/media/iDByhJJoZGSac2RH5z/giphy.gif" alt="preview"&gt;&lt;/a&gt;&lt;/p&gt;
 
             </description>
-            <category>chrome</category>
+            <category domain="http://www.blogger.com/atom/ns#">chrome</category>
             <category>firefox</category>
             <category>devtools</category>
             <category>webdev</category>

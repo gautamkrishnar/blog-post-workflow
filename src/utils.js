@@ -170,6 +170,36 @@ const escapeHTML = str => str.replace(/[&<>')("]/g,
     '(': '&lpar;'
   }[tag]));
 
+/**
+ * @typedef CategoryObj
+ * @property {string} _
+ */
+
+/***
+ * Converts categories from RSS Spec to parseable arrays
+ * https://validator.w3.org/feed/docs/rss2.html#ltcategorygtSubelementOfLtitemgt
+ * @param categories {[CategoryObj] | [string]}
+ * @returns {[string]}
+ */
+const categoriesToArray = (categories) => {
+  const categoriesStr = [];
+  if (Array.isArray(categories)) {
+    categories.forEach((item) => {
+      // <category>C#</category>
+      // <category>Controller</category>
+      if (typeof item === 'string') {
+        categoriesStr.push(item);
+      }
+      // <category domain="http://www.blogger.com/atom/ns#">C#</category>
+      // <category domain="http://www.blogger.com/atom/ns#">Controller</category>
+      else if (typeof item === 'object' && item._) {
+        categoriesStr.push(item._);
+      }
+    });
+  }
+  return categoriesStr;
+};
+
 module.exports = {
   updateAndParseCompoundParams,
   commitReadme,
@@ -177,5 +207,6 @@ module.exports = {
   buildReadme,
   exec,
   getParameterisedTemplate,
-  escapeHTML
+  escapeHTML,
+  categoriesToArray
 };

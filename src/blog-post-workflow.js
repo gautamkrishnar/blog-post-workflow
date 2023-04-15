@@ -13,7 +13,8 @@ const {
   buildReadme,
   exec,
   getParameterisedTemplate,
-  escapeHTML
+  escapeHTML,
+  categoriesToArray
 } = require('./utils');
 const {
   ignoreStackExchangeComments,
@@ -153,7 +154,7 @@ feedList.forEach((siteUrl) => {
                   Object.assign(customTags, {[tag]: item[tag]});
                 }
               });
-              const categories = item.categories ?  item.categories : [];
+              const categories = item.categories ?  categoriesToArray(item.categories) : [];
               let post = {
                 title: item.title.trim(),
                 url: item.link.trim(),
