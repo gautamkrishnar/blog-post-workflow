@@ -9819,6 +9819,19 @@ ${tagToLookFor}END -->`
         "(": "&lpar;"
       })[tag]
     );
+    var categoriesToArray2 = (categories2) => {
+      const categoriesStr = [];
+      if (Array.isArray(categories2)) {
+        categories2.forEach((item2) => {
+          if (typeof item2 === "string") {
+            categoriesStr.push(item2);
+          } else if (typeof item2 === "object" && item2._) {
+            categoriesStr.push(item2._);
+          }
+        });
+      }
+      return categoriesStr;
+    };
     module2.exports = {
       updateAndParseCompoundParams: updateAndParseCompoundParams2,
       commitReadme: commitReadme2,
@@ -9826,7 +9839,8 @@ ${tagToLookFor}END -->`
       buildReadme: buildReadme2,
       exec: exec2,
       getParameterisedTemplate: getParameterisedTemplate2,
-      escapeHTML: escapeHTML2
+      escapeHTML: escapeHTML2,
+      categoriesToArray: categoriesToArray2
     };
   }
 });
@@ -9900,7 +9914,8 @@ var {
   buildReadme,
   exec,
   getParameterisedTemplate,
-  escapeHTML
+  escapeHTML,
+  categoriesToArray
 } = require_utils3();
 var {
   ignoreStackExchangeComments,
@@ -9987,7 +10002,7 @@ feedList.forEach((siteUrl) => {
               Object.assign(customTags, { [tag]: item[tag] });
             }
           });
-          const categories = item.categories ? item.categories : [];
+          const categories = item.categories ? categoriesToArray(item.categories) : [];
           let post = {
             title: item.title.trim(),
             url: item.link.trim(),
