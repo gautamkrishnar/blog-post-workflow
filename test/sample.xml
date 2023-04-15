@@ -29,7 +29,7 @@
         </description>
           <testingTag>hello</testingTag>
           <testingTag2>apple</testingTag2>
-        <category >introductions</category>
+        <category>introductions</category>
       </item>
         <item>
             <title>God Mode in browsers: document.designMode = "on"</title>
