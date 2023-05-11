@@ -187,7 +187,7 @@ jobs:
           feed_list: "https://www.youtube.com/feeds/videos.xml?channel_id=UCtvnB6R__6vdyjUEbDgAWHw"
           custom_tags: "channelId/yt:channelId/,videoId/yt:videoId/"
           date_format: "mmm d, yyyy"
-          template: '<table><tr><td><a href="$url"><img width="140px" src="https://i.ytimg.com/vi/$videoId/mqdefault.jpg"></a></td>$newline<td><a href="$url">$title</a><br/>$date</td></tr></table>$newline'
+          template: '<table><tr><td><a href="$url"><img width="140px" src="http://img.youtube.com/vi/$videoId/maxresdefault.jpg"></a></td>$newline<td><a href="$url">$title</a><br/>$date</td></tr></table>$newline'
           committer_email: "alwinjohn231@gmail.com"
 ```
 Preview: [https://github.com/Dexters-Hub/Dexters-Hub](https://github.com/Dexters-Hub/Dexters-Hub)
