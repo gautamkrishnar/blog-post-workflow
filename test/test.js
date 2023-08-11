@@ -6,7 +6,7 @@ const { exec, escapeHTML } = require('../src/utils');
 const {DEFAULT_TEST_ENV} = require('./default-env');
 
 // Folder with readme snapshots
-const TEST_SNAP_DIR = path.join(__dirname);
+const TEST_SNAP_DIR = path.join(__dirname, 'snapshots');
 
 // language=markdown
 const TEMPLATE = `# Readme test
