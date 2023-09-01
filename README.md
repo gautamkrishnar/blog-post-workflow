@@ -312,7 +312,7 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 - Thanks **Tutanota** for sponsoring free encrypted emails for my opensource projects:
  
  <a href="https://tutanota.com" target="_blank">
- <img alt="tutanota.com" src="https://github.com/gautamkrishnar/blog-post-workflow/assets/8397274/09faa63f-6847-4133-b409-5f7dc9ed1d59" width="300">
+ <img alt="tutanota.com" src="https://user-images.githubusercontent.com/8397274/265096374-09faa63f-6847-4133-b409-5f7dc9ed1d59.png" width="300">
  </a>
 
 ## Liked it?
