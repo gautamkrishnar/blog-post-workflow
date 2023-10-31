@@ -6,15 +6,15 @@
 ## How to use
 
 1. Star this repo 😉 
-1. Go to your repository
-1. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->` in your readme. The workflow will replace this comment with the actual blog post list: 
+2. Go to your repository
+3. Add the following section to your **README.md** file, you can give whatever title you want. Just make sure that you use `<!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END -->` in your readme. The workflow will replace this comment with the actual blog post list: 
     ```markdown
     # Blog posts
     <!-- BLOG-POST-LIST:START -->
     <!-- BLOG-POST-LIST:END -->
     ```
-1. Create a folder named `.github` and create a `workflows` folder inside it, if it doesn't exist.
-1. Create a new file named `blog-post-workflow.yml` with the following contents inside the workflows folder:
+4. Create a folder named `.github` and create a `workflows` folder inside it, if it doesn't exist.
+5. Create a new file named `blog-post-workflow.yml` with the following contents inside the workflows folder:
     ```yaml
     name: Latest blog post workflow
     on:
@@ -36,8 +36,11 @@
             with:
               feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
     ```
-1. Replace the above URL list with your own RSS feed URLs. See [popular-sources](#popular-sources) for a list of common RSS feed urls.
-1. Commit and wait for it to run automatically, or you can also trigger it manually to see the result instantly. To trigger the workflow manually, please follow the steps in the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=272s).
+6. Replace the above URL list with your own RSS feed URLs. See [popular-sources](#popular-sources) for a list of common RSS feed urls. Commit the changes.
+7. Go to repository settings, Click on Actions > General. Update the "Workflow permissions" to "Read and write permissions". Click on save.
+    
+   ![Workflow permissions](https://github.com/gautamkrishnar/blog-post-workflow/assets/8397274/26d4c089-dc58-4309-b65a-2acb9a3c08ba)
+8. Wait for it to run automatically, or you can also trigger it manually to see the result instantly. To trigger the workflow manually, please follow the steps in the [video](https://www.youtube.com/watch?v=ECuqb5Tv9qI&t=272s). 
 
 ## Options
 
