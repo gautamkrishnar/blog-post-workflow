@@ -3953,7 +3953,7 @@ var require_builder = __commonJS({
           } else {
             rootName = this.options.rootName;
           }
-          render = function(_this) {
+          render = /* @__PURE__ */ function(_this) {
             return function(element, obj) {
               var attr, child, entry, index, key, value;
               if (typeof obj !== "object") {
@@ -5644,7 +5644,7 @@ var require_parser = __commonJS({
             xmlns: this.options.xmlns
           });
           this.saxParser.errThrown = false;
-          this.saxParser.onerror = function(_this) {
+          this.saxParser.onerror = /* @__PURE__ */ function(_this) {
             return function(error) {
               _this.saxParser.resume();
               if (!_this.saxParser.errThrown) {
@@ -5653,7 +5653,7 @@ var require_parser = __commonJS({
               }
             };
           }(this);
-          this.saxParser.onend = function(_this) {
+          this.saxParser.onend = /* @__PURE__ */ function(_this) {
             return function() {
               if (!_this.saxParser.ended) {
                 _this.saxParser.ended = true;
@@ -5667,7 +5667,7 @@ var require_parser = __commonJS({
           stack = [];
           attrkey = this.options.attrkey;
           charkey = this.options.charkey;
-          this.saxParser.onopentag = function(_this) {
+          this.saxParser.onopentag = /* @__PURE__ */ function(_this) {
             return function(node) {
               var key, newValue, obj, processedKey, ref;
               obj = /* @__PURE__ */ Object.create(null);
@@ -5699,7 +5699,7 @@ var require_parser = __commonJS({
               return stack.push(obj);
             };
           }(this);
-          this.saxParser.onclosetag = function(_this) {
+          this.saxParser.onclosetag = /* @__PURE__ */ function(_this) {
             return function() {
               var cdata, emptyStr, key, node, nodeName, obj, objClone, old, s, xpath;
               obj = stack.pop();
@@ -5798,7 +5798,7 @@ var require_parser = __commonJS({
               }
             };
           }(this);
-          ontext = function(_this) {
+          ontext = /* @__PURE__ */ function(_this) {
             return function(text) {
               var charChild, s;
               s = stack[stack.length - 1];
@@ -5820,7 +5820,7 @@ var require_parser = __commonJS({
             };
           }(this);
           this.saxParser.ontext = ontext;
-          return this.saxParser.oncdata = function(_this) {
+          return this.saxParser.oncdata = /* @__PURE__ */ function(_this) {
             return function(text) {
               var s;
               s = ontext(text);
@@ -5866,7 +5866,7 @@ var require_parser = __commonJS({
           }
         };
         Parser2.prototype.parseStringPromise = function(str) {
-          return new Promise(function(_this) {
+          return new Promise(/* @__PURE__ */ function(_this) {
             return function(resolve2, reject2) {
               return _this.parseString(str, function(err, value) {
                 if (err) {
@@ -7675,12 +7675,12 @@ var require_lib3 = __commonJS({
     var RetryableHttpVerbs = ["OPTIONS", "GET", "DELETE", "HEAD"];
     var ExponentialBackoffCeiling = 10;
     var ExponentialBackoffTimeSlice = 5;
-    var HttpClientError = class extends Error {
+    var HttpClientError = class _HttpClientError extends Error {
       constructor(message, statusCode) {
         super(message);
         this.name = "HttpClientError";
         this.statusCode = statusCode;
-        Object.setPrototypeOf(this, HttpClientError.prototype);
+        Object.setPrototypeOf(this, _HttpClientError.prototype);
       }
     };
     exports2.HttpClientError = HttpClientError;
@@ -8271,13 +8271,13 @@ var require_oidc_utils = __commonJS({
     var http_client_1 = require_lib3();
     var auth_1 = require_auth();
     var core_1 = require_core();
-    var OidcClient = class {
+    var OidcClient = class _OidcClient {
       static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
           allowRetries: allowRetry,
           maxRetries: maxRetry
         };
-        return new http_client_1.HttpClient("actions/oidc-client", [new auth_1.BearerCredentialHandler(OidcClient.getRequestToken())], requestOptions);
+        return new http_client_1.HttpClient("actions/oidc-client", [new auth_1.BearerCredentialHandler(_OidcClient.getRequestToken())], requestOptions);
       }
       static getRequestToken() {
         const token = process.env["ACTIONS_ID_TOKEN_REQUEST_TOKEN"];
@@ -8296,13 +8296,13 @@ var require_oidc_utils = __commonJS({
       static getCall(id_token_url) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-          const httpclient = OidcClient.createHttpClient();
+          const httpclient = _OidcClient.createHttpClient();
           const res = yield httpclient.getJson(id_token_url).catch((error) => {
             throw new Error(`Failed to get ID Token. 
  
         Error Code : ${error.statusCode}
  
-        Error Message: ${error.result.message}`);
+        Error Message: ${error.message}`);
           });
           const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
           if (!id_token) {
@@ -8314,13 +8314,13 @@ var require_oidc_utils = __commonJS({
       static getIDToken(audience) {
         return __awaiter(this, void 0, void 0, function* () {
           try {
-            let id_token_url = OidcClient.getIDTokenUrl();
+            let id_token_url = _OidcClient.getIDTokenUrl();
             if (audience) {
               const encodedAudience = encodeURIComponent(audience);
               id_token_url = `${id_token_url}&audience=${encodedAudience}`;
             }
             core_1.debug(`ID token url is ${id_token_url}`);
-            const id_token = yield OidcClient.getCall(id_token_url);
+            const id_token = yield _OidcClient.getCall(id_token_url);
             core_1.setSecret(id_token);
             return id_token;
           } catch (error) {
@@ -8911,7 +8911,7 @@ var require_dateformat = __commonJS({
   "node_modules/dateformat/lib/dateformat.js"(exports2, module2) {
     (function(global) {
       "use strict";
-      var dateFormat2 = function() {
+      var dateFormat2 = /* @__PURE__ */ function() {
         var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|"[^"]*"|'[^']*'/g;
         var timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
         var timezoneClip = /[^-+\dA-Z]/g;
