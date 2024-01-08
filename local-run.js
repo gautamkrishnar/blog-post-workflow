@@ -1,7 +1,7 @@
 const process = require('process');
 const path = require('path');
 const fs = require('fs');
-const {DEFAULT_TEST_ENV} = require('./test/default-env');
+const {DEFAULT_TEST_ENV} = require('./test/testUtils/default-env');
 // language=markdown
 const template = `# Readme test
 Post list example:

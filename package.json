@@ -6,12 +6,12 @@
   "scripts": {
     "build": "esbuild ./src/blog-post-workflow.js  --bundle --platform=node --outfile=dist/blog-post-workflow.js",
     "lint": "jshint --exclude='node_modules/' *.js",
-    "start-server": "node test/test-server.js",
+    "start-server": "node test/testUtils/test-server.js",
     "local-run-script": "node local-run.js",
     "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
-    "test-run": "mocha test/test.js",
+    "test-run": "mocha --parallel --jobs 100  test/**.js",
     "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
-    "test-run-dist": "DIST=true mocha test/test.js",
+    "test-run-dist": "DIST=true mocha --parallel --jobs 100  test/**.js",
     "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
   },
   "repository": {
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "jshint": "^2.12.0",
-    "mocha": "^8.1.3",
+    "mocha": "^10.2.0",
     "start-server-and-test": "^1.11.3"
   }
 }
