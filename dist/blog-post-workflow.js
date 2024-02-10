@@ -10033,8 +10033,12 @@ feedList.forEach((siteUrl) => {
             if (appendedPostTitles.indexOf(post.title.trim()) !== -1 || appendedPostDesc.indexOf(post.description.trim()) !== -1) {
               post = null;
             } else {
-              post.title && appendedPostTitles.push(post.title.trim());
-              post.description && appendedPostDesc.push(post.description.trim());
+              if (post.title) {
+                appendedPostTitles.push(post.title.trim());
+              }
+              if (post.description) {
+                appendedPostDesc.push(post.description.trim());
+              }
             }
           }
           const disableHtmlEncoding = core.getInput("disable_html_encoding") !== "false";
@@ -10054,129 +10058,138 @@ feedList.forEach((siteUrl) => {
     });
   }));
 });
-Promise.allSettled(promiseArray).then((results) => {
-  results.forEach((result, index) => {
-    if (result.status === "fulfilled") {
-      core.info(runnerNameArray[index] + " runner succeeded. Post count: " + result.value.length);
-      if (typeof feedNamesList[index] !== void 0 && feedNamesList[index]) {
-        result.value = result.value.map((item2) => {
-          item2.feedName = feedNamesList[index];
-          return item2;
-        });
-      }
-      postsArray.push(...result.value);
-    } else {
-      jobFailFlag = true;
-      core.error(runnerNameArray[index] + " runner failed, please verify the configuration. Error:");
-      if (result.reason && result.reason.message && result.reason.message.startsWith("Status code")) {
-        const code = result.reason.message.replace("Status code ", "");
-        core.error(`Looks like your website returned ${code}, There is nothing blog post workflow can do to fix it. Please check your website's RSS feed generation source code. Also double check the URL.`);
-        if (code === `503`) {
-          core.error(`If you are using Cloudflare or Akamai,  make sure that you have the user agent  ${userAgent} or GitHub actions IP ranges whitelisted in your firewall.`);
+var runWorkflow = async () => {
+  await Promise.allSettled(promiseArray).then((results) => {
+    results.forEach((result, index) => {
+      if (result.status === "fulfilled") {
+        core.info(runnerNameArray[index] + " runner succeeded. Post count: " + result.value.length);
+        if (typeof feedNamesList[index] !== void 0 && feedNamesList[index]) {
+          result.value = result.value.map((item2) => {
+            item2.feedName = feedNamesList[index];
+            return item2;
+          });
         }
+        postsArray.push(...result.value);
       } else {
-        core.error(result.reason || result.reason.message);
+        jobFailFlag = true;
+        core.error(runnerNameArray[index] + " runner failed, please verify the configuration. Error:");
+        if (result.reason && result.reason.message && result.reason.message.startsWith("Status code")) {
+          const code = result.reason.message.replace("Status code ", "");
+          core.error(`Looks like your website returned ${code}, There is nothing blog post workflow can do to fix it. Please check your website's RSS feed generation source code. Also double check
+            the URL.`);
+          if (code === `503`) {
+            core.error(`If you are using Cloudflare or Akamai,  make sure that you have the user agent  ${userAgent} or GitHub actions IP ranges whitelisted in your firewall.`);
+          }
+        } else {
+          core.error(result.reason || result.reason.message);
+        }
       }
+    });
+  }).finally(async () => {
+    postsArray = postsArray.filter((item2) => item2 !== null);
+    if (ENABLE_SORT) {
+      postsArray.sort(function(a, b) {
+        return b.date - a.date;
+      });
+    }
+    postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
+    if (postsArray.length > 0) {
+      try {
+        if (!process.env.TEST_MODE) {
+          await exec("git", ["config", "pull.rebase", "true"], { stdio: ["pipe", "pipe", "pipe"] });
+          await exec("git", ["pull"], { stdio: ["pipe", "pipe", "pipe"] });
+        }
+        const template = core.getInput("template");
+        const randEmojiArr = getParameterisedTemplate(template, "randomEmoji");
+        const constEmojiArr = getParameterisedTemplate(template, "emojiKey");
+        const postListMarkdown = postsArray.reduce((acc, cur, index) => {
+          if (template === "default") {
+            return acc + `
+- [${cur.title}](${cur.url})` + (index + 1 === postsArray.length ? "\n" : "");
+          } else {
+            const categoryTemplate = core.getInput("categories_template");
+            const categoryList = categoryTemplate === "default" ? cur.categories.join(", ") : cur.categories.reduce((prev, current) => prev + categoryTemplate.replace(/\$category\b/g, current.toString()), "");
+            const date = dateFormat(cur.date, core.getInput("date_format"));
+            let content = template.replace(/\$title\b/g, cur.title).replace(/\$url\b/g, cur.url).replace(/\$description\b/g, cur.description).replace(/\$date\b/g, date).replace(/\$counter\b/g, (index + 1).toString()).replace(/\$feedName\b/g, cur.feedName ? cur.feedName : "").replace(/\$categories\b/g, categoryList.toString()).replace(/\$newline/g, "\n");
+            Object.keys(CUSTOM_TAGS).forEach((tag) => {
+              const replaceValue = cur[tag] ? cur[tag] : "";
+              content = content.replace(new RegExp("\\$" + tag + "\\b", "g"), replaceValue);
+            });
+            if (randEmojiArr) {
+              let seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ? process.env.GITHUB_REPOSITORY : "example") + index;
+              if (core.getInput("rand_seed")) {
+                seed = core.getInput("rand_seed") + index;
+              }
+              const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
+              content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
+            }
+            if (constEmojiArr) {
+              content = content.replace(/\$emojiKey\((\S)*\)/g, constEmojiArr[index % constEmojiArr.length]);
+            }
+            return acc + content;
+          }
+        }, "");
+        const outputOnly = core.getInput("output_only") !== "false";
+        if (outputOnly) {
+          core.info("outputOnly mode: set `results` variable. Readme not committed.");
+          core.setOutput("results", postsArray);
+          const outputFilePath = path.join("/", "tmp", "blog_post_workflow_output.json");
+          if (fs.existsSync(outputFilePath)) {
+            fs.rmSync(outputFilePath);
+          }
+          fs.writeFileSync(outputFilePath, JSON.stringify(postsArray), { encoding: "utf-8" });
+          process.exit(jobFailFlag ? 1 : 0);
+        }
+        let changedReadmeCount = 0;
+        README_FILE_PATH_LIST.forEach((README_FILE_PATH) => {
+          const readmeData = fs.readFileSync(README_FILE_PATH, "utf8");
+          const newReadme = buildReadme(readmeData, postListMarkdown);
+          if (newReadme !== readmeData) {
+            core.info("Writing to " + README_FILE_PATH);
+            fs.writeFileSync(README_FILE_PATH, newReadme);
+            changedReadmeCount = changedReadmeCount + 1;
+          }
+        });
+        if (changedReadmeCount > 0 && !SKIP_COMMITS) {
+          if (!process.env.TEST_MODE) {
+            await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
+              process.exit(jobFailFlag ? 1 : 0);
+            });
+          }
+        } else {
+          if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
+            const committerUsername = core.getInput("committer_username");
+            const committerEmail = core.getInput("committer_email");
+            const message = await keepaliveWorkflow.KeepAliveWorkflow(
+              GITHUB_TOKEN,
+              committerUsername,
+              committerEmail,
+              "dummy commit to keep the repository active, see https://git.io/Jtm4V",
+              50,
+              true
+            );
+            core.info(message);
+          } else {
+            core.info("No change detected, skipping");
+          }
+          process.exit(jobFailFlag ? 1 : 0);
+        }
+      } catch (e) {
+        core.error(e);
+        process.exit(1);
+      }
+    } else {
+      core.info("0 blog posts fetched");
+      process.exit(jobFailFlag ? 1 : 0);
     }
   });
-}).finally(async () => {
-  postsArray = postsArray.filter((item2) => item2 !== null);
-  if (ENABLE_SORT) {
-    postsArray.sort(function(a, b) {
-      return b.date - a.date;
-    });
-  }
-  postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
-  if (postsArray.length > 0) {
-    try {
-      if (!process.env.TEST_MODE) {
-        await exec("git", ["config", "pull.rebase", "true"], { stdio: ["pipe", "pipe", "pipe"] });
-        await exec("git", ["pull"], { stdio: ["pipe", "pipe", "pipe"] });
-      }
-      const template = core.getInput("template");
-      const randEmojiArr = getParameterisedTemplate(template, "randomEmoji");
-      const constEmojiArr = getParameterisedTemplate(template, "emojiKey");
-      const postListMarkdown = postsArray.reduce((acc, cur, index) => {
-        if (template === "default") {
-          return acc + `
-- [${cur.title}](${cur.url})` + (index + 1 === postsArray.length ? "\n" : "");
-        } else {
-          const categoryTemplate = core.getInput("categories_template");
-          const categoryList = categoryTemplate === "default" ? cur.categories.join(", ") : cur.categories.reduce((prev, current) => prev + categoryTemplate.replace(/\$category\b/g, current.toString()), "");
-          const date = dateFormat(cur.date, core.getInput("date_format"));
-          let content = template.replace(/\$title\b/g, cur.title).replace(/\$url\b/g, cur.url).replace(/\$description\b/g, cur.description).replace(/\$date\b/g, date).replace(/\$counter\b/g, (index + 1).toString()).replace(/\$feedName\b/g, cur.feedName ? cur.feedName : "").replace(/\$categories\b/g, categoryList.toString()).replace(/\$newline/g, "\n");
-          Object.keys(CUSTOM_TAGS).forEach((tag) => {
-            const replaceValue = cur[tag] ? cur[tag] : "";
-            content = content.replace(new RegExp("\\$" + tag + "\\b", "g"), replaceValue);
-          });
-          if (randEmojiArr) {
-            let seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ? process.env.GITHUB_REPOSITORY : "example") + index;
-            if (core.getInput("rand_seed")) {
-              seed = core.getInput("rand_seed") + index;
-            }
-            const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
-            content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
-          }
-          if (constEmojiArr) {
-            content = content.replace(/\$emojiKey\((\S)*\)/g, constEmojiArr[index % constEmojiArr.length]);
-          }
-          return acc + content;
-        }
-      }, "");
-      const outputOnly = core.getInput("output_only") !== "false";
-      if (outputOnly) {
-        core.info("outputOnly mode: set `results` variable. Readme not committed.");
-        core.setOutput("results", postsArray);
-        const outputFilePath = path.join("/", "tmp", "blog_post_workflow_output.json");
-        if (fs.existsSync(outputFilePath)) {
-          fs.rmSync(outputFilePath);
-        }
-        fs.writeFileSync(outputFilePath, JSON.stringify(postsArray), { encoding: "utf-8" });
-        process.exit(jobFailFlag ? 1 : 0);
-      }
-      let changedReadmeCount = 0;
-      README_FILE_PATH_LIST.forEach((README_FILE_PATH) => {
-        const readmeData = fs.readFileSync(README_FILE_PATH, "utf8");
-        const newReadme = buildReadme(readmeData, postListMarkdown);
-        if (newReadme !== readmeData) {
-          core.info("Writing to " + README_FILE_PATH);
-          fs.writeFileSync(README_FILE_PATH, newReadme);
-          changedReadmeCount = changedReadmeCount + 1;
-        }
-      });
-      if (changedReadmeCount > 0 && !SKIP_COMMITS) {
-        if (!process.env.TEST_MODE) {
-          await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
-            process.exit(jobFailFlag ? 1 : 0);
-          });
-        }
-      } else {
-        if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
-          const committerUsername = core.getInput("committer_username");
-          const committerEmail = core.getInput("committer_email");
-          const message = await keepaliveWorkflow.KeepAliveWorkflow(
-            GITHUB_TOKEN,
-            committerUsername,
-            committerEmail,
-            "dummy commit to keep the repository active, see https://git.io/Jtm4V",
-            50,
-            true
-          );
-          core.info(message);
-        } else {
-          core.info("No change detected, skipping");
-        }
-        process.exit(jobFailFlag ? 1 : 0);
-      }
-    } catch (e) {
-      core.error(e);
-      process.exit(1);
-    }
-  } else {
-    core.info("0 blog posts fetched");
-    process.exit(jobFailFlag ? 1 : 0);
-  }
-});
+};
+module.exports = {
+  runWorkflow
+};
+if (!module.parent) {
+  runWorkflow().then();
+}
 /*! Bundled license information:
 
 sax/lib/sax.js:
