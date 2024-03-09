@@ -19,5 +19,6 @@ fs.writeFile(path.join(__dirname, 'test', 'Readme.md'), template, () => {
   });
   const testFile = process.env.DIST ? './dist/blog-post-workflow' : './src/blog-post-workflow';
   console.log('Testing: ', testFile);
-  require(testFile);
+  const action = require(testFile);
+  action.runWorkflow();
 });
