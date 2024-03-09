@@ -9862,7 +9862,6 @@ var require_filters = __commonJS({
         return item2;
       }
     });
-    var ignoreMediumComments2 = (item2) => !(COMMENT_FILTERS.indexOf("medium") !== -1 && item2.link && item2.link.includes("medium.com") && item2.categories === void 0);
     var ignoreStackOverflowComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackoverflow") !== -1 && item2.link && item2.link.includes("stackoverflow.com") && item2.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item2.author)));
     var ignoreStackExchangeComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackexchange") !== -1 && item2.link && item2.link.includes("stackexchange.com") && item2.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item2.author)));
     var dateFilter2 = (item2) => {
@@ -9890,7 +9889,6 @@ var require_filters = __commonJS({
       }
     };
     module2.exports = {
-      ignoreMediumComments: ignoreMediumComments2,
       ignoreStackOverflowComments: ignoreStackOverflowComments2,
       ignoreStackExchangeComments: ignoreStackExchangeComments2,
       dateFilter: dateFilter2
@@ -9986,7 +9984,7 @@ feedList.forEach((siteUrl) => {
         const responsePosts = data.items;
         const appendedPostTitles = [];
         const appendedPostDesc = [];
-        const posts = responsePosts.filter(ignoreMediumComments).filter(ignoreStackOverflowComments).filter(ignoreStackExchangeComments).filter(dateFilter).map((item) => {
+        const posts = responsePosts.filter(ignoreStackOverflowComments).filter(ignoreStackExchangeComments).filter(dateFilter).map((item) => {
           if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
             reject("Cannot read response->item->pubDate");
           }
