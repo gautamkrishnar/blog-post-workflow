@@ -132,7 +132,6 @@ feedList.forEach((siteUrl) => {
           const appendedPostTitles = [];
           const appendedPostDesc = [];
           const posts = responsePosts
-            .filter(ignoreMediumComments)
             .filter(ignoreStackOverflowComments)
             .filter(ignoreStackExchangeComments)
             .filter(dateFilter)

@@ -18,10 +18,6 @@ const COMMENT_FILTERS = core
       return item;
     }
   });
-// filters out every medium comment (PR #4)
-const ignoreMediumComments = (item) => !(COMMENT_FILTERS.indexOf('medium') !== -1 &&
-  item.link && item.link.includes('medium.com') &&
-  item.categories === undefined);
 
 // filters out stackOverflow comments (#16)
 const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 &&
@@ -62,7 +58,6 @@ const dateFilter = (item) => {
   }
 };
 module.exports = {
-  ignoreMediumComments,
   ignoreStackOverflowComments,
   ignoreStackExchangeComments,
   dateFilter
