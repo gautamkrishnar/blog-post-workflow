@@ -113,3 +113,7 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# reports
+src-report.json
+dist-report.json

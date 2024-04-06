@@ -9,9 +9,9 @@
     "start-server": "node test/testUtils/test-server.js",
     "local-run-script": "node local-run.js",
     "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
-    "test-run": "mocha --parallel --jobs 100 test/**.js",
+    "test-run": "mocha --parallel --reporter json --reporter-option output=src-report.json --jobs 100 test/**.js",
     "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
-    "test-run-dist": "DIST=true mocha --parallel --jobs 100 test/**.js",
+    "test-run-dist": "DIST=true mocha --parallel --reporter json --reporter-option output=dist-report.json --jobs 100 test/**.js",
     "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
   },
   "repository": {
