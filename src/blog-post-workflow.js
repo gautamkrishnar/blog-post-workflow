@@ -172,9 +172,8 @@ feedList.forEach((siteUrl) => {
               }
 
               if (DESCRIPTION_MAX_LENGTH && post && post.description) {
-                const trimmedDescription = post.description.trim();
                 // Trimming the description
-                post.description = truncateString(trimmedDescription, DESCRIPTION_MAX_LENGTH);
+                post.description = truncateString(post.description, DESCRIPTION_MAX_LENGTH);
               }
 
               // Advanced content manipulation using javascript code
