@@ -125,6 +125,10 @@ inputs:
     description: "Skips committing the changes to repo"
     default: "false"
     required: false
+  dummy_commit_message:
+    description: "Dummy commit message, This is when the workflow is doing automated commits to keep the repository active"
+    default: "dummy commit to keep the repository active, see https://git.io/Jtm4V"
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"

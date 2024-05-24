@@ -369,8 +369,8 @@ const runWorkflow = async () => {
             const committerUsername = core.getInput('committer_username');
             const committerEmail = core.getInput('committer_email');
             const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
-              'dummy commit to keep the repository active, see https://git.io/Jtm4V', 50, true);
-            core.info(message);
+              core.getInput('dummy_commit_message'), 50, true);
+            core.info(message.toString());
           } else {
             core.info('No change detected, skipping');
           }
