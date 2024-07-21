@@ -277,6 +277,9 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
 | [Substack](https://substack.com)                           | `https://user.substack.com/feed` |                                | Replace `user` with your substack username
 https://nathanielchitnis/substack.com/feed/
 
+| [Daily Dev Bookmarks](https://daily.dev)                  | `https://api.daily.dev/rss/b/feed` | Replace `USER_ID ` with your Devcard USER_ID | https:api.daily.dev/rss/b/3318cf63-8b45-4d1c-9cf0-ee79196d59a8 |
+
+
 </details>
 
 ### Examples 
