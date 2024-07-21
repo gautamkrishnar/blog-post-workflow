@@ -1,4 +1,7 @@
 # Blog post workflow  [![Build and test](https://github.com/gautamkrishnar/blog-post-workflow/workflows/Build%20and%20test/badge.svg?branch=master)](https://github.com/gautamkrishnar/blog-post-workflow/actions?query=workflow%3A%22Build+and+test%22)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![preview](https://user-images.githubusercontent.com/8397274/88047382-29b8b280-cb6f-11ea-9efb-2af2b10f3e0c.png)
 
@@ -308,7 +311,6 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
 
 - All the **9K+✨** [users](https://github.com/search?l=YAML&o=desc&q=gautamkrishnar%2Fblog-post-workflow&s=indexed&type=Code) of this workflow
 - Everyone for making this project the top 20 most installed / starred action in the [GitHub Marketplace](https://github.com/marketplace?category=&query=sort%3Apopularity-desc&type=actions&verification=) 
-- All the [contributors](https://github.com/gautamkrishnar/blog-post-workflow/graphs/contributors) 
 - [@codeSTACKr](https://github.com/codeSTACKr) for [this](https://www.youtube.com/watch?v=ECuqb5Tv9qI) amazing video
 - [CodeCov](https://about.codecov.io/) for this blog: [Discovering the Most Popular and Most Used GitHub Actions](https://about.codecov.io/blog/discovering-the-most-popular-and-most-used-github-actions/)
 - [the byte podcast](https://podcast.thebyte.io/episodes/learn-how-to-pimp-out-your-github-profile)
@@ -324,6 +326,52 @@ If you are experiencing any bugs, don’t forget to open a [new issue](https://g
  <a href="https://tutanota.com" target="_blank">
  <img alt="tutanota.com" src="https://user-images.githubusercontent.com/8397274/265096374-09faa63f-6847-4133-b409-5f7dc9ed1d59.png" width="300">
  </a>
+
+
+### Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/khaosdoctor"><img src="https://avatars.githubusercontent.com/u/3200560?v=4?s=100" width="100px;" alt="Lucas Santos"/><br /><sub><b>Lucas Santos</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=khaosdoctor" title="Code">💻</a> <a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=khaosdoctor" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/MichaelCurrin"><img src="https://avatars.githubusercontent.com/u/18750745?v=4?s=100" width="100px;" alt="Michael Currin"/><br /><sub><b>Michael Currin</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=MichaelCurrin" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://curious-yu.github.io/"><img src="https://avatars.githubusercontent.com/u/22830590?v=4?s=100" width="100px;" alt="WY"/><br /><sub><b>WY</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=Curious-Yu" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/hexxdump"><img src="https://avatars.githubusercontent.com/u/631835?v=4?s=100" width="100px;" alt="Hussaina Begum"/><br /><sub><b>Hussaina Begum</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=hexxdump" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/riginoommen"><img src="https://avatars.githubusercontent.com/u/3840244?v=4?s=100" width="100px;" alt="Rigin Oommen"/><br /><sub><b>Rigin Oommen</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=riginoommen" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/polilluminato"><img src="https://avatars.githubusercontent.com/u/202140?v=4?s=100" width="100px;" alt="Alberto Bonacina"/><br /><sub><b>Alberto Bonacina</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=polilluminato" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/ambroise-dhenain/"><img src="https://avatars.githubusercontent.com/u/3807458?v=4?s=100" width="100px;" alt="Vadorequest"/><br /><sub><b>Vadorequest</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=Vadorequest" title="Documentation">📖</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://freshidea.com/jonah"><img src="https://avatars.githubusercontent.com/u/20955511?v=4?s=100" width="100px;" alt="Jonah Lawrence"/><br /><sub><b>Jonah Lawrence</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=DenverCoder1" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://denvercoder.com/"><img src="https://avatars.githubusercontent.com/u/22165183?v=4?s=100" width="100px;" alt="Tim Myers"/><br /><sub><b>Tim Myers</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=denvercoder" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://linktr.ee/kaustubhgupta"><img src="https://avatars.githubusercontent.com/u/43691873?v=4?s=100" width="100px;" alt="Kaustubh Gupta"/><br /><sub><b>Kaustubh Gupta</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=kaustubhgupta" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://darkwood.com/"><img src="https://avatars.githubusercontent.com/u/1254025?v=4?s=100" width="100px;" alt="Mathieu Ledru"/><br /><sub><b>Mathieu Ledru</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=matyo91" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://adityadees.com/"><img src="https://avatars.githubusercontent.com/u/37553901?v=4?s=100" width="100px;" alt="Aditya Dharmawan Saputra"/><br /><sub><b>Aditya Dharmawan Saputra</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=adityadees" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://velog.io/@minnczi"><img src="https://avatars.githubusercontent.com/u/32619843?v=4?s=100" width="100px;" alt="Minji"/><br /><sub><b>Minji</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=minnczi" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://dhanushka.netlify.com/"><img src="https://avatars.githubusercontent.com/u/7068605?v=4?s=100" width="100px;" alt="Dhanushka Madushan"/><br /><sub><b>Dhanushka Madushan</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=madushadhanushka" title="Documentation">📖</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://curtiscode.dev/"><img src="https://avatars.githubusercontent.com/u/15653985?v=4?s=100" width="100px;" alt="Curtis Timson"/><br /><sub><b>Curtis Timson</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=curtiscde" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://bio.link/obydul"><img src="https://avatars.githubusercontent.com/u/13184472?v=4?s=100" width="100px;" alt="Md Obydullah"/><br /><sub><b>Md Obydullah</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=mdobydullah" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://david.aparicio.eu/"><img src="https://avatars.githubusercontent.com/u/809982?v=4?s=100" width="100px;" alt="David Aparicio"/><br /><sub><b>David Aparicio</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=davidaparicio" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/banyudu"><img src="https://avatars.githubusercontent.com/u/2416493?v=4?s=100" width="100px;" alt="Yudu"/><br /><sub><b>Yudu</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=banyudu" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/TLOWAC"><img src="https://avatars.githubusercontent.com/u/58043975?v=4?s=100" width="100px;" alt="Changhun Lee"/><br /><sub><b>Changhun Lee</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=TLOWAC" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NathanielChit"><img src="https://avatars.githubusercontent.com/u/175747906?v=4?s=100" width="100px;" alt="NathanielChit"/><br /><sub><b>NathanielChit</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=NathanielChit" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 ## Liked it?
 
