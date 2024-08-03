@@ -9,7 +9,7 @@ inputs:
     default: ${{ github.token }}
   readme_path:
     description: 'Comma separated paths of the readme files you want to update'
-    default: './index.html'
+    default: './README.md'
     required: false
   max_post_count:
     description: 'Maximum number of posts you want to show on your readme, all feeds combined'
