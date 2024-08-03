@@ -243,6 +243,37 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
 
 </details>
 
+<details>
+  <summary>
+    <b>Update an index.html file (instead of README.md)</b>
+  </summary>
+
+  ##### workflow.yml
+  ```yml
+  name: Latest blog post workflow
+  on:
+    schedule:
+      # Runs every hour, on the hour
+      - cron: "0 * * * *"
+    workflow_dispatch:
+  permissions:
+        contents: write
+  
+  jobs:
+    update-readme-with-youtube:
+      name: Update this repo's index.html with latest videos from YouTube
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: FreeSky-Productions/blog-post-workflow@master
+          with:
+            feed_list: "http://anxiousatmath.blogspot.com/feeds/posts/default?alt=rss"
+            template: '<li><a href="$url">$title</a></li>$newline'
+            committer_email: "muktoakash@gmail.com"
+```
+</details>
+
+
 
 ## Popular Sources 
 <details>
