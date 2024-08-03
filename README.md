@@ -245,10 +245,29 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
 
 <details>
   <summary>
-    <b>Update an index.html file (instead of README.md)</b>
+    <b>Update an index.html file (instead of README.md) with a list from blogspot</b>
   </summary>
 
+  First, create a fork of the repo to your username/blog-post-workflow so that you can make changes freely. Thn change the following lines from action.yml
+  ```yml
+   readme_path:
+      description: 'Comma separated paths of the readme files you want to update'
+      default: './README.md' #<---- remove this #
+      required: false
+  ```
+to
+  ```yml
+   readme_path:
+      description: 'Comma separated paths of the readme files you want to update'
+      default: './index.html' # <-----new
+      required: false
+```
+
   ##### workflow.yml
+
+  
+Then in the repo where you want to update the index.html, follow the steps about githum actions mentioned above, and create the blog-post-workflow.yml.
+
   ```yml
   name: Latest blog post workflow
   on:
@@ -261,16 +280,17 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
   
   jobs:
     update-readme-with-youtube:
-      name: Update this repo's index.html with latest videos from YouTube
+      name: Update this repo's index.html with latest blog titles from blogspot
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: FreeSky-Productions/blog-post-workflow@master
+        - uses: username/blog-post-workflow@master
           with:
-            feed_list: "http://anxiousatmath.blogspot.com/feeds/posts/default?alt=rss"
+            feed_list: "http://blog_name.blogspot.com/feeds/posts/default?alt=rss"
             template: '<li><a href="$url">$title</a></li>$newline'
-            committer_email: "muktoakash@gmail.com"
+            committer_email: "your_email@example.com"
 ```
+by [Mukto Akash](https://github.com/muktoakash)
 </details>
 
 
