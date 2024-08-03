@@ -291,6 +291,11 @@ Then in the repo where you want to update the index.html, follow the steps about
             committer_email: "your_email@example.com"
 ```
 by [Mukto Akash](https://github.com/muktoakash)
+
+##### Results
+![HTML](https://github.com/user-attachments/assets/ea2f1b22-1aec-491e-925e-66a02ebf0ac3)
+![Preview](https://github.com/user-attachments/assets/c8901a0f-7b6a-475e-905c-8338e0a85a91)
+
 </details>
 
 
