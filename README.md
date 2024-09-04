@@ -248,25 +248,12 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
     <b>Update an index.html file (instead of README.md) with a list from blogspot</b>
   </summary>
 
-  First, create a fork of the repo to your username/blog-post-workflow so that you can make changes freely. Thn change the following lines from action.yml
-  ```yml
-   readme_path:
-      description: 'Comma separated paths of the readme files you want to update'
-      default: './README.md' #<---- remove this #
-      required: false
-  ```
-to
-  ```yml
-   readme_path:
-      description: 'Comma separated paths of the readme files you want to update'
-      default: './index.html' # <-----new
-      required: false
-```
+  First, create an index.html file in your github repo and insert the tags  <!-- BLOG-POST-LIST:START --> <!-- BLOG-POST-LIST:END --> in the file where you want the update to take place. Use appropriate html wrappers outside the tags so that the inserted list is rendered properly (see results below).
 
   ##### workflow.yml
 
   
-Then in the repo where you want to update the index.html, follow the steps about githum actions mentioned above, and create the blog-post-workflow.yml.
+Then in the repo where you want to update the index.html, follow the steps about github actions mentioned above, and create the blog-post-workflow.yml.
 
   ```yml
   name: Latest blog post workflow
@@ -277,15 +264,16 @@ Then in the repo where you want to update the index.html, follow the steps about
     workflow_dispatch:
   permissions:
         contents: write
-  
+
   jobs:
     update-readme-with-youtube:
       name: Update this repo's index.html with latest blog titles from blogspot
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - uses: username/blog-post-workflow@master
+        - uses: gautamkrishnar/blog-post-workflow@v1
           with:
+            readme_path: 'index.html'
             feed_list: "http://blog_name.blogspot.com/feeds/posts/default?alt=rss"
             template: '<li><a href="$url">$title</a></li>$newline'
             committer_email: "your_email@example.com"
