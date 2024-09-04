@@ -1,6 +1,6 @@
 # Blog post workflow  [![Build and test](https://github.com/gautamkrishnar/blog-post-workflow/workflows/Build%20and%20test/badge.svg?branch=master)](https://github.com/gautamkrishnar/blog-post-workflow/actions?query=workflow%3A%22Build+and+test%22)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-20-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![preview](https://user-images.githubusercontent.com/8397274/88047382-29b8b280-cb6f-11ea-9efb-2af2b10f3e0c.png)
@@ -362,6 +362,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/banyudu"><img src="https://avatars.githubusercontent.com/u/2416493?v=4?s=100" width="100px;" alt="Yudu"/><br /><sub><b>Yudu</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=banyudu" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/TLOWAC"><img src="https://avatars.githubusercontent.com/u/58043975?v=4?s=100" width="100px;" alt="Changhun Lee"/><br /><sub><b>Changhun Lee</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=TLOWAC" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/NathanielChit"><img src="https://avatars.githubusercontent.com/u/175747906?v=4?s=100" width="100px;" alt="NathanielChit"/><br /><sub><b>NathanielChit</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=NathanielChit" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://cv.adrianpaniagua.es/"><img src="https://avatars.githubusercontent.com/u/66434978?v=4?s=100" width="100px;" alt="Adrián Paniagua"/><br /><sub><b>Adrián Paniagua</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=adrianpaniagualeon" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
