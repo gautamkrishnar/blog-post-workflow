@@ -243,6 +243,50 @@ by : [Mahdi Qiamast](https://github.com/Qiamast)
 
 </details>
 
+<details>
+  <summary>
+    <b>Update an index.html file (instead of README.md) with a list from blogspot</b>
+  </summary>
+
+  First, create an index.html file in your github repo and insert the tags  <!-- BLOG-POST-LIST:START --> <!-- BLOG-POST-LIST:END --> in the file where you want the update to take place. Use appropriate html wrappers outside the tags so that the inserted list is rendered properly (see results below).
+
+  ##### workflow.yml
+
+  
+Then in the repo where you want to update the index.html, follow the steps about github actions mentioned above, and create the blog-post-workflow.yml.
+
+  ```yml
+  name: Latest blog post workflow
+  on:
+    schedule:
+      # Runs every hour, on the hour
+      - cron: "0 * * * *"
+    workflow_dispatch:
+  permissions:
+        contents: write
+
+  jobs:
+    update-readme-with-youtube:
+      name: Update this repo's index.html with latest blog titles from blogspot
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: gautamkrishnar/blog-post-workflow@v1
+          with:
+            readme_path: 'index.html'
+            feed_list: "http://blog_name.blogspot.com/feeds/posts/default?alt=rss"
+            template: '<li><a href="$url">$title</a></li>$newline'
+            committer_email: "your_email@example.com"
+```
+by [Mukto Akash](https://github.com/muktoakash)
+
+##### Results
+![HTML](https://github.com/user-attachments/assets/ea2f1b22-1aec-491e-925e-66a02ebf0ac3)
+![Preview](https://github.com/user-attachments/assets/c8901a0f-7b6a-475e-905c-8338e0a85a91)
+
+</details>
+
+
 
 ## Popular Sources 
 <details>
