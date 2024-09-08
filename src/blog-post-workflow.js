@@ -233,10 +233,10 @@ const runWorkflow = async () => {
         // Succeeded
         core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length);
         summaryTable.push([
-          {data: `<a hfef="${runnerNameArray[index]}">${runnerNameArray[index]}</a>`, colspan: '6'},
-          {data: ':white_check_mark:'},
-          {data: `${result.value.length}`},
-          {data: '<code> Runner succeeded </code>', colspan: '6'}]);
+          {header: false, data: `<a href='${runnerNameArray[index]}'>${runnerNameArray[index]}</a>`, colspan: '6'},
+          {header: false, data: ':white_check_mark:'},
+          {header: false, data: `${result.value.length}`},
+          {header: false, data: '<code> Runner succeeded </code>', colspan: '6'}]);
         // Adds feed name to the items
         if (typeof feedNamesList[index] !== undefined && feedNamesList[index]) {
           result.value = result.value.map((item) => {
@@ -362,6 +362,7 @@ const runWorkflow = async () => {
             changedReadmeCount = changedReadmeCount + 1;
           }
         });
+        core.summary.addRaw(`### Summary`, true);
 
         if (changedReadmeCount > 0 && !SKIP_COMMITS) {
           if (!process.env.TEST_MODE) {
@@ -376,19 +377,20 @@ const runWorkflow = async () => {
           if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
             // Do dummy commit if elapsed time is greater than 50 days
             const committerUsername = core.getInput('committer_username');
-            const committerEmail = core.getInput('committer_email');
-            const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
+                const committerEmail = core.getInput('committer_email');
+                const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
               core.getInput('dummy_commit_message'), 50, true);
             core.info(message.toString());
-            core.summary.addRaw(`### Summary \n ${message.toString()}`, true);
-            core.summary.addTable(summaryTable);
-            await core.summary.write();
           } else {
             const noChangeMessage = 'No change detected, skipping';
             core.info(noChangeMessage);
-            core.summary.addRaw(`### Summary \n ${noChangeMessage}`, true);
-            await core.summary.write();
           }
+          core.summary.addRaw(`Blog posts fetched:`, true);
+          core.summary.addTable(summaryTable);
+          core.summary.addRaw(`\n#### Posts written to readme: ${postsArray.length}`, true);
+          core.summary.addSeparator()
+          core.summary.addDetails('Debug Info', 'Some juicy info for devs: \n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
+          await core.summary.write();
           process.exit(jobFailFlag ? 1 : 0);
         }
       } catch (e) {

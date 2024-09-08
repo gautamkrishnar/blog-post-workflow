@@ -13858,10 +13858,10 @@ var runWorkflow = async () => {
       if (result.status === "fulfilled") {
         core.info(runnerNameArray[index] + " runner succeeded. Post count: " + result.value.length);
         summaryTable.push([
-          { data: `<a hfef="${runnerNameArray[index]}">${runnerNameArray[index]}</a>`, colspan: "6" },
-          { data: ":white_check_mark:" },
-          { data: `${result.value.length}` },
-          { data: "<code> Runner succeeded </code>", colspan: "6" }
+          { header: false, data: `<a href='${runnerNameArray[index]}'>${runnerNameArray[index]}</a>`, colspan: "6" },
+          { header: false, data: ":white_check_mark:" },
+          { header: false, data: `${result.value.length}` },
+          { header: false, data: "<code> Runner succeeded </code>", colspan: "6" }
         ]);
         if (typeof feedNamesList[index] !== void 0 && feedNamesList[index]) {
           result.value = result.value.map((item2) => {
@@ -13950,6 +13950,7 @@ var runWorkflow = async () => {
             changedReadmeCount = changedReadmeCount + 1;
           }
         });
+        core.summary.addRaw(`### Summary`, true);
         if (changedReadmeCount > 0 && !SKIP_COMMITS) {
           if (!process.env.TEST_MODE) {
             await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
@@ -13969,17 +13970,17 @@ var runWorkflow = async () => {
               true
             );
             core.info(message.toString());
-            core.summary.addRaw(`### Summary 
- ${message.toString()}`, true);
-            core.summary.addTable(summaryTable);
-            await core.summary.write();
           } else {
             const noChangeMessage = "No change detected, skipping";
             core.info(noChangeMessage);
-            core.summary.addRaw(`### Summary 
- ${noChangeMessage}`, true);
-            await core.summary.write();
           }
+          core.summary.addRaw(`Blog posts fetched:`, true);
+          core.summary.addTable(summaryTable);
+          core.summary.addRaw(`
+#### Posts written to readme: ${postsArray.length}`, true);
+          core.summary.addSeparator();
+          core.summary.addDetails("Debug Info", "Some juicy info for devs: \n\n```json\n" + JSON.stringify(postsArray, null, 2) + "\n```\n\n");
+          await core.summary.write();
           process.exit(jobFailFlag ? 1 : 0);
         }
       } catch (e) {
