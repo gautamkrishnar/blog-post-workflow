@@ -374,10 +374,7 @@ const runWorkflow = async () => {
         if (changedReadmeCount > 0 && !SKIP_COMMITS) {
           if (!process.env.TEST_MODE) {
             // Commit to readme
-            await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
-              // Making job fail if one of the source fails
-              process.exit(jobFailFlag ? 1 : 0);
-            });
+            await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST);
           }
           core.summary.addRaw(`\n#### New posts written to readme, total posts: ${postsArray.length}`, true);
         } else {
@@ -395,11 +392,11 @@ const runWorkflow = async () => {
             core.info(noChangeMessage);
             core.summary.addRaw(`\n#### ${noChangeMessage}`, true);
           }
-          core.summary.addSeparator();
-          core.summary.addDetails('Debug: Some info for advanced users :beers:', '\n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
-          await core.summary.write();
-          process.exit(jobFailFlag ? 1 : 0);
         }
+        core.summary.addSeparator();
+        core.summary.addDetails('Debug: Some info for advanced users :beers:', '\n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
+        await core.summary.write();
+        process.exit(jobFailFlag ? 1 : 0);
       } catch (e) {
         core.error(e);
         process.exit(1);
