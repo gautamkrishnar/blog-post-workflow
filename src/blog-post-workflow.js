@@ -111,6 +111,10 @@ let parser = new Parser({
   }
 });
 
+const summaryTable = [
+  [{header: true, data: 'Website', colspan: '6'}, {header: true, data: 'Status'},  {header: true, data: 'Post Count'},  {header: true, data: 'Log', colspan: '6'}]
+];
+
 // Generating promise array
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
@@ -228,6 +232,11 @@ const runWorkflow = async () => {
       if (result.status === 'fulfilled') {
         // Succeeded
         core.info(runnerNameArray[index] + ' runner succeeded. Post count: ' + result.value.length);
+        summaryTable.push([
+          {data: `<a hfef="${runnerNameArray[index]}">${runnerNameArray[index]}</a>`, colspan: '6'},
+          {data: ':white_check_mark:'},
+          {data: `${result.value.length}`},
+          {data: '<code> Runner succeeded </code>', colspan: '6'}]);
         // Adds feed name to the items
         if (typeof feedNamesList[index] !== undefined && feedNamesList[index]) {
           result.value = result.value.map((item) => {
@@ -371,8 +380,14 @@ const runWorkflow = async () => {
             const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
               core.getInput('dummy_commit_message'), 50, true);
             core.info(message.toString());
+            core.summary.addRaw(`### Summary \n ${message.toString()}`, true);
+            core.summary.addTable(summaryTable);
+            await core.summary.write();
           } else {
-            core.info('No change detected, skipping');
+            const noChangeMessage = 'No change detected, skipping';
+            core.info(noChangeMessage);
+            core.summary.addRaw(`### Summary \n ${noChangeMessage}`, true);
+            await core.summary.write();
           }
           process.exit(jobFailFlag ? 1 : 0);
         }

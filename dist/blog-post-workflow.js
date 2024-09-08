@@ -13763,6 +13763,9 @@ var parser = new Parser({
     item: [...customTagArgs]
   }
 });
+var summaryTable = [
+  [{ header: true, data: "Website", colspan: "6" }, { header: true, data: "Status" }, { header: true, data: "Post Count" }, { header: true, data: "Log", colspan: "6" }]
+];
 feedList.forEach((siteUrl) => {
   runnerNameArray.push(siteUrl);
   promiseArray.push(new Promise((resolve, reject) => {
@@ -13854,6 +13857,12 @@ var runWorkflow = async () => {
     results.forEach((result, index) => {
       if (result.status === "fulfilled") {
         core.info(runnerNameArray[index] + " runner succeeded. Post count: " + result.value.length);
+        summaryTable.push([
+          { data: `<a hfef="${runnerNameArray[index]}">${runnerNameArray[index]}</a>`, colspan: "6" },
+          { data: ":white_check_mark:" },
+          { data: `${result.value.length}` },
+          { data: "<code> Runner succeeded </code>", colspan: "6" }
+        ]);
         if (typeof feedNamesList[index] !== void 0 && feedNamesList[index]) {
           result.value = result.value.map((item2) => {
             item2.feedName = feedNamesList[index];
@@ -13960,8 +13969,16 @@ var runWorkflow = async () => {
               true
             );
             core.info(message.toString());
+            core.summary.addRaw(`### Summary 
+ ${message.toString()}`, true);
+            core.summary.addTable(summaryTable);
+            await core.summary.write();
           } else {
-            core.info("No change detected, skipping");
+            const noChangeMessage = "No change detected, skipping";
+            core.info(noChangeMessage);
+            core.summary.addRaw(`### Summary 
+ ${noChangeMessage}`, true);
+            await core.summary.write();
           }
           process.exit(jobFailFlag ? 1 : 0);
         }
