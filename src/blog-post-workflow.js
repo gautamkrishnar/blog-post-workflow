@@ -388,8 +388,8 @@ const runWorkflow = async () => {
           core.summary.addRaw(`Blog posts fetched:`, true);
           core.summary.addTable(summaryTable);
           core.summary.addRaw(`\n#### Posts written to readme: ${postsArray.length}`, true);
-          core.summary.addSeparator()
-          core.summary.addDetails('Debug Info', 'Some juicy info for devs: \n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
+          core.summary.addSeparator();
+          core.summary.addDetails('Debug: Some info for advanced users :beers:', '\n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
           await core.summary.write();
           process.exit(jobFailFlag ? 1 : 0);
         }
