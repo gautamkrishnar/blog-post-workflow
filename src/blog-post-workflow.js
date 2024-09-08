@@ -362,7 +362,9 @@ const runWorkflow = async () => {
             changedReadmeCount = changedReadmeCount + 1;
           }
         });
-        core.summary.addRaw(`### Summary`, true);
+        core.summary.addRaw(`### Summary :${jobFailFlag ? 'x' : 'white_check_mark'}:`, true);
+        core.summary.addRaw(`Blog posts fetched:`, true);
+        core.summary.addTable(summaryTable);
 
         if (changedReadmeCount > 0 && !SKIP_COMMITS) {
           if (!process.env.TEST_MODE) {
@@ -372,6 +374,7 @@ const runWorkflow = async () => {
               process.exit(jobFailFlag ? 1 : 0);
             });
           }
+          core.summary.addRaw(`\n#### New posts written to readme, total posts: ${postsArray.length}`, true);
         } else {
           // Calculating last commit date, please see https://git.io/Jtm4V
           if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
@@ -381,13 +384,12 @@ const runWorkflow = async () => {
                 const message = await keepaliveWorkflow.KeepAliveWorkflow(GITHUB_TOKEN, committerUsername, committerEmail,
               core.getInput('dummy_commit_message'), 50, true);
             core.info(message.toString());
+            core.summary.addRaw(`\n#### Dummy commit: ${message}`, true);
           } else {
             const noChangeMessage = 'No change detected, skipping';
             core.info(noChangeMessage);
+            core.summary.addRaw(`\n#### ${noChangeMessage}`, true);
           }
-          core.summary.addRaw(`Blog posts fetched:`, true);
-          core.summary.addTable(summaryTable);
-          core.summary.addRaw(`\n#### Posts written to readme: ${postsArray.length}`, true);
           core.summary.addSeparator();
           core.summary.addDetails('Debug: Some info for advanced users :beers:', '\n\n```json\n' + JSON.stringify(postsArray, null, 2) + '\n```\n\n');
           await core.summary.write();
