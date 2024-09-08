@@ -248,6 +248,11 @@ const runWorkflow = async () => {
       } else {
         jobFailFlag = true;
         // Rejected
+        summaryTable.push([
+          {header: false, data: `<a href='${runnerNameArray[index]}'>${runnerNameArray[index]}</a>`, colspan: '6'},
+          {header: false, data: ':x:'},
+          {header: false, data: `n/a`},
+          {header: false, data: `<code>${JSON.stringify(result, null, 6)}</code>`, colspan: '2'}]);
         core.error(runnerNameArray[index] + ' runner failed, please verify the configuration. Error:');
         if (result.reason && result.reason.message && result.reason.message.startsWith('Status code')) {
           const code = result.reason.message.replace('Status code ', '');
