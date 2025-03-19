@@ -242,9 +242,10 @@ const runWorkflow = async () => {
         core.error(runnerNameArray[index] + ' runner failed, please verify the configuration. Error:');
         if (result.reason && result.reason.message && result.reason.message.startsWith('Status code')) {
           const code = result.reason.message.replace('Status code ', '');
-          core.error(`Looks like your website returned ${code}, There is nothing blog post workflow` +
-            ` can do to fix it. Please check your website's RSS feed generation source code. Also double check
-            the URL.`);
+          core.error(`Looks like your website returned ${code}, There is nothing blog post workflow ` +
+            `can do to fix it. Please check your website's RSS feed generation source code. Also double check ` +
+            `the URL. If you are using a third party blogging platform, please reach out to the platform's support ` +
+            `team and ask them why this is failing.`);
           if (code === `503`) {
             core.error(`If you are using Cloudflare or Akamai,  make sure that you have the user agent ` +
               ` ${userAgent} or GitHub actions IP ranges whitelisted in your firewall.`);
