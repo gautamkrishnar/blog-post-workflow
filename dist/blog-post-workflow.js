@@ -13783,7 +13783,11 @@ feedList.forEach((siteUrl) => {
             reject("Cannot read response->item->pubDate");
           }
           if (ENABLE_VALIDATION && !item.title) {
-            reject("Cannot read response->item->title");
+            core.warning(`Missing title for item with link: ${item.link || "unknown"}`);
+            if (core.getInput("skip_items_without_title") === "true") {
+              return null;
+            }
+            item.title = item.link ? `[No Title] - ${item.link.split("/").pop() || "Post"}` : "Post without title";
           }
           if (ENABLE_VALIDATION && !item.link) {
             reject("Cannot read response->item->link");
@@ -13796,7 +13800,8 @@ feedList.forEach((siteUrl) => {
           });
           const categories = item.categories ? categoriesToArray(item.categories) : [];
           let post = {
-            title: item.title.trim(),
+            title: item.title ? item.title.trim() : item.title,
+            // Handle null safely
             url: item.link.trim(),
             description: item.content ? item.content : "",
             ...customTags,
