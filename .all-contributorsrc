@@ -196,6 +196,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "joshjohanning",
+      "name": "Josh Johanning",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19912012?v=4",
+      "profile": "https://josh-ops.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
