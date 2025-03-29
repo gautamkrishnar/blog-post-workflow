@@ -140,9 +140,21 @@ feedList.forEach((siteUrl) => {
               if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
                 reject('Cannot read response->item->pubDate');
               }
+              
+              // Handle missing titles gracefully
               if (ENABLE_VALIDATION && !item.title) {
-                reject('Cannot read response->item->title');
+                // Either skip the item by returning null
+                // or use a fallback title (from URL or a default value)
+                core.warning(`Missing title for item with link: ${item.link || 'unknown'}`);
+                if (core.getInput('skip_items_without_title') === 'true') {
+                  return null; // This item will be filtered out later
+                }
+                // Use URL as fallback or a default text
+                item.title = item.link ? 
+                  `[No Title] - ${item.link.split('/').pop() || 'Post'}` : 
+                  'Post without title';
               }
+              
               if (ENABLE_VALIDATION && !item.link) {
                 reject('Cannot read response->item->link');
               }
@@ -155,7 +167,7 @@ feedList.forEach((siteUrl) => {
               });
               const categories = item.categories ?  categoriesToArray(item.categories) : [];
               let post = {
-                title: item.title.trim(),
+                title: item.title ? item.title.trim() : item.title, // Handle null safely
                 url: item.link.trim(),
                 description: item.content ? item.content : '',
                 ...customTags,
