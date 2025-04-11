@@ -31,18 +31,18 @@
   },
   "homepage": "https://github.com/gautamkrishnar/blog-post-workflow#readme",
   "dependencies": {
-    "@actions/core": "^1.10.1",
+    "@actions/core": "^1.11.1",
     "dateformat": "^3.0.3",
-    "esbuild": "^0.21.3",
-    "keepalive-workflow": "^2.0.4",
+    "esbuild": "^0.25.2",
+    "keepalive-workflow": "^2.0.9",
     "process": "latest",
     "promise-retry": "^2.0.1",
     "random-seed": "^0.3.0",
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
-    "jshint": "^2.12.0",
-    "mocha": "^10.2.0",
-    "start-server-and-test": "^1.11.3"
+    "jshint": "^2.13.6",
+    "mocha": "^11.1.0",
+    "start-server-and-test": "^2.0.11"
   }
 }
