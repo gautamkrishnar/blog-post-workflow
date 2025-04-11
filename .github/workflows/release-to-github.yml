@@ -6,6 +6,8 @@ on:
     branches: [master]
     types:
       - completed
+permissions:
+  contents: write
 jobs:
   version-bump:
     name: Release to github releases

@@ -5,6 +5,8 @@ on:
       tag_name:
         description: 'Version'
         required: true
+permissions:
+  contents: write
 jobs:
   version-bump:
     name: Update dist
