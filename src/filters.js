@@ -1,5 +1,6 @@
 const {updateAndParseCompoundParams} = require('./utils');
 const core = require('@actions/core');
+const url = require("url");
 
 const FILTER_PARAMS = {
   stackoverflow: 'Comment by $author',
@@ -19,14 +20,22 @@ const COMMENT_FILTERS = core
     }
   });
 
+const parseUrlAndCheckItem = (item, domain) => {
+  try {
+    return  url.parse(item.link).host === domain;
+  } catch(e) {
+    return false;
+  }
+};
+
 // filters out stackOverflow comments (#16)
 const ignoreStackOverflowComments = (item) => !(COMMENT_FILTERS.indexOf('stackoverflow') !== -1 &&
-  item.link && item.link.includes('stackoverflow.com') &&
+  item.link && parseUrlAndCheckItem(item,'stackoverflow.com') &&
   item.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item.author)));
 
 // filters out stackExchange comments (#16)
 const ignoreStackExchangeComments = (item) => !(COMMENT_FILTERS.indexOf('stackexchange') !== -1 &&
-  item.link && item.link.includes('stackexchange.com') &&
+  item.link && parseUrlAndCheckItem(item, 'stackexchange.com') &&
   item.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item.author)));
 
 const dateFilter = (item) => {
