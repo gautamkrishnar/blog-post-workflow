@@ -23,6 +23,10 @@ inputs:
     description: "Disables the sorting of list based on publish date"
     default: "false"
     required: false
+  reverse_sort:
+    description: "Reverses the sorting order (oldest first) when sorting is enabled"
+    default: "false"
+    required: false
   filter_comments:
     description: "Comma separated list of platforms you want to enable the comment filter"
     default: "stackoverflow/Comment by $author/,stackexchange/Comment by $author/"
