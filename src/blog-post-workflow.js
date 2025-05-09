@@ -34,6 +34,9 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Disables sort
 const ENABLE_SORT = core.getInput('disable_sort') === 'false';
 
+// Reverses sort order when enabled
+const REVERSE_SORT = core.getInput('reverse_sort') === 'true';
+
 // Disables validation checks
 const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
 
@@ -140,7 +143,7 @@ feedList.forEach((siteUrl) => {
               if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
                 reject('Cannot read response->item->pubDate');
               }
-              
+
               // Handle missing titles gracefully
               if (ENABLE_VALIDATION && !item.title) {
                 // Either skip the item by returning null
@@ -150,11 +153,11 @@ feedList.forEach((siteUrl) => {
                   return null; // This item will be filtered out later
                 }
                 // Use URL as fallback or a default text
-                item.title = item.link ? 
-                  `[No Title] - ${item.link.split('/').pop() || 'Post'}` : 
+                item.title = item.link ?
+                  `[No Title] - ${item.link.split('/').pop() || 'Post'}` :
                   'Post without title';
               }
-              
+
               if (ENABLE_VALIDATION && !item.link) {
                 reject('Cannot read response->item->link');
               }
@@ -277,6 +280,12 @@ const runWorkflow = async () => {
         return b.date - a.date;
       });
     }
+
+    // Apply reverse sort as a separate step if needed
+    if (REVERSE_SORT) {
+      postsArray.reverse();
+    }
+
     // Slicing with the max count
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
     if (postsArray.length > 0) {
