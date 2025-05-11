@@ -31518,6 +31518,7 @@ var userAgent = core.getInput("user_agent");
 var acceptHeader = core.getInput("accept_header");
 var TOTAL_POST_COUNT = Number.parseInt(core.getInput("max_post_count"));
 var ENABLE_SORT = core.getInput("disable_sort") === "false";
+var SORT_ORDER = core.getInput("sort_order");
 var ENABLE_VALIDATION = core.getInput("disable_item_validation") === "false";
 var TITLE_MAX_LENGTH = core.getInput("title_max_length") ? Number.parseInt(core.getInput("title_max_length")) : null;
 var DESCRIPTION_MAX_LENGTH = core.getInput("description_max_length") ? Number.parseInt(core.getInput("description_max_length")) : null;
@@ -31682,7 +31683,16 @@ var runWorkflow = async () => {
     postsArray = postsArray.filter((item2) => item2 !== null);
     if (ENABLE_SORT) {
       postsArray.sort(function(a, b) {
-        return b.date - a.date;
+        const aHasDate = !!a.date;
+        const bHasDate = !!b.date;
+        if (!aHasDate && !bHasDate) return 0;
+        if (!aHasDate) return 1;
+        if (!bHasDate) return -1;
+        if (SORT_ORDER === "asc") {
+          return a.date - b.date;
+        } else {
+          return b.date - a.date;
+        }
       });
     }
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
