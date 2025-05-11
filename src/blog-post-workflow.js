@@ -34,6 +34,12 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 // Disables sort
 const ENABLE_SORT = core.getInput('disable_sort') === 'false';
 
+// Specifies sort order
+const SORT_ORDER = core.getInput('sort_order'); // 'asc' or 'desc'
+
+// Reverses sort order when enabled
+const REVERSE_SORT = core.getInput('reverse_sort') === 'true';
+
 // Disables validation checks
 const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
 
@@ -140,7 +146,7 @@ feedList.forEach((siteUrl) => {
               if (ENABLE_SORT && ENABLE_VALIDATION && !item.pubDate) {
                 reject('Cannot read response->item->pubDate');
               }
-              
+
               // Handle missing titles gracefully
               if (ENABLE_VALIDATION && !item.title) {
                 // Either skip the item by returning null
@@ -150,11 +156,11 @@ feedList.forEach((siteUrl) => {
                   return null; // This item will be filtered out later
                 }
                 // Use URL as fallback or a default text
-                item.title = item.link ? 
-                  `[No Title] - ${item.link.split('/').pop() || 'Post'}` : 
+                item.title = item.link ?
+                  `[No Title] - ${item.link.split('/').pop() || 'Post'}` :
                   'Post without title';
               }
-              
+
               if (ENABLE_VALIDATION && !item.link) {
                 reject('Cannot read response->item->link');
               }
@@ -274,9 +280,24 @@ const runWorkflow = async () => {
     // Sorting posts based on date
     if (ENABLE_SORT) {
       postsArray.sort(function (a, b) {
-        return b.date - a.date;
+        // Handle items without dates consistently by moving them to the end
+        const aHasDate = !!a.date;
+        const bHasDate = !!b.date;
+
+        if (!aHasDate && !bHasDate) return 0; // Keep original relative order for items without dates
+        if (!aHasDate) return 1;  // 'a' (no date) comes after 'b' (has date)
+        if (!bHasDate) return -1; // 'b' (no date) comes after 'a' (has date)
+
+        // Both items have dates, sort according to SORT_ORDER
+        if (SORT_ORDER === 'asc') {
+          return a.date - b.date; // Sorts ascending by date (oldest first)
+        } else {
+          return b.date - a.date; // Sorts descending by date (newest first) by default
+        }
       });
     }
+    // If ENABLE_SORT is false (i.e., disable_sort is true), postsArray remains in fetched order.
+
     // Slicing with the max count
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
     if (postsArray.length > 0) {
