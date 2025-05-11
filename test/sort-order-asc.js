@@ -6,7 +6,7 @@ describe('Ascending sort order readme (sort_order: asc)', function () {
     const envObj = {
       ...process.env,
       ...DEFAULT_TEST_ENV,
-      INPUT_SORT_ORDER: 'asc' // Changed from REVERSE_SORT: 'true'
+      INPUT_SORT_ORDER: 'asc'
     };
     // Snapshot name will also need to be changed to Readme.sort-order-asc.md
     await runAndCompareSnap('Readme.sort-order-asc.md', envObj);

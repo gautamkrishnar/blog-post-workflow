@@ -35,10 +35,7 @@ const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
 const ENABLE_SORT = core.getInput('disable_sort') === 'false';
 
 // Specifies sort order
-const SORT_ORDER = core.getInput('sort_order'); // 'asc' or 'desc'
-
-// Reverses sort order when enabled
-const REVERSE_SORT = core.getInput('reverse_sort') === 'true';
+const SORT_ORDER = core.getInput('sort_order'); // 'asc' or 'desc
 
 // Disables validation checks
 const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
