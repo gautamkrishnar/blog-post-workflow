@@ -293,7 +293,10 @@ const runWorkflow = async () => {
         }
       });
     }
-    // If ENABLE_SORT is false (i.e., disable_sort is true), postsArray remains in fetched order.
+    // If ENABLE_SORT is false (i.e., disable_sort is true), check if SORT_ORDER is 'desc' to reverse the feed order
+    else if (!ENABLE_SORT && SORT_ORDER === 'desc') {
+      postsArray.reverse();
+    }
 
     // Slicing with the max count
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
