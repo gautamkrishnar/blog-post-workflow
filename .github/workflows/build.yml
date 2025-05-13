@@ -32,7 +32,7 @@ jobs:
       - run: yarn build && yarn run test-dist
       - name: Test Report
         uses: dorny/test-reporter@v1
-        if: ${{ github.repository == 'gautamkrishnar/blog-post-workflow' && (success() || failure()) }}
+        if: ${{ github.repository == 'gautamkrishnar/blog-post-workflow' && github.event_name != 'pull_request' && (success() || failure()) }}
         with:
           name: Mocha Tests
           path: "*-report.json"
