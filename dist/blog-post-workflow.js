@@ -31519,6 +31519,7 @@ var acceptHeader = core.getInput("accept_header");
 var TOTAL_POST_COUNT = Number.parseInt(core.getInput("max_post_count"));
 var ENABLE_SORT = core.getInput("disable_sort") === "false";
 var SORT_ORDER = core.getInput("sort_order");
+var REVERSE_ORDER = core.getInput("reverse_order") !== "false";
 var ENABLE_VALIDATION = core.getInput("disable_item_validation") === "false";
 var TITLE_MAX_LENGTH = core.getInput("title_max_length") ? Number.parseInt(core.getInput("title_max_length")) : null;
 var DESCRIPTION_MAX_LENGTH = core.getInput("description_max_length") ? Number.parseInt(core.getInput("description_max_length")) : null;
@@ -31694,6 +31695,8 @@ var runWorkflow = async () => {
           return b.date - a.date;
         }
       });
+    } else if (REVERSE_ORDER) {
+      postsArray.reverse();
     }
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);
     if (postsArray.length > 0) {
