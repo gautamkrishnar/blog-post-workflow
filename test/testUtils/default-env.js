@@ -26,7 +26,8 @@ const DEFAULT_TEST_ENV = {
   INPUT_FILTER_DATES: '',
   INPUT_RAND_SEED: '',
   INPUT_REMOVE_DUPLICATES: 'false',
-  INPUT_SKIP_COMMIT: 'false'
+  INPUT_SKIP_COMMIT: 'false',
+  INPUT_REVERSE_ORDER: 'false',
 };
 
 

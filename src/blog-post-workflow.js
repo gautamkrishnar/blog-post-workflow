@@ -37,6 +37,9 @@ const ENABLE_SORT = core.getInput('disable_sort') === 'false';
 // Specifies sort order
 const SORT_ORDER = core.getInput('sort_order'); // 'asc' or 'desc
 
+// Specifies sort order
+const REVERSE_ORDER = core.getInput('reverse_order') !== 'false';
+
 // Disables validation checks
 const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
 
@@ -293,7 +296,10 @@ const runWorkflow = async () => {
         }
       });
     }
-    // If ENABLE_SORT is false (i.e., disable_sort is true), postsArray remains in fetched order.
+    // If ENABLE_SORT is false
+    else if (REVERSE_ORDER) {
+      postsArray.reverse();
+    }
 
     // Slicing with the max count
     postsArray = postsArray.slice(0, TOTAL_POST_COUNT);

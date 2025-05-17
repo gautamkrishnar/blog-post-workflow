@@ -27,6 +27,10 @@ inputs:
     description: "Specifies the sort order of posts when date sorting is enabled (disable_sort is 'false'). Supports 'asc' (ascending, oldest first) and 'desc' (descending, newest first). Has no effect if disable_sort is 'true'."
     default: "desc"
     required: false
+  reverse_order:
+    description: "Reverses the order of posts when `disable_sort` is set to true"
+    default: "false"
+    required: false
   filter_comments:
     description: "Comma separated list of platforms you want to enable the comment filter"
     default: "stackoverflow/Comment by $author/,stackexchange/Comment by $author/"
