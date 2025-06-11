@@ -5,7 +5,8 @@
   "main": "blog-post-workflow.js",
   "scripts": {
     "build": "esbuild ./src/blog-post-workflow.js  --bundle --platform=node --outfile=dist/blog-post-workflow.js",
-    "lint": "jshint --exclude='node_modules/' *.js",
+    "lint": "biome check",
+    "lint:fix": "biome check --write",
     "start-server": "node test/testUtils/test-server.js",
     "local-run-script": "node local-run.js",
     "local-run": "start-server-and-test start-server http://localhost:8080 local-run-script",
@@ -41,7 +42,7 @@
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
-    "jshint": "^2.13.6",
+    "@biomejs/biome": "1.9.4",
     "mocha": "^11.1.0",
     "start-server-and-test": "^2.0.11"
   }

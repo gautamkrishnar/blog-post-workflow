@@ -1,4 +1,4 @@
-const {spawn} = require('child_process');
+const { spawn } = require('node:child_process');
 const core = require('@actions/core');
 
 /**
@@ -8,30 +8,31 @@ const core = require('@actions/core');
  * @param options {Object} extra options
  * @return {Promise<Object>}
  */
-const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => {
-  let outputData = '';
-  const optionsToCLI = {
-    ...options
-  };
-  if (!optionsToCLI.stdio) {
-    Object.assign(optionsToCLI, {stdio: ['inherit', 'inherit', 'inherit']});
-  }
-  const app = spawn(cmd, args, optionsToCLI);
-  if (app.stdout) {
-    // Only needed for pipes
-    app.stdout.on('data', function (data) {
-      outputData += data.toString();
-    });
-  }
+const exec = (cmd, args = [], options = {}) =>
+	new Promise((resolve, reject) => {
+		let outputData = '';
+		const optionsToCLI = {
+			...options,
+		};
+		if (!optionsToCLI.stdio) {
+			Object.assign(optionsToCLI, { stdio: ['inherit', 'inherit', 'inherit'] });
+		}
+		const app = spawn(cmd, args, optionsToCLI);
+		if (app.stdout) {
+			// Only needed for pipes
+			app.stdout.on('data', (data) => {
+				outputData += data.toString();
+			});
+		}
 
-  app.on('close', (code) => {
-    if (code !== 0) {
-      return reject({code, outputData});
-    }
-    return resolve({code, outputData});
-  });
-  app.on('error', () => reject({code: 1, outputData}));
-});
+		app.on('close', (code) => {
+			if (code !== 0) {
+				return reject({ code, outputData });
+			}
+			return resolve({ code, outputData });
+		});
+		app.on('error', () => reject({ code: 1, outputData }));
+	});
 
 /**
  * Builds the new readme by replacing the readme's <!-- BLOG-POST-LIST:START --><!-- BLOG-POST-LIST:END --> tags
@@ -40,39 +41,25 @@ const exec = (cmd, args = [], options = {}) => new Promise((resolve, reject) => 
  * @return {string}: content after combining previousContent and newContent
  */
 const buildReadme = (previousContent, newContent) => {
-  const tagNameInput = core.getInput('comment_tag_name');
-  const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : `<!-- BLOG-POST-LIST:`;
-  const closingTag = '-->';
-  const tagNewlineFlag = core.getInput('tag_post_pre_newline') === 'true';
-  const startOfOpeningTagIndex = previousContent.indexOf(
-    `${tagToLookFor}START`,
-  );
-  const endOfOpeningTagIndex = previousContent.indexOf(
-    closingTag,
-    startOfOpeningTagIndex,
-  );
-  const startOfClosingTagIndex = previousContent.indexOf(
-    `${tagToLookFor}END`,
-    endOfOpeningTagIndex,
-  );
-  if (
-    startOfOpeningTagIndex === -1 ||
-    endOfOpeningTagIndex === -1 ||
-    startOfClosingTagIndex === -1
-  ) {
-    // Exit with error if comment is not found on the readme
-    core.error(
-      `Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`
-    );
-    process.exit(1);
-  }
-  return [
-    previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-    tagNewlineFlag ? '\n' : '',
-    newContent,
-    tagNewlineFlag ? '\n' : '',
-    previousContent.slice(startOfClosingTagIndex),
-  ].join('');
+	const tagNameInput = core.getInput('comment_tag_name');
+	const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : '<!-- BLOG-POST-LIST:';
+	const closingTag = '-->';
+	const tagNewlineFlag = core.getInput('tag_post_pre_newline') === 'true';
+	const startOfOpeningTagIndex = previousContent.indexOf(`${tagToLookFor}START`);
+	const endOfOpeningTagIndex = previousContent.indexOf(closingTag, startOfOpeningTagIndex);
+	const startOfClosingTagIndex = previousContent.indexOf(`${tagToLookFor}END`, endOfOpeningTagIndex);
+	if (startOfOpeningTagIndex === -1 || endOfOpeningTagIndex === -1 || startOfClosingTagIndex === -1) {
+		// Exit with error if comment is not found on the readme
+		core.error(`Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`);
+		process.exit(1);
+	}
+	return [
+		previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
+		tagNewlineFlag ? '\n' : '',
+		newContent,
+		tagNewlineFlag ? '\n' : '',
+		previousContent.slice(startOfClosingTagIndex),
+	].join('');
 };
 
 /**
@@ -82,10 +69,9 @@ const buildReadme = (previousContent, newContent) => {
  * @return {string} truncated value
  */
 const truncateString = (str, length) => {
-  const trimmedString = str.trim();
-  const truncatedString = [...trimmedString].slice(0, length).join('');
-  return truncatedString === trimmedString ?
-    trimmedString : truncatedString.trim() + '...';
+	const trimmedString = str.trim();
+	const truncatedString = [...trimmedString].slice(0, length).join('');
+	return truncatedString === trimmedString ? trimmedString : `${truncatedString.trim()}...`;
 };
 
 /**
@@ -95,27 +81,26 @@ const truncateString = (str, length) => {
  * @return {Promise<void>}
  */
 const commitReadme = async (githubToken, readmeFilePaths) => {
-  // Getting config
-  const committerUsername = core.getInput('committer_username');
-  const committerEmail = core.getInput('committer_email');
-  const commitMessage = core.getInput('commit_message');
-  // Doing commit and push
-  await exec('git', [
-    'config',
-    '--global',
-    'user.email',
-    committerEmail,
-  ]);
-  if (githubToken) {
-    // git remote set-url origin
-    await exec('git', ['remote', 'set-url', 'origin',
-      `https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`]);
-  }
-  await exec('git', ['config', '--global', 'user.name', committerUsername]);
-  await exec('git', ['add', ...readmeFilePaths]);
-  await exec('git', ['commit', '-m', commitMessage]);
-  await exec('git', ['push']);
-  core.info('Readme updated successfully in the upstream repository');
+	// Getting config
+	const committerUsername = core.getInput('committer_username');
+	const committerEmail = core.getInput('committer_email');
+	const commitMessage = core.getInput('commit_message');
+	// Doing commit and push
+	await exec('git', ['config', '--global', 'user.email', committerEmail]);
+	if (githubToken) {
+		// git remote set-url origin
+		await exec('git', [
+			'remote',
+			'set-url',
+			'origin',
+			`https://${githubToken}@github.com/${process.env.GITHUB_REPOSITORY}.git`,
+		]);
+	}
+	await exec('git', ['config', '--global', 'user.name', committerUsername]);
+	await exec('git', ['add', ...readmeFilePaths]);
+	await exec('git', ['commit', '-m', commitMessage]);
+	await exec('git', ['push']);
+	core.info('Readme updated successfully in the upstream repository');
 };
 
 /**
@@ -125,33 +110,34 @@ const commitReadme = async (githubToken, readmeFilePaths) => {
  * @return {string} actual source name eg: stackoverflow
  */
 const updateAndParseCompoundParams = (sourceWithParam, obj) => {
-  const param = sourceWithParam.split('/'); // Reading params ['stackoverflow','Comment by $author', '']
-  if (param.length === 3) {
-    Object.assign(obj, {[param[0]]: param[1]});
-    return param[0];// Returning source name
-  } else {
-    return sourceWithParam;
-  }
+	const param = sourceWithParam.split('/'); // Reading params ['stackoverflow','Comment by $author', '']
+	if (param.length === 3) {
+		Object.assign(obj, { [param[0]]: param[1] });
+		return param[0]; // Returning source name
+	}
+	return sourceWithParam;
 };
 
 /**
- * Returns parsed parameterised templates as array or return null
+ * Returns parsed parameterized templates as array or return null
  * @param template
  * @param keyName
  * @return {null|string[]}
  */
 const getParameterisedTemplate = (template, keyName) => {
-  const key = '$' + keyName + '(';
-  if (template.indexOf(key) > -1) {
-    const startIndex = template.indexOf(key) + key.length;
-    const endIndex = template.indexOf(')', startIndex);
-    if (endIndex === -1) {
-      return null;
-    }
-    return template.slice(startIndex, endIndex).split(',').map(item => item.trim());
-  } else {
-    return null;
-  }
+	const key = `$${keyName}(`;
+	if (template.indexOf(key) > -1) {
+		const startIndex = template.indexOf(key) + key.length;
+		const endIndex = template.indexOf(')', startIndex);
+		if (endIndex === -1) {
+			return null;
+		}
+		return template
+			.slice(startIndex, endIndex)
+			.split(',')
+			.map((item) => item.trim());
+	}
+	return null;
 };
 
 /***
@@ -159,16 +145,20 @@ const getParameterisedTemplate = (template, keyName) => {
  * @param str {string} string to escape
  * @return string
  */
-const escapeHTML = str => str.replace(/[&<>')("]/g,
-  (tag) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '\'': '&#39;',
-    '"': '&quot;',
-    ')': '&rpar;',
-    '(': '&lpar;'
-  }[tag]));
+const escapeHTML = (str) =>
+	str.replace(
+		/[&<>')("]/g,
+		(tag) =>
+			({
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				"'": '&#39;',
+				'"': '&quot;',
+				')': '&rpar;',
+				'(': '&lpar;',
+			})[tag],
+	);
 
 /**
  * @typedef CategoryObj
@@ -182,31 +172,31 @@ const escapeHTML = str => str.replace(/[&<>')("]/g,
  * @returns {[string]}
  */
 const categoriesToArray = (categories) => {
-  const categoriesStr = [];
-  if (Array.isArray(categories)) {
-    categories.forEach((item) => {
-      // <category>C#</category>
-      // <category>Controller</category>
-      if (typeof item === 'string') {
-        categoriesStr.push(item);
-      }
-      // <category domain="http://www.blogger.com/atom/ns#">C#</category>
-      // <category domain="http://www.blogger.com/atom/ns#">Controller</category>
-      else if (typeof item === 'object' && item._) {
-        categoriesStr.push(item._);
-      }
-    });
-  }
-  return categoriesStr;
+	const categoriesStr = [];
+	if (Array.isArray(categories)) {
+		for (const item of categories) {
+			// <category>C#</category>
+			// <category>Controller</category>
+			if (typeof item === 'string') {
+				categoriesStr.push(item);
+			}
+			// <category domain="http://www.blogger.com/atom/ns#">C#</category>
+			// <category domain="http://www.blogger.com/atom/ns#">Controller</category>
+			else if (typeof item === 'object' && item._) {
+				categoriesStr.push(item._);
+			}
+		}
+	}
+	return categoriesStr;
 };
 
 module.exports = {
-  updateAndParseCompoundParams,
-  commitReadme,
-  truncateString,
-  buildReadme,
-  exec,
-  getParameterisedTemplate,
-  escapeHTML,
-  categoriesToArray
+	updateAndParseCompoundParams,
+	commitReadme,
+	truncateString,
+	buildReadme,
+	exec,
+	getParameterisedTemplate,
+	escapeHTML,
+	categoriesToArray,
 };

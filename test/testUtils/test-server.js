@@ -1,26 +1,26 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+const http = require('node:http');
+const fs = require('node:fs');
+const path = require('node:path');
 let failCounter = 0;
 const MAX_FAIL_COUNT = 5;
 
 const sendResponse = (res, statusCode, data) => {
-  res.writeHead(statusCode, {'Content-Type': 'text/plain'});
-  res.write(data);
-  res.end();
+	res.writeHead(statusCode, { 'Content-Type': 'text/plain' });
+	res.write(data);
+	res.end();
 };
 
 const xmlData = fs.readFileSync(path.join(__dirname, 'sample.xml'), 'utf-8');
 const duplicateXmlData = fs.readFileSync(path.join(__dirname, 'sample.duplicate.xml'), 'utf-8');
 
-
-http.createServer(function (req, res) {
-  if (req.url === '/failtest') {
-    const showError = failCounter !== MAX_FAIL_COUNT;
-    sendResponse(res, showError ? 500 : 200, showError ? 'error!' : xmlData);
-    failCounter = failCounter + 1;
-  } else if (req.url === '/empty-tags') {
-    const emptyTagResponse = `
+http
+	.createServer((req, res) => {
+		if (req.url === '/failtest') {
+			const showError = failCounter !== MAX_FAIL_COUNT;
+			sendResponse(res, showError ? 500 : 200, showError ? 'error!' : xmlData);
+			failCounter = failCounter + 1;
+		} else if (req.url === '/empty-tags') {
+			const emptyTagResponse = `
     <?xml version="1.0" encoding="UTF-8"?>
       <rss version="2.0">
       <channel>
@@ -43,11 +43,11 @@ http.createServer(function (req, res) {
       </channel>
     </rss>
     `;
-    sendResponse(res, 200, emptyTagResponse);
-  } else if (req.url === '/duplicates') {
-    sendResponse(res, 200, duplicateXmlData);
-  }
-  else {
-    sendResponse(res, 200, xmlData);
-  }
-}).listen(8080);
+			sendResponse(res, 200, emptyTagResponse);
+		} else if (req.url === '/duplicates') {
+			sendResponse(res, 200, duplicateXmlData);
+		} else {
+			sendResponse(res, 200, xmlData);
+		}
+	})
+	.listen(8080);
