@@ -51,7 +51,7 @@ inputs:
     required: false
   user_agent:
     description: "Allows you to customize the user agent used by the RSS feed crawler"
-    default: "rss-parser"
+    default: "Mozilla/5.0 (compatible; BlogPostWorkflow/1.0; +https://github.com/gautamkrishnar/blog-post-workflow)"
     required: false
   accept_header:
     description: "Allows you to customize the accept header of the http request"
