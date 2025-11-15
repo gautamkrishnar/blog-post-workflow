@@ -1,6 +1,6 @@
 # Blog post workflow  [![Build and test](https://github.com/gautamkrishnar/blog-post-workflow/workflows/Build%20and%20test/badge.svg?branch=master)](https://github.com/gautamkrishnar/blog-post-workflow/actions?query=workflow%3A%22Build+and+test%22)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-24-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ![preview](https://user-images.githubusercontent.com/8397274/88047382-29b8b280-cb6f-11ea-9efb-2af2b10f3e0c.png)
@@ -420,6 +420,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://josh-ops.com"><img src="https://avatars.githubusercontent.com/u/19912012?v=4?s=100" width="100px;" alt="Josh Johanning"/><br /><sub><b>Josh Johanning</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=joshjohanning" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://kakkoyun.me"><img src="https://avatars.githubusercontent.com/u/536449?v=4?s=100" width="100px;" alt="Kemal Akkoyun"/><br /><sub><b>Kemal Akkoyun</b></sub></a><br /><a href="https://github.com/gautamkrishnar/blog-post-workflow/commits?author=kakkoyun" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://ngie-eign.github.io"><img src="https://avatars.githubusercontent.com/u/1574099?v=4?s=100" width="100px;" alt="Enji Cooper"/><br /><sub><b>Enji Cooper</b></sub></a><br /><a href="#ideas-ngie-eign" title="Ideas, Planning, & Feedback">🤔</a></td>
     </tr>
   </tbody>
 </table>
