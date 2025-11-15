@@ -22,7 +22,7 @@
     name: Latest blog post workflow
     on:
       schedule: # Run workflow automatically
-        - cron: '0 * * * *' # Runs every hour, on the hour
+        - cron: '0 0 * * *' # Runs once a day at 00:00 UTC
       workflow_dispatch: # Run workflow manually (without waiting for the cron to be called), through the GitHub Actions Workflow page directly
     permissions:
       contents: write # To write the generated contents to the readme
@@ -40,6 +40,14 @@
               feed_list: "https://dev.to/feed/gautamkrishnar,https://www.gautamkrishnar.com/feed/"
     ```
 6. Replace the above URL list with your own RSS feed URLs. See [popular-sources](#popular-sources) for a list of common RSS feed urls. Commit the changes.
+
+   > **Note on workflow frequency:** The default schedule above runs once daily at 00:00 UTC, which is suitable for most users. You can adjust the schedule based on how frequently you publish content:
+   > - **Daily**: `cron: '0 0 * * *'` (recommended for most users)
+   > - **Weekly**: `cron: '0 0 * * 0'` (every Sunday at 00:00 UTC)
+   > - **Monthly**: `cron: '0 0 1 * *'` (1st day of every month at 00:00 UTC)
+   >
+   > Running the workflow too frequently (e.g., hourly) may be unnecessary unless you publish content very often. You can always trigger the workflow manually using `workflow_dispatch` whenever needed.
+
 7. Go to repository settings, Click on Actions > General. Update the "Workflow permissions" to "Read and write permissions". Click on save.
 
    ![Workflow permissions](https://github.com/gautamkrishnar/blog-post-workflow/assets/8397274/26d4c089-dc58-4309-b65a-2acb9a3c08ba)
@@ -141,7 +149,7 @@ name: Latest stack oveflow activity
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 * * * *'
+    - cron: '0 0 * * *' # Runs once a day at 00:00 UTC
 permissions:
       contents: write
 jobs:
@@ -179,8 +187,7 @@ Preview: [https://github.com/gkr-bot/gkr-bot#latest-stackoveflow-activity-of-gau
 name: Latest YouTube Videos
 on:
   schedule:
-    # Runs every hour, on the hour
-    - cron: "0 * * * *"
+    - cron: '0 0 * * *' # Runs once a day at 00:00 UTC
   workflow_dispatch:
 permissions:
       contents: write
