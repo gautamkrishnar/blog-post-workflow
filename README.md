@@ -369,9 +369,22 @@ If you are experiencing any bugs, don't forget to open a [new issue](https://git
 - [the byte podcast](https://podcast.thebyte.io/episodes/learn-how-to-pimp-out-your-github-profile)
 - **JetBrains** for sponsoring the Open Source License to my favorite IDE WebStorm:
 
- <a href="https://www.jetbrains.com/?from=SOCLI" target="_blank">
- <img alt="jetbrains" src="https://user-images.githubusercontent.com/8397274/72133518-a6d8c300-33a7-11ea-8979-659b248ca1a2.png" width="100">
- </a>
+<a href="https://jb.gg/OpenSource" target="_blank">
+  <picture>
+    <source
+    srcset="https://github.com/user-attachments/assets/dd448785-d28d-4f01-9c66-c924ee65ee00"
+    media="(prefers-color-scheme: dark)"
+    alt="Jetbrains Logo"
+    width="300px"
+    />
+    <img
+    src="https://resources.jetbrains.com/storage/products/company/brand/logos/jetbrains.svg"
+    alt="Jetbrains Logo"
+    width="300px"
+    />
+  </picture>
+</a>
+
 
 - Thanks [@github](https://github.com/github), for [GitHub India Open Source Grants](https://github.blog/2021-09-12-recipients-open-source-grants-github-sponsors-india/) and for sponsoring me
 - Thanks **Tutanota** for sponsoring free encrypted emails for my opensource projects:
