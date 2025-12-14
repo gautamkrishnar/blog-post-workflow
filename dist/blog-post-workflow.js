@@ -31517,13 +31517,23 @@ var require_utils4 = __commonJS({
       const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : "<!-- BLOG-POST-LIST:";
       const closingTag = "-->";
       const tagNewlineFlag = core2.getInput("tag_post_pre_newline") === "true";
-      const startOfOpeningTagIndex = previousContent.indexOf(`${tagToLookFor}START`);
-      const endOfOpeningTagIndex = previousContent.indexOf(closingTag, startOfOpeningTagIndex);
-      const startOfClosingTagIndex = previousContent.indexOf(`${tagToLookFor}END`, endOfOpeningTagIndex);
+      const startOfOpeningTagIndex = previousContent.indexOf(
+        `${tagToLookFor}START`
+      );
+      const endOfOpeningTagIndex = previousContent.indexOf(
+        closingTag,
+        startOfOpeningTagIndex
+      );
+      const startOfClosingTagIndex = previousContent.indexOf(
+        `${tagToLookFor}END`,
+        endOfOpeningTagIndex
+      );
       if (startOfOpeningTagIndex === -1 || endOfOpeningTagIndex === -1 || startOfClosingTagIndex === -1) {
-        core2.error(`Cannot find the comment tag on the readme:
+        core2.error(
+          `Cannot find the comment tag on the readme:
 ${tagToLookFor}START -->
-${tagToLookFor}END -->`);
+${tagToLookFor}END -->`
+        );
         process.exit(1);
       }
       return [
@@ -31634,12 +31644,16 @@ var require_filters = __commonJS({
     var parseUrlAndCheckItem = (item2, domain) => {
       try {
         return new URL(item2.link).host === domain;
-      } catch (e) {
+      } catch {
         return false;
       }
     };
-    var ignoreStackOverflowComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackoverflow") !== -1 && item2.link && parseUrlAndCheckItem(item2, "stackoverflow.com") && item2.title.startsWith(FILTER_PARAMS.stackoverflow.replace(/\$author/g, item2.author)));
-    var ignoreStackExchangeComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackexchange") !== -1 && item2.link && parseUrlAndCheckItem(item2, "stackexchange.com") && item2.title.startsWith(FILTER_PARAMS.stackexchange.replace(/\$author/g, item2.author)));
+    var ignoreStackOverflowComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackoverflow") !== -1 && item2.link && parseUrlAndCheckItem(item2, "stackoverflow.com") && item2.title.startsWith(
+      FILTER_PARAMS.stackoverflow.replace(/\$author/g, item2.author)
+    ));
+    var ignoreStackExchangeComments2 = (item2) => !(COMMENT_FILTERS.indexOf("stackexchange") !== -1 && item2.link && parseUrlAndCheckItem(item2, "stackexchange.com") && item2.title.startsWith(
+      FILTER_PARAMS.stackexchange.replace(/\$author/g, item2.author)
+    ));
     var dateFilter2 = (item2) => {
       if (!item2.pubDate) {
         return true;
@@ -31694,20 +31708,19 @@ var {
 } = require_utils4();
 var {
   ignoreStackExchangeComments,
-  ignoreMediumComments,
   ignoreStackOverflowComments,
   dateFilter
 } = require_filters();
 var path = require("node:path");
 var userAgent = core.getInput("user_agent");
 var acceptHeader = core.getInput("accept_header");
-var TOTAL_POST_COUNT = Number.parseInt(core.getInput("max_post_count"));
+var TOTAL_POST_COUNT = Number.parseInt(core.getInput("max_post_count"), 10);
 var ENABLE_SORT = core.getInput("disable_sort") === "false";
 var SORT_ORDER = core.getInput("sort_order");
 var REVERSE_ORDER = core.getInput("reverse_order") !== "false";
 var ENABLE_VALIDATION = core.getInput("disable_item_validation") === "false";
-var TITLE_MAX_LENGTH = core.getInput("title_max_length") ? Number.parseInt(core.getInput("title_max_length")) : null;
-var DESCRIPTION_MAX_LENGTH = core.getInput("description_max_length") ? Number.parseInt(core.getInput("description_max_length")) : null;
+var TITLE_MAX_LENGTH = core.getInput("title_max_length") ? Number.parseInt(core.getInput("title_max_length"), 10) : null;
+var DESCRIPTION_MAX_LENGTH = core.getInput("description_max_length") ? Number.parseInt(core.getInput("description_max_length"), 10) : null;
 var ITEM_EXEC = core.getInput("item_exec");
 var README_FILE_PATH_LIST = core.getInput("readme_path").split(",").map((item2) => item2.trim());
 var GITHUB_TOKEN = core.getInput("gh_token");
@@ -31715,9 +31728,9 @@ var CUSTOM_TAGS = {};
 var ENABLE_KEEPALIVE = core.getInput("enable_keepalive") === "true";
 var SKIP_COMMITS = core.getInput("skip_commit") === "true";
 var retryConfig = {
-  retries: Number.parseInt(core.getInput("retry_count")),
+  retries: Number.parseInt(core.getInput("retry_count"), 10),
   factor: 1,
-  minTimeout: Number.parseInt(core.getInput("retry_wait_time")) * 1e3
+  minTimeout: Number.parseInt(core.getInput("retry_wait_time"), 10) * 1e3
 };
 core.setSecret(GITHUB_TOKEN);
 for (let item2 of core.getInput("custom_tags").trim().split(",")) {
@@ -31736,7 +31749,10 @@ if (feedList.length === 0) {
 }
 var feedNames = core.getInput("feed_names").trim();
 var feedNamesList = feedNames.split(",").map((item2) => item2.trim());
-var customTagArgs = Object.keys(CUSTOM_TAGS).map((item2) => [CUSTOM_TAGS[item2], item2]);
+var customTagArgs = Object.keys(CUSTOM_TAGS).map((item2) => [
+  CUSTOM_TAGS[item2],
+  item2
+]);
 var parser = new Parser({
   headers: {
     "User-Agent": userAgent,
@@ -31752,7 +31768,9 @@ for (const siteUrl of feedList) {
     new Promise((resolve, reject) => {
       promiseRetry((retry, tryNumber) => {
         if (tryNumber > 1) {
-          core.info(`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`);
+          core.info(
+            `Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`
+          );
         }
         return parser.parseURL(siteUrl).catch(retry);
       }, retryConfig).then(
@@ -31768,7 +31786,9 @@ for (const siteUrl of feedList) {
                 reject("Cannot read response->item->pubDate");
               }
               if (ENABLE_VALIDATION && !item.title) {
-                core.warning(`Missing title for item with link: ${item.link || "unknown"}`);
+                core.warning(
+                  `Missing title for item with link: ${item.link || "unknown"}`
+                );
                 if (core.getInput("skip_items_without_title") === "true") {
                   return null;
                 }
@@ -31799,7 +31819,10 @@ for (const siteUrl of feedList) {
                 post.title = truncateString(post.title, TITLE_MAX_LENGTH);
               }
               if (DESCRIPTION_MAX_LENGTH && post && post.description) {
-                post.description = truncateString(post.description, DESCRIPTION_MAX_LENGTH);
+                post.description = truncateString(
+                  post.description,
+                  DESCRIPTION_MAX_LENGTH
+                );
               }
               if (ITEM_EXEC) {
                 try {
@@ -31846,7 +31869,9 @@ var runWorkflow = async () => {
   await Promise.allSettled(promiseArray).then((results) => {
     results.forEach((result, index) => {
       if (result.status === "fulfilled") {
-        core.info(`${runnerNameArray[index]} runner succeeded. Post count: ${result.value.length}`);
+        core.info(
+          `${runnerNameArray[index]} runner succeeded. Post count: ${result.value.length}`
+        );
         if (typeof feedNamesList[index] !== "undefined" && feedNamesList[index]) {
           result.value = result.value.map((item2) => {
             item2.feedName = feedNamesList[index];
@@ -31856,7 +31881,9 @@ var runWorkflow = async () => {
         postsArray.push(...result.value);
       } else {
         jobFailFlag = true;
-        core.error(`${runnerNameArray[index]} runner failed, please verify the configuration. Error:`);
+        core.error(
+          `${runnerNameArray[index]} runner failed, please verify the configuration. Error:`
+        );
         if (result?.reason?.message?.startsWith("Status code")) {
           const code = result.reason.message.replace("Status code ", "");
           core.error(
@@ -31899,7 +31926,10 @@ var runWorkflow = async () => {
           await exec("git", ["pull"], { stdio: ["pipe", "pipe", "pipe"] });
         }
         const template = core.getInput("template");
-        const randEmojiArr = getParameterisedTemplate(template, "randomEmoji");
+        const randEmojiArr = getParameterisedTemplate(
+          template,
+          "randomEmoji"
+        );
         const constEmojiArr = getParameterisedTemplate(template, "emojiKey");
         const postListMarkdown = postsArray.reduce((acc, cur, index) => {
           if (template === "default") {
@@ -31908,14 +31938,20 @@ var runWorkflow = async () => {
           }
           const categoryTemplate = core.getInput("categories_template");
           const categoryList = categoryTemplate === "default" ? cur.categories.join(", ") : cur.categories.reduce(
-            (prev, current) => prev + categoryTemplate.replace(/\$category\b/g, current.toString()),
+            (prev, current) => prev + categoryTemplate.replace(
+              /\$category\b/g,
+              current.toString()
+            ),
             ""
           );
           const date = dateFormat(cur.date, core.getInput("date_format"));
           let content = template.replace(/\$title\b/g, cur.title).replace(/\$url\b/g, cur.url).replace(/\$description\b/g, cur.description).replace(/\$date\b/g, date).replace(/\$counter\b/g, (index + 1).toString()).replace(/\$feedName\b/g, cur.feedName ? cur.feedName : "").replace(/\$categories\b/g, categoryList.toString()).replace(/\$newline/g, "\n");
           for (const tag of Object.keys(CUSTOM_TAGS)) {
             const replaceValue = cur[tag] ? cur[tag] : "";
-            content = content.replace(new RegExp(`\\$${tag}\\b`, "g"), replaceValue);
+            content = content.replace(
+              new RegExp(`\\$${tag}\\b`, "g"),
+              replaceValue
+            );
           }
           if (randEmojiArr) {
             let seed = (process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ? process.env.GITHUB_REPOSITORY : "example") + index;
@@ -31926,15 +31962,24 @@ var runWorkflow = async () => {
             content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
           }
           if (constEmojiArr) {
-            content = content.replace(/\$emojiKey\((\S)*\)/g, constEmojiArr[index % constEmojiArr.length]);
+            content = content.replace(
+              /\$emojiKey\((\S)*\)/g,
+              constEmojiArr[index % constEmojiArr.length]
+            );
           }
           return acc + content;
         }, "");
         const outputOnly = core.getInput("output_only") !== "false";
         if (outputOnly) {
-          core.info("outputOnly mode: set `results` variable. Readme not committed.");
+          core.info(
+            "outputOnly mode: set `results` variable. Readme not committed."
+          );
           core.setOutput("results", postsArray);
-          const outputFilePath = path.join("/", "tmp", "blog_post_workflow_output.json");
+          const outputFilePath = path.join(
+            "/",
+            "tmp",
+            "blog_post_workflow_output.json"
+          );
           if (fs.existsSync(outputFilePath)) {
             fs.rmSync(outputFilePath);
           }
@@ -31955,9 +32000,11 @@ var runWorkflow = async () => {
         }
         if (changedReadmeCount > 0 && !SKIP_COMMITS) {
           if (!process.env.TEST_MODE) {
-            await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
-              process.exit(jobFailFlag ? 1 : 0);
-            });
+            await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(
+              () => {
+                process.exit(jobFailFlag ? 1 : 0);
+              }
+            );
           }
         } else {
           if (!process.env.TEST_MODE && ENABLE_KEEPALIVE) {
