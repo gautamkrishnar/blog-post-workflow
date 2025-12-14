@@ -117,3 +117,4 @@ out
 # reports
 src-report.json
 dist-report.json
+dist
