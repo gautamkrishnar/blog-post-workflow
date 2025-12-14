@@ -42,15 +42,31 @@ const exec = (cmd, args = [], options = {}) =>
  */
 const buildReadme = (previousContent, newContent) => {
 	const tagNameInput = core.getInput('comment_tag_name');
-	const tagToLookFor = tagNameInput ? `<!-- ${tagNameInput}:` : '<!-- BLOG-POST-LIST:';
+	const tagToLookFor = tagNameInput
+		? `<!-- ${tagNameInput}:`
+		: '<!-- BLOG-POST-LIST:';
 	const closingTag = '-->';
 	const tagNewlineFlag = core.getInput('tag_post_pre_newline') === 'true';
-	const startOfOpeningTagIndex = previousContent.indexOf(`${tagToLookFor}START`);
-	const endOfOpeningTagIndex = previousContent.indexOf(closingTag, startOfOpeningTagIndex);
-	const startOfClosingTagIndex = previousContent.indexOf(`${tagToLookFor}END`, endOfOpeningTagIndex);
-	if (startOfOpeningTagIndex === -1 || endOfOpeningTagIndex === -1 || startOfClosingTagIndex === -1) {
+	const startOfOpeningTagIndex = previousContent.indexOf(
+		`${tagToLookFor}START`,
+	);
+	const endOfOpeningTagIndex = previousContent.indexOf(
+		closingTag,
+		startOfOpeningTagIndex,
+	);
+	const startOfClosingTagIndex = previousContent.indexOf(
+		`${tagToLookFor}END`,
+		endOfOpeningTagIndex,
+	);
+	if (
+		startOfOpeningTagIndex === -1 ||
+		endOfOpeningTagIndex === -1 ||
+		startOfClosingTagIndex === -1
+	) {
 		// Exit with error if comment is not found on the readme
-		core.error(`Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`);
+		core.error(
+			`Cannot find the comment tag on the readme:\n${tagToLookFor}START -->\n${tagToLookFor}END -->`,
+		);
 		process.exit(1);
 	}
 	return [
@@ -71,7 +87,9 @@ const buildReadme = (previousContent, newContent) => {
 const truncateString = (str, length) => {
 	const trimmedString = str.trim();
 	const truncatedString = [...trimmedString].slice(0, length).join('');
-	return truncatedString === trimmedString ? trimmedString : `${truncatedString.trim()}...`;
+	return truncatedString === trimmedString
+		? trimmedString
+		: `${truncatedString.trim()}...`;
 };
 
 /**

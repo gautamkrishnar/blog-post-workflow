@@ -5,7 +5,8 @@ describe('Generated readme with feed names', () => {
 		const envObj = {
 			...process.env,
 			...DEFAULT_TEST_ENV,
-			INPUT_FEED_LIST: 'http://localhost:8080,http://localhost:8080,http://localhost:8080',
+			INPUT_FEED_LIST:
+				'http://localhost:8080,http://localhost:8080,http://localhost:8080',
 			INPUT_FEED_NAMES: 'hello,,world',
 			INPUT_TEMPLATE: '$newline - $feedName -> $title ',
 			INPUT_MAX_POST_COUNT: '100',

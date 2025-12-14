@@ -4,7 +4,8 @@ const DEFAULT_TEST_ENV = {
 	INPUT_DISABLE_SORT: 'false',
 	INPUT_SORT_ORDER: 'desc',
 	INPUT_TEMPLATE: 'default',
-	INPUT_FILTER_COMMENTS: 'medium,stackoverflow/Comment by $author/,stackexchange/Comment by $author/',
+	INPUT_FILTER_COMMENTS:
+		'medium,stackoverflow/Comment by $author/,stackexchange/Comment by $author/',
 	INPUT_USER_AGENT: 'rss-parser',
 	INPUT_ACCEPT_HEADER: 'application/rss+xml',
 	INPUT_GH_TOKEN: 'secret-test',

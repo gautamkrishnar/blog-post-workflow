@@ -11,7 +11,10 @@ const sendResponse = (res, statusCode, data) => {
 };
 
 const xmlData = fs.readFileSync(path.join(__dirname, 'sample.xml'), 'utf-8');
-const duplicateXmlData = fs.readFileSync(path.join(__dirname, 'sample.duplicate.xml'), 'utf-8');
+const duplicateXmlData = fs.readFileSync(
+	path.join(__dirname, 'sample.duplicate.xml'),
+	'utf-8',
+);
 
 http
 	.createServer((req, res) => {

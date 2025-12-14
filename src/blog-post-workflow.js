@@ -2,7 +2,7 @@ const process = require('process');
 const Parser = require('rss-parser');
 const core = require('@actions/core');
 const fs = require('node:fs');
-const dateFormat = require('dateformat');
+const dateFormat = require('dateformat').default;
 const rand = require('random-seed');
 const promiseRetry = require('promise-retry');
 const keepaliveWorkflow = require('keepalive-workflow');
@@ -18,7 +18,6 @@ const {
 } = require('./utils');
 const {
 	ignoreStackExchangeComments,
-	ignoreMediumComments,
 	ignoreStackOverflowComments,
 	dateFilter,
 } = require('./filters');
@@ -29,7 +28,7 @@ const userAgent = core.getInput('user_agent');
 const acceptHeader = core.getInput('accept_header');
 
 // Total no of posts to display on readme, all sources combined, default: 5
-const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'));
+const TOTAL_POST_COUNT = Number.parseInt(core.getInput('max_post_count'), 10);
 
 // Disables sort
 const ENABLE_SORT = core.getInput('disable_sort') === 'false';
@@ -44,11 +43,13 @@ const REVERSE_ORDER = core.getInput('reverse_order') !== 'false';
 const ENABLE_VALIDATION = core.getInput('disable_item_validation') === 'false';
 
 // Title trimming parameter, default: ""
-const TITLE_MAX_LENGTH = core.getInput('title_max_length') ? Number.parseInt(core.getInput('title_max_length')) : null;
+const TITLE_MAX_LENGTH = core.getInput('title_max_length')
+	? Number.parseInt(core.getInput('title_max_length'), 10)
+	: null;
 
 // Description trimming parameter, default: ""
 const DESCRIPTION_MAX_LENGTH = core.getInput('description_max_length')
-	? Number.parseInt(core.getInput('description_max_length'))
+	? Number.parseInt(core.getInput('description_max_length'), 10)
 	: null;
 
 // Advanced content modification parameter, default: ""
@@ -72,9 +73,9 @@ const SKIP_COMMITS = core.getInput('skip_commit') === 'true';
 
 // Retry configuration
 const retryConfig = {
-	retries: Number.parseInt(core.getInput('retry_count')),
+	retries: Number.parseInt(core.getInput('retry_count'), 10),
 	factor: 1,
-	minTimeout: Number.parseInt(core.getInput('retry_wait_time')) * 1000,
+	minTimeout: Number.parseInt(core.getInput('retry_wait_time'), 10) * 1000,
 };
 
 core.setSecret(GITHUB_TOKEN);
@@ -102,7 +103,10 @@ if (feedList.length === 0) {
 const feedNames = core.getInput('feed_names').trim();
 const feedNamesList = feedNames.split(',').map((item) => item.trim());
 
-const customTagArgs = Object.keys(CUSTOM_TAGS).map((item) => [CUSTOM_TAGS[item], item]);
+const customTagArgs = Object.keys(CUSTOM_TAGS).map((item) => [
+	CUSTOM_TAGS[item],
+	item,
+]);
 
 const parser = new Parser({
 	headers: {
@@ -122,7 +126,9 @@ for (const siteUrl of feedList) {
 			promiseRetry((retry, tryNumber) => {
 				// Retry block
 				if (tryNumber > 1) {
-					core.info(`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`);
+					core.info(
+						`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`,
+					);
 				}
 				return parser.parseURL(siteUrl).catch(retry);
 			}, retryConfig).then(
@@ -148,7 +154,9 @@ for (const siteUrl of feedList) {
 								if (ENABLE_VALIDATION && !item.title) {
 									// Either skip the item by returning null
 									// or use a fallback title (from URL or a default value)
-									core.warning(`Missing title for item with link: ${item.link || 'unknown'}`);
+									core.warning(
+										`Missing title for item with link: ${item.link || 'unknown'}`,
+									);
 									if (core.getInput('skip_items_without_title') === 'true') {
 										return null; // This item will be filtered out later
 									}
@@ -168,7 +176,9 @@ for (const siteUrl of feedList) {
 										Object.assign(customTags, { [tag]: item[tag] });
 									}
 								}
-								const categories = item.categories ? categoriesToArray(item.categories) : [];
+								const categories = item.categories
+									? categoriesToArray(item.categories)
+									: [];
 								let post = {
 									title: item.title ? item.title.trim() : item.title, // Handle null safely
 									url: item.link.trim(),
@@ -188,7 +198,10 @@ for (const siteUrl of feedList) {
 
 								if (DESCRIPTION_MAX_LENGTH && post && post.description) {
 									// Trimming the description
-									post.description = truncateString(post.description, DESCRIPTION_MAX_LENGTH);
+									post.description = truncateString(
+										post.description,
+										DESCRIPTION_MAX_LENGTH,
+									);
 								}
 
 								// Advanced content manipulation using javascript code
@@ -219,7 +232,8 @@ for (const siteUrl of feedList) {
 								}
 
 								// Doing HTML encoding at last ref: #117
-								const disableHtmlEncoding = core.getInput('disable_html_encoding') !== 'false';
+								const disableHtmlEncoding =
+									core.getInput('disable_html_encoding') !== 'false';
 								if (!disableHtmlEncoding && post) {
 									for (const key of Object.keys(post)) {
 										if (typeof post[key] === 'string' && key !== 'url') {
@@ -247,9 +261,14 @@ const runWorkflow = async () => {
 			results.forEach((result, index) => {
 				if (result.status === 'fulfilled') {
 					// Succeeded
-					core.info(`${runnerNameArray[index]} runner succeeded. Post count: ${result.value.length}`);
+					core.info(
+						`${runnerNameArray[index]} runner succeeded. Post count: ${result.value.length}`,
+					);
 					// Adds feed name to the items
-					if (typeof feedNamesList[index] !== 'undefined' && feedNamesList[index]) {
+					if (
+						typeof feedNamesList[index] !== 'undefined' &&
+						feedNamesList[index]
+					) {
 						result.value = result.value.map((item) => {
 							item.feedName = feedNamesList[index];
 							return item;
@@ -259,7 +278,9 @@ const runWorkflow = async () => {
 				} else {
 					jobFailFlag = true;
 					// Rejected
-					core.error(`${runnerNameArray[index]} runner failed, please verify the configuration. Error:`);
+					core.error(
+						`${runnerNameArray[index]} runner failed, please verify the configuration. Error:`,
+					);
 					if (result?.reason?.message?.startsWith('Status code')) {
 						const code = result.reason.message.replace('Status code ', '');
 						core.error(
@@ -315,7 +336,10 @@ const runWorkflow = async () => {
 						await exec('git', ['pull'], { stdio: ['pipe', 'pipe', 'pipe'] });
 					}
 					const template = core.getInput('template');
-					const randEmojiArr = getParameterisedTemplate(template, 'randomEmoji');
+					const randEmojiArr = getParameterisedTemplate(
+						template,
+						'randomEmoji',
+					);
 					const constEmojiArr = getParameterisedTemplate(template, 'emojiKey');
 					const postListMarkdown = postsArray.reduce((acc, cur, index) => {
 						if (template === 'default') {
@@ -328,7 +352,12 @@ const runWorkflow = async () => {
 							categoryTemplate === 'default'
 								? cur.categories.join(', ')
 								: cur.categories.reduce(
-										(prev, current) => prev + categoryTemplate.replace(/\$category\b/g, current.toString()),
+										(prev, current) =>
+											prev +
+											categoryTemplate.replace(
+												/\$category\b/g,
+												current.toString(),
+											),
 										'',
 									);
 						// Building with custom template
@@ -346,27 +375,35 @@ const runWorkflow = async () => {
 						// Setting Custom tags to the template
 						for (const tag of Object.keys(CUSTOM_TAGS)) {
 							const replaceValue = cur[tag] ? cur[tag] : '';
-							content = content.replace(new RegExp(`\\$${tag}\\b`, 'g'), replaceValue);
+							content = content.replace(
+								new RegExp(`\\$${tag}\\b`, 'g'),
+								replaceValue,
+							);
 						}
 
 						// Emoji implementation: Random
 						if (randEmojiArr) {
 							// For making randomness unique for each repos
 							let seed =
-								(process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE ? process.env.GITHUB_REPOSITORY : 'example') +
-								index;
+								(process.env.GITHUB_REPOSITORY && !process.env.TEST_MODE
+									? process.env.GITHUB_REPOSITORY
+									: 'example') + index;
 							if (core.getInput('rand_seed')) {
 								// If manual seed is provided, use it
 								seed = core.getInput('rand_seed') + index;
 							}
-							const emoji = randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
+							const emoji =
+								randEmojiArr[rand.create(seed).range(randEmojiArr.length)];
 							content = content.replace(/\$randomEmoji\((\S)*\)/g, emoji);
 						}
 
 						// Emoji implementation: Static
 						if (constEmojiArr) {
 							// using modulus
-							content = content.replace(/\$emojiKey\((\S)*\)/g, constEmojiArr[index % constEmojiArr.length]);
+							content = content.replace(
+								/\$emojiKey\((\S)*\)/g,
+								constEmojiArr[index % constEmojiArr.length],
+							);
 						}
 
 						return acc + content;
@@ -376,9 +413,15 @@ const runWorkflow = async () => {
 					const outputOnly = core.getInput('output_only') !== 'false';
 					if (outputOnly) {
 						// Sets output as output as `results` variable in github action
-						core.info('outputOnly mode: set `results` variable. Readme not committed.');
+						core.info(
+							'outputOnly mode: set `results` variable. Readme not committed.',
+						);
 						core.setOutput('results', postsArray);
-						const outputFilePath = path.join('/', 'tmp', 'blog_post_workflow_output.json');
+						const outputFilePath = path.join(
+							'/',
+							'tmp',
+							'blog_post_workflow_output.json',
+						);
 						if (fs.existsSync(outputFilePath)) {
 							fs.rmSync(outputFilePath);
 						}
@@ -404,10 +447,12 @@ const runWorkflow = async () => {
 					if (changedReadmeCount > 0 && !SKIP_COMMITS) {
 						if (!process.env.TEST_MODE) {
 							// Commit to readme
-							await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(() => {
-								// Making job fail if one of the source fails
-								process.exit(jobFailFlag ? 1 : 0);
-							});
+							await commitReadme(GITHUB_TOKEN, README_FILE_PATH_LIST).then(
+								() => {
+									// Making job fail if one of the source fails
+									process.exit(jobFailFlag ? 1 : 0);
+								},
+							);
 						}
 					} else {
 						// Calculating last commit date, please see https://git.io/Jtm4V

@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/gautamkrishnar/blog-post-workflow#readme",
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "dateformat": "^3.0.3",
-    "esbuild": "^0.25.2",
+    "@actions/core": "^2.0.1",
+    "dateformat": "^5.0.3",
+    "esbuild": "^0.27.1",
     "keepalive-workflow": "^2.0.9",
     "process": "latest",
     "promise-retry": "^2.0.1",
@@ -43,9 +43,9 @@
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.3.8",
     "husky": "^9.1.7",
-    "mocha": "^11.1.0",
-    "start-server-and-test": "^2.0.11"
+    "mocha": "^11.7.5",
+    "start-server-and-test": "^2.1.3"
   }
 }

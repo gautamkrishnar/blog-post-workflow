@@ -5,7 +5,8 @@ describe('Generated readme with advanced manipulation via JS', () => {
 		const envObj = {
 			...process.env,
 			...DEFAULT_TEST_ENV,
-			INPUT_ITEM_EXEC: 'post.title=post.title.replace("Gautam",""); post.title=post.title.replace("browser","");',
+			INPUT_ITEM_EXEC:
+				'post.title=post.title.replace("Gautam",""); post.title=post.title.replace("browser","");',
 		};
 		await runAndCompareSnap('Readme.exec.md', envObj);
 	});

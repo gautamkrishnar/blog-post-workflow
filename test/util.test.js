@@ -48,7 +48,10 @@ if (process.env.DIST !== 'true') {
 	describe('updateAndParseCompoundParams', () => {
 		it('should update the object with the correct key-value pair and return the source name when the source has compound parameters', () => {
 			const obj = {};
-			const result = updateAndParseCompoundParams('stackoverflow/Comment by $author/', obj);
+			const result = updateAndParseCompoundParams(
+				'stackoverflow/Comment by $author/',
+				obj,
+			);
 			assert.strictEqual(result, 'stackoverflow');
 			assert.deepStrictEqual(obj, { stackoverflow: 'Comment by $author' });
 		});
@@ -69,7 +72,10 @@ if (process.env.DIST !== 'true') {
 
 		it('should handle cases where the source has more than 3 parts and return the original source', () => {
 			const obj = {};
-			const result = updateAndParseCompoundParams('stackoverflow/Comment by $author/extra/part', obj);
+			const result = updateAndParseCompoundParams(
+				'stackoverflow/Comment by $author/extra/part',
+				obj,
+			);
 			assert.strictEqual(result, 'stackoverflow/Comment by $author/extra/part');
 			assert.deepStrictEqual(obj, {}); // Ensure obj is not modified
 		});
@@ -83,9 +89,15 @@ if (process.env.DIST !== 'true') {
 
 		it('should handle cases where the object is pre-populated', () => {
 			const obj = { existingKey: 'existingValue' };
-			const result = updateAndParseCompoundParams('stackoverflow/Comment by $author/', obj);
+			const result = updateAndParseCompoundParams(
+				'stackoverflow/Comment by $author/',
+				obj,
+			);
 			assert.strictEqual(result, 'stackoverflow');
-			assert.deepStrictEqual(obj, { existingKey: 'existingValue', stackoverflow: 'Comment by $author' });
+			assert.deepStrictEqual(obj, {
+				existingKey: 'existingValue',
+				stackoverflow: 'Comment by $author',
+			});
 		});
 	});
 
@@ -176,8 +188,13 @@ if (process.env.DIST !== 'true') {
 		});
 
 		it('should escape multiple conflicting characters', () => {
-			const result = escapeHTML('if (a < b) { return "yes"; } else { return "no"; }');
-			assert.strictEqual(result, 'if &lpar;a &lt; b&rpar; { return &quot;yes&quot;; } else { return &quot;no&quot;; }');
+			const result = escapeHTML(
+				'if (a < b) { return "yes"; } else { return "no"; }',
+			);
+			assert.strictEqual(
+				result,
+				'if &lpar;a &lt; b&rpar; { return &quot;yes&quot;; } else { return &quot;no&quot;; }',
+			);
 		});
 
 		it('should return the original string if there are no conflicting characters', () => {
@@ -204,9 +221,19 @@ if (process.env.DIST !== 'true') {
 		});
 
 		it('should return an array of strings when the input is a mixed array of strings and CategoryObj objects', () => {
-			const categories = ['Programming', { _: 'C#' }, { _: 'Controller' }, 'Tech'];
+			const categories = [
+				'Programming',
+				{ _: 'C#' },
+				{ _: 'Controller' },
+				'Tech',
+			];
 			const result = categoriesToArray(categories);
-			assert.deepStrictEqual(result, ['Programming', 'C#', 'Controller', 'Tech']);
+			assert.deepStrictEqual(result, [
+				'Programming',
+				'C#',
+				'Controller',
+				'Tech',
+			]);
 		});
 
 		it('should return an empty array when the input is an empty array', () => {
@@ -228,13 +255,21 @@ if (process.env.DIST !== 'true') {
 		});
 
 		it('should return an empty array when the input array contains only objects without the "_" property', () => {
-			const categories = [{ domain: 'http://example.com' }, { domain: 'http://example.org' }];
+			const categories = [
+				{ domain: 'http://example.com' },
+				{ domain: 'http://example.org' },
+			];
 			const result = categoriesToArray(categories);
 			assert.deepStrictEqual(result, []);
 		});
 
 		it('should handle a mix of valid and invalid objects', () => {
-			const categories = ['Programming', { _: 'C#' }, { domain: 'http://example.com' }, 'Tech'];
+			const categories = [
+				'Programming',
+				{ _: 'C#' },
+				{ domain: 'http://example.com' },
+				'Tech',
+			];
 			const result = categoriesToArray(categories);
 			assert.deepStrictEqual(result, ['Programming', 'C#', 'Tech']);
 		});

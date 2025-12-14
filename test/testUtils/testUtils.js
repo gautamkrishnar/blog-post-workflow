@@ -37,7 +37,10 @@ const runAndCompareSnap = async (README_FILE, envObjParam) => {
 	};
 	const workflow = await require(TEST_FILE);
 	await workflow.runWorkflow();
-	const snapshot = fs.readFileSync(path.join(TEST_SNAP_DIR, `${README_FILE}.snap`), 'utf-8');
+	const snapshot = fs.readFileSync(
+		path.join(TEST_SNAP_DIR, `${README_FILE}.snap`),
+		'utf-8',
+	);
 	const newReadme = fs.readFileSync(readmePath, 'utf-8');
 	assert.strictEqual(snapshot, newReadme);
 };
