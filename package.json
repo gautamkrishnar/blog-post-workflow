@@ -13,7 +13,8 @@
     "test-run": "mocha --parallel --reporter json --reporter-option output=src-report.json --jobs 100 test/**.js",
     "test": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run",
     "test-run-dist": "DIST=true mocha --parallel --reporter json --reporter-option output=dist-report.json --jobs 100 test/**.js",
-    "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist"
+    "test-dist": "yarn run lint && start-server-and-test start-server http://localhost:8080 test-run-dist",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -43,6 +44,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "husky": "^9.1.7",
     "mocha": "^11.1.0",
     "start-server-and-test": "^2.0.11"
   }
