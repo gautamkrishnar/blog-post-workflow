@@ -207,8 +207,9 @@ for (const siteUrl of feedList) {
 								// Advanced content manipulation using javascript code
 								if (ITEM_EXEC) {
 									try {
-										// biome-ignore lint/security/noGlobalEval: its needed here
-										eval(ITEM_EXEC);
+										post = new Function('post', `${ITEM_EXEC};return post;`)(
+											post,
+										);
 									} catch (e) {
 										core.error('Failure in executing `item_exec` parameter');
 										core.error(e);
