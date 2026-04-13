@@ -1,5 +1,5 @@
-const { DEFAULT_TEST_ENV } = require('./testUtils/default-env');
-const { runAndCompareSnap } = require('./testUtils/testUtils');
+import { DEFAULT_TEST_ENV } from './testUtils/default-env.js';
+import { runAndCompareSnap } from './testUtils/testUtils.js';
 
 describe('Disabled sort with desc order (disable_sort: true, sort_order: desc)', () => {
 	it('should reverse feed order and be equal to the saved snapshot', async () => {

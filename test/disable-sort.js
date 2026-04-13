@@ -1,5 +1,6 @@
-const { DEFAULT_TEST_ENV } = require('./testUtils/default-env');
-const { runAndCompareSnap } = require('./testUtils/testUtils');
+import { DEFAULT_TEST_ENV } from './testUtils/default-env.js';
+import { runAndCompareSnap } from './testUtils/testUtils.js';
+
 describe('Sorting disabled readme', () => {
 	it('should be equal to the saved snapshot', async () => {
 		const envObj = {

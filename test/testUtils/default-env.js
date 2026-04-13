@@ -31,6 +31,4 @@ const DEFAULT_TEST_ENV = {
 	INPUT_REVERSE_ORDER: 'false',
 };
 
-module.exports = {
-	DEFAULT_TEST_ENV,
-};
+export { DEFAULT_TEST_ENV };

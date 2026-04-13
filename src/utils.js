@@ -1,5 +1,5 @@
-const { spawn } = require('node:child_process');
-const core = require('@actions/core');
+import { spawn } from 'node:child_process';
+import * as core from '@actions/core';
 
 /**
  * Executes a command and returns its result as promise
@@ -208,13 +208,13 @@ const categoriesToArray = (categories) => {
 	return categoriesStr;
 };
 
-module.exports = {
-	updateAndParseCompoundParams,
-	commitReadme,
-	truncateString,
+export {
 	buildReadme,
+	categoriesToArray,
+	commitReadme,
+	escapeHTML,
 	exec,
 	getParameterisedTemplate,
-	escapeHTML,
-	categoriesToArray,
+	truncateString,
+	updateAndParseCompoundParams,
 };

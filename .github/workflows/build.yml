@@ -28,8 +28,8 @@ jobs:
           node-version: "24"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: yarn test
-      - run: yarn build && yarn run test-dist
+      - run: yarn test-ci
+      - run: yarn build && yarn test-dist-ci
       - name: Test Report
         uses: dorny/test-reporter@v1
         if: ${{ github.repository == 'gautamkrishnar/blog-post-workflow' && github.event_name != 'pull_request' && (success() || failure()) }}

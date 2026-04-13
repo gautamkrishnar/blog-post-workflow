@@ -1,5 +1,5 @@
-const { updateAndParseCompoundParams } = require('./utils');
-const core = require('@actions/core');
+import * as core from '@actions/core';
+import { updateAndParseCompoundParams } from './utils.js';
 
 const FILTER_PARAMS = {
 	stackoverflow: 'Comment by $author',
@@ -82,8 +82,5 @@ const dateFilter = (item) => {
 	}
 	return true;
 };
-module.exports = {
-	ignoreStackOverflowComments,
-	ignoreStackExchangeComments,
-	dateFilter,
-};
+
+export { dateFilter, ignoreStackExchangeComments, ignoreStackOverflowComments };

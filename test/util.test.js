@@ -1,11 +1,12 @@
-const assert = require('node:assert');
-const {
+import assert from 'node:assert';
+import {
+	categoriesToArray,
+	escapeHTML,
+	getParameterisedTemplate,
 	truncateString,
 	updateAndParseCompoundParams,
-	getParameterisedTemplate,
-	escapeHTML,
-	categoriesToArray,
-} = require('../src/utils');
+} from '../src/utils.js';
+
 // Skip utils check on dist tests because it is a bundle that do not export these functions
 if (process.env.DIST !== 'true') {
 	describe('truncateString', () => {

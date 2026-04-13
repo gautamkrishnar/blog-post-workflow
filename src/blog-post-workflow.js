@@ -1,27 +1,27 @@
-const process = require('process');
-const Parser = require('rss-parser');
-const core = require('@actions/core');
-const fs = require('node:fs');
-const dateFormat = require('dateformat').default;
-const rand = require('random-seed');
-const promiseRetry = require('promise-retry');
-const keepaliveWorkflow = require('keepalive-workflow');
-const {
-	updateAndParseCompoundParams,
-	commitReadme,
-	truncateString,
-	buildReadme,
-	exec,
-	getParameterisedTemplate,
-	escapeHTML,
-	categoriesToArray,
-} = require('./utils');
-const {
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import * as core from '@actions/core';
+import dateFormat from 'dateformat';
+import keepaliveWorkflow from 'keepalive-workflow';
+import promiseRetry from 'promise-retry';
+import rand from 'random-seed';
+import Parser from 'rss-parser';
+import {
+	dateFilter,
 	ignoreStackExchangeComments,
 	ignoreStackOverflowComments,
-	dateFilter,
-} = require('./filters');
-const path = require('node:path');
+} from './filters.js';
+import {
+	buildReadme,
+	categoriesToArray,
+	commitReadme,
+	escapeHTML,
+	exec,
+	getParameterisedTemplate,
+	truncateString,
+	updateAndParseCompoundParams,
+} from './utils.js';
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
@@ -191,12 +191,12 @@ for (const siteUrl of feedList) {
 									post.date = new Date(item.pubDate.trim());
 								}
 
-								if (TITLE_MAX_LENGTH && post && post.title) {
+								if (TITLE_MAX_LENGTH && post?.title) {
 									// Trimming the title
 									post.title = truncateString(post.title, TITLE_MAX_LENGTH);
 								}
 
-								if (DESCRIPTION_MAX_LENGTH && post && post.description) {
+								if (DESCRIPTION_MAX_LENGTH && post?.description) {
 									// Trimming the description
 									post.description = truncateString(
 										post.description,
@@ -485,10 +485,8 @@ const runWorkflow = async () => {
 		});
 };
 
-module.exports = {
-	runWorkflow,
-};
+export { runWorkflow };
 
-if (require.main === module) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 	runWorkflow().then();
 }

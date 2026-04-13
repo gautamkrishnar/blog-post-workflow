@@ -1,6 +1,7 @@
-const http = require('node:http');
-const fs = require('node:fs');
-const path = require('node:path');
+import fs from 'node:fs';
+import http from 'node:http';
+import path from 'node:path';
+
 let failCounter = 0;
 const MAX_FAIL_COUNT = 5;
 
@@ -10,9 +11,12 @@ const sendResponse = (res, statusCode, data) => {
 	res.end();
 };
 
-const xmlData = fs.readFileSync(path.join(__dirname, 'sample.xml'), 'utf-8');
+const xmlData = fs.readFileSync(
+	path.join(import.meta.dirname, 'sample.xml'),
+	'utf-8',
+);
 const duplicateXmlData = fs.readFileSync(
-	path.join(__dirname, 'sample.duplicate.xml'),
+	path.join(import.meta.dirname, 'sample.duplicate.xml'),
 	'utf-8',
 );
 
