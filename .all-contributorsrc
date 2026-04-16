@@ -232,6 +232,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bnbong",
+      "name": "이준혁",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55042923?v=4",
+      "profile": "https://bnbong.github.io",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
