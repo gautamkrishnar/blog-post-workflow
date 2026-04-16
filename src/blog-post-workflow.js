@@ -207,9 +207,12 @@ for (const siteUrl of feedList) {
 								// Advanced content manipulation using javascript code
 								if (ITEM_EXEC) {
 									try {
-										post = new Function('post', `${ITEM_EXEC};return post;`)(
-											post,
-										);
+										post = new Function(
+											'post',
+											'customTags',
+											'item',
+											`${ITEM_EXEC};return post;`,
+										)(post, customTags, item);
 									} catch (e) {
 										core.error('Failure in executing `item_exec` parameter');
 										core.error(e);
