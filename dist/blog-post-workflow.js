@@ -30881,9 +30881,12 @@ for (const siteUrl of feedList) {
               }
               if (ITEM_EXEC) {
                 try {
-                  post = new Function("post", `${ITEM_EXEC};return post;`)(
-                    post
-                  );
+                  post = new Function(
+                    "post",
+                    "customTags",
+                    "item",
+                    `${ITEM_EXEC};return post;`
+                  )(post, customTags, item);
                 } catch (e) {
                   error("Failure in executing `item_exec` parameter");
                   error(e);
