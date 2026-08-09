@@ -117,7 +117,32 @@ const commitReadme = async (githubToken, readmeFilePaths) => {
 	await exec('git', ['config', '--global', 'user.name', committerUsername]);
 	await exec('git', ['add', ...readmeFilePaths]);
 	await exec('git', ['commit', '-m', commitMessage]);
-	await exec('git', ['push']);
+	let pushOutput = '';
+	const pushExitCode = await exec('git', ['push'], {
+		ignoreReturnCode: true,
+		listeners: {
+			stderr: (data) => {
+				pushOutput += data.toString();
+			},
+		},
+	});
+	if (pushExitCode !== 0) {
+		if (
+			pushOutput.includes('403') ||
+			pushOutput.toLowerCase().includes('permission') ||
+			pushOutput.toLowerCase().includes('denied')
+		) {
+			core.error(
+				'Push failed due to insufficient permissions. Please add `contents: write` permission to your workflow file:\n\n' +
+					'permissions:\n' +
+					'  contents: write\n\n' +
+					'See: https://github.com/gautamkrishnar/blog-post-workflow#readme',
+			);
+		}
+		throw new Error(
+			`git push failed with exit code ${pushExitCode}: ${pushOutput}`,
+		);
+	}
 	core.info('Readme updated successfully in the upstream repository');
 };
 
