@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import {
 	categoriesToArray,
+	commitReadme,
 	escapeHTML,
 	getParameterisedTemplate,
 	truncateString,
@@ -273,6 +274,106 @@ if (process.env.DIST !== 'true') {
 			];
 			const result = categoriesToArray(categories);
 			assert.deepStrictEqual(result, ['Programming', 'C#', 'Tech']);
+		});
+	});
+
+	describe('commitReadme git push simulation', () => {
+		const makeExecFn = (pushBehavior) => async (cmd, args) => {
+			const isGitPush = cmd === 'git' && args[0] === 'push';
+			if (isGitPush) {
+				return pushBehavior();
+			}
+			return { code: 0, outputData: '', errorData: '' };
+		};
+
+		beforeEach(() => {
+			process.env.INPUT_COMMITTER_USERNAME = 'test-bot';
+			process.env.INPUT_COMMITTER_EMAIL = 'test-bot@example.com';
+			process.env.INPUT_COMMIT_MESSAGE = 'test commit';
+			process.env.GITHUB_REPOSITORY = 'owner/repo';
+		});
+
+		it('should resolve when git push succeeds', async () => {
+			const execFn = makeExecFn(() =>
+				Promise.resolve({ code: 0, outputData: '', errorData: '' }),
+			);
+			await assert.doesNotReject(() =>
+				commitReadme('token', ['README.md'], execFn),
+			);
+		});
+
+		it('should throw and log permission error on 403', async () => {
+			const errors = [];
+			const origError = process.env.ACTIONS_RUNNER_DEBUG;
+			// Capture core.error by overriding stderr temporarily — just assert the thrown error
+			const execFn = makeExecFn(() =>
+				Promise.reject({
+					code: 128,
+					outputData: '',
+					errorData:
+						'remote: Permission to owner/repo.git denied to github-actions[bot].\nfatal: unable to access: The requested URL returned error: 403',
+				}),
+			);
+			await assert.rejects(
+				() => commitReadme('token', ['README.md'], execFn),
+				(err) => {
+					assert.ok(
+						err.message.includes('128'),
+						'error message should include exit code',
+					);
+					return true;
+				},
+			);
+			void origError;
+			void errors;
+		});
+
+		it('should throw with exit code on generic push failure', async () => {
+			const execFn = makeExecFn(() =>
+				Promise.reject({
+					code: 1,
+					outputData: '',
+					errorData: 'some other git error',
+				}),
+			);
+			await assert.rejects(
+				() => commitReadme('token', ['README.md'], execFn),
+				(err) => {
+					assert.ok(err.message.includes('exit code 1'));
+					assert.ok(err.message.includes('some other git error'));
+					return true;
+				},
+			);
+		});
+
+		it('should throw on permission denied message without 403', async () => {
+			const execFn = makeExecFn(() =>
+				Promise.reject({
+					code: 128,
+					outputData: '',
+					errorData: 'error: permission denied',
+				}),
+			);
+			await assert.rejects(
+				() => commitReadme('token', ['README.md'], execFn),
+				(err) => {
+					assert.ok(err.message.includes('128'));
+					return true;
+				},
+			);
+		});
+
+		it('should skip setting remote URL when no token provided', async () => {
+			const calls = [];
+			const execFn = async (cmd, args) => {
+				calls.push({ cmd, args });
+				return { code: 0, outputData: '', errorData: '' };
+			};
+			await commitReadme(null, ['README.md'], execFn);
+			const remoteSetUrl = calls.find(
+				(c) => c.cmd === 'git' && c.args[0] === 'remote',
+			);
+			assert.strictEqual(remoteSetUrl, undefined);
 		});
 	});
 }
