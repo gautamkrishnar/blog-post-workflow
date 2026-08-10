@@ -17,17 +17,9 @@ jobs:
       - name: Set env
         run: echo "pkg_version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)" >> $GITHUB_ENV
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+        run: gh release create "${{ env.pkg_version }}" --title "${{ env.pkg_version }}" --notes "-" --draft
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        with:
-          tag_name: ${{ env.pkg_version }}
-          release_name: ${{ env.pkg_version }}
-          body: |
-            -
-          draft: true
-          prerelease: false
+          GH_TOKEN: ${{ github.token }}
       - name: Update v1 release with the latest code
         run: |
           git config user.name gkr-bot
