@@ -22,6 +22,7 @@ import {
 	truncateString,
 	updateAndParseCompoundParams,
 } from './utils.js';
+import { fetchYoutubeFeed, getYoutubePlaylistId } from './youtube.js';
 
 // Blog workflow code
 const userAgent = core.getInput('user_agent');
@@ -62,6 +63,9 @@ const README_FILE_PATH_LIST = core
 	.map((item) => item.trim());
 const GITHUB_TOKEN = core.getInput('gh_token');
 
+// Optional YouTube Data API key, used for YouTube feed URLs
+const YOUTUBE_API_KEY = core.getInput('youtube_api_key');
+
 // Custom tags
 const CUSTOM_TAGS = {};
 
@@ -79,6 +83,9 @@ const retryConfig = {
 };
 
 core.setSecret(GITHUB_TOKEN);
+if (YOUTUBE_API_KEY) {
+	core.setSecret(YOUTUBE_API_KEY);
+}
 
 for (let item of core.getInput('custom_tags').trim().split(',')) {
 	item = item.trim();
@@ -130,7 +137,18 @@ for (const siteUrl of feedList) {
 						`Previous try for ${siteUrl} failed, retrying: ${tryNumber - 1}`,
 					);
 				}
-				return parser.parseURL(siteUrl).catch(retry);
+				const youtubePlaylistId = YOUTUBE_API_KEY
+					? getYoutubePlaylistId(siteUrl)
+					: null;
+				const feed = youtubePlaylistId
+					? fetchYoutubeFeed(
+							youtubePlaylistId,
+							YOUTUBE_API_KEY,
+							CUSTOM_TAGS,
+							TOTAL_POST_COUNT,
+						)
+					: parser.parseURL(siteUrl);
+				return feed.catch(retry);
 			}, retryConfig).then(
 				(data) => {
 					if (!data.items) {

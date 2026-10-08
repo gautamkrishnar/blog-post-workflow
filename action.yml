@@ -137,6 +137,10 @@ inputs:
     description: "Dummy commit message, This is when the workflow is doing automated commits to keep the repository active"
     default: "dummy commit to keep the repository active, see https://git.io/Jtm4V"
     required: false
+  youtube_api_key:
+    description: "YouTube Data API v3 key. When set, YouTube feed URLs (youtube.com/feeds/videos.xml?channel_id= or ?playlist_id=) are read through the API instead of the RSS feed"
+    default: ""
+    required: false
 outputs:
   results:
     description: "JSON stringified array of posts"
